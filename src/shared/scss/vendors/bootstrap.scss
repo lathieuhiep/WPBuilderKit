@@ -1,7 +1,7 @@
 @import "../abstracts/abstracts";
 
 // Include functions first (so you can manipulate colors, SVGs, calc, etc)
-@import "../../../node_modules/bootstrap/scss/functions";
+@import "bootstrap/scss/functions";
 
 // Include any default variable overrides here
 $enable-rfs: false;
@@ -28,7 +28,7 @@ $grid-gutter-width: $grid-gutter-width;
 //
 // Style anchor elements.
 $link-color: $body-color;
-$link-hover-color: $var-accent-color;
+$link-hover-color: map-get($mt-colors, "accent");
 $link-decoration: none;
 
 // scss-docs-end caret-variables
@@ -70,28 +70,28 @@ $spacer: $spacing-base !default;
 $spacers: $spacers !default;
 
 // Include remainder of required Bootstrap stylesheets
-@import "../../../node_modules/bootstrap/scss/variables";
-@import "../../../node_modules/bootstrap/scss/variables-dark";
-@import "../../../node_modules/bootstrap/scss/maps";
-@import "../../../node_modules/bootstrap/scss/mixins";
-@import "../../../node_modules/bootstrap/scss/utilities";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
 
 // Include any optional Bootstrap components as you like
-@import "../../../node_modules/bootstrap/scss/root";
-@import "../../../node_modules/bootstrap/scss/reboot";
-@import "../../../node_modules/bootstrap/scss/type";
-@import "../../../node_modules/bootstrap/scss/images";
-@import "../../../node_modules/bootstrap/scss/containers";
-@import "../../../node_modules/bootstrap/scss/grid";
-@import "../../../node_modules/bootstrap/scss/transitions";
-@import "../../../node_modules/bootstrap/scss/nav";
-@import "../../../node_modules/bootstrap/scss/navbar";
-@import "../../../node_modules/bootstrap/scss/close";
-@import "../../../node_modules/bootstrap/scss/modal";
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/modal";
 
 // Helpers
-@import "../../../node_modules/bootstrap/scss/helpers";
+@import "bootstrap/scss/helpers";
 
 // Utilities
-@import "../../../node_modules/bootstrap/scss/utilities/api";
+@import "bootstrap/scss/utilities/api";
 // scss-docs-end import-stack

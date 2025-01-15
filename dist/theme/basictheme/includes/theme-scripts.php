@@ -59,7 +59,7 @@ function basictheme_register_front_end(): void {
 	/** Load js **/
 
 	// bootstrap js
-	wp_enqueue_script( 'bootstrap', get_theme_file_uri( '/assets/libs/bootstrap/bootstrap.min.js' ), array('jquery'), null, true );
+	wp_enqueue_script( 'bootstrap', get_theme_file_uri( '/assets/libs/bootstrap/bootstrap.bundle.min.js' ), array('jquery'), null, true );
 
 	// comment reply
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {

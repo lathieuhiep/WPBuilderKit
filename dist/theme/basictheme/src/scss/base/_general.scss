@@ -1,0 +1,66 @@
+@import "../abstracts/abstracts";
+
+.sticky-footer {
+  flex: 1 0 auto;
+}
+
+#site-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color:#ffffff;
+  z-index: 99999;
+}
+
+#back-top {
+  --#{$prefix-theme}bt-square: 4rem;
+
+  background-color: $var-accent-color;
+  opacity: 0;
+  @include square(var(--#{$prefix-theme}bt-square));
+  bottom: 0;
+  cursor: pointer;
+  position: fixed;
+  right: 1.5rem;
+  z-index: 1000;
+  @include transition();
+
+  a {
+    display: block;
+    color: #ffffff;
+    line-height: var(--#{$prefix-theme}bt-square);
+    text-align: center;
+    @include transition(all 0.25s ease-in-out);
+  }
+
+  &.active_top {
+    opacity: 1;
+    bottom: 1.5rem;
+  }
+
+  &:hover {
+    background-color: $var-black-color;
+  }
+}
+
+.site-container {
+  --#{$prefix-theme}pd-site-container: 5rem 0;
+
+  padding: var(--#{$prefix-theme}pd-site-container);
+
+  &.site-container-elementor {
+    --#{$prefix-theme}pd-site-container: 0;
+  }
+}
+
+.site-page-content {
+  p {
+    &::after {
+      display: table;
+      clear: both;
+      content: '';
+    }
+  }
+}

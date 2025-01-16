@@ -1,3 +1,16 @@
+# Bỏ qua tất cả các tệp trong wp-content
+wp-content/*
+
+# Loại trừ phần phát triển
+!wp-content/plugins/essentials-for-basic/
+!wp-content/src
+!wp-content/themes/basictheme/
+
+!wp-content/gulpfile.js
+!wp-content/package.json
+!wp-content/README.md
+
+# Bỏ qua các tệp không cần thiết khác
 .idea
 /node_modules
 package-lock.json

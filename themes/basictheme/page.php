@@ -13,9 +13,9 @@ endif;
     <main class="site-container<?php echo esc_attr( $basictheme_class_elementor ); ?>">
         <?php
         if ( $basictheme_check_elementor ) :
-            get_template_part('template-parts/page/content','page-elementor');
+            get_template_part('template-parts/page/content-page-elementor.php','page-elementor');
         else:
-            get_template_part('template-parts/page/content','page');
+            get_template_part('template-parts/page/content', 'content-page.php');
         endif;
         ?>
     </main>

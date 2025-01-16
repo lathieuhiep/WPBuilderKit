@@ -20,7 +20,7 @@ if ( class_exists( 'CSF' ) ) {
 		'menu_slug'           => 'theme-options',
 		'menu_position'       => 2,
 		'admin_bar_menu_icon' => 'dashicons-admin-generic',
-		'framework_title'     => $basictheme_my_theme->get( 'Name' ) . ' ' . esc_html__( 'Options', 'basictheme' ),
+		'framework_title'     => $basictheme_my_theme->get('Name') . ' theme-options.php' . esc_html__( 'Options', 'basictheme' ),
 		'footer_text'         => esc_html__( 'Thank you for using my theme', 'basictheme' ),
 		'footer_after'        => '<pre>Contact me:<br />Zalo/Phone: 0975458209 - Skype: lathieuhiep - facebook: <a href="https://www.facebook.com/lathieuhiep" target="_blank">lathieuhiep</a></pre>',
 	) );

@@ -3,7 +3,7 @@ wp-content/*
 
 # Loại trừ phần phát triển
 !wp-content/plugins/essentials-for-basic/
-!wp-content/src
+!wp-content/src/
 !wp-content/themes/basictheme/
 
 !wp-content/gulpfile.js

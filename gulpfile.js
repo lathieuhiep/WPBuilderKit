@@ -29,14 +29,15 @@ const paths = {
     },
     output: {
         theme: {
-            root: 'dist/theme/basictheme/assets/',
-            css: 'dist/theme/basictheme/assets/css/',
-            js: 'dist/theme/basictheme/assets/js/',
-            libs: 'dist/theme/basictheme/assets/libs/'
+            root: 'themes/basictheme/assets/',
+            css: 'themes/basictheme/assets/css/',
+            js: 'themes/basictheme/assets/js/',
+            libs: 'themes/basictheme/assets/libs/',
+            extension: 'themes/basictheme/extension/'
         },
         plugins: {
-            root: 'dist/plugins/',
-            essentialsForBasic: 'dist/plugins/essentials-for-basic/assets/'
+            root: 'plugins/',
+            essentialsForBasic: 'plugins/essentials-for-basic/assets/'
         }
     }
 };
@@ -207,6 +208,76 @@ function buildJSTheme() {
         .pipe(browserSync.stream())
 }
 
+// Task build style custom post type
+function buildStyleCustomPostType() {
+    return src(`${paths.theme.scss}post-type/*/**.scss`)
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.error(err.message);
+                this.emit('end');
+            }
+        }))
+        .pipe(sourcemaps.init())
+        .pipe(sass({
+            outputStyle: 'expanded'
+        }, '').on('error', sass.logError))
+        .pipe(cleanCSS ({
+            level: 2
+        }))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(sourcemaps.write())
+        .pipe(dest(`${paths.output.theme.css}post-type/`))
+        .pipe(browserSync.stream())
+}
+
+// Task build style page templates
+function buildStylePageTemplate() {
+    return src(`${paths.theme.scss}page-templates/*.scss`)
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.error(err.message);
+                this.emit('end');
+            }
+        }))
+        .pipe(sourcemaps.init())
+        .pipe(sass({
+            outputStyle: 'expanded'
+        }, '').on('error', sass.logError))
+        .pipe(cleanCSS ({
+            level: 2
+        }))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(sourcemaps.write())
+        .pipe(dest(`${paths.output.theme.css}page-templates/`))
+        .pipe(browserSync.stream())
+}
+
+// Task build style shop
+function buildStyleShop() {
+    return src(`${paths.theme.scss}shop/shop.scss`)
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.error(err.message);
+                this.emit('end');
+            }
+        }))
+        .pipe(sourcemaps.init())
+        .pipe(sass({
+            outputStyle: 'expanded'
+        }, '').on('error', sass.logError))
+        .pipe(cleanCSS ({
+            level: 2
+        }))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(sourcemaps.write())
+        .pipe(dest(`${paths.output.theme.extension}woocommerce/assets/css/`))
+        .pipe(browserSync.stream())
+}
+exports.buildStyleShop = buildStyleShop
+
+/*
+Plugin
+* */
 // Task build elementor addons
 function buildStyleElementor() {
     return src(`${pathSrc}/scss/elementor-addons/addons.scss`)
@@ -232,55 +303,6 @@ function buildJSElementor() {
         .pipe(dest(`./extension/elementor-addon/js/`))
         .pipe(browserSync.stream())
 }
-
-// Task build style custom post type
-function buildStyleCustomPostType() {
-    return src(`${pathSrc}/scss/post-type/*/**.scss`)
-        .pipe(sourcemaps.init())
-        .pipe(sass({
-            outputStyle: 'expanded'
-        }, '').on('error', sass.logError))
-        .pipe(cleanCSS ({
-            level: {1: {specialComments: 0}}
-        }))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(sourcemaps.write())
-        .pipe(dest(`${pathDist}/css/post-type/`))
-        .pipe(browserSync.stream())
-}
-
-// Task build style page templates
-function buildStylePageTemplate() {
-    return src(`${pathSrc}/scss/page-templates/*.scss`)
-        .pipe(sourcemaps.init())
-        .pipe(sass({
-            outputStyle: 'expanded'
-        }, '').on('error', sass.logError))
-        .pipe(cleanCSS ({
-            level: {1: {specialComments: 0}}
-        }))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(sourcemaps.write())
-        .pipe(dest(`${pathDist}/css/page-templates/`))
-        .pipe(browserSync.stream())
-}
-
-// Task build style shop
-function buildStyleShop() {
-    return src(`${pathSrc}/scss/shop/shop.scss`)
-        .pipe(sourcemaps.init())
-        .pipe(sass({
-            outputStyle: 'expanded'
-        }, '').on('error', sass.logError))
-        .pipe(cleanCSS ({
-            level: {1: {specialComments: 0}}
-        }))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(sourcemaps.write())
-        .pipe(dest(`./extension/woocommerce/assets/css/`))
-        .pipe(browserSync.stream())
-}
-exports.buildStyleShop = buildStyleShop
 
 /*
 Task build project

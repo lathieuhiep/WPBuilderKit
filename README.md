@@ -1,67 +1,44 @@
-# WPBuilderKit
+# WPBuilderKit - WordPress Theme & Plugin Development
 
-WPBuilderKit là bộ công cụ phát triển Theme và Plugin cho WordPress, được thiết kế để dễ dàng tùy chỉnh và mở rộng cho các dự án WordPress sử dụng Elementor.
+## Mô tả
+Dự án này bao gồm một theme WordPress cơ bản và một plugin tạo thêm addons cho Elementor. Bạn có thể phát triển song song cả theme và plugin, quản lý SCSS và JS chung thông qua Gulp.
 
-## Cấu trúc Dự Án
+## Cấu trúc thư mục
+- `themes/`: Chứa các theme của WordPress.
+- `plugins/`: Chứa các plugin của WordPress.
+- `src/`: Thư mục chứa mã nguồn chung cho SCSS và JS.
+    - `scss/`: SCSS cho theme và plugin.
+    - `js/`: JavaScript cho theme và plugin.
+- `gulpfile.js`: File cấu hình Gulp để build và watch.
+- `node_modules/`: Các thư viện Node.js.
 
-Dự án bao gồm:
-
-- `dist/` : Chứa mã nguồn đã build của theme và plugin.
-    - `theme/` : Theme WordPress.
-    - `plugins/` : Các plugin phát triển cho theme.
-
-- `src/` : Mã nguồn phát triển của theme và plugin.
-    - `theme/` : Các tệp SCSS, JS và template cho theme.
-    - `plugins/` : Các tệp SCSS, JS cho plugin.
-    - `shared/` : Các tệp SCSS, JS dùng chung giữa theme và plugin.
-
-- `gulpfile.js` : Cấu hình Gulp để biên dịch SCSS, tối ưu hóa JS và thực hiện các tác vụ tự động.
-
-## Yêu cầu Hệ thống
-
-- Node.js (Lý tưởng là phiên bản LTS)
-- NPM (được cài đặt cùng Node.js)
-- Gulp CLI
-
-## Cài đặt Dự Án
-
-1. **Clone dự án từ Git**:
-   ```bash
-   git clone https://github.com/lathieuhiep/WPBuilderKit.git
-   cd WPBuilderKit
-   
-2. **Cài đặt các phụ thuộc**:
-
-- Chạy lệnh sau để cài đặt tất cả các phụ thuộc cần thiết:
-
+## Cài đặt và phát triển
+1. Clone dự án về:
+- Di chuyển vào thư mục wp-content và khởi tạo Git (nếu chưa làm):
     ```bash
-    npm install
+    git init
+  
+2. Thêm remote repository
+     ```bash
+   git remote add origin <repository_url>
+   git pull origin main
    
-3. **Cấu hình Symbolic Link (tùy chọn)**:
-
-- Để phát triển dễ dàng, bạn có thể sử dụng symbolic link để trỏ theme và plugin từ thư mục dist/ đến thư mục wp-content của WordPress.
-- Mở Command Prompt hoặc PowerShell với quyền admin.
-    
-  - Tạo symbolic link cho theme:
-      ```bash
-      mklink /D "PATH_TO_WP_CONTENT/themes/THEME_NAME" "PATH_TO_WPBUILDERKIT/dist/theme/THEME_NAME"
-    
-  - Giải thích:
-
-    - PATH_TO_WP_CONTENT: Đây là đường dẫn đến thư mục wp-content của cài đặt WordPress của bạn.
-    - THEME_NAME: Đây là tên theme bạn đang làm việc.
-    - PATH_TO_WPBUILDERKIT: Đây là đường dẫn đến thư mục dự án WPBuilderKit, nơi chứa mã nguồn của theme bạn.
-
-
-  - Tạo symbolic link cho plugin:
+3. Di chuyển các thư mục themes và plugins tạm thời nếu chúng có dữ liệu từ trước:
     ```bash
-    mklink /D "PATH_TO_WP_CONTENT/plugins/PLUGIN_NAME" "PATH_TO_WPBUILDERKIT/dist/plugins/PLUGIN_NAME"
+    mv themes themes_backup
+    mv plugins plugins_backup
+   
+4. Sao chép lại các tệp từ các thư mục backup vào:
+- Sao chép lại các thay đổi từ thư mục themes_backup và plugins_backup vào thư mục tương ứng:
+    ```bash
+    cp -r themes_backup/* themes/
+    cp -r plugins_backup/* plugins/
 
-  - Giải thích:
-
-    - PATH_TO_WP_CONTENT: Đây là đường dẫn đến thư mục wp-content của cài đặt WordPress của bạn.
-    - PLUGIN_NAME: Đây là tên plugin bạn đang phát triển.
-    - PATH_TO_WPBUILDERKIT: Đây là đường dẫn đến thư mục dự án WPBuilderKit, nơi chứa mã nguồn của plugin bạn.
+5. Xóa các thư mục backup tạm thời:
+- Sau khi sao chép xong, bạn có thể xóa các thư mục backup:
+    ```bash
+    rm -rf themes_backup
+    rm -rf plugins_backup
 
 ## Liên Hệ
 

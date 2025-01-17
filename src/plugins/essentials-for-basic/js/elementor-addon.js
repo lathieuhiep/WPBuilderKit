@@ -1,23 +1,42 @@
 (function ($) {
+    // setting owlCarousel
+    const owlCarouselOptions = (options) => {
+        let defaults = {
+            loop: true,
+            smartSpeed: 800,
+            autoplaySpeed: 800,
+            navSpeed: 800,
+            dotsSpeed: 800,
+            dragEndSpeed: 800,
+            navText: ['<i class="fa-solid fa-angle-left"></i>','<i class="fa-solid fa-angle-right"></i>'],
+        }
+
+        // extend options
+        return $.extend(defaults, options)
+    }
+
     /* Start Carousel slider */
     let ElementCarouselSlider = function ($scope, $) {
-        let element_slides = $scope.find('.custom-owl-carousel');
+        let slider = $scope.find('.custom-owl-carousel');
 
-        $(document).general_owlCarousel_custom(element_slides);
+        if ( slider.length ) {
+            const options = slider.data('settings-owl');
+            slider.owlCarousel(owlCarouselOptions(options))
+        }
     };
 
     $(window).on('elementor/frontend/init', function () {
         /* Element slider */
-        elementorFrontend.hooks.addAction('frontend/element_ready/basictheme-slides.default', ElementCarouselSlider);
+        elementorFrontend.hooks.addAction('frontend/element_ready/efb-slides.default', ElementCarouselSlider);
 
         /* Element post carousel */
-        elementorFrontend.hooks.addAction('frontend/element_ready/basictheme-post-carousel.default', ElementCarouselSlider);
+        elementorFrontend.hooks.addAction('frontend/element_ready/efb-post-carousel.default', ElementCarouselSlider);
 
         /* Element testimonial slider */
-        elementorFrontend.hooks.addAction('frontend/element_ready/basictheme-testimonial-slider.default', ElementCarouselSlider);
+        elementorFrontend.hooks.addAction('frontend/element_ready/efb-testimonial-slider.default', ElementCarouselSlider);
 
         /* Element carousel images */
-        elementorFrontend.hooks.addAction('frontend/element_ready/basictheme-carousel-images.default', ElementCarouselSlider);
+        elementorFrontend.hooks.addAction('frontend/element_ready/efb-carousel-images.default', ElementCarouselSlider);
     });
 
 })(jQuery);

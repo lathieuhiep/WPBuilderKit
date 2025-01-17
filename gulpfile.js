@@ -37,7 +37,10 @@ const paths = {
         },
         plugins: {
             root: 'plugins/',
-            essentialsForBasic: 'plugins/essentials-for-basic/assets/'
+            essentialsForBasic: {
+                css: 'plugins/essentials-for-basic/assets/css/',
+                js: 'plugins/essentials-for-basic/assets/js/',
+            }
         }
     }
 };
@@ -273,34 +276,45 @@ function buildStyleShop() {
         .pipe(dest(`${paths.output.theme.extension}woocommerce/assets/css/`))
         .pipe(browserSync.stream())
 }
-exports.buildStyleShop = buildStyleShop
 
 /*
-Plugin
+** Plugin
 * */
+
 // Task build elementor addons
 function buildStyleElementor() {
-    return src(`${pathSrc}/scss/elementor-addons/addons.scss`)
+    return src(`${paths.plugins.essentialsForBasic.scss}addons.scss`)
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.error(err.message);
+                this.emit('end');
+            }
+        }))
         .pipe(sourcemaps.init())
         .pipe(sass({
             outputStyle: 'expanded'
         }, '').on('error', sass.logError))
         .pipe(cleanCSS ({
-            level: {1: {specialComments: 0}}
+            level: 2
         }))
         .pipe(rename({suffix: '.min'}))
         .pipe(sourcemaps.write())
-        .pipe(dest(`./extension/elementor-addon/css/`))
+        .pipe(dest(`${paths.output.plugins.essentialsForBasic.css}`))
         .pipe(browserSync.stream())
 }
+exports.buildStyleElementor = buildStyleElementor
 
 function buildJSElementor() {
-    return src([
-        `${pathSrc}/js/elementor-addon.js`,
-    ], {allowEmpty: true})
+    return src(`${paths.plugins.essentialsForBasic.js}*.js`, {allowEmpty: true})
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.error('Error in build js in plugin addon elementor:', err.message);
+                this.emit('end');
+            }
+        }))
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
-        .pipe(dest(`./extension/elementor-addon/js/`))
+        .pipe(dest(`${paths.output.plugins.essentialsForBasic.js}`))
         .pipe(browserSync.stream())
 }
 

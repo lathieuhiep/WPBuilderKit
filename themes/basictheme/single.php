@@ -4,7 +4,7 @@ get_header();
 $sidebar = basictheme_get_option('opt_post_single_sidebar_position', 'right');
 $class_col_content = basictheme_col_use_sidebar( $sidebar, 'sidebar-main' );
 
-get_template_part( 'components/inc-breadcrumbs.php', 'breadcrumbs' );
+get_template_part( 'components/inc', 'breadcrumbs' );
 ?>
 
 <div class="site-container single-post-warp">
@@ -14,7 +14,7 @@ get_template_part( 'components/inc-breadcrumbs.php', 'breadcrumbs' );
                 <?php
                 if ( have_posts() ) : while (have_posts()) : the_post();
 
-                    get_template_part( 'template-parts/post/content-single.php','single' );
+                    get_template_part( 'template-parts/post/content','single' );
 
                     endwhile;
                 endif;

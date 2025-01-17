@@ -11,11 +11,9 @@
 
 <?php
 if ( !is_404() ) :
-	get_template_part('components/inc-header.php','header');
+	get_template_part('components/inc','header');
 endif;
 ?>
 
 <!--Start Sticky Footer-->
 <div class="sticky-footer">
-
-

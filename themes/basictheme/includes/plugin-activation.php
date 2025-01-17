@@ -4,7 +4,7 @@
  */
 
 add_action( 'tgmpa_register', 'basictheme_register_required_plugins' );
-function basictheme_register_required_plugins() {
+function basictheme_register_required_plugins(): void {
 
 	/**
 	 * Array of plugin arrays. Required keys are name and slug.

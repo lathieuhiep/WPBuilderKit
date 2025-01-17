@@ -195,7 +195,7 @@ class EFB_Widget_Testimonial_Slider extends Widget_Base {
 								echo wp_get_attachment_image( $item['list_image']['id'], array( '150', '150' ) );
 							else:
 								?>
-                                <img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/user-avatar.png' ) ) ?>"
+                                <img src="<?php echo esc_url( EFB_PLUGIN_URL . 'assets/images/user-avatar.png' ); ?>"
                                      alt="<?php echo esc_attr( $item['list_title'] ); ?>"/>
 							<?php endif; ?>
                         </div>

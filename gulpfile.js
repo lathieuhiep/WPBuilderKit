@@ -11,7 +11,7 @@ const path = require('path');
 
 // Đường dẫn file
 const paths = {
-    node_modules: 'node_modules',
+    node_modules: 'node_modules/',
     theme: {
         scss: 'src/theme/scss/',
         js: 'src/theme/js/'
@@ -24,8 +24,8 @@ const paths = {
         }
     },
     shared: {
-        libs: 'src/shared/libs/',
-        scss: 'src/shared/scss/'
+        scss: 'src/shared/scss/',
+        vendors: 'src/shared/scss/vendors/',
     },
     output: {
         theme: {
@@ -66,32 +66,40 @@ function server() {
 Task build fontawesome
 * */
 function buildFontawesomeStyle() {
-    return src(`${pathSrc}/scss/vendors/fontawesome.scss`)
+    return src(`${paths.shared.vendors}fontawesome.scss`)
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.error(err.message);
+                this.emit('end');
+            }
+        }))
         .pipe(sass({
             outputStyle: 'expanded',
-            includePaths: ['node_modules']
+            includePaths: [
+                path.resolve(__dirname, 'node_modules/')
+            ],
+            quietDeps: true
         }, '').on('error', sass.logError))
         .pipe(cleanCSS ({
-            level: {1: {specialComments: 0}}
+            level: 2
         }))
         .pipe(rename({suffix: '.min'}))
-        .pipe(dest(`${pathDist}/libs/fontawesome/css`))
+        .pipe(dest(`${paths.output.theme.libs}fontawesome/css`))
         .pipe(browserSync.stream())
 }
 
 function CopyWebFonts() {
     return src([
-        './node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf',
-        './node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2',
-        './node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.ttf',
-        './node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2',
-        './node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf',
-        './node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2',
+        `${paths.node_modules}@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf`,
+        `${paths.node_modules}@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2`,
+        `${paths.node_modules}@fortawesome/fontawesome-free/webfonts/fa-regular-400.ttf`,
+        `${paths.node_modules}@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2`,
+        `${paths.node_modules}@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf`,
+        `${paths.node_modules}@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2`,
     ], {encoding: false})
-        .pipe(dest(`${pathDist}/libs/fontawesome/webfonts`))
+        .pipe(dest(`${paths.output.theme.libs}fontawesome/webfonts`))
         .pipe(browserSync.stream())
 }
-
 exports.CopyWebFonts = CopyWebFonts
 
 /*

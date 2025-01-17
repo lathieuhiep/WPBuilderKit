@@ -1,6 +1,11 @@
 # Bỏ qua tất cả các tệp trong wp-content
 *
 
+# Bỏ qua các tệp không cần thiết khác
+/node_modules
+package-lock.json
+.env
+
 # Loại trừ phần phát triển
 !plugins/
 !plugins/essentials-for-basic/
@@ -12,13 +17,8 @@
 
 !src/
 !src/**
+
 !.gitignore
 !gulpfile.js
 !package.json
 !README.md
-
-
-# Bỏ qua các tệp không cần thiết khác
-/node_modules
-package-lock.json
-.env

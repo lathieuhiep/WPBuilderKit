@@ -1,14 +1,22 @@
 # Bỏ qua tất cả các tệp trong wp-content
-/*
+*
 
 # Loại trừ phần phát triển
+!plugins/
 !plugins/essentials-for-basic/
-!src/
-!themes/basictheme/
+!plugins/essentials-for-basic/**
 
+!themes/
+!themes/basictheme/
+!themes/basictheme/**
+
+!src/
+!src/**
+!.gitignore
 !gulpfile.js
 !package.json
 !README.md
+
 
 # Bỏ qua các tệp không cần thiết khác
 /node_modules

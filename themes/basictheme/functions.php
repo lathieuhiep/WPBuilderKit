@@ -75,11 +75,6 @@ if ( !class_exists('CMB2') ) {
     require get_parent_theme_file_path( '/configurations/meta-box/cmb_post.php' );
 }
 
-// Required: Elementor
-if ( did_action( 'elementor/loaded' ) ) :
-    require get_parent_theme_file_path( '/extension/elementor-addon/elementor-addon.php' );
-endif;
-
 // Require Register Sidebar
 require get_parent_theme_file_path( '/includes/register-sidebar.php' );
 

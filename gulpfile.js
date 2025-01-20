@@ -84,6 +84,7 @@ function buildFontawesomeStyle() {
         .pipe(dest(`${paths.output.theme.libs}fontawesome/css`))
         .pipe(browserSync.stream())
 }
+exports.buildFontawesomeStyle = buildFontawesomeStyle
 
 function CopyWebFonts() {
     return src([
@@ -97,6 +98,7 @@ function CopyWebFonts() {
         .pipe(dest(`${paths.output.theme.libs}fontawesome/webfonts`))
         .pipe(browserSync.stream())
 }
+exports.CopyWebFonts = CopyWebFonts
 
 /*
 Task build Bootstrap

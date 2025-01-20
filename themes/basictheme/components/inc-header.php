@@ -39,7 +39,7 @@ $cart = basictheme_get_option( 'opt_menu_cart', '1' );
                 <ul class="main-menu">
                     <li>
                         <a href="<?php echo get_admin_url() . '/nav-menus.php'; ?>">
-							<?php esc_html_e( 'ADD TO MENU', 'basictheme' ); ?>
+							<?php esc_html_e( 'Thêm Menu', 'basictheme' ); ?>
                         </a>
                     </li>
                 </ul>

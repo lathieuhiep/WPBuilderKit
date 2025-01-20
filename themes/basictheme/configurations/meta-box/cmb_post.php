@@ -3,7 +3,7 @@ add_action('cmb2_admin_init', 'basictheme_post_meta_boxes');
 function basictheme_post_meta_boxes(): void {
     $cmb = new_cmb2_box(array(
         'id' => 'basictheme_cmb_post',
-        'title' => esc_html__('Option metabox', 'basictheme'),
+        'title' => esc_html__('Tùy chọn metabox', 'basictheme'),
         'object_types' => array('post'),
         'context' => 'normal',
         'priority' => 'low',

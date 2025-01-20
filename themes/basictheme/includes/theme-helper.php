@@ -13,7 +13,7 @@ function basictheme_get_version_theme(): string {
 
 // check is blog
 function basictheme_is_blog (): bool {
-	return ( is_archive() || is_category() || is_tag() || is_author() || is_home() );
+	return ( is_archive() || is_category() || is_tag() || is_author() || is_home() || ( is_search() && get_post_type() === 'post' ) );
 }
 
 // Callback Comment List
@@ -50,7 +50,7 @@ function basictheme_comments( $basictheme_comment, $basictheme_comment_args, $ba
 
             <?php if ( $basictheme_comment->comment_approved == '0' ) : ?>
                 <div class="awaiting">
-                    <?php esc_html_e( 'Your comment is awaiting moderation.', 'basictheme' ); ?>
+                    <?php esc_html_e( 'Bình luận của bạn đang chờ kiểm duyệt.', 'basictheme' ); ?>
                 </div>
             <?php endif; ?>
 
@@ -82,16 +82,16 @@ function basictheme_comment_nav(): void {
 ?>
 	<nav class="navigation comment-navigation">
 		<h2 class="screen-reader-text">
-			<?php esc_html_e( 'Comment navigation', 'basictheme' ); ?>
+			<?php esc_html_e( 'Điều hướng bình luận', 'basictheme' ); ?>
 		</h2>
 
 		<div class="nav-links">
 			<?php
-			if ( $prev_link = get_previous_comments_link( esc_html__( 'Older Comments', 'basictheme' ) ) ) :
+			if ( $prev_link = get_previous_comments_link( esc_html__( 'Bình luận cũ hơn', 'basictheme' ) ) ) :
 				printf( '<div class="nav-previous">%s</div>', $prev_link );
 			endif;
 
-			if ( $next_link = get_next_comments_link( esc_html__( 'Newer Comments', 'basictheme' ) ) ) :
+			if ( $next_link = get_next_comments_link( esc_html__( 'Bình luận mới hơn', 'basictheme' ) ) ) :
 				printf( '<div class="nav-next">%s</div>', $next_link );
 			endif;
 			?>
@@ -106,8 +106,8 @@ function basictheme_pagination(): void {
 	the_posts_pagination( array(
 		'type'               => 'list',
 		'mid_size'           => 2,
-		'prev_text'          => esc_html__( 'Previous', 'basictheme' ),
-		'next_text'          => esc_html__( 'Next', 'basictheme' ),
+		'prev_text'          => esc_html__( 'Trước', 'basictheme' ),
+		'next_text'          => esc_html__( 'Sau', 'basictheme' ),
 		'screen_reader_text' => '&nbsp;',
 	) );
 }
@@ -116,8 +116,8 @@ function basictheme_pagination(): void {
 function basictheme_paging_nav_query( $query ): void {
 
 	$args = array(
-		'prev_text' => esc_html__( ' Previous', 'basictheme' ),
-		'next_text' => esc_html__( 'Next', 'basictheme' ),
+		'prev_text' => esc_html__( ' Trước', 'basictheme' ),
+		'next_text' => esc_html__( 'Sau', 'basictheme' ),
 		'current'   => max( 1, get_query_var( 'paged' ) ),
 		'total'     => $query->max_num_pages,
 		'type'      => 'list',
@@ -167,7 +167,7 @@ function basictheme_post_meta(): void {
 
 	<div class="post-meta">
         <span class="post-meta__author">
-            <?php esc_html_e( 'Author:', 'basictheme' ); ?>
+            <?php esc_html_e( 'Tác giả:', 'basictheme' ); ?>
 
             <a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>">
                 <?php the_author(); ?>
@@ -175,13 +175,13 @@ function basictheme_post_meta(): void {
         </span>
 
 		<span class="post-meta__date">
-            <?php esc_html_e( 'Post date: ', 'basictheme' );
+            <?php esc_html_e( 'Ngày đăng: ', 'basictheme' );
             the_date(); ?>
         </span>
 
 		<span class="post-meta__comments">
             <?php
-            comments_popup_link( '0 ' . esc_html__( 'Comment', 'basictheme' ), '1 ' . esc_html__( 'Comment', 'basictheme' ), '% ' . esc_html__( 'Comments', 'basictheme' ) );
+            comments_popup_link( '0 ' . esc_html__( 'Bình luận', 'basictheme' ), '1 ' . esc_html__( 'Bình luận', 'basictheme' ), '% ' . esc_html__( 'Bình luận', 'basictheme' ) );
             ?>
         </span>
 	</div>
@@ -193,7 +193,7 @@ function basictheme_post_meta(): void {
 function basictheme_link_page(): void {
 
 	wp_link_pages( array(
-		'before'      => '<div class="page-links">' . esc_html__( 'Pages:', 'basictheme' ),
+		'before'      => '<div class="page-links">' . esc_html__( 'Trang:', 'basictheme' ),
 		'after'       => '</div>',
 		'link_before' => '<span class="page-number">',
 		'link_after'  => '</span>',
@@ -232,14 +232,14 @@ function basictheme_get_form_cf7(): array {
 			'numberposts' => -1,
 		) );
 
-		$options[0] = esc_html__('Select a Contact Form', 'basictheme');
+		$options[0] = esc_html__('Chọn một mẫu liên hệ', 'basictheme');
 
 		if ( !empty($wpcf7_form_list) && !is_wp_error($wpcf7_form_list) ) :
 			foreach ( $wpcf7_form_list as $item ) :
 				$options[$item->ID] = $item->post_title;
 			endforeach;
 		else :
-			$options[0] = esc_html__('Create a Form First', 'basictheme');
+			$options[0] = esc_html__('Tạo biểu mẫu trước tiên', 'basictheme');
 		endif;
 
 	}

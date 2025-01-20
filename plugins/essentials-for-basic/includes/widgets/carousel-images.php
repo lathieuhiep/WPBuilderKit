@@ -31,9 +31,14 @@ class EFB_Widget_Carousel_Images extends Widget_Base {
 		return array( 'efb-addons' );
 	}
 
-	// get style
+	// widget style dependencies
 	public function get_style_depends(): array {
 		return [ 'owl.carousel' ];
+	}
+
+    // widget scripts dependencies
+    public function get_script_depends(): array {
+		return [ 'owl.carousel', 'efb-script' ];
 	}
 
 	// widget controls
@@ -106,65 +111,6 @@ class EFB_Widget_Carousel_Images extends Widget_Base {
 					],
 				],
 				'title_field' => '{{{ list_title }}}',
-			]
-		);
-
-		$this->end_controls_section();
-
-		// Content additional options
-		$this->start_controls_section(
-			'content_additional_options',
-			[
-				'label' => __( 'Options', 'essentials-for-basic' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'loop',
-			[
-				'type'         => Controls_Manager::SWITCHER,
-				'label'        => esc_html__( 'Loop Slider ?', 'essentials-for-basic' ),
-				'label_off'    => esc_html__( 'No', 'essentials-for-basic' ),
-				'label_on'     => esc_html__( 'Yes', 'essentials-for-basic' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
-			]
-		);
-
-		$this->add_control(
-			'autoplay',
-			[
-				'label'        => esc_html__( 'Autoplay?', 'essentials-for-basic' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_off'    => esc_html__( 'No', 'essentials-for-basic' ),
-				'label_on'     => esc_html__( 'Yes', 'essentials-for-basic' ),
-				'return_value' => 'yes',
-				'default'      => 'no',
-			]
-		);
-
-		$this->add_control(
-			'nav',
-			[
-				'label'        => esc_html__( 'Nav Slider', 'essentials-for-basic' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'essentials-for-basic' ),
-				'label_off'    => esc_html__( 'No', 'essentials-for-basic' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
-			]
-		);
-
-		$this->add_control(
-			'dots',
-			[
-				'label'        => esc_html__( 'Dots Slider', 'essentials-for-basic' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'essentials-for-basic' ),
-				'label_off'    => esc_html__( 'No', 'essentials-for-basic' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
 			]
 		);
 

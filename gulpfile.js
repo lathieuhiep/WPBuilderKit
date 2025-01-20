@@ -40,14 +40,11 @@ const paths = {
             essentialsForBasic: {
                 css: 'plugins/essentials-for-basic/assets/css/',
                 js: 'plugins/essentials-for-basic/assets/js/',
+                libs: 'plugins/essentials-for-basic/assets/libs/'
             }
         }
     }
 };
-
-const pathSrc = './src'
-const pathDist = './assets'
-const pathNodeModule = './node_modules'
 
 // server
 // tạo file .env với biến PROXY="localhost/basicthem". Có thể thay đổi giá trị này.
@@ -100,7 +97,6 @@ function CopyWebFonts() {
         .pipe(dest(`${paths.output.theme.libs}fontawesome/webfonts`))
         .pipe(browserSync.stream())
 }
-exports.CopyWebFonts = CopyWebFonts
 
 /*
 Task build Bootstrap
@@ -165,6 +161,7 @@ function buildStyleOwlCarousel() {
         }))
         .pipe(rename({suffix: '.min'}))
         .pipe(dest(`${paths.output.theme.libs}owl.carousel/`))
+        .pipe(dest(`${paths.output.plugins.essentialsForBasic.libs}owl.carousel/`))
         .pipe(browserSync.stream())
 }
 
@@ -179,6 +176,7 @@ function buildJsOwlCarouse() {
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
         .pipe(dest(`${paths.output.theme.libs}owl.carousel/`))
+        .pipe(dest(`${paths.output.plugins.essentialsForBasic.libs}owl.carousel/`))
         .pipe(browserSync.stream())
 }
 
@@ -310,7 +308,6 @@ function buildStyleElementor() {
         .pipe(dest(`${paths.output.plugins.essentialsForBasic.css}`))
         .pipe(browserSync.stream())
 }
-exports.buildStyleElementor = buildStyleElementor
 
 function buildJSElementor() {
     return src(`${paths.plugins.essentialsForBasic.js}*.js`, {allowEmpty: true})
@@ -349,15 +346,15 @@ async function buildProject() {
 
     await buildStylePageTemplate()
 }
-
 exports.buildProject = buildProject
 
 // Task watch
 function watchTask() {
     server()
 
+    // watch abstracts
     watch([
-        `${pathSrc}/scss/abstracts/*/**.scss`
+        `${paths.shared.scss}abstracts/*/**.scss`
     ], gulp.series(
         buildStyleBootstrap,
         buildStyleTheme,
@@ -366,37 +363,36 @@ function watchTask() {
         buildStylePageTemplate
     ))
 
+    // watch lib bootstrap
     watch([
-        `${pathSrc}/scss/vendors/bootstrap.scss`
+        `${paths.shared.vendors}bootstrap.scss`
     ], buildStyleBootstrap)
 
+    // theme watch
     watch([
-        `${pathSrc}/scss/base/*.scss`,
-        `${pathSrc}/scss/utilities/*.scss`,
-        `${pathSrc}/scss/components/*.scss`,
-        `${pathSrc}/scss/layout/*.scss`,
-        `${pathSrc}/scss/style-theme.scss`,
+        `${paths.theme.scss}base/*.scss`,
+        `${paths.theme.scss}utilities/*.scss`,
+        `${paths.theme.scss}components/*.scss`,
+        `${paths.theme.scss}layout/*.scss`,
+        `${paths.theme.scss}style-theme.scss`,
     ], buildStyleTheme)
-    watch([`${pathSrc}/js/custom.js`], buildJSTheme)
+
+    watch([`${paths.theme.js}custom.js`], buildJSTheme)
 
     watch([
-        `${pathSrc}/scss/elementor-addons/*.scss`
-    ], buildStyleElementor)
-    watch([`${pathSrc}/js/elementor-addon.js`], buildJSElementor)
-
-    watch([
-        `${pathSrc}/scss/post-type/*/**.scss`
+        `${paths.theme.scss}post-type/*/**.scss`
     ], buildStyleCustomPostType)
 
     watch([
-        `${pathSrc}/scss/page-templates/*.scss`
+        `${paths.theme.scss}page-templates/*.scss`
     ], buildStylePageTemplate)
 
+    // plugin essentials watch
     watch([
-        './*.php',
-        './**/*.php',
-        `${pathDist}/images/**/*`
-    ], browserSync.reload);
+        `${paths.plugins.essentialsForBasic.scss}*.scss`
+    ], buildStyleElementor)
+
+    watch([`${paths.plugins.essentialsForBasic.js}*.js`], buildJSElementor)
 }
 
 exports.watchTask = watchTask

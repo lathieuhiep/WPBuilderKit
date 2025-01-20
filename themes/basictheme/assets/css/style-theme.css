@@ -161,7 +161,7 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 }
 #back-top a {
   display: block;
-  color: #ffffff;
+  color: var(--theme-white);
   line-height: var(--theme-bt-square);
   text-align: center;
   transition: all 0.25s ease-in-out;

@@ -32,6 +32,16 @@ class EFB_Widget_Slides extends Widget_Base {
 		return array( 'efb-addons' );
 	}
 
+	// widget style dependencies
+	public function get_style_depends(): array {
+		return [ 'owl.carousel' ];
+	}
+
+	// widget scripts dependencies
+	public function get_script_depends(): array {
+		return [ 'owl.carousel', 'efb-script' ];
+	}
+
 	// widget controls
 	protected function register_controls(): void {
 		$this->start_controls_section(

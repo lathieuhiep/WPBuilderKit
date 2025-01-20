@@ -17,9 +17,9 @@ function basictheme_remove_jquery_migrate( $scripts ): void {
 	}
 }
 
-// Register Front-End Styles
-add_action('wp_enqueue_scripts', 'basictheme_register_front_end');
-function basictheme_register_front_end(): void {
+// load libs front-end style +scrip
+add_action('wp_enqueue_scripts', 'basictheme_front_end_libs', 5);
+function basictheme_front_end_libs(): void {
 	// remove style gutenberg
 	wp_dequeue_style('wp-block-library');
 	wp_dequeue_style('wp-block-library-theme');
@@ -28,16 +28,21 @@ function basictheme_register_front_end(): void {
 	wp_dequeue_style('wc-blocks-style');
 	wp_dequeue_style('storefront-gutenberg-blocks');
 
-	/** Load css **/
-
 	// font google
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Roboto+Slab:wght@400;500;700&display=swap', array(), null );
 
-	// fontawesome
-	wp_enqueue_style( 'fontawesome', get_theme_file_uri( '/assets/libs/fontawesome/css/fontawesome.min.css' ), array(), null );
-
 	// bootstrap css
 	wp_enqueue_style( 'bootstrap', get_theme_file_uri( '/assets/libs/bootstrap/bootstrap.min.css' ), array(), null );
+	wp_enqueue_script( 'bootstrap', get_theme_file_uri( '/assets/libs/bootstrap/bootstrap.bundle.min.js' ), array('jquery'), null, true );
+
+	// fontawesome
+	wp_enqueue_style( 'fontawesome', get_theme_file_uri( '/assets/libs/fontawesome/css/fontawesome.min.css' ), array(), null );
+}
+
+// load front-end styles
+add_action('wp_enqueue_scripts', 'basictheme_front_end_scripts', 22);
+function basictheme_front_end_scripts (): void {
+	/** Load css **/
 
 	// style theme
 	wp_enqueue_style( 'basictheme-style', get_theme_file_uri( '/assets/css/style-theme.min.css' ), array(), basictheme_get_version_theme() );
@@ -57,10 +62,6 @@ function basictheme_register_front_end(): void {
 	}
 
 	/** Load js **/
-
-	// bootstrap js
-	wp_enqueue_script( 'bootstrap', get_theme_file_uri( '/assets/libs/bootstrap/bootstrap.bundle.min.js' ), array('jquery'), null, true );
-
 	// comment reply
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

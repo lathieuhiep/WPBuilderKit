@@ -40,6 +40,12 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		return [ 'owl.carousel', 'efb-script' ];
 	}
 
+	// widget keywords
+	public function get_keywords(): array
+	{
+		return ['carousel', 'post', 'slider'];
+	}
+
 	// widget controls
 	protected function register_controls(): void {
 
@@ -401,7 +407,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'style_title',
 			[
-				'label' => esc_html__( 'Title', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Tiêu đề', 'essentials-for-basic' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -409,7 +415,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'title_color',
 			[
-				'label'     => esc_html__( 'Color', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Màu', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -421,7 +427,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'title_color_hover',
 			[
-				'label'     => esc_html__( 'Color Hover', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Màu khi di chuột', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -438,33 +444,32 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'title_alignment',
+		$this->add_responsive_control(
+			'title_align',
 			[
-				'label'     => esc_html__( 'Title Alignment', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Căn chỉnh', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Trái', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 
 					'center' => [
-						'title' => esc_html__( 'Center', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Giữa', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 
 					'right' => [
-						'title' => esc_html__( 'Right', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Phải', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 
 					'justify' => [
-						'title' => esc_html__( 'Justified', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Căn đều hai lề', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
-				'toggle'    => true,
 				'selectors' => [
 					'{{WRAPPER}} .element-post-carousel .item-post__content .title' => 'text-align: {{VALUE}};',
 				]
@@ -477,7 +482,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'style_excerpt',
 			[
-				'label'     => esc_html__( 'Excerpt', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Nôi dung tóm tắt', 'essentials-for-basic' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_excerpt' => 'show',
@@ -488,11 +493,11 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'excerpt_color',
 			[
-				'label'     => esc_html__( 'Color', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Màu', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
-					'{{WRAPPER}} .element-post-carousel .item-post__content .desc p' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .element-post-carousel .item-post__content .desc' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -501,39 +506,38 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'excerpt_typography',
-				'selector' => '{{WRAPPER}} .element-post-carousel .item-post__content .desc p',
+				'selector' => '{{WRAPPER}} .element-post-carousel .item-post__content .desc',
 			]
 		);
 
 		$this->add_control(
-			'excerpt_alignment',
+			'excerpt_align',
 			[
-				'label'     => esc_html__( 'Excerpt Alignment', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Căn chỉnh', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Trái', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 
 					'center' => [
-						'title' => esc_html__( 'Center', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Giữa', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 
 					'right' => [
-						'title' => esc_html__( 'Right', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Phải', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 
 					'justify' => [
-						'title' => esc_html__( 'Justified', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Căn đều hai lề', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
-				'toggle'    => true,
 				'selectors' => [
-					'{{WRAPPER}} .element-post-carousel .item-post__content .desc p' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .element-post-carousel .item-post__content .desc' => 'text-align: {{VALUE}};',
 				]
 			]
 		);

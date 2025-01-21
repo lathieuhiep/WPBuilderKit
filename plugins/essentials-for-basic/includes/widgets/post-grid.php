@@ -121,7 +121,7 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$this->add_control(
 			'show_excerpt',
 			[
-				'label'   => esc_html__( 'Hiên thị tóm tắt', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Hiên thị nôi dung tóm tắt', 'essentials-for-basic' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'show' => [
@@ -231,7 +231,7 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'style_excerpt',
 			[
-				'label'     => esc_html__( 'Tóm tắt', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Nôi dung tóm tắt', 'essentials-for-basic' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_excerpt' => 'show',

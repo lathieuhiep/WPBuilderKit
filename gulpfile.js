@@ -125,6 +125,7 @@ function buildStyleBootstrap() {
         }))
         .pipe(rename({suffix: '.min'}))
         .pipe(dest(`${paths.output.theme.libs}bootstrap/`))
+        .pipe(dest(`${paths.output.plugins.essentialsForBasic.libs}bootstrap/`))
         .pipe(browserSync.stream())
 }
 
@@ -140,6 +141,7 @@ function buildLibsBootstrapJS() {
         .pipe(uglify())
         .pipe(rename( {suffix: '.min'} ))
         .pipe(dest(`${paths.output.theme.libs}/bootstrap/`))
+        .pipe(dest(`${paths.output.plugins.essentialsForBasic.libs}bootstrap/`))
         .pipe(browserSync.stream())
 }
 

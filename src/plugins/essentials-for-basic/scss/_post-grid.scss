@@ -1,4 +1,5 @@
 @import "../../../shared/scss/abstracts/abstracts";
+@import "abstracts/abstracts";
 
 .element-post-grid {
   .title {
@@ -6,7 +7,8 @@
   }
 
   .item-post {
-    margin-bottom: 3rem;
+    --#{$prefix-plugin-essentials}fs-title: #{map-get($mt-font-sizes, md)};
+    --#{$prefix-plugin-essentials}fs-content: #{map-get($mt-font-sizes, sm)};
 
     &__thumbnail {
       margin-bottom: 1.5rem;
@@ -17,7 +19,7 @@
     }
 
     &__title {
-      font-size: 1.8rem;
+      font-size: var(--#{$prefix-plugin-essentials}fs-title);
     }
 
     &__content {
@@ -25,7 +27,6 @@
 
       p {
         margin: 0;
-        font-size: $var-fs-xs;
       }
     }
   }

@@ -1,6 +1,10 @@
 @import "../../../shared/scss/abstracts/abstracts";
+@import "abstracts/abstracts";
 
 .element-testimonial-slider {
+  --#{$prefix-plugin-essentials}fs-name: #{map-get($mt-font-sizes, md)};
+  --#{$prefix-plugin-essentials}fw-name: #{map-get($mt-font-weights, bold)};
+
   .item {
     &__image {
       width: 15rem;
@@ -15,8 +19,8 @@
       }
 
       .name {
-        font-size: $var-fs-md;
-        font-weight: $var-fw-bold;
+        font-size: var(--#{$prefix-plugin-essentials}fs-name);
+        font-weight: var(--#{$prefix-plugin-essentials}fw-name);
       }
     }
   }

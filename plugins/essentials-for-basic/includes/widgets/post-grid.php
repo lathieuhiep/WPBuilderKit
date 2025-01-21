@@ -319,7 +319,7 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		if ( $query->have_posts() ) :
         ?>
             <div class="element-post-grid">
-                <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-<?php echo esc_attr( $settings['column_number'] ); ?>">
+                <div class="row-gap-6 row row-cols-sm-2 row-cols-md-3 row-cols-lg-<?php echo esc_attr( $settings['column_number'] ); ?>">
 					<?php while ( $query->have_posts() ): $query->the_post(); ?>
 
                         <div class="col">

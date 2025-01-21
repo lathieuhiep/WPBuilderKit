@@ -1,4 +1,5 @@
 @import "../../../shared/scss/abstracts/abstracts";
+@import "abstracts/abstracts";
 
 .element-slides {
   position: relative;
@@ -28,10 +29,12 @@
         }
 
         i.fa {
+          --#{$prefix-plugin-essentials}ic-color-hover: #{map-get($mt-colors, "accent")};
+
           font-size: 3rem;
 
           &:hover {
-            color: $var-accent-color;
+            color: var(--#{$prefix-plugin-essentials}ic-color-hover);
           }
         }
       }
@@ -46,13 +49,15 @@
 
       .owl-dot {
         span {
-          background-color: $var-white-color;
+          background-color: #ffffff;
         }
 
         &.active,
         &:hover {
           span {
-            background-color: $var-accent-color;
+            --#{$prefix-plugin-essentials}bk-color-hover: #{map-get($mt-colors, "accent")};
+
+            background-color: var(--#{$prefix-plugin-essentials}bk-color-hover);
           }
         }
       }

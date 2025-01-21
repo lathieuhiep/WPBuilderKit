@@ -17,7 +17,7 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 
 	// widget title
 	public function get_title(): string {
-		return esc_html__( 'Posts Grid', 'essentials-for-basic' );
+		return esc_html__( 'Bài viết dạng lưới', 'essentials-for-basic' );
 	}
 
 	// widget icon
@@ -36,7 +36,7 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Query', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Thiết lập bài viết', 'essentials-for-basic' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -44,7 +44,7 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$this->add_control(
 			'select_cat',
 			[
-				'label'       => esc_html__( 'Select Category', 'essentials-for-basic' ),
+				'label'       => esc_html__( 'Chọn danh mục', 'essentials-for-basic' ),
 				'type'        => Controls_Manager::SELECT2,
 				'options'     => efb_check_get_cat( 'category' ),
 				'multiple'    => true,
@@ -55,7 +55,7 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$this->add_control(
 			'limit',
 			[
-				'label'   => esc_html__( 'Number of Posts', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Số bài lấy ra', 'essentials-for-basic' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 6,
 				'min'     => 1,
@@ -67,15 +67,14 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$this->add_control(
 			'order_by',
 			[
-				'label'   => esc_html__( 'Order By', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Sắp xếp theo', 'essentials-for-basic' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'id',
 				'options' => [
-					'id'     => esc_html__( 'Post ID', 'essentials-for-basic' ),
-					'author' => esc_html__( 'Post Author', 'essentials-for-basic' ),
-					'title'  => esc_html__( 'Title', 'essentials-for-basic' ),
-					'date'   => esc_html__( 'Date', 'essentials-for-basic' ),
-					'rand'   => esc_html__( 'Random', 'essentials-for-basic' ),
+					'id'    => esc_html__( 'ID', 'essentials-for-basic' ),
+					'title' => esc_html__( 'Tiêu đề', 'essentials-for-basic' ),
+					'date'  => esc_html__( 'Ngày đăng', 'essentials-for-basic' ),
+					'rand'  => esc_html__( 'Ngẫu nhiên', 'essentials-for-basic' ),
 				],
 			]
 		);
@@ -83,12 +82,12 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$this->add_control(
 			'order',
 			[
-				'label'   => esc_html__( 'Order', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Sắp xếp', 'essentials-for-basic' ),
 				'type'    => Controls_Manager::SELECT,
-				'default' => 'ASC',
+				'default' => 'DESC',
 				'options' => [
-					'ASC'  => esc_html__( 'Ascending', 'essentials-for-basic' ),
-					'DESC' => esc_html__( 'Descending', 'essentials-for-basic' ),
+					'ASC'  => esc_html__( 'Tăng dần', 'essentials-for-basic' ),
+					'DESC' => esc_html__( 'Giảm dần', 'essentials-for-basic' ),
 				],
 			]
 		);
@@ -99,7 +98,7 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'content_layout',
 			[
-				'label' => esc_html__( 'Layout Settings', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Thiết lập giao diện', 'essentials-for-basic' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -107,14 +106,14 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$this->add_control(
 			'column_number',
 			[
-				'label'   => esc_html__( 'Column', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Cột', 'essentials-for-basic' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 3,
 				'options' => [
-					1 => esc_html__( '1 Column', 'essentials-for-basic' ),
-					2 => esc_html__( '2 Column', 'essentials-for-basic' ),
-					3 => esc_html__( '3 Column', 'essentials-for-basic' ),
-					4 => esc_html__( '4 Column', 'essentials-for-basic' ),
+					1 => esc_html__( '1 Cột', 'essentials-for-basic' ),
+					2 => esc_html__( '2 Cột', 'essentials-for-basic' ),
+					3 => esc_html__( '3 Cột', 'essentials-for-basic' ),
+					4 => esc_html__( '4 Cột', 'essentials-for-basic' ),
 				],
 			]
 		);
@@ -122,16 +121,16 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$this->add_control(
 			'show_excerpt',
 			[
-				'label'   => esc_html__( 'Show excerpt', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Hiên thị tóm tắt', 'essentials-for-basic' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'show' => [
-						'title' => esc_html__( 'Yes', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Có', 'essentials-for-basic' ),
 						'icon'  => 'eicon-check',
 					],
 
 					'hide' => [
-						'title' => esc_html__( 'No', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Không', 'essentials-for-basic' ),
 						'icon'  => 'eicon-ban',
 					]
 				],
@@ -142,7 +141,7 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$this->add_control(
 			'excerpt_length',
 			[
-				'label'     => esc_html__( 'Excerpt Words', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Số lượng từ hiển thị', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::NUMBER,
 				'default'   => '10',
 				'condition' => [
@@ -157,7 +156,7 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'style_title',
 			[
-				'label' => esc_html__( 'Title', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Tiêu đề', 'essentials-for-basic' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -165,7 +164,7 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$this->add_control(
 			'title_color',
 			[
-				'label'     => esc_html__( 'Color', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Màu', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -177,7 +176,7 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$this->add_control(
 			'title_color_hover',
 			[
-				'label'     => esc_html__( 'Color Hover', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Màu thay đổi', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -194,33 +193,35 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'title_alignment',
+		$this->add_responsive_control(
+			'title_align',
 			[
-				'label'     => esc_html__( 'Title Alignment', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Căn chỉnh', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
-					'left'    => [
-						'title' => esc_html__( 'Left', 'essentials-for-basic' ),
+					'left' => [
+						'title' => esc_html__( 'Trái', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-left',
 					],
-					'center'  => [
-						'title' => esc_html__( 'Center', 'essentials-for-basic' ),
+
+					'center' => [
+						'title' => esc_html__( 'Giữa', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-center',
 					],
-					'right'   => [
-						'title' => esc_html__( 'Right', 'essentials-for-basic' ),
+
+					'right' => [
+						'title' => esc_html__( 'Phải', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-right',
 					],
+
 					'justify' => [
-						'title' => esc_html__( 'Justified', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Căn đều hai lề', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
-				'toggle'    => true,
 				'selectors' => [
 					'{{WRAPPER}} .element-post-grid .item-post .item-post__title' => 'text-align: {{VALUE}};',
-				]
+				],
 			]
 		);
 
@@ -230,7 +231,7 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'style_excerpt',
 			[
-				'label'     => esc_html__( 'Excerpt', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Tóm tắt', 'essentials-for-basic' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_excerpt' => 'show',
@@ -241,7 +242,7 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$this->add_control(
 			'excerpt_color',
 			[
-				'label'     => esc_html__( 'Color', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Màu', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -258,36 +259,35 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'excerpt_alignment',
+		$this->add_responsive_control(
+			'excerpt_align',
 			[
-				'label'     => esc_html__( 'Excerpt Alignment', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Căn chỉnh', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Trái', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 
 					'center' => [
-						'title' => esc_html__( 'Center', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Giữa', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 
 					'right' => [
-						'title' => esc_html__( 'Right', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Phải', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 
 					'justify' => [
-						'title' => esc_html__( 'Justified', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Căn đều hai lề', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
-				'toggle'    => true,
 				'selectors' => [
 					'{{WRAPPER}} .element-post-grid .item-post .item-post__content p' => 'text-align: {{VALUE}};',
-				]
+				],
 			]
 		);
 
@@ -317,9 +317,7 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		$query = new WP_Query( $args );
 
 		if ( $query->have_posts() ) :
-
-			?>
-
+        ?>
             <div class="element-post-grid">
                 <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-<?php echo esc_attr( $settings['column_number'] ); ?>">
 					<?php while ( $query->have_posts() ): $query->the_post(); ?>
@@ -367,9 +365,7 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 					wp_reset_postdata(); ?>
                 </div>
             </div>
-
 		<?php
-
 		endif;
 	}
 }

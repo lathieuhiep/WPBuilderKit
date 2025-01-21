@@ -387,9 +387,9 @@ class EFB_Widget_Slides extends Widget_Base {
 			'loop',
 			[
 				'type'         => Controls_Manager::SWITCHER,
-				'label'        => esc_html__( 'Loop Slider ?', 'essentials-for-basic' ),
-				'label_off'    => esc_html__( 'No', 'essentials-for-basic' ),
-				'label_on'     => esc_html__( 'Yes', 'essentials-for-basic' ),
+				'label'        => esc_html__( 'Vòng lặp', 'essentials-for-basic' ),
+				'label_off'    => esc_html__( 'Không', 'essentials-for-basic' ),
+				'label_on'     => esc_html__( 'Có', 'essentials-for-basic' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
 			]
@@ -398,10 +398,10 @@ class EFB_Widget_Slides extends Widget_Base {
 		$this->add_control(
 			'autoplay',
 			[
-				'label'        => esc_html__( 'Autoplay?', 'essentials-for-basic' ),
+				'label'        => esc_html__( 'Tự động chạy', 'essentials-for-basic' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_off'    => esc_html__( 'No', 'essentials-for-basic' ),
-				'label_on'     => esc_html__( 'Yes', 'essentials-for-basic' ),
+				'label_off'    => esc_html__( 'Không', 'essentials-for-basic' ),
+				'label_on'     => esc_html__( 'Có', 'essentials-for-basic' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
 			]
@@ -412,8 +412,8 @@ class EFB_Widget_Slides extends Widget_Base {
 			[
 				'label'        => esc_html__( 'nav Slider', 'essentials-for-basic' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'essentials-for-basic' ),
-				'label_off'    => esc_html__( 'No', 'essentials-for-basic' ),
+				'label_on'     => esc_html__( 'Có', 'essentials-for-basic' ),
+				'label_off'    => esc_html__( 'Không', 'essentials-for-basic' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
 			]
@@ -424,8 +424,8 @@ class EFB_Widget_Slides extends Widget_Base {
 			[
 				'label'        => esc_html__( 'Dots Slider', 'essentials-for-basic' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'essentials-for-basic' ),
-				'label_off'    => esc_html__( 'No', 'essentials-for-basic' ),
+				'label_on'     => esc_html__( 'Có', 'essentials-for-basic' ),
+				'label_off'    => esc_html__( 'Không', 'essentials-for-basic' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
 			]

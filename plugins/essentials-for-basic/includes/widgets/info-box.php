@@ -40,7 +40,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'image_section',
 			[
-				'label' => esc_html__( 'Image', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Ảnh', 'essentials-for-basic' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -48,14 +48,14 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->add_control(
 			'img_type',
 			[
-				'label'       => esc_html__( 'Infobox Type', 'essentials-for-basic' ),
+				'label'       => esc_html__( 'Kiểu', 'essentials-for-basic' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'img-on-top',
 				'label_block' => false,
 				'options'     => [
-					'img-on-top'   => esc_html__( 'Image/Icon On Top', 'essentials-for-basic' ),
-					'img-on-left'  => esc_html__( 'Image/Icon On Left', 'essentials-for-basic' ),
-					'img-on-right' => esc_html__( 'Image/Icon On Right', 'essentials-for-basic' ),
+					'img-on-top'   => esc_html__( 'Ảnh/Icon ở trên', 'essentials-for-basic' ),
+					'img-on-left'  => esc_html__( 'Ảnh/Icon ở bên trái', 'essentials-for-basic' ),
+					'img-on-right' => esc_html__( 'Ảnh/Icon ở bên phải', 'essentials-for-basic' ),
 				],
 			]
 		);
@@ -63,12 +63,12 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->add_control(
 			'img_or_icon',
 			[
-				'label'       => esc_html__( 'Image or Icon', 'essentials-for-basic' ),
+				'label'       => esc_html__( 'Ảnh hoặc icon', 'essentials-for-basic' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'label_block' => true,
 				'options'     => [
 					'none' => [
-						'title' => esc_html__( 'None', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Trống', 'essentials-for-basic' ),
 						'icon'  => 'fa fa-ban',
 					],
 
@@ -78,7 +78,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 					],
 
 					'img' => [
-						'title' => esc_html__( 'Image', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Ảnh', 'essentials-for-basic' ),
 						'icon'  => 'eicon-image-bold',
 					],
 				],
@@ -89,7 +89,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->add_control(
 			'icon_vertical_position',
 			[
-				'label'                => esc_html__( 'Icon Position', 'essentials-for-basic' ),
+				'label'                => esc_html__( 'Ví trí icon', 'essentials-for-basic' ),
 				'type'                 => Controls_Manager::CHOOSE,
 				'default'              => 'top',
 				'condition'            => [

@@ -35,7 +35,7 @@ class EFB_Widget_Contact_Form_7 extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Contact Form', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Form liên hệ', 'essentials-for-basic' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -43,7 +43,7 @@ class EFB_Widget_Contact_Form_7 extends Widget_Base {
 		$this->add_control(
 			'contact_form_list',
 			[
-				'label'       => esc_html__( 'Select Form', 'essentials-for-basic' ),
+				'label'       => esc_html__( 'Chọn mẫu liên hệ', 'essentials-for-basic' ),
 				'type'        => Controls_Manager::SELECT,
 				'label_block' => true,
 				'options'     => efb_get_form_cf7(),

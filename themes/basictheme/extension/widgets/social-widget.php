@@ -31,7 +31,7 @@ class basictheme_social_widget extends WP_Widget {
             echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
         }
     ?>
-        <div class="social-widget">
+        <div class="warp d-flex gap-3">
             <?php basictheme_get_social_url(); ?>
         </div>
     <?php

@@ -3,7 +3,9 @@
 add_action('admin_enqueue_scripts', 'basictheme_register_back_end_scripts');
 function basictheme_register_back_end_scripts(): void {
 	/* Start Get CSS Admin */
-	wp_enqueue_style( 'admin', get_theme_file_uri( '/assets/css/admin.css' ) );
+	wp_enqueue_style( 'admin', get_theme_file_uri( '/backend/assets/css/admin.css' ) );
+
+	wp_enqueue_script( 'admin', get_theme_file_uri( '/backend/assets/js/admin.js' ), array('jquery'), basictheme_get_version_theme(), true );
 }
 
 // Remove jquery migrate

@@ -20,10 +20,11 @@ function basictheme_multiple_widget_init(): void {
 	basictheme_widget_registration( esc_html__('Sidebar Shop', 'basictheme'), 'sidebar-wc', esc_html__('Display sidebar on page shop.', 'basictheme') );
 	basictheme_widget_registration( esc_html__('Sidebar Product', 'basictheme'), 'sidebar-wc-product', esc_html__('Display sidebar on page single product.', 'basictheme') );
 
-	basictheme_widget_registration( esc_html__('Sidebar Footer Column 1', 'basictheme'), 'sidebar-footer-column-1' );
-	basictheme_widget_registration( esc_html__('Sidebar Footer Column 2', 'basictheme'), 'sidebar-footer-column-2' );
-	basictheme_widget_registration( esc_html__('Sidebar Footer Column 3', 'basictheme'), 'sidebar-footer-column-3' );
-	basictheme_widget_registration( esc_html__('Sidebar Footer Column 4', 'basictheme'), 'sidebar-footer-column-4' );
+	// sidebar footer
+	$opt_number_columns = basictheme_get_option('opt_footer_columns', '4');
+	for ( $i = 1; $i <= $opt_number_columns; $i++ ) {
+		basictheme_widget_registration( esc_html__('Sidebar Footer Column ' . $i, 'basictheme'), 'sidebar-footer-column-' . $i );
+	}
 }
 
 add_action('widgets_init', 'basictheme_multiple_widget_init');

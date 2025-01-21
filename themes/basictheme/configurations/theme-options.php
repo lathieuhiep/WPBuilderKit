@@ -10,7 +10,7 @@ if ( ! function_exists( 'basictheme_get_option' ) ) {
 
 // Control core classes for avoid errors
 if ( class_exists( 'CSF' ) ) {
-	add_action( 'admin_enqueue_scripts', function() {
+	add_action( 'admin_enqueue_scripts', function () {
 		// Hủy Font Awesome 5 mặc định của Codestar Framework
 		wp_dequeue_style( 'csf-fa5' );
 		wp_dequeue_style( 'csf-fa5-v4-shims' );
@@ -19,7 +19,24 @@ if ( class_exists( 'CSF' ) ) {
 		wp_enqueue_style( 'font-awesome-6-admin', get_theme_file_uri( '/assets/libs/fontawesome/css/fontawesome.min.css' ), [], '6.7.2' );
 	}, 10 );
 
-// Set a unique slug-like ID
+	// remove icon
+	add_filter( 'csf_field_icon_add_icons', 'customize_csf_icons' );
+	function customize_csf_icons( $icons ) {
+		foreach ($icons as $key => $list) {
+			foreach ($list["icons"] as $icon_key =>  $icon) {
+				if ($icon === 'fab fa-acquisitions-incorporated') {
+					unset($list['icons'][$icon_key]);
+					break;
+				}
+			}
+
+			$icons[$key] = $list;
+		}
+
+		return $icons;
+	}
+
+	// Set a unique slug-like ID
 	$basictheme_prefix   = 'options';
 	$basictheme_my_theme = wp_get_theme();
 
@@ -29,25 +46,16 @@ if ( class_exists( 'CSF' ) ) {
 		'menu_slug'           => 'theme-options',
 		'menu_position'       => 2,
 		'admin_bar_menu_icon' => 'dashicons-admin-generic',
-		'framework_title'     => $basictheme_my_theme->get('Name') . ' theme-options.php' . esc_html__( 'Options', 'basictheme' ),
+		'framework_title'     => $basictheme_my_theme->get( 'Name' ) . ' theme-options.php' . esc_html__( 'Options', 'basictheme' ),
 		'footer_text'         => esc_html__( 'Cảm ơn bạn đã sử dụng theme của tôi', 'basictheme' ),
 		'footer_after'        => '<pre>Liên hệ:<br />Zalo/Phone: 0975458209 - Skype: lathieuhiep - facebook: <a href="https://www.facebook.com/lathieuhiep" target="_blank">lathieuhiep</a></pre>',
 	) );
 
 	// Create a section general
 	CSF::createSection( $basictheme_prefix, array(
-		'title'  => esc_html__( 'General', 'basictheme' ),
+		'title'  => esc_html__( 'Cài đặt chung', 'basictheme' ),
 		'icon'   => 'fas fa-cog',
 		'fields' => array(
-			// favicon
-			array(
-				'id'      => 'opt_general_favicon',
-				'type'    => 'media',
-				'title'   => esc_html__( 'Chọn ảnh favicon', 'basictheme' ),
-				'library' => 'image',
-				'url'     => false
-			),
-
 			// logo
 			array(
 				'id'      => 'opt_general_logo',
@@ -130,10 +138,10 @@ if ( class_exists( 'CSF' ) ) {
 
 	// Category Post
 	CSF::createSection( $basictheme_prefix, array(
-		'parent' => 'opt_post_section',
-		'title'  => esc_html__( 'Danh mục', 'basictheme' ),
+		'parent'      => 'opt_post_section',
+		'title'       => esc_html__( 'Danh mục', 'basictheme' ),
 		'description' => esc_html__( 'Sử dụng cho các trang archive, index, tìm kiếm', 'basictheme' ),
-		'fields' => array(
+		'fields'      => array(
 			// Sidebar
 			array(
 				'id'      => 'opt_post_cat_sidebar_position',
@@ -218,21 +226,21 @@ if ( class_exists( 'CSF' ) ) {
 					),
 
 					array(
-						'id'    => 'url',
-						'type'  => 'text',
-						'title' => esc_html__('URL', 'basictheme'),
+						'id'      => 'url',
+						'type'    => 'text',
+						'title'   => esc_html__( 'URL', 'basictheme' ),
 						'default' => '#'
 					),
 				),
 				'default' => array(
 					array(
 						'icon' => 'fab fa-facebook-f',
-						'url' => '#',
+						'url'  => '#',
 					),
 
 					array(
 						'icon' => 'fab fa-youtube',
-						'url' => '#',
+						'url'  => '#',
 					),
 				)
 			),
@@ -243,16 +251,16 @@ if ( class_exists( 'CSF' ) ) {
 	//  Create a section shop
 	CSF::createSection( $basictheme_prefix, array(
 		'id'    => 'opt_shop_section',
-		'title'  => esc_html__( 'Của hàng', 'basictheme' ),
-		'icon'   => 'fas fa-shopping-cart',
+		'title' => esc_html__( 'Của hàng', 'basictheme' ),
+		'icon'  => 'fas fa-shopping-cart',
 	) );
 
 	// Category product
 	CSF::createSection( $basictheme_prefix, array(
-		'parent' => 'opt_shop_section',
-		'title'  => esc_html__( 'Danh mục', 'basictheme' ),
+		'parent'      => 'opt_shop_section',
+		'title'       => esc_html__( 'Danh mục', 'basictheme' ),
 		'description' => esc_html__( 'Sử dụng cho danh mục và thẻ cửa hàng', 'basictheme' ),
-		'fields' => array(
+		'fields'      => array(
 			// Sidebar
 			array(
 				'id'      => 'opt_shop_cat_sidebar_position',
@@ -291,10 +299,10 @@ if ( class_exists( 'CSF' ) ) {
 
 	// Single product
 	CSF::createSection( $basictheme_prefix, array(
-		'parent' => 'opt_shop_section',
-		'title'  => esc_html__( 'Chi tiết', 'basictheme' ),
+		'parent'      => 'opt_shop_section',
+		'title'       => esc_html__( 'Chi tiết', 'basictheme' ),
 		'description' => esc_html__( 'Sử dụng cho chi tiết sản phẩm', 'basictheme' ),
-		'fields' => array(
+		'fields'      => array(
 			// Sidebar
 			array(
 				'id'      => 'opt_shop_single_sidebar_position',
@@ -341,44 +349,180 @@ if ( class_exists( 'CSF' ) ) {
 			// column width 1
 			array(
 				'id'         => 'opt_footer_column_width_1',
-				'type'       => 'slider',
+				'type'       => 'fieldset',
 				'title'      => esc_html__( 'Độ rộng cột 1', 'basictheme' ),
-				'default'    => 3,
-				'min'        => 1,
-				'max'        => 12,
+				'fields'     => array(
+					array(
+						'id'         => 'sm',
+						'type'       => 'slider',
+						'title'      => esc_html__( 'sm: ≥576px', 'clinic' ),
+						'default'    => 12,
+						'min'        => 1,
+						'max'        => 12,
+					),
+
+					array(
+						'id'         => 'md',
+						'type'       => 'slider',
+						'title'      => esc_html__( 'md: ≥768px', 'clinic' ),
+						'default'    => 6,
+						'min'        => 1,
+						'max'        => 12,
+					),
+
+					array(
+						'id'         => 'lg',
+						'type'       => 'slider',
+						'title'      => esc_html__( 'lg: ≥992px', 'clinic' ),
+						'default'    => 3,
+						'min'        => 1,
+						'max'        => 12,
+					),
+
+					array(
+						'id'         => 'xl',
+						'type'       => 'slider',
+						'title'      => esc_html__( 'lg: ≥1200px', 'clinic' ),
+						'default'    => 3,
+						'min'        => 1,
+						'max'        => 12,
+					),
+				),
 				'dependency' => array( 'opt_footer_columns', '!=', '0' )
 			),
 
 			// column width 2
 			array(
 				'id'         => 'opt_footer_column_width_2',
-				'type'       => 'slider',
+				'type'       => 'fieldset',
 				'title'      => esc_html__( 'Độ rộng cột 2', 'basictheme' ),
-				'default'    => 3,
-				'min'        => 1,
-				'max'        => 12,
+				'fields'     => array(
+					array(
+						'id'         => 'sm',
+						'type'       => 'slider',
+						'title'      => esc_html__( 'sm: ≥576px', 'clinic' ),
+						'default'    => 12,
+						'min'        => 1,
+						'max'        => 12,
+					),
+
+					array(
+						'id'         => 'md',
+						'type'       => 'slider',
+						'title'      => esc_html__( 'md: ≥768px', 'clinic' ),
+						'default'    => 6,
+						'min'        => 1,
+						'max'        => 12,
+					),
+
+					array(
+						'id'         => 'lg',
+						'type'       => 'slider',
+						'title'      => esc_html__( 'lg: ≥992px', 'clinic' ),
+						'default'    => 3,
+						'min'        => 1,
+						'max'        => 12,
+					),
+
+					array(
+						'id'         => 'xl',
+						'type'       => 'slider',
+						'title'      => esc_html__( 'lg: ≥1200px', 'clinic' ),
+						'default'    => 3,
+						'min'        => 1,
+						'max'        => 12,
+					),
+				),
 				'dependency' => array( 'opt_footer_columns', 'not-any', '0,1' )
 			),
 
 			// column width 3
 			array(
 				'id'         => 'opt_footer_column_width_3',
-				'type'       => 'slider',
+				'type'       => 'fieldset',
 				'title'      => esc_html__( 'Độ rộng cột 3', 'basictheme' ),
-				'default'    => 3,
-				'min'        => 1,
-				'max'        => 12,
+				'fields'     => array(
+					array(
+						'id'         => 'sm',
+						'type'       => 'slider',
+						'title'      => esc_html__( 'sm: ≥576px', 'clinic' ),
+						'default'    => 12,
+						'min'        => 1,
+						'max'        => 12,
+					),
+
+					array(
+						'id'         => 'md',
+						'type'       => 'slider',
+						'title'      => esc_html__( 'md: ≥768px', 'clinic' ),
+						'default'    => 6,
+						'min'        => 1,
+						'max'        => 12,
+					),
+
+					array(
+						'id'         => 'lg',
+						'type'       => 'slider',
+						'title'      => esc_html__( 'lg: ≥992px', 'clinic' ),
+						'default'    => 3,
+						'min'        => 1,
+						'max'        => 12,
+					),
+
+					array(
+						'id'         => 'xl',
+						'type'       => 'slider',
+						'title'      => esc_html__( 'lg: ≥1200px', 'clinic' ),
+						'default'    => 3,
+						'min'        => 1,
+						'max'        => 12,
+					),
+				),
 				'dependency' => array( 'opt_footer_columns', 'not-any', '0,1,2' )
 			),
 
 			// column width 4
 			array(
 				'id'         => 'opt_footer_column_width_4',
-				'type'       => 'slider',
+				'type'       => 'fieldset',
 				'title'      => esc_html__( 'Độ rộng cột 4', 'basictheme' ),
-				'default'    => 3,
-				'min'        => 1,
-				'max'        => 12,
+				'fields'     => array(
+					array(
+						'id'         => 'sm',
+						'type'       => 'slider',
+						'title'      => esc_html__( 'sm: ≥576px', 'clinic' ),
+						'default'    => 12,
+						'min'        => 1,
+						'max'        => 12,
+					),
+
+					array(
+						'id'         => 'md',
+						'type'       => 'slider',
+						'title'      => esc_html__( 'md: ≥768px', 'clinic' ),
+						'default'    => 6,
+						'min'        => 1,
+						'max'        => 12,
+					),
+
+					array(
+						'id'         => 'lg',
+						'type'       => 'slider',
+						'title'      => esc_html__( 'lg: ≥992px', 'clinic' ),
+						'default'    => 3,
+						'min'        => 1,
+						'max'        => 12,
+					),
+
+					array(
+						'id'         => 'xl',
+						'type'       => 'slider',
+						'title'      => esc_html__( 'lg: ≥1200px', 'clinic' ),
+						'default'    => 3,
+						'min'        => 1,
+						'max'        => 12,
+					),
+				),
 				'dependency' => array( 'opt_footer_columns', 'not-any', '0,1,2,3' )
 			),
 		)
@@ -402,11 +546,11 @@ if ( class_exists( 'CSF' ) ) {
 
 			// content
 			array(
-				'id'      => 'opt_footer_copyright_content',
-				'type'    => 'wp_editor',
-				'title'   => esc_html__( 'Nội dung', 'basictheme' ),
+				'id'            => 'opt_footer_copyright_content',
+				'type'          => 'wp_editor',
+				'title'         => esc_html__( 'Nội dung', 'basictheme' ),
 				'media_buttons' => false,
-				'default' => esc_html__( 'Copyright &copy; DiepLK', 'basictheme' )
+				'default'       => esc_html__( 'Copyright &copy; DiepLK', 'basictheme' )
 			),
 		)
 	) );

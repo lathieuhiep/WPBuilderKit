@@ -5,7 +5,6 @@
  */
 
 ( function( $ ) {
-
     "use strict";
 
     let timer_clear;

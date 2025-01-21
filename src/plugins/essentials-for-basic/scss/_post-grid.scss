@@ -8,7 +8,6 @@
 
   .item-post {
     --#{$prefix-plugin-essentials}fs-title: #{map-get($mt-font-sizes, md)};
-    --#{$prefix-plugin-essentials}fs-content: #{map-get($mt-font-sizes, sm)};
 
     &__thumbnail {
       margin-bottom: 1.5rem;

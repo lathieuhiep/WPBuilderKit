@@ -30,6 +30,12 @@ class EFB_Widget_Post_Grid extends Widget_Base {
 		return array( 'efb-addons' );
 	}
 
+	// widget keywords
+	public function get_keywords(): array
+	{
+		return ['post', 'grid'];
+	}
+
 	// widget controls
 	protected function register_controls(): void {
 		// Content query

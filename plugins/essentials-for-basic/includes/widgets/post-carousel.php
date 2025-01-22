@@ -17,7 +17,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 
 	// widget title
 	public function get_title(): string {
-		return esc_html__( 'Posts Carousel', 'essentials-for-basic' );
+		return esc_html__( 'Slider bài viết', 'essentials-for-basic' );
 	}
 
 	// widget icon
@@ -40,6 +40,12 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		return [ 'owl.carousel', 'efb-script' ];
 	}
 
+	// widget keywords
+	public function get_keywords(): array
+	{
+		return ['carousel', 'post', 'slider'];
+	}
+
 	// widget controls
 	protected function register_controls(): void {
 
@@ -47,7 +53,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Query', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Thiết lập bài viết', 'essentials-for-basic' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -55,7 +61,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'select_cat',
 			[
-				'label'       => esc_html__( 'Select Category', 'essentials-for-basic' ),
+				'label'       => esc_html__( 'Chọn danh mục', 'essentials-for-basic' ),
 				'type'        => Controls_Manager::SELECT2,
 				'options'     => efb_check_get_cat( 'category' ),
 				'multiple'    => true,
@@ -66,7 +72,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'limit',
 			[
-				'label'   => esc_html__( 'Number of Posts', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Số bài lấy ra', 'essentials-for-basic' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 6,
 				'min'     => 1,
@@ -78,14 +84,14 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'order_by',
 			[
-				'label'   => esc_html__( 'Order By', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Sắp xếp theo', 'essentials-for-basic' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'id',
 				'options' => [
 					'id'    => esc_html__( 'ID', 'essentials-for-basic' ),
-					'title' => esc_html__( 'Title', 'essentials-for-basic' ),
-					'date'  => esc_html__( 'Date', 'essentials-for-basic' ),
-					'rand'  => esc_html__( 'Random', 'essentials-for-basic' ),
+					'title' => esc_html__( 'Tiêu đề', 'essentials-for-basic' ),
+					'date'  => esc_html__( 'Ngày đăng', 'essentials-for-basic' ),
+					'rand'  => esc_html__( 'Ngẫu nhiên', 'essentials-for-basic' ),
 				],
 			]
 		);
@@ -93,12 +99,12 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'order',
 			[
-				'label'   => esc_html__( 'Order', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Sắp xếp', 'essentials-for-basic' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'DESC',
 				'options' => [
-					'ASC'  => esc_html__( 'Ascending', 'essentials-for-basic' ),
-					'DESC' => esc_html__( 'Descending', 'essentials-for-basic' ),
+					'ASC'  => esc_html__( 'Tăng dần', 'essentials-for-basic' ),
+					'DESC' => esc_html__( 'Giảm dần', 'essentials-for-basic' ),
 				],
 			]
 		);
@@ -106,16 +112,16 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'show_excerpt',
 			[
-				'label'   => esc_html__( 'Show excerpt', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Hiên thị tóm tắt', 'essentials-for-basic' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'show' => [
-						'title' => esc_html__( 'Yes', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Có', 'essentials-for-basic' ),
 						'icon'  => 'eicon-check',
 					],
 
 					'hide' => [
-						'title' => esc_html__( 'No', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Không', 'essentials-for-basic' ),
 						'icon'  => 'eicon-ban',
 					],
 				],
@@ -126,7 +132,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'excerpt_length',
 			[
-				'label'     => esc_html__( 'Excerpt Words', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Số lượng từ hiển thị', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::NUMBER,
 				'default'   => '10',
 				'condition' => [
@@ -135,13 +141,24 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'image_size',
+			[
+				'label' => esc_html__( 'Độ phân giải ảnh', 'lpbcolor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'large',
+				'options' => efb_image_size_options(),
+				'label_block' => true
+			]
+		);
+
 		$this->end_controls_section();
 
-		// Content additional options
+		// additional options
 		$this->start_controls_section(
-			'additional_options_section',
+			'content_additional_options',
 			[
-				'label' => esc_html__( 'Additional Options', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Tùy chọn bổ sung', 'essentials-for-basic' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -150,9 +167,9 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 			'loop',
 			[
 				'type'         => Controls_Manager::SWITCHER,
-				'label'        => esc_html__( 'Loop Slider?', 'essentials-for-basic' ),
-				'label_off'    => esc_html__( 'No', 'essentials-for-basic' ),
-				'label_on'     => esc_html__( 'Yes', 'essentials-for-basic' ),
+				'label'        => esc_html__( 'Vòng lặp', 'essentials-for-basic' ),
+				'label_on'     => esc_html__( 'Có', 'essentials-for-basic' ),
+				'label_off'    => esc_html__( 'Không', 'essentials-for-basic' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
 			]
@@ -161,160 +178,45 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'autoplay',
 			[
-				'label'        => esc_html__( 'Autoplay?', 'essentials-for-basic' ),
+				'label'        => esc_html__( 'Tự động chạy', 'essentials-for-basic' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_off'    => esc_html__( 'No', 'essentials-for-basic' ),
-				'label_on'     => esc_html__( 'Yes', 'essentials-for-basic' ),
+				'label_on'     => esc_html__( 'Có', 'essentials-for-basic' ),
+				'label_off'    => esc_html__( 'Không', 'essentials-for-basic' ),
 				'return_value' => 'yes',
-				'default'      => 'no',
+				'default'      => '',
 			]
 		);
 
 		$this->add_control(
-			'nav',
+			'navigation',
 			[
-				'label'        => esc_html__( 'Nav Slider', 'essentials-for-basic' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'essentials-for-basic' ),
-				'label_off'    => esc_html__( 'No', 'essentials-for-basic' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
+				'label' => esc_html__( 'Thanh điều hướng', 'essentials-for-basic' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'arrows',
+				'options' => [
+					'both'  => esc_html__( 'Mũi tên và Dấu chấm', 'essentials-for-basic' ),
+					'arrows'  => esc_html__( 'Mũi tên', 'essentials-for-basic' ),
+					'dots'  => esc_html__( 'Dấu chấm', 'essentials-for-basic' ),
+					'none' => esc_html__( 'Không', 'essentials-for-basic' ),
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		// mobile options
+		$this->start_controls_section(
+			'mobile_options',
+			[
+				'label' => esc_html__( 'Dưới 480px', 'essentials-for-basic' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
 
 		$this->add_control(
-			'dots',
+			'mobile_items',
 			[
-				'label'        => esc_html__( 'Dots Slider', 'essentials-for-basic' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'essentials-for-basic' ),
-				'label_off'    => esc_html__( 'No', 'essentials-for-basic' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
-			]
-		);
-
-		$this->add_control(
-			'margin_item',
-			[
-				'label'   => esc_html__( 'Space Between Item', 'essentials-for-basic' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 30,
-				'min'     => 0,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->add_control(
-			'min_width_1200',
-			[
-				'label'     => esc_html__( 'Min Width 1200px', 'essentials-for-basic' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
-			'item',
-			[
-				'label'   => esc_html__( 'Number of Item', 'essentials-for-basic' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 3,
-				'min'     => 1,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->add_control(
-			'min_width_992',
-			[
-				'label'     => esc_html__( 'Min Width 992px', 'essentials-for-basic' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
-			'item_992',
-			[
-				'label'   => esc_html__( 'Number of Item', 'essentials-for-basic' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 2,
-				'min'     => 1,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->add_control(
-			'min_width_768',
-			[
-				'label'     => esc_html__( 'Min Width 768px', 'essentials-for-basic' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
-			'item_768',
-			[
-				'label'   => esc_html__( 'Number of Item', 'essentials-for-basic' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 2,
-				'min'     => 1,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->add_control(
-			'min_width_568',
-			[
-				'label'     => esc_html__( 'Min Width 568px', 'essentials-for-basic' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
-			'item_568',
-			[
-				'label'   => esc_html__( 'Number of Item', 'essentials-for-basic' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 2,
-				'min'     => 1,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->add_control(
-			'margin_item_568',
-			[
-				'label'   => esc_html__( 'Space Between Item', 'essentials-for-basic' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 15,
-				'min'     => 0,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->add_control(
-			'max_width_567',
-			[
-				'label'     => esc_html__( 'Max Width 567px', 'essentials-for-basic' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
-			'item_567',
-			[
-				'label'   => esc_html__( 'Number of Item', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Hiển thị', 'essentials-for-basic' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 1,
 				'min'     => 1,
@@ -324,11 +226,186 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		);
 
 		$this->add_control(
-			'margin_item_567',
+			'mobile_spaces_between',
 			[
-				'label'   => esc_html__( 'Space Between Item', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Khoảng cách', 'essentials-for-basic' ),
 				'type'    => Controls_Manager::NUMBER,
-				'default' => 0,
+				'default' => 4,
+				'min'     => 0,
+				'max'     => 100,
+				'step'    => 1,
+			]
+		);
+
+		$this->end_controls_section();
+
+		// mobile large options
+		$this->start_controls_section(
+			'mobile_large_options',
+			[
+				'label' => esc_html__( 'Từ 480px', 'essentials-for-basic' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'mobile_large_items',
+			[
+				'label'   => esc_html__( 'Hiển thị', 'essentials-for-basic' ),
+				'type'    => Controls_Manager::NUMBER,
+				'default' => 2,
+				'min'     => 1,
+				'max'     => 100,
+				'step'    => 1,
+			]
+		);
+
+		$this->add_control(
+			'mobile_large_spaces_between',
+			[
+				'label'   => esc_html__( 'Khoảng cách', 'essentials-for-basic' ),
+				'type'    => Controls_Manager::NUMBER,
+				'default' => 8,
+				'min'     => 1,
+				'max'     => 100,
+				'step'    => 1,
+			]
+		);
+
+		$this->end_controls_section();
+
+		// tablet small options
+		$this->start_controls_section(
+			'tablet_small_options',
+			[
+				'label' => esc_html__( 'Từ 576px', 'essentials-for-basic' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'tablet_small_items',
+			[
+				'label'   => esc_html__( 'Hiển thị', 'essentials-for-basic' ),
+				'type'    => Controls_Manager::NUMBER,
+				'default' => 2,
+				'min'     => 1,
+				'max'     => 100,
+				'step'    => 1,
+			]
+		);
+
+		$this->add_control(
+			'tablet_small_spaces_between',
+			[
+				'label'   => esc_html__( 'Khoảng cách', 'essentials-for-basic' ),
+				'type'    => Controls_Manager::NUMBER,
+				'default' => 12,
+				'min'     => 0,
+				'max'     => 100,
+				'step'    => 1,
+			]
+		);
+
+		$this->end_controls_section();
+
+		// tablet large options
+		$this->start_controls_section(
+			'tablet_large_options',
+			[
+				'label' => esc_html__( 'Từ 768px', 'essentials-for-basic' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'tablet_large_items',
+			[
+				'label'   => esc_html__( 'Hiển thị', 'essentials-for-basic' ),
+				'type'    => Controls_Manager::NUMBER,
+				'default' => 3,
+				'min'     => 1,
+				'max'     => 100,
+				'step'    => 1,
+			]
+		);
+
+		$this->add_control(
+			'tablet_large_spaces_between',
+			[
+				'label'   => esc_html__( 'Khoảng cách', 'essentials-for-basic' ),
+				'type'    => Controls_Manager::NUMBER,
+				'default' => 16,
+				'min'     => 0,
+				'max'     => 100,
+				'step'    => 1,
+			]
+		);
+
+		$this->end_controls_section();
+
+		// desktop small options
+		$this->start_controls_section(
+			'desktop_small_options',
+			[
+				'label' => esc_html__( 'Từ 992px', 'essentials-for-basic' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'desktop_small_items',
+			[
+				'label'   => esc_html__( 'Hiển thị', 'essentials-for-basic' ),
+				'type'    => Controls_Manager::NUMBER,
+				'default' => 3,
+				'min'     => 1,
+				'max'     => 100,
+				'step'    => 1,
+			]
+		);
+
+		$this->add_control(
+			'desktop_small_spaces_between',
+			[
+				'label'   => esc_html__( 'Khoảng cách', 'essentials-for-basic' ),
+				'type'    => Controls_Manager::NUMBER,
+				'default' => 20,
+				'min'     => 0,
+				'max'     => 100,
+				'step'    => 1,
+			]
+		);
+
+		$this->end_controls_section();
+
+		// desktop large options
+		$this->start_controls_section(
+			'desktop_large_options',
+			[
+				'label' => esc_html__( 'Từ 1200px', 'essentials-for-basic' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'desktop_large_items',
+			[
+				'label'   => esc_html__( 'Hiển thị', 'essentials-for-basic' ),
+				'type'    => Controls_Manager::NUMBER,
+				'default' => 4,
+				'min'     => 1,
+				'max'     => 100,
+				'step'    => 1,
+			]
+		);
+
+		$this->add_control(
+			'desktop_large_spaces_between',
+			[
+				'label'   => esc_html__( 'Khoảng cách', 'essentials-for-basic' ),
+				'type'    => Controls_Manager::NUMBER,
+				'default' => 24,
 				'min'     => 0,
 				'max'     => 100,
 				'step'    => 1,
@@ -341,7 +418,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'style_title',
 			[
-				'label' => esc_html__( 'Title', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Tiêu đề', 'essentials-for-basic' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -349,7 +426,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'title_color',
 			[
-				'label'     => esc_html__( 'Color', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Màu', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -361,7 +438,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'title_color_hover',
 			[
-				'label'     => esc_html__( 'Color Hover', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Màu khi di chuột', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -378,33 +455,32 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'title_alignment',
+		$this->add_responsive_control(
+			'title_align',
 			[
-				'label'     => esc_html__( 'Title Alignment', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Căn chỉnh', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Trái', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 
 					'center' => [
-						'title' => esc_html__( 'Center', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Giữa', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 
 					'right' => [
-						'title' => esc_html__( 'Right', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Phải', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 
 					'justify' => [
-						'title' => esc_html__( 'Justified', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Căn đều hai lề', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
-				'toggle'    => true,
 				'selectors' => [
 					'{{WRAPPER}} .element-post-carousel .item-post__content .title' => 'text-align: {{VALUE}};',
 				]
@@ -417,7 +493,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'style_excerpt',
 			[
-				'label'     => esc_html__( 'Excerpt', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Nôi dung tóm tắt', 'essentials-for-basic' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_excerpt' => 'show',
@@ -428,11 +504,11 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'excerpt_color',
 			[
-				'label'     => esc_html__( 'Color', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Màu', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
-					'{{WRAPPER}} .element-post-carousel .item-post__content .desc p' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .element-post-carousel .item-post__content .desc' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -441,39 +517,38 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'excerpt_typography',
-				'selector' => '{{WRAPPER}} .element-post-carousel .item-post__content .desc p',
+				'selector' => '{{WRAPPER}} .element-post-carousel .item-post__content .desc',
 			]
 		);
 
 		$this->add_control(
-			'excerpt_alignment',
+			'excerpt_align',
 			[
-				'label'     => esc_html__( 'Excerpt Alignment', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Căn chỉnh', 'essentials-for-basic' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left' => [
-						'title' => esc_html__( 'Left', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Trái', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 
 					'center' => [
-						'title' => esc_html__( 'Center', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Giữa', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 
 					'right' => [
-						'title' => esc_html__( 'Right', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Phải', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 
 					'justify' => [
-						'title' => esc_html__( 'Justified', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Căn đều hai lề', 'essentials-for-basic' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
-				'toggle'    => true,
 				'selectors' => [
-					'{{WRAPPER}} .element-post-carousel .item-post__content .desc p' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .element-post-carousel .item-post__content .desc' => 'text-align: {{VALUE}};',
 				]
 			]
 		);
@@ -492,33 +567,40 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 
 		$data_settings_owl = [
 			'loop'       => ( 'yes' === $settings['loop'] ),
-			'nav'        => ( 'yes' === $settings['nav'] ),
-			'dots'       => ( 'yes' === $settings['dots'] ),
-			'margin'     => $settings['margin_item'],
+			'nav'        => $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows',
+			'dots'       => $settings['navigation'] == 'both' || $settings['navigation'] == 'dots',
 			'autoplay'   => ( 'yes' === $settings['autoplay'] ),
 			'responsive' => [
 				'0' => array(
-					'items'  => $settings['item_567'],
-					'margin' => $settings['margin_item_567']
+					'items'  => $settings['mobile_items'],
+					'margin' => $settings['mobile_spaces_between']
+				),
+
+				'480' => array(
+					'items'  => $settings['mobile_large_items'],
+					'margin' => $settings['mobile_large_spaces_between']
 				),
 
 				'576' => array(
-					'items'  => $settings['item_568'],
-					'margin' => $settings['margin_item_568']
+					'items'  => $settings['tablet_small_items'],
+					'margin' => $settings['tablet_small_spaces_between']
 				),
 
 				'768' => array(
-					'items' => $settings['item_768']
+					'items' => $settings['tablet_large_items'],
+					'margin' => $settings['tablet_large_spaces_between']
 				),
 
 				'992' => array(
-					'items' => $settings['item_992']
+					'items' => $settings['desktop_small_items'],
+					'margin' => $settings['desktop_small_spaces_between']
 				),
 
 				'1200' => array(
-					'items' => $settings['item']
+					'items' => $settings['desktop_large_items'],
+					'margin' => $settings['desktop_large_spaces_between']
 				),
-			],
+			]
 		];
 
 		// Query
@@ -534,8 +616,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$query = new WP_Query( $args );
 
 		if ( $query->have_posts() ) :
-
-			?>
+        ?>
             <div class="element-post-carousel">
                 <div class="custom-owl-carousel owl-carousel owl-theme"
                      data-settings-owl='<?php echo wp_json_encode( $data_settings_owl ); ?>'>
@@ -546,7 +627,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
                                 <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
 									<?php
 									if ( has_post_thumbnail() ) :
-										the_post_thumbnail( 'large' );
+										the_post_thumbnail( $settings['image_size'] );
 									else:
 										?>
                                         <img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/no-image.png' ) ) ?>"
@@ -585,7 +666,6 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
                 </div>
             </div>
 		<?php
-
 		endif;
 	}
 }

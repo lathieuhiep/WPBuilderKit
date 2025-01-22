@@ -5,12 +5,6 @@ button, a {
   outline: none;
 }
 
-section.widget .social-network-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 form.wpcf7-form p:has(.wpcf7-submit) {
   display: flex;
   align-items: center;
@@ -51,12 +45,6 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 
 button, a {
   outline: none;
-}
-
-section.widget .social-network-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 form.wpcf7-form p:has(.wpcf7-submit) {
@@ -119,12 +107,6 @@ input, button, textarea {
 
 a, button {
   outline: none;
-}
-
-section.widget .social-network-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 form.wpcf7-form p:has(.wpcf7-submit) {
@@ -190,12 +172,6 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 
 a, button {
   outline: none;
-}
-
-section.widget .social-network-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 form.wpcf7-form p:has(.wpcf7-submit) {
@@ -315,12 +291,6 @@ a, button {
   outline: none;
 }
 
-section.widget .social-network-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 form.wpcf7-form p:has(.wpcf7-submit) {
   display: flex;
   align-items: center;
@@ -402,12 +372,6 @@ a, button {
   outline: none;
 }
 
-section.widget .social-network-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 form.wpcf7-form p:has(.wpcf7-submit) {
   display: flex;
   align-items: center;
@@ -466,12 +430,6 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 -----------------------------------------------------------------------------*/
 a, button {
   outline: none;
-}
-
-section.widget .social-network-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 form.wpcf7-form p:has(.wpcf7-submit) {
@@ -835,12 +793,6 @@ a, button {
   outline: none;
 }
 
-section.widget .social-network-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 form.wpcf7-form p:has(.wpcf7-submit) {
   display: flex;
   align-items: center;
@@ -923,8 +875,7 @@ section.widget.widget_calendar table {
 }
 section.widget.widget_calendar table caption {
   padding: 0;
-  margin-bottom: 1.2rem;
-  text-align: center;
+  margin-top: var(--theme-spacing-3);
 }
 section.widget.widget_calendar table tr {
   border-bottom: 1px solid var(--theme-primary);
@@ -968,12 +919,6 @@ section.widget.widget_tag_cloud .tagcloud a:hover, section.widget.widget_product
   color: var(--theme-white);
   border-color: var(--theme-accent);
 }
-section.widget .social-network-item {
-  margin-bottom: 1rem;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-}
 section.widget .recent-post-widget__list .post {
   margin-bottom: 1.2rem;
   display: grid;
@@ -1003,19 +948,13 @@ a, button {
   outline: none;
 }
 
-section.widget .social-network-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 form.wpcf7-form p:has(.wpcf7-submit) {
   display: flex;
   align-items: center;
 }
 
 .global-footer section.widget {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
 }
 .global-footer__column {
   border-top: 0.1rem solid var(--theme-primary);
@@ -1034,12 +973,6 @@ a, button {
   outline: none;
 }
 
-section.widget .social-network-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 form.wpcf7-form p:has(.wpcf7-submit) {
   display: flex;
   align-items: center;
@@ -1052,12 +985,6 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 
 a, button {
   outline: none;
-}
-
-section.widget .social-network-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 form.wpcf7-form p:has(.wpcf7-submit) {
@@ -1132,12 +1059,6 @@ form.wpcf7-form.invalid .wpcf7-response-output {
 
 a, button {
   outline: none;
-}
-
-section.widget .social-network-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 form.wpcf7-form p:has(.wpcf7-submit) {
@@ -1258,7 +1179,7 @@ form.wpcf7-form p:has(.wpcf7-submit) {
   cursor: pointer;
   display: inline-block;
   width: auto;
-  color: var(--theme-black);
+  color: var(--theme-white);
   background-color: var(--theme-primary);
   border: none;
   border-radius: 0.4rem;
@@ -1272,12 +1193,6 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 
 a, button {
   outline: none;
-}
-
-section.widget .social-network-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 form.wpcf7-form p:has(.wpcf7-submit) {
@@ -1318,12 +1233,6 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 
 a, button {
   outline: none;
-}
-
-section.widget .social-network-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 form.wpcf7-form p:has(.wpcf7-submit) {
@@ -1379,12 +1288,6 @@ a, button {
   outline: none;
 }
 
-section.widget .social-network-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 form.wpcf7-form p:has(.wpcf7-submit) {
   display: flex;
   align-items: center;
@@ -1392,10 +1295,6 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 
 .social-network-item {
   display: inline-block;
-  margin-right: var(--theme-spacing-1);
-}
-.social-network-item:last-child {
-  margin-right: 0;
 }
 .social-network-item a {
   display: block;

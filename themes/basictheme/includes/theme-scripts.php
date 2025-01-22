@@ -3,7 +3,9 @@
 add_action('admin_enqueue_scripts', 'basictheme_register_back_end_scripts');
 function basictheme_register_back_end_scripts(): void {
 	/* Start Get CSS Admin */
-	wp_enqueue_style( 'admin', get_theme_file_uri( '/assets/css/admin.css' ) );
+	wp_enqueue_style( 'admin', get_theme_file_uri( '/backend/assets/css/admin.css' ) );
+
+	wp_enqueue_script( 'admin', get_theme_file_uri( '/backend/assets/js/admin.js' ), array('jquery'), basictheme_get_version_theme(), true );
 }
 
 // Remove jquery migrate
@@ -36,7 +38,7 @@ function basictheme_front_end_libs(): void {
 	wp_enqueue_script( 'bootstrap', get_theme_file_uri( '/assets/libs/bootstrap/bootstrap.bundle.min.js' ), array('jquery'), null, true );
 
 	// fontawesome
-	wp_enqueue_style( 'fontawesome', get_theme_file_uri( '/assets/libs/fontawesome/css/fontawesome.min.css' ), array(), null );
+	wp_enqueue_style( 'fontawesome', get_theme_file_uri( '/assets/libs/fontawesome/css/fontawesome.min.css' ), array(), '6.7.2' );
 }
 
 // load front-end styles

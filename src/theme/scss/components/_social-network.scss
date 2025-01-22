@@ -2,11 +2,6 @@
 
 .social-network-item {
   display: inline-block;
-  margin-right: var(--#{$prefix-theme}spacing-1);
-
-  &:last-child {
-    margin-right: 0;
-  }
 
   a {
     display: block;

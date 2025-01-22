@@ -1,18 +1,4 @@
 <?php
-// setting favicon
-add_action('wp_head', 'basictheme_favicon', 1);
-function basictheme_favicon(): void {
-    $opt_favicon = basictheme_get_option( 'opt_general_favicon' );
-
-    if ( empty( $opt_favicon['url'] ) ) :
-        $favicon_url = get_theme_file_uri('/assets/images/favicon.png' );
-    else:
-	    $favicon_url = $opt_favicon['url'];
-    endif;
-
-    echo '<link rel="shortcut icon" href="' . esc_url( $favicon_url ) . '" type="image/x-icon" sizes="16x16" />';
-}
-
 // add property
 add_action( 'wp_head', 'basictheme_opengraph', 5 );
 function basictheme_opengraph(): void {

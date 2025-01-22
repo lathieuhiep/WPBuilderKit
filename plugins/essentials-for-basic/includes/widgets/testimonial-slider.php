@@ -53,6 +53,17 @@ class EFB_Widget_Testimonial_Slider extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'image_size',
+			[
+				'label' => esc_html__( 'Độ phân giải ảnh', 'lpbcolor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'large',
+				'options' => efb_image_size_options(),
+				'label_block' => true
+			]
+		);
+
 		$repeater = new Repeater();
 
 		$repeater->add_control(
@@ -193,7 +204,7 @@ class EFB_Widget_Testimonial_Slider extends Widget_Base {
                         <div class="item__image">
 							<?php
 							if ( $imageId ) :
-								echo wp_get_attachment_image( $item['list_image']['id'], array( '150', '150' ) );
+								echo wp_get_attachment_image( $item['list_image']['id'], $settings['image_size'] );
 							else:
 								?>
                                 <img src="<?php echo esc_url( EFB_PLUGIN_URL . 'assets/images/user-avatar.png' ); ?>"

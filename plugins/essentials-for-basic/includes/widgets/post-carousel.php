@@ -141,6 +141,17 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'image_size',
+			[
+				'label' => esc_html__( 'Độ phân giải ảnh', 'lpbcolor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'large',
+				'options' => efb_image_size_options(),
+				'label_block' => true
+			]
+		);
+
 		$this->end_controls_section();
 
 		// additional options
@@ -616,7 +627,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
                                 <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
 									<?php
 									if ( has_post_thumbnail() ) :
-										the_post_thumbnail( 'large' );
+										the_post_thumbnail( $settings['image_size'] );
 									else:
 										?>
                                         <img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/no-image.png' ) ) ?>"

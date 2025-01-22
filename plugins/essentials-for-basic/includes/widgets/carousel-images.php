@@ -59,6 +59,17 @@ class EFB_Widget_Carousel_Images extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'image_size',
+			[
+				'label' => esc_html__( 'Độ phân giải ảnh', 'lpbcolor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'large',
+				'options' => efb_image_size_options(),
+				'label_block' => true
+			]
+		);
+
 		$repeater = new Repeater();
 
 		$repeater->add_control(
@@ -437,7 +448,7 @@ class EFB_Widget_Carousel_Images extends Widget_Base {
 
                     <div class="item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
 						<?php
-						echo wp_get_attachment_image( $image_id, 'full' );
+						echo wp_get_attachment_image( $image_id, $settings['image_size'] );
 
 						if ( $url ) :
 							$link_key = 'link_' . $index;

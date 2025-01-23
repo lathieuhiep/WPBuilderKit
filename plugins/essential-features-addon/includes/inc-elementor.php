@@ -1,16 +1,16 @@
 <?php
-// Register widgets
+// register widget elementor
 add_action( 'elementor/widgets/register', 'efa_register_widget_elementor_addon' );
 function efa_register_widget_elementor_addon( $widgets_manager ): void {
 	// include add on
-	require_once EFA_PLUGIN_PATH . 'includes/widgets/carousel-images.php';
-	require_once EFA_PLUGIN_PATH . 'includes/widgets/contact-form-7.php';
-	require_once EFA_PLUGIN_PATH . 'includes/widgets/heading-with-editor.php';
-	require_once EFA_PLUGIN_PATH . 'includes/widgets/info-box.php';
-	require_once EFA_PLUGIN_PATH . 'includes/widgets/post-carousel.php';
-	require_once EFA_PLUGIN_PATH . 'includes/widgets/post-grid.php';
-	require_once EFA_PLUGIN_PATH . 'includes/widgets/slides.php';
-	require_once EFA_PLUGIN_PATH . 'includes/widgets/testimonial-slider.php';
+	require_once EFA_PLUGIN_PATH . 'includes/widgets/elementor/carousel-images.php';
+	require_once EFA_PLUGIN_PATH . 'includes/widgets/elementor/contact-form-7.php';
+	require_once EFA_PLUGIN_PATH . 'includes/widgets/elementor/heading-with-editor.php';
+	require_once EFA_PLUGIN_PATH . 'includes/widgets/elementor/info-box.php';
+	require_once EFA_PLUGIN_PATH . 'includes/widgets/elementor/post-carousel.php';
+	require_once EFA_PLUGIN_PATH . 'includes/widgets/elementor/post-grid.php';
+	require_once EFA_PLUGIN_PATH . 'includes/widgets/elementor/slides.php';
+	require_once EFA_PLUGIN_PATH . 'includes/widgets/elementor/testimonial-slider.php';
 
 	// register add on
 	$widgets_manager->register( new \EFA_Widget_Carousel_Images() );

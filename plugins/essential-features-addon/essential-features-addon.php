@@ -27,6 +27,9 @@ require_once EFA_PLUGIN_PATH . 'includes/enqueue.php';
 // include cpt
 require_once EFA_PLUGIN_PATH . 'includes/cpt/post-type-portfolio.php';
 
+// include wp-custom
+require_once EFA_PLUGIN_PATH . 'includes/inc-wp-custom.php';
+
 // check active plugin elementor
 add_action( 'plugins_loaded', 'efa_check_elementor' );
 function efa_check_elementor(): void {
@@ -37,7 +40,7 @@ function efa_check_elementor(): void {
 	}
 
 	// include widget addons elementor
-	require_once EFA_PLUGIN_PATH . 'includes/widgets.php';
+	require_once EFA_PLUGIN_PATH . 'includes/inc-elementor.php';
 
     // create category addons
 	add_action( 'elementor/elements/categories_registered', 'efa_add_elementor_widget_categories' );
@@ -47,7 +50,7 @@ function efa_check_elementor(): void {
 function efa_elementor_missing_notice(): void {
 	?>
     <div class="notice notice-error is-dismissible">
-        <p><?php esc_html_e( 'Essentials for Basic plugin requires Elementor to be installed and activated.', 'essential-features-addon' ); ?></p>
+        <p><?php esc_html_e( 'Plugin Essential Features Addon có phần mở rộng addon cho plugin Elementor. Nếu muốn sử dụng bạn cần cài plugin Elementor và kích hoạt.', 'essential-features-addon' ); ?></p>
     </div>
 	<?php
 }

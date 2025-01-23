@@ -27,16 +27,16 @@
 
     $(window).on('elementor/frontend/init', function () {
         /* Element slider */
-        elementorFrontend.hooks.addAction('frontend/element_ready/efb-slides.default', ElementCarouselSlider);
+        elementorFrontend.hooks.addAction('frontend/element_ready/efa-slides.default', ElementCarouselSlider);
 
         /* Element post carousel */
-        elementorFrontend.hooks.addAction('frontend/element_ready/efb-post-carousel.default', ElementCarouselSlider);
+        elementorFrontend.hooks.addAction('frontend/element_ready/efa-post-carousel.default', ElementCarouselSlider);
 
         /* Element testimonial slider */
-        elementorFrontend.hooks.addAction('frontend/element_ready/efb-testimonial-slider.default', ElementCarouselSlider);
+        elementorFrontend.hooks.addAction('frontend/element_ready/efa-testimonial-slider.default', ElementCarouselSlider);
 
         /* Element carousel images */
-        elementorFrontend.hooks.addAction('frontend/element_ready/efb-carousel-images.default', ElementCarouselSlider);
+        elementorFrontend.hooks.addAction('frontend/element_ready/efa-carousel-images.default', ElementCarouselSlider);
     });
 
 })(jQuery);

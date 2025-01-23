@@ -8,16 +8,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-class EFB_Widget_Heading_With_Editor extends Widget_Base {
+class EFA_Widget_Heading_With_Editor extends Widget_Base {
 
 	// widget name
 	public function get_name(): string {
-		return 'efb-heading-with-editor';
+		return 'efa-heading-with-editor';
 	}
 
 	// widget title
 	public function get_title(): string {
-		return esc_html__( 'Tiêu đề và văn bản', 'essentials-for-basic' );
+		return esc_html__( 'Tiêu đề và văn bản', 'essential-features-addon' );
 	}
 
 	// widget icon
@@ -27,7 +27,7 @@ class EFB_Widget_Heading_With_Editor extends Widget_Base {
 
 	// widget categories
 	public function get_categories(): array {
-		return array( 'efb-addons' );
+		return array( 'efa-addons' );
 	}
 
 	// widget keywords
@@ -42,7 +42,7 @@ class EFB_Widget_Heading_With_Editor extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Nội dung', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Nội dung', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -50,9 +50,9 @@ class EFB_Widget_Heading_With_Editor extends Widget_Base {
 		$this->add_control(
 			'heading',
 			[
-				'label'       => esc_html__( 'Tiêu đề', 'essentials-for-basic' ),
+				'label'       => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Tiêu đề', 'essentials-for-basic' ),
+				'default'     => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
 				'label_block' => true
 			]
 		);
@@ -60,7 +60,7 @@ class EFB_Widget_Heading_With_Editor extends Widget_Base {
 		$this->add_control(
 			'html_tag',
 			[
-				'label'   => esc_html__( 'HTML Tag', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'HTML Tag', 'essential-features-addon' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'h2',
 				'options' => [
@@ -77,9 +77,9 @@ class EFB_Widget_Heading_With_Editor extends Widget_Base {
 		$this->add_control(
 			'description',
 			[
-				'label'   => esc_html__( 'Văn bản', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Văn bản', 'essential-features-addon' ),
 				'type'    => Controls_Manager::WYSIWYG,
-				'default' => esc_html__( 'Nội dung văn bản', 'essentials-for-basic' ),
+				'default' => esc_html__( 'Nội dung văn bản', 'essential-features-addon' ),
 			]
 		);
 
@@ -89,7 +89,7 @@ class EFB_Widget_Heading_With_Editor extends Widget_Base {
 		$this->start_controls_section(
 			'style_heading',
 			[
-				'label' => esc_html__( 'Tiêu đề', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -97,26 +97,26 @@ class EFB_Widget_Heading_With_Editor extends Widget_Base {
 		$this->add_responsive_control(
 			'heading_align',
 			[
-				'label'     => esc_html__( 'Căn chỉnh', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Căn chỉnh', 'essential-features-addon' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left' => [
-						'title' => esc_html__( 'Trái', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Trái', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 
 					'center' => [
-						'title' => esc_html__( 'Giữa', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Giữa', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 
 					'right' => [
-						'title' => esc_html__( 'Phải', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Phải', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 
 					'justify' => [
-						'title' => esc_html__( 'Căn đều hai lề', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Căn đều hai lề', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -129,7 +129,7 @@ class EFB_Widget_Heading_With_Editor extends Widget_Base {
 		$this->add_control(
 			'heading_color',
 			[
-				'label'     => esc_html__( 'Màu', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Màu', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .element-heading-with-editor .heading' => 'color: {{VALUE}}',
@@ -141,7 +141,7 @@ class EFB_Widget_Heading_With_Editor extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'heading_typography',
-				'label'    => esc_html__( 'Kiểu chữ', 'essentials-for-basic' ),
+				'label'    => esc_html__( 'Kiểu chữ', 'essential-features-addon' ),
 				'selector' => '{{WRAPPER}} .element-heading-with-editor .heading',
 			]
 		);
@@ -152,7 +152,7 @@ class EFB_Widget_Heading_With_Editor extends Widget_Base {
 		$this->start_controls_section(
 			'style_description',
 			[
-				'label' => esc_html__( 'Văn bản', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Văn bản', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -160,26 +160,26 @@ class EFB_Widget_Heading_With_Editor extends Widget_Base {
 		$this->add_responsive_control(
 			'desc_align',
 			[
-				'label'     => esc_html__( 'Căn chỉnh', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Căn chỉnh', 'essential-features-addon' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left' => [
-						'title' => esc_html__( 'Trái', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Trái', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 
 					'center' => [
-						'title' => esc_html__( 'Giữa', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Giữa', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 
 					'right' => [
-						'title' => esc_html__( 'Phải', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Phải', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 
 					'justify' => [
-						'title' => esc_html__( 'Căn đều hai lề', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Căn đều hai lề', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -192,7 +192,7 @@ class EFB_Widget_Heading_With_Editor extends Widget_Base {
 		$this->add_control(
 			'desc_color',
 			[
-				'label'     => esc_html__( 'Color', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Color', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .element-heading-with-editor .desc' => 'color: {{VALUE}}',
@@ -204,7 +204,7 @@ class EFB_Widget_Heading_With_Editor extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'desc_typography',
-				'label'    => esc_html__( 'Kiểu chữ', 'essentials-for-basic' ),
+				'label'    => esc_html__( 'Kiểu chữ', 'essential-features-addon' ),
 				'selector' => '{{WRAPPER}} .element-heading-with-editor .desc',
 			]
 		);

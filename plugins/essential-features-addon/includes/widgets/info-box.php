@@ -11,16 +11,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-class EFB_Widget_Info_Box extends Widget_Base {
+class EFA_Widget_Info_Box extends Widget_Base {
 
 	// widget name
 	public function get_name(): string {
-		return 'efb-info-box';
+		return 'efa-info-box';
 	}
 
 	// widget title
 	public function get_title(): string {
-		return esc_html__( 'Info box', 'essentials-for-basic' );
+		return esc_html__( 'Info box', 'essential-features-addon' );
 	}
 
 	// widget icon
@@ -30,7 +30,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 
 	// widget categories
 	public function get_categories(): array {
-		return array( 'efb-addons' );
+		return array( 'efa-addons' );
 	}
 
 	// widget controls
@@ -40,7 +40,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'image_section',
 			[
-				'label' => esc_html__( 'Ảnh', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Ảnh', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -48,14 +48,14 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->add_control(
 			'img_type',
 			[
-				'label'       => esc_html__( 'Kiểu', 'essentials-for-basic' ),
+				'label'       => esc_html__( 'Kiểu', 'essential-features-addon' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'img-on-top',
 				'label_block' => false,
 				'options'     => [
-					'img-on-top'   => esc_html__( 'Ảnh/Icon ở trên', 'essentials-for-basic' ),
-					'img-on-left'  => esc_html__( 'Ảnh/Icon ở bên trái', 'essentials-for-basic' ),
-					'img-on-right' => esc_html__( 'Ảnh/Icon ở bên phải', 'essentials-for-basic' ),
+					'img-on-top'   => esc_html__( 'Ảnh/Icon ở trên', 'essential-features-addon' ),
+					'img-on-left'  => esc_html__( 'Ảnh/Icon ở bên trái', 'essential-features-addon' ),
+					'img-on-right' => esc_html__( 'Ảnh/Icon ở bên phải', 'essential-features-addon' ),
 				],
 			]
 		);
@@ -63,22 +63,22 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->add_control(
 			'img_or_icon',
 			[
-				'label'       => esc_html__( 'Ảnh hoặc icon', 'essentials-for-basic' ),
+				'label'       => esc_html__( 'Ảnh hoặc icon', 'essential-features-addon' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'label_block' => true,
 				'options'     => [
 					'none' => [
-						'title' => esc_html__( 'Trống', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Trống', 'essential-features-addon' ),
 						'icon'  => 'fa fa-ban',
 					],
 
 					'icon' => [
-						'title' => esc_html__( 'Icon', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Icon', 'essential-features-addon' ),
 						'icon'  => 'fa fa-info-circle',
 					],
 
 					'img' => [
-						'title' => esc_html__( 'Ảnh', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Ảnh', 'essential-features-addon' ),
 						'icon'  => 'eicon-image-bold',
 					],
 				],
@@ -89,7 +89,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->add_control(
 			'icon_vertical_position',
 			[
-				'label'                => esc_html__( 'Ví trí icon', 'essentials-for-basic' ),
+				'label'                => esc_html__( 'Ví trí icon', 'essential-features-addon' ),
 				'type'                 => Controls_Manager::CHOOSE,
 				'default'              => 'top',
 				'condition'            => [
@@ -97,15 +97,15 @@ class EFB_Widget_Info_Box extends Widget_Base {
 				],
 				'options'              => [
 					'top'    => [
-						'title' => esc_html__( 'Top', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Top', 'essential-features-addon' ),
 						'icon'  => 'eicon-v-align-top',
 					],
 					'middle' => [
-						'title' => esc_html__( 'Middle', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Middle', 'essential-features-addon' ),
 						'icon'  => 'eicon-v-align-middle',
 					],
 					'bottom' => [
-						'title' => esc_html__( 'Bottom', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Bottom', 'essential-features-addon' ),
 						'icon'  => 'eicon-v-align-bottom',
 					],
 				],
@@ -126,7 +126,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->add_control(
 			'selected_image',
 			[
-				'label'     => esc_html__( 'Infobox Image', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Infobox Image', 'essential-features-addon' ),
 				'type'      => Controls_Manager::MEDIA,
 				'default'   => [
 					'url' => Utils::get_placeholder_image_src(),
@@ -143,7 +143,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->add_control(
 			'selected_icon',
 			[
-				'label'            => esc_html__( 'Icon', 'essentials-for-basic' ),
+				'label'            => esc_html__( 'Icon', 'essential-features-addon' ),
 				'type'             => Controls_Manager::ICONS,
 				'fa4compatibility' => 'icon',
 				'default'          => [
@@ -162,40 +162,40 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Content', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Content', 'essential-features-addon' ),
 			]
 		);
 
 		$this->add_control(
 			'title',
 			[
-				'label'       => esc_html__( 'Title', 'essentials-for-basic' ),
+				'label'       => esc_html__( 'Title', 'essential-features-addon' ),
 				'type'        => Controls_Manager::TEXT,
 				'label_block' => true,
-				'default'     => esc_html__( 'This is an icon box', 'essentials-for-basic' ),
+				'default'     => esc_html__( 'This is an icon box', 'essential-features-addon' ),
 			]
 		);
 
 		$this->add_control(
 			'text',
 			[
-				'label'       => esc_html__( 'Description', 'essentials-for-basic' ),
+				'label'       => esc_html__( 'Description', 'essential-features-addon' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'label_block' => true,
 				'rows'        => 10,
-				'default'     => esc_html__( 'Write a short description, that will describe the title or something informational and useful.', 'essentials-for-basic' ),
-				'placeholder' => esc_html__( 'Type your description here', 'essentials-for-basic' ),
+				'default'     => esc_html__( 'Write a short description, that will describe the title or something informational and useful.', 'essential-features-addon' ),
+				'placeholder' => esc_html__( 'Type your description here', 'essential-features-addon' ),
 			]
 		);
 
 		$this->add_control(
 			'show_description',
 			[
-				'label'        => esc_html__( 'Show Description', 'essentials-for-basic' ),
+				'label'        => esc_html__( 'Show Description', 'essential-features-addon' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => 'yes',
-				'label_on'     => esc_html__( 'Show', 'essentials-for-basic' ),
-				'label_off'    => esc_html__( 'Hide', 'essentials-for-basic' ),
+				'label_on'     => esc_html__( 'Show', 'essential-features-addon' ),
+				'label_off'    => esc_html__( 'Hide', 'essential-features-addon' ),
 				'return_value' => 'yes',
 			]
 		);
@@ -203,20 +203,20 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'content_alignment',
 			[
-				'label'        => esc_html__( 'Content Alignment', 'essentials-for-basic' ),
+				'label'        => esc_html__( 'Content Alignment', 'essential-features-addon' ),
 				'type'         => Controls_Manager::CHOOSE,
 				'label_block'  => true,
 				'options'      => [
 					'left'   => [
-						'title' => esc_html__( 'Left', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Left', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Center', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 					'right'  => [
-						'title' => esc_html__( 'Right', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Right', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 				],
@@ -234,7 +234,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'icon_style',
 			[
-				'label'     => esc_html__( 'Icon', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Icon', 'essential-features-addon' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'img_or_icon' => 'icon',
@@ -245,7 +245,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'icon_size',
 			[
-				'label'     => esc_html__( 'Icon Size', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Icon Size', 'essential-features-addon' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [
 					'size' => 40,
@@ -267,7 +267,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'icon_spacing',
 			[
-				'label'     => esc_html__( 'Spacing', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Spacing', 'essential-features-addon' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [
 					'size' => 12,
@@ -290,14 +290,14 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->start_controls_tab(
 			'icon_normal',
 			[
-				'label' => esc_html__( 'Normal', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Normal', 'essential-features-addon' ),
 			]
 		);
 
 		$this->add_control(
 			'icon_color',
 			[
-				'label'     => esc_html__( 'Icon Color', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Icon Color', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -312,14 +312,14 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->start_controls_tab(
 			'icon_hover',
 			[
-				'label' => esc_html__( 'Hover', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Hover', 'essential-features-addon' ),
 			]
 		);
 
 		$this->add_control(
 			'icon_hover_color',
 			[
-				'label'     => esc_html__( 'Icon Color', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Icon Color', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -339,7 +339,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->start_controls_section(
 			'content_style',
 			[
-				'label' => esc_html__( 'Content', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Content', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -347,7 +347,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->add_control(
 			'title_options',
 			[
-				'label'     => esc_html__( 'Title', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Title', 'essential-features-addon' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -356,7 +356,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->add_responsive_control(
 			'title_spacing',
 			[
-				'label'     => esc_html__( 'Spacing', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Spacing', 'essential-features-addon' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [
 					'size' => 12,
@@ -377,7 +377,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->add_control(
 			'title_color',
 			[
-				'label'     => esc_html__( 'Color', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Color', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .element-info-box__content .title' => 'color: {{VALUE}};'
@@ -396,7 +396,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->add_control(
 			'description_options',
 			[
-				'label'     => esc_html__( 'Description', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Description', 'essential-features-addon' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -405,7 +405,7 @@ class EFB_Widget_Info_Box extends Widget_Base {
 		$this->add_control(
 			'description_color',
 			[
-				'label'     => esc_html__( 'Color', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Color', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .element-info-box__content .text' => 'color: {{VALUE}};'

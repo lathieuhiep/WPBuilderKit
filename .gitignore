@@ -8,8 +8,8 @@ package-lock.json
 
 # Loại trừ phần phát triển
 !plugins/
-!plugins/essentials-for-basic/
-!plugins/essentials-for-basic/**
+!plugins/essential-features-addon/
+!plugins/essential-features-addon/**
 
 !themes/
 !themes/basictheme/

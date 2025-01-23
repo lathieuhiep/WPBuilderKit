@@ -8,16 +8,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class EFB_Widget_Post_Carousel extends Widget_Base {
+class EFA_Widget_Post_Carousel extends Widget_Base {
 
 	// widget name
 	public function get_name(): string {
-		return 'efb-post-carousel';
+		return 'efa-post-carousel';
 	}
 
 	// widget title
 	public function get_title(): string {
-		return esc_html__( 'Slider bài viết', 'essentials-for-basic' );
+		return esc_html__( 'Slider bài viết', 'essential-features-addon' );
 	}
 
 	// widget icon
@@ -27,7 +27,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 
 	// widget categories
 	public function get_categories(): array {
-		return array( 'efb-addons' );
+		return array( 'efa-addons' );
 	}
 
 	// widget style dependencies
@@ -37,7 +37,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 
 	// widget scripts dependencies
 	public function get_script_depends(): array {
-		return [ 'owl.carousel', 'efb-script' ];
+		return [ 'owl.carousel', 'efa-script' ];
 	}
 
 	// widget keywords
@@ -53,7 +53,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Thiết lập bài viết', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Thiết lập bài viết', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -61,9 +61,9 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'select_cat',
 			[
-				'label'       => esc_html__( 'Chọn danh mục', 'essentials-for-basic' ),
+				'label'       => esc_html__( 'Chọn danh mục', 'essential-features-addon' ),
 				'type'        => Controls_Manager::SELECT2,
-				'options'     => efb_check_get_cat( 'category' ),
+				'options'     => efa_check_get_cat( 'category' ),
 				'multiple'    => true,
 				'label_block' => true
 			]
@@ -72,7 +72,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'limit',
 			[
-				'label'   => esc_html__( 'Số bài lấy ra', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Số bài lấy ra', 'essential-features-addon' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 6,
 				'min'     => 1,
@@ -84,14 +84,14 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'order_by',
 			[
-				'label'   => esc_html__( 'Sắp xếp theo', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Sắp xếp theo', 'essential-features-addon' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'id',
 				'options' => [
-					'id'    => esc_html__( 'ID', 'essentials-for-basic' ),
-					'title' => esc_html__( 'Tiêu đề', 'essentials-for-basic' ),
-					'date'  => esc_html__( 'Ngày đăng', 'essentials-for-basic' ),
-					'rand'  => esc_html__( 'Ngẫu nhiên', 'essentials-for-basic' ),
+					'id'    => esc_html__( 'ID', 'essential-features-addon' ),
+					'title' => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
+					'date'  => esc_html__( 'Ngày đăng', 'essential-features-addon' ),
+					'rand'  => esc_html__( 'Ngẫu nhiên', 'essential-features-addon' ),
 				],
 			]
 		);
@@ -99,12 +99,12 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'order',
 			[
-				'label'   => esc_html__( 'Sắp xếp', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Sắp xếp', 'essential-features-addon' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'DESC',
 				'options' => [
-					'ASC'  => esc_html__( 'Tăng dần', 'essentials-for-basic' ),
-					'DESC' => esc_html__( 'Giảm dần', 'essentials-for-basic' ),
+					'ASC'  => esc_html__( 'Tăng dần', 'essential-features-addon' ),
+					'DESC' => esc_html__( 'Giảm dần', 'essential-features-addon' ),
 				],
 			]
 		);
@@ -112,16 +112,16 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'show_excerpt',
 			[
-				'label'   => esc_html__( 'Hiên thị tóm tắt', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Hiên thị tóm tắt', 'essential-features-addon' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'show' => [
-						'title' => esc_html__( 'Có', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Có', 'essential-features-addon' ),
 						'icon'  => 'eicon-check',
 					],
 
 					'hide' => [
-						'title' => esc_html__( 'Không', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Không', 'essential-features-addon' ),
 						'icon'  => 'eicon-ban',
 					],
 				],
@@ -132,7 +132,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'excerpt_length',
 			[
-				'label'     => esc_html__( 'Số lượng từ hiển thị', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Số lượng từ hiển thị', 'essential-features-addon' ),
 				'type'      => Controls_Manager::NUMBER,
 				'default'   => '10',
 				'condition' => [
@@ -147,7 +147,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 				'label' => esc_html__( 'Độ phân giải ảnh', 'lpbcolor' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'large',
-				'options' => efb_image_size_options(),
+				'options' => efa_image_size_options(),
 				'label_block' => true
 			]
 		);
@@ -158,7 +158,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'content_additional_options',
 			[
-				'label' => esc_html__( 'Tùy chọn bổ sung', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Tùy chọn bổ sung', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -167,9 +167,9 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 			'loop',
 			[
 				'type'         => Controls_Manager::SWITCHER,
-				'label'        => esc_html__( 'Vòng lặp', 'essentials-for-basic' ),
-				'label_on'     => esc_html__( 'Có', 'essentials-for-basic' ),
-				'label_off'    => esc_html__( 'Không', 'essentials-for-basic' ),
+				'label'        => esc_html__( 'Vòng lặp', 'essential-features-addon' ),
+				'label_on'     => esc_html__( 'Có', 'essential-features-addon' ),
+				'label_off'    => esc_html__( 'Không', 'essential-features-addon' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
 			]
@@ -178,10 +178,10 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'autoplay',
 			[
-				'label'        => esc_html__( 'Tự động chạy', 'essentials-for-basic' ),
+				'label'        => esc_html__( 'Tự động chạy', 'essential-features-addon' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Có', 'essentials-for-basic' ),
-				'label_off'    => esc_html__( 'Không', 'essentials-for-basic' ),
+				'label_on'     => esc_html__( 'Có', 'essential-features-addon' ),
+				'label_off'    => esc_html__( 'Không', 'essential-features-addon' ),
 				'return_value' => 'yes',
 				'default'      => '',
 			]
@@ -190,14 +190,14 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'navigation',
 			[
-				'label' => esc_html__( 'Thanh điều hướng', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Thanh điều hướng', 'essential-features-addon' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'arrows',
 				'options' => [
-					'both'  => esc_html__( 'Mũi tên và Dấu chấm', 'essentials-for-basic' ),
-					'arrows'  => esc_html__( 'Mũi tên', 'essentials-for-basic' ),
-					'dots'  => esc_html__( 'Dấu chấm', 'essentials-for-basic' ),
-					'none' => esc_html__( 'Không', 'essentials-for-basic' ),
+					'both'  => esc_html__( 'Mũi tên và Dấu chấm', 'essential-features-addon' ),
+					'arrows'  => esc_html__( 'Mũi tên', 'essential-features-addon' ),
+					'dots'  => esc_html__( 'Dấu chấm', 'essential-features-addon' ),
+					'none' => esc_html__( 'Không', 'essential-features-addon' ),
 				],
 			]
 		);
@@ -208,7 +208,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'mobile_options',
 			[
-				'label' => esc_html__( 'Dưới 480px', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Dưới 480px', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -216,7 +216,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'mobile_items',
 			[
-				'label'   => esc_html__( 'Hiển thị', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Hiển thị', 'essential-features-addon' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 1,
 				'min'     => 1,
@@ -228,7 +228,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'mobile_spaces_between',
 			[
-				'label'   => esc_html__( 'Khoảng cách', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Khoảng cách', 'essential-features-addon' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 4,
 				'min'     => 0,
@@ -243,7 +243,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'mobile_large_options',
 			[
-				'label' => esc_html__( 'Từ 480px', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Từ 480px', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -251,7 +251,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'mobile_large_items',
 			[
-				'label'   => esc_html__( 'Hiển thị', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Hiển thị', 'essential-features-addon' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 2,
 				'min'     => 1,
@@ -263,7 +263,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'mobile_large_spaces_between',
 			[
-				'label'   => esc_html__( 'Khoảng cách', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Khoảng cách', 'essential-features-addon' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 8,
 				'min'     => 1,
@@ -278,7 +278,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'tablet_small_options',
 			[
-				'label' => esc_html__( 'Từ 576px', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Từ 576px', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -286,7 +286,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'tablet_small_items',
 			[
-				'label'   => esc_html__( 'Hiển thị', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Hiển thị', 'essential-features-addon' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 2,
 				'min'     => 1,
@@ -298,7 +298,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'tablet_small_spaces_between',
 			[
-				'label'   => esc_html__( 'Khoảng cách', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Khoảng cách', 'essential-features-addon' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 12,
 				'min'     => 0,
@@ -313,7 +313,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'tablet_large_options',
 			[
-				'label' => esc_html__( 'Từ 768px', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Từ 768px', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -321,7 +321,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'tablet_large_items',
 			[
-				'label'   => esc_html__( 'Hiển thị', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Hiển thị', 'essential-features-addon' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 3,
 				'min'     => 1,
@@ -333,7 +333,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'tablet_large_spaces_between',
 			[
-				'label'   => esc_html__( 'Khoảng cách', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Khoảng cách', 'essential-features-addon' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 16,
 				'min'     => 0,
@@ -348,7 +348,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'desktop_small_options',
 			[
-				'label' => esc_html__( 'Từ 992px', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Từ 992px', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -356,7 +356,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'desktop_small_items',
 			[
-				'label'   => esc_html__( 'Hiển thị', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Hiển thị', 'essential-features-addon' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 3,
 				'min'     => 1,
@@ -368,7 +368,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'desktop_small_spaces_between',
 			[
-				'label'   => esc_html__( 'Khoảng cách', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Khoảng cách', 'essential-features-addon' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 20,
 				'min'     => 0,
@@ -383,7 +383,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'desktop_large_options',
 			[
-				'label' => esc_html__( 'Từ 1200px', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Từ 1200px', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -391,7 +391,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'desktop_large_items',
 			[
-				'label'   => esc_html__( 'Hiển thị', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Hiển thị', 'essential-features-addon' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 4,
 				'min'     => 1,
@@ -403,7 +403,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'desktop_large_spaces_between',
 			[
-				'label'   => esc_html__( 'Khoảng cách', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Khoảng cách', 'essential-features-addon' ),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => 24,
 				'min'     => 0,
@@ -418,7 +418,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'style_title',
 			[
-				'label' => esc_html__( 'Tiêu đề', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -426,7 +426,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'title_color',
 			[
-				'label'     => esc_html__( 'Màu', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Màu', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -438,7 +438,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'title_color_hover',
 			[
-				'label'     => esc_html__( 'Màu khi di chuột', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Màu khi di chuột', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -458,26 +458,26 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_responsive_control(
 			'title_align',
 			[
-				'label'     => esc_html__( 'Căn chỉnh', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Căn chỉnh', 'essential-features-addon' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left' => [
-						'title' => esc_html__( 'Trái', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Trái', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 
 					'center' => [
-						'title' => esc_html__( 'Giữa', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Giữa', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 
 					'right' => [
-						'title' => esc_html__( 'Phải', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Phải', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 
 					'justify' => [
-						'title' => esc_html__( 'Căn đều hai lề', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Căn đều hai lề', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -493,7 +493,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->start_controls_section(
 			'style_excerpt',
 			[
-				'label'     => esc_html__( 'Nôi dung tóm tắt', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Nôi dung tóm tắt', 'essential-features-addon' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_excerpt' => 'show',
@@ -504,7 +504,7 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'excerpt_color',
 			[
-				'label'     => esc_html__( 'Màu', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Màu', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -524,26 +524,26 @@ class EFB_Widget_Post_Carousel extends Widget_Base {
 		$this->add_control(
 			'excerpt_align',
 			[
-				'label'     => esc_html__( 'Căn chỉnh', 'essentials-for-basic' ),
+				'label'     => esc_html__( 'Căn chỉnh', 'essential-features-addon' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left' => [
-						'title' => esc_html__( 'Trái', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Trái', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 
 					'center' => [
-						'title' => esc_html__( 'Giữa', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Giữa', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 
 					'right' => [
-						'title' => esc_html__( 'Phải', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Phải', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 
 					'justify' => [
-						'title' => esc_html__( 'Căn đều hai lề', 'essentials-for-basic' ),
+						'title' => esc_html__( 'Căn đều hai lề', 'essential-features-addon' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],

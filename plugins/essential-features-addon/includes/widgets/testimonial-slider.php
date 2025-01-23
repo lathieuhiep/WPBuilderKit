@@ -9,16 +9,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class EFB_Widget_Testimonial_Slider extends Widget_Base {
+class EFA_Widget_Testimonial_Slider extends Widget_Base {
 
 	// widget name
 	public function get_name(): string {
-		return 'efb-testimonial-slider';
+		return 'efa-testimonial-slider';
 	}
 
 	// widget title
 	public function get_title(): string {
-		return esc_html__( 'Slider lời chứng thực', 'essentials-for-basic' );
+		return esc_html__( 'Slider lời chứng thực', 'essential-features-addon' );
 	}
 
 	// widget icon
@@ -28,7 +28,7 @@ class EFB_Widget_Testimonial_Slider extends Widget_Base {
 
 	// widget categories
 	public function get_categories(): array {
-		return array( 'efb-addons' );
+		return array( 'efa-addons' );
 	}
 
 	// widget style dependencies
@@ -38,7 +38,7 @@ class EFB_Widget_Testimonial_Slider extends Widget_Base {
 
 	// widget scripts dependencies
 	public function get_script_depends(): array {
-		return [ 'owl.carousel', 'efb-script' ];
+		return [ 'owl.carousel', 'efa-script' ];
 	}
 
 	// widget controls
@@ -48,7 +48,7 @@ class EFB_Widget_Testimonial_Slider extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Nội dung', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Nội dung', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -59,7 +59,7 @@ class EFB_Widget_Testimonial_Slider extends Widget_Base {
 				'label' => esc_html__( 'Độ phân giải ảnh', 'lpbcolor' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'large',
-				'options' => efb_image_size_options(),
+				'options' => efa_image_size_options(),
 				'label_block' => true
 			]
 		);
@@ -68,9 +68,9 @@ class EFB_Widget_Testimonial_Slider extends Widget_Base {
 
 		$repeater->add_control(
 			'list_title', [
-				'label'       => esc_html__( 'Tên', 'essentials-for-basic' ),
+				'label'       => esc_html__( 'Tên', 'essential-features-addon' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'John Doe', 'essentials-for-basic' ),
+				'default'     => esc_html__( 'John Doe', 'essential-features-addon' ),
 				'label_block' => true,
 			]
 		);
@@ -78,9 +78,9 @@ class EFB_Widget_Testimonial_Slider extends Widget_Base {
 		$repeater->add_control(
 			'list_position',
 			[
-				'label'       => esc_html__( 'Vị trí', 'essentials-for-basic' ),
+				'label'       => esc_html__( 'Vị trí', 'essential-features-addon' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Vị trí', 'essentials-for-basic' ),
+				'default'     => esc_html__( 'Vị trí', 'essential-features-addon' ),
 				'label_block' => true
 			]
 		);
@@ -88,7 +88,7 @@ class EFB_Widget_Testimonial_Slider extends Widget_Base {
 		$repeater->add_control(
 			'list_image',
 			[
-				'label'   => esc_html__( 'Chọn ảnh', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Chọn ảnh', 'essential-features-addon' ),
 				'type'    => Controls_Manager::MEDIA,
 				'default' => [
 					'url' => Utils::get_placeholder_image_src(),
@@ -99,26 +99,26 @@ class EFB_Widget_Testimonial_Slider extends Widget_Base {
 		$repeater->add_control(
 			'list_description',
 			[
-				'label'       => esc_html__( 'Văn bản', 'essentials-for-basic' ),
+				'label'       => esc_html__( 'Văn bản', 'essential-features-addon' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'rows'        => 10,
-				'default'     => esc_html__( 'GEMs are robotics algorithm for modules that built & optimized for NVIDIA AGX Data should underlie every business decision. Data should underlie every business Yet too often some very down the certain routes.', 'essentials-for-basic' ),
-				'placeholder' => esc_html__( 'Nhập văn bản', 'essentials-for-basic' ),
+				'default'     => esc_html__( 'GEMs are robotics algorithm for modules that built & optimized for NVIDIA AGX Data should underlie every business decision. Data should underlie every business Yet too often some very down the certain routes.', 'essential-features-addon' ),
+				'placeholder' => esc_html__( 'Nhập văn bản', 'essential-features-addon' ),
 			]
 		);
 
 		$this->add_control(
 			'list',
 			[
-				'label'       => esc_html__( 'Danh sách', 'essentials-for-basic' ),
+				'label'       => esc_html__( 'Danh sách', 'essential-features-addon' ),
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
 				'default'     => [
 					[
-						'list_title' => esc_html__( 'Tiêu đề #1', 'essentials-for-basic' ),
+						'list_title' => esc_html__( 'Tiêu đề #1', 'essential-features-addon' ),
 					],
 					[
-						'list_title' => esc_html__( 'Tiêu đề #2', 'essentials-for-basic' ),
+						'list_title' => esc_html__( 'Tiêu đề #2', 'essential-features-addon' ),
 					],
 				],
 				'title_field' => '{{{ list_title }}}',
@@ -131,7 +131,7 @@ class EFB_Widget_Testimonial_Slider extends Widget_Base {
 		$this->start_controls_section(
 			'content_additional_options',
 			[
-				'label' => esc_html__( 'Tùy chọn bổ sung', 'essentials-for-basic' ),
+				'label' => esc_html__( 'Tùy chọn bổ sung', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -140,9 +140,9 @@ class EFB_Widget_Testimonial_Slider extends Widget_Base {
 			'loop',
 			[
 				'type'         => Controls_Manager::SWITCHER,
-				'label'        => esc_html__( 'Vòng lặp', 'essentials-for-basic' ),
-				'label_on'     => esc_html__( 'Có', 'essentials-for-basic' ),
-				'label_off'    => esc_html__( 'Không', 'essentials-for-basic' ),
+				'label'        => esc_html__( 'Vòng lặp', 'essential-features-addon' ),
+				'label_on'     => esc_html__( 'Có', 'essential-features-addon' ),
+				'label_off'    => esc_html__( 'Không', 'essential-features-addon' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
 			]
@@ -151,10 +151,10 @@ class EFB_Widget_Testimonial_Slider extends Widget_Base {
 		$this->add_control(
 			'autoplay',
 			[
-				'label'        => esc_html__( 'Tự động chạy', 'essentials-for-basic' ),
+				'label'        => esc_html__( 'Tự động chạy', 'essential-features-addon' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Có', 'essentials-for-basic' ),
-				'label_off'    => esc_html__( 'Không', 'essentials-for-basic' ),
+				'label_on'     => esc_html__( 'Có', 'essential-features-addon' ),
+				'label_off'    => esc_html__( 'Không', 'essential-features-addon' ),
 				'return_value' => 'yes',
 				'default'      => '',
 			]
@@ -163,14 +163,14 @@ class EFB_Widget_Testimonial_Slider extends Widget_Base {
 		$this->add_control(
 			'navigation',
 			[
-				'label'   => esc_html__( 'Thanh điều hướng', 'essentials-for-basic' ),
+				'label'   => esc_html__( 'Thanh điều hướng', 'essential-features-addon' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'arrows',
 				'options' => [
-					'both'   => esc_html__( 'Mũi tên và Dấu chấm', 'essentials-for-basic' ),
-					'arrows' => esc_html__( 'Mũi tên', 'essentials-for-basic' ),
-					'dots'   => esc_html__( 'Dấu chấm', 'essentials-for-basic' ),
-					'none'   => esc_html__( 'Không', 'essentials-for-basic' ),
+					'both'   => esc_html__( 'Mũi tên và Dấu chấm', 'essential-features-addon' ),
+					'arrows' => esc_html__( 'Mũi tên', 'essential-features-addon' ),
+					'dots'   => esc_html__( 'Dấu chấm', 'essential-features-addon' ),
+					'none'   => esc_html__( 'Không', 'essential-features-addon' ),
 				],
 			]
 		);
@@ -207,7 +207,7 @@ class EFB_Widget_Testimonial_Slider extends Widget_Base {
 								echo wp_get_attachment_image( $item['list_image']['id'], $settings['image_size'] );
 							else:
 								?>
-                                <img src="<?php echo esc_url( EFB_PLUGIN_URL . 'assets/images/user-avatar.png' ); ?>"
+                                <img src="<?php echo esc_url( EFA_PLUGIN_URL . 'assets/images/user-avatar.png' ); ?>"
                                      alt="<?php echo esc_attr( $item['list_title'] ); ?>"/>
 							<?php endif; ?>
                         </div>

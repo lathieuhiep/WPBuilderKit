@@ -19,8 +19,8 @@ const paths = {
     plugins: {
         root: 'src/plugins/',
         essentialsForBasic: {
-            scss: 'src/plugins/essentials-for-basic/scss/',
-            js: 'src/plugins/essentials-for-basic/js/'
+            scss: 'src/plugins/essential-features-addon/scss/',
+            js: 'src/plugins/essential-features-addon/js/'
         }
     },
     shared: {
@@ -38,9 +38,9 @@ const paths = {
         plugins: {
             root: 'plugins/',
             essentialsForBasic: {
-                css: 'plugins/essentials-for-basic/assets/css/',
-                js: 'plugins/essentials-for-basic/assets/js/',
-                libs: 'plugins/essentials-for-basic/assets/libs/'
+                css: 'plugins/essential-features-addon/assets/css/',
+                js: 'plugins/essential-features-addon/assets/js/',
+                libs: 'plugins/essential-features-addon/assets/libs/'
             }
         }
     }

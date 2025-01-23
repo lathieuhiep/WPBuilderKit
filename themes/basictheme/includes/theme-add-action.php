@@ -52,14 +52,6 @@ function basictheme_add_arrow( $output, $item, $depth, $args ){
 	return $output;
 }
 
-// Custom Search Post
-add_action( 'pre_get_posts', 'basictheme_include_custom_post_types_in_search_results' );
-function basictheme_include_custom_post_types_in_search_results( $query ): void {
-	if ( $query->is_main_query() && $query->is_search() && ! is_admin() ) {
-		$query->set( 'post_type', array( 'post' ) );
-	}
-}
-
 //Disable emojis in WordPress
 add_action( 'init', 'basictheme_disable_emojis' );
 function basictheme_disable_emojis() {

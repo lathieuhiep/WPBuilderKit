@@ -50,7 +50,7 @@ function efa_register_ctp_portfolio(): void {
 		'query_var'         => true,
 		'rewrite'           => array( 'slug' => 'danh-muc-du-an' ),
 	);
-	register_taxonomy( 'portfolio-cat', array( 'portfolio' ), $tax_args );
+	register_taxonomy( 'portfolio_cat', array( 'portfolio' ), $tax_args );
 
 	// Đăng ký Taxonomy: Thẻ dự án
 	$tag_args = array(

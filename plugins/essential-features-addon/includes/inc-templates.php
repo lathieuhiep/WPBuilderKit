@@ -23,11 +23,11 @@ add_filter( 'template_include', 'efa_load_portfolio_templates' );
 function efa_load_portfolio_templates( $template ) {
 	if ( is_singular( 'portfolio' ) ) {
 		return efa_get_template_custom( 'single-portfolio.php' );
-	} elseif ( is_post_type_archive( 'portfolio' ) ) {
+	} elseif ( is_post_type_archive( 'portfolio' ) && !is_search() ) {
 		return efa_get_template_custom( 'archive-portfolio.php' );
-	} elseif ( is_tax( 'portfolio-cat' ) ) {
+	} elseif ( is_tax( 'portfolio_cat' ) ) {
 		return efa_get_template_custom( 'archive-portfolio.php' );
-	} elseif ( is_tax( 'portfolio-tag' ) ) {
+	} elseif ( is_tax( 'portfolio_tag' ) ) {
 		return efa_get_template_custom( 'archive-portfolio.php' );
 	} elseif ( is_search() && isset( $_GET['post_type'] ) && $_GET['post_type'] === 'portfolio' ) {
 		return efa_get_template_custom( 'search-portfolio.php' );

@@ -21,6 +21,8 @@ define( 'EFA_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'EFA_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 // load core functionality
+require_once EFA_PLUGIN_PATH . 'includes/inc-hooks.php';
+
 require_once EFA_PLUGIN_PATH . 'includes/helpers.php';
 require_once EFA_PLUGIN_PATH . 'includes/enqueue.php';
 

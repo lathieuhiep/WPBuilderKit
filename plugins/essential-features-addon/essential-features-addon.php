@@ -26,6 +26,7 @@ require_once EFA_PLUGIN_PATH . 'includes/enqueue.php';
 
 // include cpt
 require_once EFA_PLUGIN_PATH . 'includes/cpt/post-type-portfolio.php';
+require_once EFA_PLUGIN_PATH . 'includes/inc-templates.php';
 
 // include wp-custom
 require_once EFA_PLUGIN_PATH . 'includes/inc-wp-custom.php';

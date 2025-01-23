@@ -70,3 +70,14 @@ function efa_image_object_position_options(): array {
 		'bottom right' => esc_html__( 'Phía dưới bên phải', 'essential-features-addon' ),
 	];
 }
+
+// pagination
+function efa_pagination(): void {
+	the_posts_pagination( array(
+		'type'               => 'list',
+		'mid_size'           => 2,
+		'prev_text'          => esc_html__( 'Trước', 'essential-features-addon' ),
+		'next_text'          => esc_html__( 'Sau', 'essential-features-addon' ),
+		'screen_reader_text' => '&nbsp;',
+	) );
+}

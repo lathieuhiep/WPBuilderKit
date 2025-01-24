@@ -20,7 +20,7 @@ function basictheme_comments( $basictheme_comment, $basictheme_comment_args, $ba
 	endif;
 
 	?>
-    <<?php echo $basictheme_comment_tag ?><?php comment_class( empty( $basictheme_comment_args['has_children'] ) ? '' : 'parent' ) ?> id="comment-<?php comment_ID() ?>">
+    <<?php echo $basictheme_comment_tag . ' ' ?><?php comment_class( empty( $basictheme_comment_args['has_children'] ) ? '' : 'parent' ) ?> id="comment-<?php comment_ID() ?>">
 
 	<?php if ( 'div' != $basictheme_comment_args['style'] ) : ?>
 
@@ -52,7 +52,7 @@ function basictheme_comments( $basictheme_comment, $basictheme_comment_args, $ba
     </div>
 
     <div class="action">
-		<?php edit_comment_link( esc_html__( 'Edit ', 'basictheme' ) ); ?>
+		<?php edit_comment_link( esc_html__( 'Sửa ', 'basictheme' ) ); ?>
 
 		<?php comment_reply_link( array_merge( $basictheme_comment_args, array(
 			'add_below' => $basictheme_comment_add_below,

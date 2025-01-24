@@ -4,7 +4,7 @@ get_header();
 $sidebar = basictheme_get_option('opt_post_single_sidebar_position', 'right');
 $class_col_content = basictheme_col_use_sidebar( $sidebar, 'sidebar-main' );
 
-get_template_part( 'components/inc', 'breadcrumbs' );
+get_template_part( 'template-parts/parts/breadcrumbs' );
 ?>
 
 <div class="site-container single-post-warp">

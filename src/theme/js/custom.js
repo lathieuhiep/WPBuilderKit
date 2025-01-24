@@ -48,9 +48,7 @@
 
     // loading
     $( window ).on( "load", function() {
-
         $( '#site-loading' ).remove();
-
     });
 
     // scroll event

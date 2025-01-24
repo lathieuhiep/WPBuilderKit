@@ -9,6 +9,10 @@ const rename = require("gulp-rename")
 const plumber = require('gulp-plumber');
 const path = require('path');
 
+// Biến đại diện cho tên plugin và theme
+const pluginNameEFA = 'essential-features-addon';
+const themeName = 'basictheme';
+
 // Đường dẫn file
 const paths = {
     node_modules: 'node_modules/',
@@ -18,9 +22,9 @@ const paths = {
     },
     plugins: {
         root: 'src/plugins/',
-        essentialsForBasic: {
-            scss: 'src/plugins/essentials-for-basic/scss/',
-            js: 'src/plugins/essentials-for-basic/js/'
+        efa: {
+            scss: `src/plugins/${pluginNameEFA}/scss/`,
+            js: `src/plugins/${pluginNameEFA}/js/`
         }
     },
     shared: {
@@ -29,18 +33,18 @@ const paths = {
     },
     output: {
         theme: {
-            root: 'themes/basictheme/assets/',
-            css: 'themes/basictheme/assets/css/',
-            js: 'themes/basictheme/assets/js/',
-            libs: 'themes/basictheme/assets/libs/',
-            extension: 'themes/basictheme/extension/'
+            root: `themes/${themeName}/assets/`,
+            css: `themes/${themeName}/assets/css/`,
+            js: `themes/${themeName}/assets/js/`,
+            libs: `themes/${themeName}/assets/libs/`,
+            extension: `themes/${themeName}/extension/`
         },
         plugins: {
             root: 'plugins/',
-            essentialsForBasic: {
-                css: 'plugins/essentials-for-basic/assets/css/',
-                js: 'plugins/essentials-for-basic/assets/js/',
-                libs: 'plugins/essentials-for-basic/assets/libs/'
+            efa: {
+                css: `plugins/${pluginNameEFA}/assets/css/`,
+                js: `plugins/${pluginNameEFA}/assets/js/`,
+                libs: `plugins/${pluginNameEFA}/assets/libs/`
             }
         }
     }
@@ -84,7 +88,6 @@ function buildFontawesomeStyle() {
         .pipe(dest(`${paths.output.theme.libs}fontawesome/css`))
         .pipe(browserSync.stream())
 }
-exports.buildFontawesomeStyle = buildFontawesomeStyle
 
 function CopyWebFonts() {
     return src([
@@ -98,7 +101,6 @@ function CopyWebFonts() {
         .pipe(dest(`${paths.output.theme.libs}fontawesome/webfonts`))
         .pipe(browserSync.stream())
 }
-exports.CopyWebFonts = CopyWebFonts
 
 /*
 Task build Bootstrap
@@ -125,7 +127,7 @@ function buildStyleBootstrap() {
         }))
         .pipe(rename({suffix: '.min'}))
         .pipe(dest(`${paths.output.theme.libs}bootstrap/`))
-        .pipe(dest(`${paths.output.plugins.essentialsForBasic.libs}bootstrap/`))
+        .pipe(dest(`${paths.output.plugins.efa.libs}bootstrap/`))
         .pipe(browserSync.stream())
 }
 
@@ -141,7 +143,7 @@ function buildLibsBootstrapJS() {
         .pipe(uglify())
         .pipe(rename( {suffix: '.min'} ))
         .pipe(dest(`${paths.output.theme.libs}/bootstrap/`))
-        .pipe(dest(`${paths.output.plugins.essentialsForBasic.libs}bootstrap/`))
+        .pipe(dest(`${paths.output.plugins.efa.libs}bootstrap/`))
         .pipe(browserSync.stream())
 }
 
@@ -165,7 +167,7 @@ function buildStyleOwlCarousel() {
         }))
         .pipe(rename({suffix: '.min'}))
         .pipe(dest(`${paths.output.theme.libs}owl.carousel/`))
-        .pipe(dest(`${paths.output.plugins.essentialsForBasic.libs}owl.carousel/`))
+        .pipe(dest(`${paths.output.plugins.efa.libs}owl.carousel/`))
         .pipe(browserSync.stream())
 }
 
@@ -180,7 +182,7 @@ function buildJsOwlCarouse() {
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
         .pipe(dest(`${paths.output.theme.libs}owl.carousel/`))
-        .pipe(dest(`${paths.output.plugins.essentialsForBasic.libs}owl.carousel/`))
+        .pipe(dest(`${paths.output.plugins.efa.libs}owl.carousel/`))
         .pipe(browserSync.stream())
 }
 
@@ -291,9 +293,9 @@ function buildStyleShop() {
 ** Plugin
 * */
 
-// Task build elementor addons
+// Task build style elementor addons
 function buildStyleElementor() {
-    return src(`${paths.plugins.essentialsForBasic.scss}addons.scss`)
+    return src(`${paths.plugins.efa.scss}efa-elementor.scss`)
         .pipe(plumber({
             errorHandler: function (err) {
                 console.error(err.message);
@@ -309,21 +311,21 @@ function buildStyleElementor() {
         }))
         .pipe(rename({suffix: '.min'}))
         .pipe(sourcemaps.write())
-        .pipe(dest(`${paths.output.plugins.essentialsForBasic.css}`))
+        .pipe(dest(`${paths.output.plugins.efa.css}`))
         .pipe(browserSync.stream())
 }
 
-function buildJSElementor() {
-    return src(`${paths.plugins.essentialsForBasic.js}*.js`, {allowEmpty: true})
+function buildJPluginEFA() {
+    return src(`${paths.plugins.efa.js}*.js`, {allowEmpty: true})
         .pipe(plumber({
             errorHandler: function (err) {
-                console.error('Error in build js in plugin addon elementor:', err.message);
+                console.error('Error in build js in plugin EFA:', err.message);
                 this.emit('end');
             }
         }))
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
-        .pipe(dest(`${paths.output.plugins.essentialsForBasic.js}`))
+        .pipe(dest(`${paths.output.plugins.efa.js}`))
         .pipe(browserSync.stream())
 }
 
@@ -344,7 +346,7 @@ async function buildProject() {
     await buildJSTheme()
 
     await buildStyleElementor()
-    await buildJSElementor()
+    await buildJPluginEFA()
 
     await buildStyleCustomPostType()
 
@@ -358,7 +360,7 @@ function watchTask() {
 
     // watch abstracts
     watch([
-        `${paths.shared.scss}abstracts/*/**.scss`
+        `${paths.shared.scss}abstracts/*.scss`
     ], gulp.series(
         buildStyleBootstrap,
         buildStyleTheme,
@@ -393,10 +395,11 @@ function watchTask() {
 
     // plugin essentials watch
     watch([
-        `${paths.plugins.essentialsForBasic.scss}*.scss`
+        `${paths.plugins.efa.scss}addons/*.scss`,
+        `${paths.plugins.efa.scss}efa-elementor.scss`
     ], buildStyleElementor)
 
-    watch([`${paths.plugins.essentialsForBasic.js}*.js`], buildJSElementor)
+    watch([`${paths.plugins.efa.js}*.js`], buildJPluginEFA)
 }
 
 exports.watchTask = watchTask

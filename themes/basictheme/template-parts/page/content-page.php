@@ -7,7 +7,7 @@
             ?>
         </div>
     <?php
-	    get_template_part( 'components/inc','comment-form' );
+	    get_template_part( 'template-parts/parts/comment','form' );
     endwhile;
     ?>
 </div>

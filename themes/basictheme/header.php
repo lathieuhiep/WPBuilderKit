@@ -11,7 +11,7 @@
 
 <?php
 if ( !is_404() ) :
-	get_template_part('components/inc','header');
+	get_template_part('template-parts/header/header','main');
 endif;
 ?>
 

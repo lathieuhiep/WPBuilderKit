@@ -43,4 +43,4 @@ Dự án này bao gồm một theme WordPress cơ bản và một plugin tạo t
 ## Liên Hệ
 
 Nếu bạn gặp vấn đề hoặc có câu hỏi nào liên quan đến dự án, vui lòng mở issue trên GitHub hoặc liên hệ qua
-- email: khacdiepkma90@gmail.com
+- email: [khacdiepkma90@gmail.com](mailto:khacdiepkma90@gmail.com)

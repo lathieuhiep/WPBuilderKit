@@ -1,0 +1,32 @@
+@import "../../../../shared/scss/abstracts/abstracts";
+@import "../abstracts/abstracts";
+
+.element-post-grid {
+  .title {
+    text-align: center;
+  }
+
+  .item-post {
+    --#{$prefix-plugin-essentials}fs-title: #{map-get($mt-font-sizes, md)};
+
+    &__thumbnail {
+      margin-bottom: 1.5rem;
+
+      a {
+        display: block;
+      }
+    }
+
+    &__title {
+      font-size: var(--#{$prefix-plugin-essentials}fs-title);
+    }
+
+    &__content {
+      margin-top: 1.5rem;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+}

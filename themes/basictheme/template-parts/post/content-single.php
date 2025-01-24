@@ -47,7 +47,7 @@ $show_related = basictheme_get_option('opt_post_single_related', '1');
 </div>
 
 <?php
-get_template_part( 'components/inc','comment-form' );
+get_template_part( 'template-parts/parts/comment','form' );
 
 if ( $show_related == '1' ) :
     get_template_part( 'template-parts/post/inc','related-post' );

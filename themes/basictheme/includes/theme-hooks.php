@@ -1,4 +1,8 @@
 <?php
+/*
+ * Action
+ * */
+
 // add property
 add_action( 'wp_head', 'basictheme_opengraph', 5 );
 function basictheme_opengraph(): void {
@@ -40,6 +44,40 @@ function basictheme_sanitize_pagination( $basictheme_content ): string {
 	return preg_replace( '#<h2.*?>(.*?)<\/h2>#si', '', $basictheme_content );
 }
 
+//Disable emojis in WordPress
+add_action( 'init', 'basictheme_disable_emojis' );
+function basictheme_disable_emojis(): void {
+	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+	remove_action( 'wp_print_styles', 'print_emoji_styles' );
+	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+	remove_action( 'admin_print_styles', 'print_emoji_styles' );
+	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+	add_filter( 'tiny_mce_plugins', 'basictheme_disable_emojis_tinymce' );
+}
+
+function basictheme_disable_emojis_tinymce( $plugins ): array {
+	if ( is_array( $plugins ) ) {
+		return array_diff( $plugins, array( 'wpemoji' ) );
+	} else {
+		return array();
+	}
+}
+
+/*
+ * Filter
+ * */
+
+// disable gutenberg editor
+add_filter("use_block_editor_for_post_type", "disable_gutenberg_editor");
+function disable_gutenberg_editor(): bool {
+	return false;
+}
+
+// disable gutenberg widgets
+add_filter('use_widgets_block_editor', '__return_false');
+
 // Walker for the main menu
 add_filter( 'walker_nav_menu_start_el', 'basictheme_add_arrow',10,4);
 function basictheme_add_arrow( $output, $item, $depth, $args ){
@@ -52,23 +90,23 @@ function basictheme_add_arrow( $output, $item, $depth, $args ){
 	return $output;
 }
 
-//Disable emojis in WordPress
-add_action( 'init', 'basictheme_disable_emojis' );
-function basictheme_disable_emojis() {
-	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-	remove_action( 'wp_print_styles', 'print_emoji_styles' );
-	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
-	remove_action( 'admin_print_styles', 'print_emoji_styles' );
-	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
-	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
-	add_filter( 'tiny_mce_plugins', 'basictheme_disable_emojis_tinymce' );
-}
+// add async file scrip
+add_filter('script_loader_tag', 'add_async_attribute', 10, 2);
+function add_async_attribute($tag, $handle) {
+	$async_scripts = array(
+		'bootstrap.min.js',
+		'owl.carousel.min.js',
+		'custom.min.js',
+		'elementor-addon.js'
+	);
 
-function basictheme_disable_emojis_tinymce( $plugins ) {
-	if ( is_array( $plugins ) ) {
-		return array_diff( $plugins, array( 'wpemoji' ) );
-	} else {
-		return array();
+	$src = wp_scripts()->registered[$handle]->src;
+
+	foreach ($async_scripts as $async_script) {
+		if ( str_contains( $src, $async_script ) ) {
+			return str_replace(' src', ' async="async" src', $tag);
+		}
 	}
+
+	return $tag;
 }

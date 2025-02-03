@@ -26,6 +26,9 @@ require_once EFA_PLUGIN_PATH . 'includes/inc-hooks.php';
 require_once EFA_PLUGIN_PATH . 'includes/helpers.php';
 require_once EFA_PLUGIN_PATH . 'includes/enqueue.php';
 
+// include custom login
+require_once EFA_PLUGIN_PATH . 'includes/inc-custom-login.php';
+
 // include cpt
 require_once EFA_PLUGIN_PATH . 'includes/cpt/post-type-portfolio.php';
 require_once EFA_PLUGIN_PATH . 'includes/inc-templates.php';

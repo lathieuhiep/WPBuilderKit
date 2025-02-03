@@ -1,17 +1,17 @@
 @import "../../../shared/scss/abstracts/abstracts";
 
-.global-header {
+.main-header {
   background-color: #ffffff;
   box-shadow: 0 .3rem .3rem -0.3rem rgba(0, 0, 0, 0.3);
-}
 
-.site-navigation {
-  position: relative;
-  display: flex;
-  gap: 2.4rem;
-  min-height: 6.4rem;
+  &__warp {
+    position: relative;
+    display: flex;
+    gap: 2.4rem;
+    min-height: 6.4rem;
+  }
 
-  &__logo {
+  .logo {
     --#{$prefix-theme}logo-padding: var(--#{$prefix-theme}spacing-2);
 
     @media (min-width: 992px) {
@@ -19,6 +19,8 @@
     }
 
     @media (max-width: 991px) {
+      display: flex;
+      justify-content: space-between;
       flex: 1;
     }
 
@@ -30,7 +32,7 @@
     }
   }
 
-  &__menu {
+  .primary-menu {
     --#{$prefix-theme}menu-item-padding: 0 1.2rem;
     flex: 1;
 
@@ -260,11 +262,11 @@
         font-family: $font-awesome-free;
         font-style: normal;
         font-weight: 900;
-        
+
         @media (min-width: 992px) {
           content: "\f078";
         }
-        
+
         @media (max-width: 991px) {
           content: "\2b";
         }
@@ -272,7 +274,7 @@
     }
   }
 
-  &__cart {
+  .widget-cart-warp {
     position: relative;
     flex: 0;
 
@@ -396,15 +398,6 @@
         opacity: 1;
         visibility: visible;
       }
-    }
-  }
-
-  @media (max-width: 991px) {
-    grid-template-columns: 1fr auto;
-
-    &__logo {
-      display: flex;
-      justify-content: space-between;
     }
   }
 }

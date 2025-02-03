@@ -3,9 +3,9 @@ $sticky_menu = basictheme_get_option( 'opt_menu_sticky', '1' );
 $logo = basictheme_get_option( 'opt_general_logo' );
 $cart = basictheme_get_option( 'opt_menu_cart', '1' );
 ?>
-<header class="global-header <?php echo esc_attr( $sticky_menu == '1' ? 'active-sticky-nav' : '' ); ?>">
-    <nav class="site-navigation container">
-        <div class="site-navigation__logo">
+<header class="main-header <?php echo esc_attr( $sticky_menu == '1' ? 'active-sticky-nav' : '' ); ?>">
+    <nav class="main-header__warp container">
+        <div class="logo">
             <a href="<?php echo esc_url( get_home_url( '/' ) ); ?>" title="<?php bloginfo( 'name' ); ?>">
 				<?php
 				if ( ! empty( $logo['id'] ) ) :
@@ -26,7 +26,7 @@ $cart = basictheme_get_option( 'opt_menu_cart', '1' );
             </button>
         </div>
 
-        <div id="primary-menu" class="site-navigation__menu collapse navbar-collapse d-lg-block">
+        <div id="primary-menu" class="primary-menu collapse navbar-collapse d-lg-block">
 			<?php
 			if ( has_nav_menu( 'primary' ) ) :
 				wp_nav_menu( array(
@@ -47,7 +47,7 @@ $cart = basictheme_get_option( 'opt_menu_cart', '1' );
         </div>
 
 		<?php if ( class_exists( 'Woocommerce' ) && $cart == '1' && ! is_cart() && ! is_checkout() ) : ?>
-            <div class="site-navigation__cart d-flex align-items-center">
+            <div class="widget-cart-warp d-flex align-items-center">
 				<?php
 				do_action( 'basictheme_woo_shopping_cart' );
 

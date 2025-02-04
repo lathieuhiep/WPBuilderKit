@@ -315,6 +315,28 @@ function buildStyleElementor() {
         .pipe(browserSync.stream())
 }
 
+// Task build style custom login
+function buildStyleCustomLogin() {
+    return src(`${paths.plugins.efa.scss}efa-custom-login.scss`)
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.error(err.message);
+                this.emit('end');
+            }
+        }))
+        .pipe(sourcemaps.init())
+        .pipe(sass({
+            outputStyle: 'expanded'
+        }, '').on('error', sass.logError))
+        .pipe(cleanCSS ({
+            level: 2
+        }))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(sourcemaps.write())
+        .pipe(dest(`${paths.output.plugins.efa.css}`))
+        .pipe(browserSync.stream())
+}
+
 function buildJPluginEFA() {
     return src(`${paths.plugins.efa.js}*.js`, {allowEmpty: true})
         .pipe(plumber({
@@ -346,6 +368,7 @@ async function buildProject() {
     await buildJSTheme()
 
     await buildStyleElementor()
+    await buildStyleCustomLogin()
     await buildJPluginEFA()
 
     await buildStyleCustomPostType()
@@ -365,6 +388,7 @@ function watchTask() {
         buildStyleBootstrap,
         buildStyleTheme,
         buildStyleElementor,
+        buildStyleCustomLogin,
         buildStyleCustomPostType,
         buildStylePageTemplate
     ))
@@ -398,6 +422,10 @@ function watchTask() {
         `${paths.plugins.efa.scss}addons/*.scss`,
         `${paths.plugins.efa.scss}efa-elementor.scss`
     ], buildStyleElementor)
+
+    watch([
+        `${paths.plugins.efa.scss}efa-custom-login.scss`
+    ], buildStyleCustomLogin)
 
     watch([`${paths.plugins.efa.js}*.js`], buildJPluginEFA)
 }

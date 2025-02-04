@@ -1,0 +1,150 @@
+:root {
+  --background: #f8f9fd;
+  --color: #000;
+  --primary-color: #0f3460;
+}
+
+body {
+  &.login {
+    background: var(--background);
+    color: var(--color);
+  }
+}
+
+.login {
+  #backtoblog a,
+  #nav a {
+    color: var(--color);
+
+    &:hover {
+      color: #60ad80;
+      transition: all 0.4s ease-in-out;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  h1 a:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  form {
+    border: 0;
+    box-shadow: 0 10px 34px -15px rgba(0, 0, 0, 0.24);
+    border-radius: 8px;
+    background: transparent;
+
+    .dashicons {
+      &:before {
+        color: var(--color);
+      }
+    }
+
+    .input {
+      padding: 0 20px;
+      min-height: 48px;
+      color: var(--color);
+      font-size: 16px;
+      background: rgba(0, 0, 0, 0.05);
+      border: none;
+      border-radius: 50px;
+
+      &:focus {
+        background: rgba(0, 0, 0, 0.07);
+        box-shadow: none;
+      }
+    }
+
+    input[name="wp-submit"] {
+      border: 0;
+      border-radius: 5px;
+      background: var(--primary-color);
+      transition: all 0.4s ease-in-out;
+    }
+
+    .forgetmenot {
+      position: relative;
+
+      input[type=checkbox] {
+        display: none;
+
+        + label {
+          margin: 0;
+          cursor: pointer;
+
+          &:before {
+            content:'';
+            border-radius: 5px;
+            padding: 10px;
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            margin-right: 6px;
+            background: rgba(0, 0, 0, 0.1);
+            transform: translateY(6px);
+          }
+        }
+
+        &:checked {
+          + label {
+            &:before {
+              background: var(--primary-color);
+            }
+
+            &:after {
+              content: '';
+              display: block;
+              position: absolute;
+              top: 6px;
+              left: 6px;
+              width: 6px;
+              height: 14px;
+              border: solid #fff;
+              border-width: 0 2px 2px 0;
+              transform: rotate(45deg);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  label {
+    margin-bottom: 6px;
+  }
+
+  .notice-error,
+  .message,
+  .notice,
+  .success {
+    background: #9191911f;
+  }
+}
+
+#language-switcher {
+  select {
+    color: var(--color);
+    background: #9191911f;
+    border: none;
+    border-radius: 5px;
+    backdrop-filter: blur(15px);
+
+    option {
+      color: #000;
+    }
+  }
+
+  input {
+    &.button {
+      border: 0;
+      border-radius: 5px;
+      color: #ffffff;
+      background: var(--primary-color);
+      transition: all 0.4s ease-in-out;
+    }
+  }
+}

@@ -45,8 +45,9 @@ body {
     }
 
     .input {
+      margin: 0;
       padding: 0 20px;
-      min-height: 48px;
+      min-height: 40px;
       color: var(--color);
       font-size: 16px;
       background: rgba(0, 0, 0, 0.05);
@@ -60,10 +61,16 @@ body {
     }
 
     input[name="wp-submit"] {
-      border: 0;
-      border-radius: 5px;
-      background: var(--primary-color);
-      transition: all 0.4s ease-in-out;
+      &.button-large {
+        display: block;
+        width: 100%;
+        min-height: 40px;
+        float: none;
+        border: 0;
+        border-radius: 50px;
+        background: var(--primary-color);
+        transition: all 0.4s ease-in-out;
+      }
     }
 
     .forgetmenot {
@@ -111,6 +118,24 @@ body {
         }
       }
     }
+
+    .button {
+      &.wp-hide-pw {
+        height: auto;
+        top: 0;
+        bottom: 0;
+
+        &:focus {
+          box-shadow: none;
+          border: none;
+          outline: none;
+        }
+      }
+    }
+
+    .submit {
+      text-align: center;
+    }
   }
 
   label {
@@ -122,6 +147,13 @@ body {
   .notice,
   .success {
     background: #9191911f;
+  }
+}
+
+#login {
+  form {
+    display: grid;
+    gap: .8rem;
   }
 }
 

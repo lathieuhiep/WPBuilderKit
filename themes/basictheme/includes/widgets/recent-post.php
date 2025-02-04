@@ -7,15 +7,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class basictheme_recent_post_widget extends WP_Widget {
+class BasicTheme_Recent_Post_Widget extends WP_Widget {
 	/* Widget setup */
 	public function __construct() {
 		$widget_ops = array(
 			'classname'   => 'recent-post-widget',
-			'description' => esc_html__( 'A widget show post', 'basictheme' ),
+			'description' => esc_html__( 'Hiển thị bài viết mới nhất', 'basictheme' ),
 		);
 
-		parent::__construct( 'recent-post-widget', 'My Theme: Recent Post', $widget_ops );
+		parent::__construct( 'recent-post-widget', 'My Theme: Bài viết mới nhất', $widget_ops );
 	}
 
 	/**
@@ -24,7 +24,7 @@ class basictheme_recent_post_widget extends WP_Widget {
 	 * @param array $args
 	 * @param array $instance
 	 */
-	function widget( $args, $instance ) {
+	function widget( $args, $instance ): void {
 		echo $args['before_widget'];
 
 		if ( ! empty( $instance['title'] ) ) {
@@ -57,13 +57,13 @@ class basictheme_recent_post_widget extends WP_Widget {
 
 		if ( $post_query->have_posts() ) :
 
-        ?>
-            <div class="recent-post-widget__list">
+			?>
+            <div class="post-list">
 				<?php
 				while ( $post_query->have_posts() ) :
 					$post_query->the_post();
-                ?>
-                    <div class="post">
+					?>
+                    <div class="item">
                         <div class="image">
 							<?php
 							if ( has_post_thumbnail() ):
@@ -104,10 +104,10 @@ class basictheme_recent_post_widget extends WP_Widget {
 	 *
 	 * @param array $instance The widget options
 	 */
-	function form( $instance ) {
+	function form( $instance ): void {
 
 		$defaults = array(
-			'title' => esc_html__('Recent Post', 'basictheme'),
+			'title' => esc_html__('Bài viết mới nhất', 'basictheme'),
 			'order' => 'DESC'
 		);
 
@@ -128,7 +128,7 @@ class basictheme_recent_post_widget extends WP_Widget {
         <!-- Widget Title: Text Input -->
         <p>
             <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-				<?php esc_html_e( 'Title:', 'basictheme' ); ?>
+				<?php esc_html_e( 'Tiêu đề:', 'basictheme' ); ?>
             </label>
 
             <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"
@@ -138,7 +138,7 @@ class basictheme_recent_post_widget extends WP_Widget {
         <!-- Start Select Event Cat -->
         <p>
             <label for="<?php echo esc_attr( $this->get_field_id( 'select_cat' ) ); ?>">
-				<?php esc_attr_e( 'Select Categories:', 'basictheme' ); ?>
+				<?php esc_attr_e( 'Chọn danh mục:', 'basictheme' ); ?>
             </label>
 
             <select id="<?php echo esc_attr( $this->get_field_id( 'select_cat' ) ); ?>"
@@ -146,7 +146,7 @@ class basictheme_recent_post_widget extends WP_Widget {
                     size="10" multiple>
 
                 <option value="0" <?php echo( in_array( 0, $select_cat ) ? 'selected="selected"' : '' ); ?>>
-					<?php esc_html_e( 'All Category', 'basictheme' ); ?>
+					<?php esc_html_e( 'Tất cả', 'basictheme' ); ?>
                 </option>
 
 				<?php
@@ -169,17 +169,17 @@ class basictheme_recent_post_widget extends WP_Widget {
         <!-- Start Order -->
         <p>
             <label for="<?php echo esc_attr( $this->get_field_id( 'order' ) ); ?>">
-				<?php esc_html_e( 'Order:', 'basictheme' ); ?>
+				<?php esc_html_e( 'Sắp xếp:', 'basictheme' ); ?>
             </label>
 
             <select id="<?php echo esc_attr( $this->get_field_id( 'order' ) ); ?>"
                     name="<?php echo $this->get_field_name( 'order' ) ?>" class="widefat">
                 <option value="ASC" <?php echo ( $order == 'ASC' ) ? 'selected' : ''; ?>>
-					<?php esc_html_e( 'ASC', 'basictheme' ); ?>
+					<?php esc_html_e( 'Tăng dần', 'basictheme' ); ?>
                 </option>
 
                 <option value="DESC" <?php echo ( $order == 'DESC' ) ? 'selected' : ''; ?>>
-					<?php esc_html_e( 'DESC', 'basictheme' ); ?>
+					<?php esc_html_e( 'Giảm dần', 'basictheme' ); ?>
                 </option>
             </select>
         </p>
@@ -187,7 +187,7 @@ class basictheme_recent_post_widget extends WP_Widget {
         <!-- Start OrderBy -->
         <p>
             <label for="<?php echo esc_attr( $this->get_field_id( 'order_by' ) ); ?>">
-				<?php esc_html_e( 'Order:', 'basictheme' ); ?>
+				<?php esc_html_e( 'Sắp xếp theo:', 'basictheme' ); ?>
             </label>
 
             <select id="<?php echo esc_attr( $this->get_field_id( 'order_by' ) ); ?>"
@@ -197,15 +197,15 @@ class basictheme_recent_post_widget extends WP_Widget {
                 </option>
 
                 <option value="date" <?php echo ( $order_by == 'date' ) ? 'selected' : ''; ?>>
-					<?php esc_html_e( 'Date', 'basictheme' ); ?>
+					<?php esc_html_e( 'Ngày', 'basictheme' ); ?>
                 </option>
 
                 <option value="title" <?php echo ( $order_by == 'title' ) ? 'selected' : ''; ?>>
-					<?php esc_html_e( 'Title', 'basictheme' ); ?>
+					<?php esc_html_e( 'Tiêu đề', 'basictheme' ); ?>
                 </option>
 
                 <option value="rand" <?php echo ( $order_by == 'rand' ) ? 'selected' : ''; ?>>
-					<?php esc_html_e( 'Rand', 'basictheme' ); ?>
+					<?php esc_html_e( 'Ngẫu nhiên', 'basictheme' ); ?>
                 </option>
             </select>
         </p>
@@ -213,7 +213,7 @@ class basictheme_recent_post_widget extends WP_Widget {
         <!-- Start Number Post Show -->
         <p>
             <label for="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>">
-				<?php esc_html_e( 'Number of posts to show:', 'basictheme' ); ?>
+				<?php esc_html_e( 'Số lượng bài viết hiển thị:', 'basictheme' ); ?>
             </label>
 
             <input id="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>" class="tiny-text"
@@ -233,7 +233,7 @@ class basictheme_recent_post_widget extends WP_Widget {
 	 *
 	 * @return array
 	 */
-	function update( $new_instance, $old_instance ) {
+	function update( $new_instance, $old_instance ): array {
 		$instance = array();
 
 		$instance['title']      = strip_tags( $new_instance['title'] );
@@ -244,12 +244,11 @@ class basictheme_recent_post_widget extends WP_Widget {
 
 		return $instance;
 	}
-
 }
 
 // Register widget
-function basictheme_recent_post_widget_register() {
-	register_widget( 'basictheme_recent_post_widget' );
+function basictheme_register_recent_post_widget(): void {
+	register_widget( 'BasicTheme_Recent_Post_Widget' );
 }
 
-add_action( 'widgets_init', 'basictheme_recent_post_widget_register' );
+add_action( 'widgets_init', 'basictheme_register_recent_post_widget' );

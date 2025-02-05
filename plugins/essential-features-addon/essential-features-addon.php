@@ -41,14 +41,13 @@ add_action( 'plugins_loaded', 'efa_check_elementor' );
 function efa_check_elementor(): void {
 	if ( ! did_action( 'elementor/loaded' ) ) {
 		add_action( 'admin_notices', 'efa_elementor_missing_notice' );
-
-        return;
+		return;
 	}
 
 	// include widget addons elementor
 	require_once EFA_PLUGIN_PATH . 'includes/inc-elementor.php';
 
-    // create category addons
+	// create category addons
 	add_action( 'elementor/elements/categories_registered', 'efa_add_elementor_widget_categories' );
 }
 

@@ -107,7 +107,6 @@ function basictheme_pagination(): void {
 
 // Pagination Nav Query
 function basictheme_paging_nav_query( $query ): void {
-
 	$args = array(
 		'prev_text' => esc_html__( ' Trước', 'basictheme' ),
 		'next_text' => esc_html__( 'Sau', 'basictheme' ),
@@ -119,14 +118,11 @@ function basictheme_paging_nav_query( $query ): void {
 	$paginate_links = paginate_links( $args );
 
 	if ( $paginate_links ) :
-
 		?>
         <nav class="pagination">
 			<?php echo $paginate_links; ?>
         </nav>
-
 	<?php
-
 	endif;
 }
 
@@ -190,25 +186,6 @@ function basictheme_link_page(): void {
 	) );
 }
 
-// Get Category Check Box
-function basictheme_check_get_cat( $type_taxonomy ): array {
-	$cat_check = array();
-	$category  = get_terms(
-		array(
-			'taxonomy'   => $type_taxonomy,
-			'hide_empty' => false
-		)
-	);
-
-	if ( isset( $category ) && ! empty( $category ) ):
-		foreach ( $category as $item ) {
-			$cat_check[ $item->term_id ] = $item->name;
-		}
-	endif;
-
-	return $cat_check;
-}
-
 // Get Contact Form 7
 function basictheme_get_form_cf7(): array {
 	$options = array();
@@ -251,4 +228,18 @@ function basictheme_get_social_url(): void {
 
 		endforeach;
 	endif;
+}
+
+// Create a function to fetch all post categories and return them as an associative array for use in a select dropdown
+function basictheme_get_all_categories(): array {
+	$categories = get_categories( array(
+		'hide_empty' => 0,
+	) );
+
+	$categories_list = array();
+	foreach ( $categories as $category ) {
+		$categories_list[ $category->term_id ] = $category->name;
+	}
+
+	return $categories_list;
 }

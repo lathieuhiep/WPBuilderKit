@@ -39,15 +39,15 @@ if ( class_exists( 'CSF' ) ) {
 
 	// Set a unique slug-like ID
 	$prefix_theme_options   = 'options';
-	$basictheme_my_theme = wp_get_theme();
+	$menu_title = esc_html__( 'Cài đặt theme', 'basictheme' );
 
 	// Create options
 	CSF::createOptions( $prefix_theme_options, array(
-		'menu_title'          => esc_html__( 'Cài đặt theme', 'basictheme' ),
+		'menu_title'          => $menu_title,
 		'menu_slug'           => 'theme-options',
 		'menu_position'       => 2,
 		'admin_bar_menu_icon' => 'dashicons-admin-generic',
-		'framework_title'     => $basictheme_my_theme->get( 'Name' ) . ' theme-options.php' . esc_html__( 'Options', 'basictheme' ),
+		'framework_title'     => $menu_title,
 		'footer_text'         => esc_html__( 'Cảm ơn bạn đã sử dụng theme của tôi', 'basictheme' ),
 		'footer_after'        => '<pre>Liên hệ:<br />Zalo/Phone: 0975458209 - Skype: lathieuhiep - facebook: <a href="https://www.facebook.com/lathieuhiep" target="_blank">lathieuhiep</a></pre>',
 	) );

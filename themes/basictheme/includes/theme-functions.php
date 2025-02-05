@@ -230,6 +230,18 @@ function basictheme_get_social_url(): void {
 	endif;
 }
 
+// replace number
+function basictheme_preg_replace_ony_number($string): string|null
+{
+	$number = '';
+
+	if (!empty($string)) {
+		$number = preg_replace('/[^0-9]/', '', strip_tags($string));
+	}
+
+	return $number;
+}
+
 // Create a function to fetch all post categories and return them as an associative array for use in a select dropdown
 function basictheme_get_all_categories(): array {
 	$categories = get_categories( array(

@@ -811,129 +811,143 @@ form.wpcf7-form p:has(.wpcf7-submit) {
   transition: all 0.4s ease-in-out;
 }
 
-section.widget {
-  margin-bottom: 3rem;
+.widget ~ .widget {
+  margin-top: var(--theme-spacing-4);
 }
-section.widget:last-child {
+.widget:last-child {
   margin-bottom: 0;
 }
-section.widget .widget-title {
+.widget .widget-title {
   text-transform: uppercase;
   margin-bottom: 2rem;
   font-size: var(--theme-fs-sm);
 }
-section.widget ul {
+.widget ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-section.widget ul li:not(:last-child) {
+.widget ul li:not(:last-child) {
   margin-bottom: 1rem;
 }
-section.widget ul li a {
+.widget ul li a {
   display: block;
 }
-section.widget ul li ul.children, section.widget ul li ul.sub-menu {
+.widget ul li ul.children, .widget ul li ul.sub-menu {
   padding-left: 1.2rem;
   padding-top: 0.8rem;
 }
-section.widget ul li ul.children li, section.widget ul li ul.sub-menu li {
+.widget ul li ul.children li, .widget ul li ul.sub-menu li {
   border-bottom: 0;
   padding: 0 0 1rem;
 }
-section.widget ul li ul.children li:last-child, section.widget ul li ul.sub-menu li:last-child {
+.widget ul li ul.children li:last-child, .widget ul li ul.sub-menu li:last-child {
   padding-bottom: 0;
 }
-section.widget select {
+.widget select {
   width: 100%;
   padding: 0.9rem 1rem;
   font-size: var(--theme-fs-xs);
 }
-section.widget.widget_search .search-form {
+.widget.widget_search .search-form {
   display: flex;
 }
-section.widget.widget_search .search-form .search-field {
+.widget.widget_search .search-form .search-field {
   flex: 1;
 }
-section.widget.widget_search .search-form .search-submit {
+.widget.widget_search .search-form .search-submit {
   margin-left: 1rem;
 }
-section.widget.widget_archive ul li a, section.widget.widget_categories ul li a {
+.widget.widget_archive ul li a, .widget.widget_categories ul li a {
   display: inline-block;
   margin-right: 0.5rem;
 }
-section.widget.widget_calendar table {
+.widget.widget_calendar table {
   width: 100%;
 }
-section.widget.widget_calendar table caption {
+.widget.widget_calendar table caption {
   padding: 0;
   margin-top: var(--theme-spacing-3);
 }
-section.widget.widget_calendar table tr {
+.widget.widget_calendar table tr {
   border-bottom: 1px solid var(--theme-primary);
 }
-section.widget.widget_calendar table tr th {
+.widget.widget_calendar table tr th {
   text-align: center;
 }
-section.widget.widget_calendar table tr td {
+.widget.widget_calendar table tr td {
   padding: 0.5rem 0;
   text-align: center;
 }
-section.widget.widget_calendar table tr td#today {
+.widget.widget_calendar table tr td#today {
   background-color: var(--theme-accent);
   color: var(--theme-white);
 }
-section.widget.widget_calendar table tr td#today a {
+.widget.widget_calendar table tr td#today a {
   color: var(--theme-white);
 }
-section.widget.widget_calendar table tr td#prev {
+.widget.widget_calendar table tr td#prev {
   text-align: left;
 }
-section.widget.widget_calendar table tr td#next {
+.widget.widget_calendar table tr td#next {
   text-align: right;
 }
-section.widget.widget_rss ul li {
+.widget.widget_rss ul li {
   padding-bottom: 2rem;
   margin-bottom: 2rem;
 }
-section.widget.widget_rss ul li .rssSummary {
+.widget.widget_rss ul li .rssSummary {
   font-size: var(--theme-fs-xs);
 }
-section.widget.widget_tag_cloud .tagcloud a, section.widget.widget_product_tag_cloud .tagcloud a {
+.widget.widget_tag_cloud .tagcloud a, .widget.widget_product_tag_cloud .tagcloud a {
   display: inline-block;
   font-size: var(--theme-fs-xs) !important;
   border: 0.1rem solid #ddd;
   padding: 0.5rem 1rem;
   margin: 0 0.2rem 5px;
 }
-section.widget.widget_tag_cloud .tagcloud a:hover, section.widget.widget_product_tag_cloud .tagcloud a:hover {
+.widget.widget_tag_cloud .tagcloud a:hover, .widget.widget_product_tag_cloud .tagcloud a:hover {
   background-color: var(--theme-accent);
   color: var(--theme-white);
   border-color: var(--theme-accent);
 }
-section.widget .recent-post-widget__list .post {
+.widget.recent-post-widget .post-list .item {
   margin-bottom: 1.2rem;
   display: grid;
   grid-gap: 1.2rem;
   grid-template-columns: 11rem 1fr;
 }
-section.widget .recent-post-widget__list .post:last-child {
+.widget.recent-post-widget .post-list .item:last-child {
   margin-bottom: 0;
 }
-section.widget .recent-post-widget__list .image {
+.widget.recent-post-widget .post-list .image {
   width: 11rem;
   flex: 0 0 auto;
 }
-section.widget .recent-post-widget__list .title {
+.widget.recent-post-widget .post-list .title {
   margin-bottom: 1rem;
   font-size: var(--theme-fs-sm);
   overflow: hidden;
 }
-section.widget .recent-post-widget__list .meta {
+.widget.recent-post-widget .post-list .meta {
   font-size: 1.2rem;
 }
-section.widget .recent-post-widget__list .meta i.fa {
+.widget.recent-post-widget .post-list .meta i.fa {
   margin-right: 0.5rem;
+}
+.widget.contact-info-widget .list {
+  display: grid;
+  gap: 1.2rem;
+}
+.widget.contact-info-widget .list .item {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: 2.4rem 1fr;
+  align-items: center;
+}
+.widget.contact-info-widget .list .item i {
+  font-size: var(--theme-fs-md);
+  text-align: center;
 }
 
 a, button {
@@ -945,9 +959,6 @@ form.wpcf7-form p:has(.wpcf7-submit) {
   align-items: center;
 }
 
-.global-footer section.widget {
-  margin-bottom: 0;
-}
 .global-footer__column {
   border-top: 0.1rem solid var(--theme-primary);
   padding: 3rem 0;

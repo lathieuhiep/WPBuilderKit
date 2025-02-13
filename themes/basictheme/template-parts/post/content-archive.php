@@ -25,7 +25,7 @@ if ( $sidebar !== 'hide' ) {
                                     <h2 class="post-title">
                                         <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
 							                <?php if (is_sticky() && is_home()) : ?>
-                                                <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+                                                <i class="icon-mask icon-mask-thumbtack" aria-hidden="true"></i>
 							                <?php
 							                endif;
 

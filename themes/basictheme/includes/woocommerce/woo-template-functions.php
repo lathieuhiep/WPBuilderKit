@@ -34,7 +34,7 @@ function basictheme_get_cart(): void {
 ?>
     <div class="cart-box">
         <div class="cart-customlocation">
-            <i class="fas fa-shopping-cart"></i>
+            <i class="icon-mask icon-mask-cart-shopping"></i>
 
             <span class="number-cart-product">
                  <?php echo esc_html( WC()->cart->get_cart_contents_count() ); ?>

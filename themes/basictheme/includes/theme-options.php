@@ -11,31 +11,6 @@ if ( ! function_exists( 'basictheme_get_option' ) ) {
 
 // Control core classes for avoid errors
 if ( class_exists( 'CSF' ) ) {
-	add_action( 'admin_enqueue_scripts', function () {
-		// Hủy Font Awesome 5 mặc định của Codestar Framework
-		wp_dequeue_style( 'csf-fa5' );
-		wp_dequeue_style( 'csf-fa5-v4-shims' );
-
-		// Thêm Font Awesome 6 vào khu vực admin
-		wp_enqueue_style( 'font-awesome-6-admin', get_theme_file_uri( '/assets/libs/fontawesome/css/fontawesome.min.css' ), [], '6.7.2' );
-	}, 10 );
-
-	// remove icon
-	add_filter( 'csf_field_icon_add_icons', 'customize_csf_icons' );
-	function customize_csf_icons( $icons ) {
-		foreach ( $icons as $key => $list ) {
-			foreach ( $list["icons"] as $icon_key => $icon ) {
-				if ( $icon === 'fab fa-acquisitions-incorporated' ) {
-					unset( $list['icons'][ $icon_key ] );
-					break;
-				}
-			}
-
-			$icons[ $key ] = $list;
-		}
-
-		return $icons;
-	}
 
 	// Set a unique slug-like ID
 	$prefix_theme_options   = 'options';

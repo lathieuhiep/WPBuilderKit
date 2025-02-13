@@ -83,7 +83,7 @@ class BasicTheme_Recent_Post_Widget extends WP_Widget {
                             </h4>
 
                             <p class="meta">
-                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                <i class="icon-mask icon-mask-calendar" aria-hidden="true"></i>
 								<?php echo get_the_date(); ?>
                             </p>
                         </div>

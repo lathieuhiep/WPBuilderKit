@@ -5,7 +5,7 @@ $column_width_fields = [
 	[
 		'id'      => 'sm',
 		'type'    => 'slider',
-		'title'   => esc_html__( 'sm: ≥576px', 'clinic' ),
+		'title'   => esc_html__( 'sm: ≥576px', 'basictheme' ),
 		'default' => 12,
 		'min'     => 1,
 		'max'     => 12,
@@ -14,7 +14,7 @@ $column_width_fields = [
 	[
 		'id'      => 'md',
 		'type'    => 'slider',
-		'title'   => esc_html__( 'md: ≥768px', 'clinic' ),
+		'title'   => esc_html__( 'md: ≥768px', 'basictheme' ),
 		'default' => 6,
 		'min'     => 1,
 		'max'     => 12,
@@ -23,7 +23,7 @@ $column_width_fields = [
 	[
 		'id'      => 'lg',
 		'type'    => 'slider',
-		'title'   => esc_html__( 'lg: ≥992px', 'clinic' ),
+		'title'   => esc_html__( 'lg: ≥992px', 'basictheme' ),
 		'default' => 3,
 		'min'     => 1,
 		'max'     => 12,
@@ -32,7 +32,7 @@ $column_width_fields = [
 	[
 		'id'      => 'xl',
 		'type'    => 'slider',
-		'title'   => esc_html__( 'lg: ≥1200px', 'clinic' ),
+		'title'   => esc_html__( 'lg: ≥1200px', 'basictheme' ),
 		'default' => 3,
 		'min'     => 1,
 		'max'     => 12,

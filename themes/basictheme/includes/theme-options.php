@@ -11,6 +11,7 @@ if ( ! function_exists( 'basictheme_get_option' ) ) {
 
 // Control core classes for avoid errors
 if ( class_exists( 'CSF' ) ) {
+	$facebook_url = esc_url( 'https://www.facebook.com/lathieuhiep' );
 
 	// Set a unique slug-like ID
 	$prefix_theme_options   = 'options';
@@ -24,7 +25,10 @@ if ( class_exists( 'CSF' ) ) {
 		'admin_bar_menu_icon' => 'dashicons-admin-generic',
 		'framework_title'     => $menu_title,
 		'footer_text'         => esc_html__( 'Cảm ơn bạn đã sử dụng theme của tôi', 'basictheme' ),
-		'footer_after'        => '<pre>Liên hệ:<br />Zalo/Phone: 0975458209 - Skype: lathieuhiep - facebook: <a href="https://www.facebook.com/lathieuhiep" target="_blank">lathieuhiep</a></pre>',
+		'footer_after'        => sprintf(
+			'<pre>Liên hệ:<br />Zalo/Phone: 0975458209 - Skype: lathieuhiep - facebook: <a href="%s" target="_blank">lathieuhiep</a></pre>',
+			$facebook_url
+		),
 	) );
 
 	// general options

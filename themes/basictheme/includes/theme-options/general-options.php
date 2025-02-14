@@ -1,6 +1,7 @@
 <?php
 global $prefix_theme_options;
 
+$link = esc_url( 'https://loading.io/' );
 // Create a section general
 CSF::createSection( $prefix_theme_options, array(
 	'title'  => esc_html__( 'Cài đặt chung', 'basictheme' ),
@@ -30,7 +31,10 @@ CSF::createSection( $prefix_theme_options, array(
 			'id'         => 'opt_general_image_loading',
 			'type'       => 'media',
 			'title'      => esc_html__( 'Chọn ảnh tải trang', 'basictheme' ),
-			'subtitle'   => esc_html__( 'Sử dụng ảnh .git', 'basictheme' ) . ' <a href="https://loading.io/" target="_blank">loading.io</a>',
+			'subtitle'   => sprintf(
+				esc_html__( 'Sử dụng ảnh .git %s', 'basictheme' ),
+				'<a href="' . $link . '" target="_blank">loading.io</a>'
+			),
 			'dependency' => array( 'opt_general_loading', '==', 'true' ),
 			'url'        => false
 		),

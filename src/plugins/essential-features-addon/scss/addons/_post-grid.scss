@@ -1,7 +1,7 @@
 @import "../../../../shared/scss/abstracts/abstracts";
 @import "../abstracts/abstracts";
 
-.element-post-grid {
+.#{$prefix-plugin-class-addon}post-grid {
   .title {
     text-align: center;
   }

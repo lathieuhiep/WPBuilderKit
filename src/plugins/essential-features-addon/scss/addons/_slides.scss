@@ -1,7 +1,7 @@
 @import "../../../../shared/scss/abstracts/abstracts";
 @import "../abstracts/abstracts";
 
-.element-slides {
+.#{$prefix-plugin-class-addon}slides {
   position: relative;
 
   &.owl-carousel {
@@ -65,7 +65,7 @@
   }
 }
 
-.element-slides__item {
+.#{$prefix-plugin-class-addon}slides__item {
   position: relative;
 
   &--bg {
@@ -118,39 +118,39 @@
   }
 }
 
-.element-slides {
+.#{$prefix-plugin-class-addon}slides {
   &--h-position-center {
-    .element-slides__item--inner {
+    .#{$prefix-plugin-class-addon}slides__item--inner {
       justify-content: center;
     }
   }
 
   &--h-position-left {
-    .element-slides__item--inner {
+    .#{$prefix-plugin-class-addon}slides__item--inner {
       justify-content: flex-start;
     }
   }
 
   &--h-position-right {
-    .element-slides__item--inner {
+    .#{$prefix-plugin-class-addon}slides__item--inner {
       justify-content: flex-end;
     }
   }
 
   &--v-position-middle {
-    .element-slides__item--inner {
+    .#{$prefix-plugin-class-addon}slides__item--inner {
       align-items: center;
     }
   }
 
   &--v-position-top {
-    .element-slides__item--inner {
+    .#{$prefix-plugin-class-addon}slides__item--inner {
       align-items: flex-start;
     }
   }
 
   &--v-position-bottom {
-    .element-slides__item--inner {
+    .#{$prefix-plugin-class-addon}slides__item--inner {
       align-items: flex-end;
     }
   }

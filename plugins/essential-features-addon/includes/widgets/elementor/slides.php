@@ -997,38 +997,38 @@ class EFA_Widget_Slides extends Widget_Base {
 			'dots'     => ( 'yes' === $settings['dots'] ),
 		];
 		?>
-        <div class="element-slides custom-owl-carousel owl-carousel owl-theme"
+        <div class="efa-addon-slides custom-owl-carousel owl-carousel owl-theme"
              data-settings-owl='<?php echo wp_json_encode( $data_settings_owl ); ?>'>
 			<?php
 			foreach ( $settings['slides_list'] as $item ) :
 				$efa_slides_link = $item['link'];
 				?>
-                <div class="element-slides__item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
-                    <div class="element-slides__item--bg"></div>
+                <div class="efa-addon-slides__item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
+                    <div class="efa-addon-slides__item--bg"></div>
 
-                    <div class="element-slides__item--inner">
+                    <div class="efa-addon-slides__item--inner">
 						<?php if ( $item['background_overlay'] == 'yes' ) : ?>
-                            <div class="element-slides__item--overlay"></div>
+                            <div class="efa-addon-slides__item--overlay"></div>
 						<?php
 						endif;
 
 						if ( $item['show_content'] == 'yes' ) :
 							?>
-                            <div class="element-slides__item--content">
+                            <div class="efa-addon-slides__item--content">
 								<?php if ( ! empty( $item['heading'] ) ) : ?>
-                                    <div class="element-slides__item--heading">
+                                    <div class="efa-addon-slides__item--heading">
 										<?php echo esc_html( $item['heading'] ); ?>
                                     </div>
 								<?php endif; ?>
 
 								<?php if ( ! empty( $item['description'] ) ) : ?>
-                                    <div class="element-slides__item--description">
+                                    <div class="efa-addon-slides__item--description">
 										<?php echo esc_html( $item['description'] ); ?>
                                     </div>
 								<?php endif; ?>
 
 								<?php if ( ! empty( $item['button_text'] ) ) : ?>
-                                    <div class="element-slides__item--link">
+                                    <div class="efa-addon-slides__item--link">
 										<?php if ( ! empty( $efa_slides_link['url'] ) ) : ?>
                                             <a href="<?php echo esc_url( $efa_slides_link['url'] ); ?>" <?php echo( $efa_slides_link['is_external'] ? 'target="_blank"' : '' ); ?>>
 												<?php echo esc_html( $item['button_text'] ); ?>

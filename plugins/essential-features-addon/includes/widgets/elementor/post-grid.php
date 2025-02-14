@@ -335,11 +335,10 @@ class EFA_Widget_Post_Grid extends Widget_Base {
 
 		if ( $query->have_posts() ) :
         ?>
-            <div class="element-post-grid">
-                <div class="row-gap-6 row row-cols-sm-2 row-cols-md-3 row-cols-lg-<?php echo esc_attr( $settings['column_number'] ); ?>">
+            <div class="efa-addon-post-grid">
+                <div class="efa-row efa-row-cols-sm-2 efa-row-cols-md-3 efa-row-cols-lg-<?php echo esc_attr( $settings['column_number'] ); ?> efa-row-gap-6">
 					<?php while ( $query->have_posts() ): $query->the_post(); ?>
-
-                        <div class="col">
+                        <div class="efa-col">
                             <div class="item-post">
                                 <div class="item-post__thumbnail">
                                     <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
@@ -377,7 +376,6 @@ class EFA_Widget_Post_Grid extends Widget_Base {
 								<?php endif; ?>
                             </div>
                         </div>
-
 					<?php endwhile;
 					wp_reset_postdata(); ?>
                 </div>

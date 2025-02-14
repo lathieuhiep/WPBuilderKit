@@ -437,7 +437,7 @@ class EFA_Widget_Carousel_Images extends Widget_Base {
 		];
 		?>
 
-        <div class="element-carousel-images">
+        <div class="efa-addon-carousel-images">
             <div class="custom-owl-carousel owl-carousel owl-theme"
                  data-settings-owl='<?php echo wp_json_encode( $data_settings_owl ); ?>'>
 				<?php

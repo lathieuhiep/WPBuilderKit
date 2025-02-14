@@ -1,0 +1,92 @@
+@import "../abstracts/abstracts";
+
+// row
+.#{$prefix-plugin-essentials} {
+  // row: .efa-row
+  &row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: calc(-1 * var(--#{$prefix-plugin-essentials}gutter-width));
+    margin-left: calc(-1 * var(--#{$prefix-plugin-essentials}gutter-width));
+
+    > * {
+      padding-right: var(--#{$prefix-plugin-essentials}gutter-width);
+      padding-left: var(--#{$prefix-plugin-essentials}gutter-width);
+    }
+  }
+
+  // column: .efa-col & .efa-col-[size]
+  &col {
+    flex: 1 1 0;
+  }
+}
+
+// row-gap & col-gap
+@for $i from 1 through 24 {
+  .#{$prefix-plugin-essentials} {
+    &row-gap-#{$i} {
+      row-gap: #{$i * $spacing-base};
+    }
+
+    &col-gap-#{$i} {
+      column-gap: #{$i * $spacing-base};
+    }
+  }
+}
+
+// Responsive row-gap & column-gap
+@each $breakpoint, $size in $breakpoints {
+  @media (min-width: $size) {
+    @for $i from 1 through 24 {
+      .#{$prefix-plugin-essentials} {
+        &row-gap-#{$breakpoint}-#{$i} {
+          row-gap: #{$i * $spacing-base};
+        }
+
+        &col-gap-#{$breakpoint}-#{$i} {
+          column-gap: #{$i * $spacing-base};
+        }
+      }
+    }
+  }
+}
+
+// col: .efa-col-*
+@for $i from 1 through $grid-columns {
+  .#{$prefix-plugin-essentials}col-#{$i} {
+    flex: 0 0 percentage($i / $grid-columns);
+    max-width: percentage($i / $grid-columns);
+  }
+}
+
+// Responsive Grid: .efa-col-sm-* .efa-col-md-* .efa-col-lg-*
+@each $breakpoint, $size in $breakpoints {
+  @media (min-width: $size) {
+    @for $i from 1 through $grid-columns {
+      .#{$prefix-plugin-essentials}col-#{$breakpoint}-#{$i} {
+        flex: 0 0 percentage($i / $grid-columns);
+        max-width: percentage($i / $grid-columns);
+      }
+    }
+  }
+}
+
+// row-cols: .efa-row-cols-*
+@for $i from 1 through $grid-columns {
+  .efa-row-cols-#{$i} > * {
+    flex: 0 0 calc(100% / #{$i});
+    max-width: calc(100% / #{$i});
+  }
+}
+
+// Responsive row-cols: .efa-row-cols-sm-* .efa-row-cols-md-* .efa-row-cols-lg-*
+@each $breakpoint, $size in $breakpoints {
+  @media (min-width: $size) {
+    @for $i from 1 through $grid-columns {
+      .efa-row-cols-#{$breakpoint}-#{$i} > * {
+        flex: 0 0 calc(100% / #{$i});
+        max-width: calc(100% / #{$i});
+      }
+    }
+  }
+}

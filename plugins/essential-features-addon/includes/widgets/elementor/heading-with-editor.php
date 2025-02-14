@@ -217,7 +217,7 @@ class EFA_Widget_Heading_With_Editor extends Widget_Base {
 		$settings = $this->get_settings_for_display();
 		$tag = $settings['html_tag'];
 		?>
-        <div class="element-heading-with-editor">
+        <div class="efa-addon-heading-with-editor">
             <?php if ( $settings['heading'] ) : ?>
                 <<?php echo esc_html( $tag ); ?> class="heading">
 		            <?php echo esc_html( $settings['heading'] ); ?>
@@ -239,7 +239,7 @@ class EFA_Widget_Heading_With_Editor extends Widget_Base {
         var tag = settings.html_tag;
         #>
 
-        <div class="element-heading-with-editor">
+        <div class="efa-addon-heading-with-editor">
             <{{{ tag }}} class="heading">
                 {{{ settings.heading }}}
             </{{{ tag }}}>

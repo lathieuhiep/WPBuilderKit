@@ -192,7 +192,7 @@ class EFA_Widget_Testimonial_Slider extends Widget_Base {
 		];
 		?>
 
-        <div class="element-testimonial-slider">
+        <div class="efa-addon-testimonial-slider">
             <div class="custom-owl-carousel owl-carousel owl-theme"
                  data-settings-owl='<?php echo wp_json_encode( $data_settings_owl ); ?>'>
 				<?php

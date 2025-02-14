@@ -61,7 +61,7 @@ class EFA_Widget_Contact_Form_7 extends Widget_Base {
 		if ( ! empty( $settings['contact_form_list'] ) ) :
 			?>
 
-            <div class="element-contact-form-7">
+            <div class="efa-addon-contact-form-7">
 				<?php echo do_shortcode( '[contact-form-7 id="' . $settings['contact_form_list'] . '" ]' ); ?>
             </div>
 

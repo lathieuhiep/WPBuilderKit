@@ -22,14 +22,14 @@ class BasicTheme_Contact_Info_Widget extends WP_Widget {
 		<div class="list">
 			<?php if ( ! empty( $instance['address'] ) ) : ?>
 				<div class="item">
-					<i class="icon-mask icon-mask-location-dot"></i>
+                    <i class="fas fa-location-dot"></i>
 					<span class="text"><?php echo esc_html( $instance['address'] ); ?></span>
 				</div>
 			<?php endif; ?>
 
 			<?php if ( ! empty( $instance['email'] ) ) : ?>
 				<div class="item">
-					<i class="icon-mask icon-mask-paper-plane-p"></i>
+                    <i class="fas fa-paper-plane"></i>
 					<a class="text"
 					   href="mailto:<?php echo esc_attr( $instance['email'] ); ?>"><?php echo esc_html( $instance['email'] ); ?></a>
 				</div>
@@ -37,7 +37,7 @@ class BasicTheme_Contact_Info_Widget extends WP_Widget {
 
 			<?php if ( ! empty( $instance['phone'] ) ) : ?>
 				<div class="item">
-					<i class="icon-mask icon-mask-phone"></i>
+                    <i class="fas fa-phone"></i>
 					<a class="text"
 					   href="tel:<?php echo esc_attr( basictheme_preg_replace_ony_number( $instance['phone'] ) ); ?>"><?php echo esc_html( $instance['phone'] ); ?></a>
 				</div>

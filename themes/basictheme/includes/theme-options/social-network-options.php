@@ -2,6 +2,8 @@
 global $prefix_theme_options;
 
 // Create a section social network
+$max_social_networks = count( basictheme_list_social_network() );
+
 CSF::createSection( $prefix_theme_options, array(
 	'title'  => esc_html__( 'Mạng xã hội', 'basictheme' ),
 	'icon'   => 'fab fa-hive',
@@ -10,6 +12,7 @@ CSF::createSection( $prefix_theme_options, array(
 			'id'      => 'opt_social_networks',
 			'type'    => 'repeater',
 			'title'   => esc_html__( 'Mạng xã hội', 'basictheme' ),
+			'max'     => $max_social_networks,
 			'fields'  => array(
 				array(
 					'id'          => 'item',
@@ -28,7 +31,7 @@ CSF::createSection( $prefix_theme_options, array(
 			),
 			'default' => array(
 				array(
-					'item' => 'facebook',
+					'item' => 'facebook-f',
 					'url'  => '#',
 				),
 

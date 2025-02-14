@@ -64,6 +64,45 @@ function server() {
 }
 
 /*
+Task build fontawesome
+* */
+function buildFontawesomeStyle() {
+    return src(`${paths.shared.vendors}fontawesome.scss`)
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.error(err.message);
+                this.emit('end');
+            }
+        }))
+        .pipe(sass({
+            outputStyle: 'expanded',
+            includePaths: [
+                path.resolve(__dirname, 'node_modules/')
+            ],
+            quietDeps: true
+        }, '').on('error', sass.logError))
+        .pipe(cleanCSS ({
+            level: 2
+        }))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(dest(`${paths.output.theme.libs}fontawesome/css`))
+        .pipe(browserSync.stream())
+}
+
+function CopyWebFonts() {
+    return src([
+        `${paths.node_modules}@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf`,
+        `${paths.node_modules}@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2`,
+        `${paths.node_modules}@fortawesome/fontawesome-free/webfonts/fa-regular-400.ttf`,
+        `${paths.node_modules}@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2`,
+        `${paths.node_modules}@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf`,
+        `${paths.node_modules}@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2`,
+    ], {encoding: false})
+        .pipe(dest(`${paths.output.theme.libs}fontawesome/webfonts`))
+        .pipe(browserSync.stream())
+}
+
+/*
 Task build Bootstrap
 * */
 
@@ -319,6 +358,9 @@ async function buildProject() {
     await buildStyleBootstrap()
     await buildLibsBootstrapJS()
 
+    await buildFontawesomeStyle()
+    await CopyWebFonts()
+
     await buildStyleOwlCarousel()
     await buildJsOwlCarouse()
 
@@ -377,6 +419,8 @@ function watchTask() {
 
     // plugin essentials watch
     watch([
+        `${paths.plugins.efa.scss}abstracts/*.scss`,
+        `${paths.plugins.efa.scss}base/*.scss`,
         `${paths.plugins.efa.scss}addons/*.scss`,
         `${paths.plugins.efa.scss}efa-elementor.scss`
     ], buildStyleElementor)

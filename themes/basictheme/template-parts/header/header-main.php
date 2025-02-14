@@ -22,7 +22,7 @@ $cart = basictheme_get_option( 'opt_menu_cart', '1' );
 
             <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#primary-menu"
                     aria-controls="site-menu" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="icon-mask icon-mask-bars" aria-hidden="true"></i>
+                <i class="fas fa-bars"></i>
             </button>
         </div>
 

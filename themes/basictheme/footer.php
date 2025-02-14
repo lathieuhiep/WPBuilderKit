@@ -9,7 +9,7 @@ if ( $opt_back_to_top == '1' ) :
 ?>
     <div id="back-top">
         <a href="#">
-            <i class="icon-mask icon-mask-chevron-up"></i>
+            <i class="fas fa-chevron-up"></i>
         </a>
     </div>
 <?php

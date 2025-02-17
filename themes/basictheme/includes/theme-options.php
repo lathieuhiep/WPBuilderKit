@@ -47,5 +47,8 @@ if ( class_exists( 'CSF' ) ) {
 	require get_theme_file_path( '/includes/theme-options/shop-options.php' );
 
 	// footer options
-	require get_theme_file_path( '/includes/theme-options/footer.php' );
+	require get_theme_file_path( '/includes/theme-options/footer-options.php' );
+
+	// custom code options
+	require get_theme_file_path( '/includes/theme-options/custom-code-options.php' );
 }

@@ -617,13 +617,13 @@ class EFA_Widget_Post_Carousel extends Widget_Base {
 
 		if ( $query->have_posts() ) :
         ?>
-            <div class="element-post-carousel">
+            <div class="efa-addon-post-carousel">
                 <div class="custom-owl-carousel owl-carousel owl-theme"
                      data-settings-owl='<?php echo wp_json_encode( $data_settings_owl ); ?>'>
 					<?php while ( $query->have_posts() ): $query->the_post(); ?>
 
-                        <div class="item-post">
-                            <div class="item-post__thumbnail">
+                        <div class="item">
+                            <div class="thumbnail">
                                 <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
 									<?php
 									if ( has_post_thumbnail() ) :
@@ -636,7 +636,7 @@ class EFA_Widget_Post_Carousel extends Widget_Base {
                                 </a>
                             </div>
 
-                            <div class="item-post__content">
+                            <div class="body">
                                 <h2 class="title">
                                     <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
 										<?php the_title(); ?>
@@ -644,7 +644,6 @@ class EFA_Widget_Post_Carousel extends Widget_Base {
                                 </h2>
 
 								<?php if ( $settings['show_excerpt'] == 'show' ) : ?>
-
                                     <div class="desc">
                                         <p>
 											<?php
@@ -656,7 +655,6 @@ class EFA_Widget_Post_Carousel extends Widget_Base {
 											?>
                                         </p>
                                     </div>
-
 								<?php endif; ?>
                             </div>
                         </div>

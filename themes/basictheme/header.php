@@ -8,7 +8,7 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-
+<?php wp_body_open(); ?>
 <?php
 if ( !is_404() ) :
 	get_template_part('template-parts/header/header','main');

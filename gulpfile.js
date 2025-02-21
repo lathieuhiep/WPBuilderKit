@@ -127,7 +127,6 @@ function buildStyleBootstrap() {
         }))
         .pipe(rename({suffix: '.min'}))
         .pipe(dest(`${paths.output.theme.libs}bootstrap/`))
-        .pipe(dest(`${paths.output.plugins.efa.libs}bootstrap/`))
         .pipe(browserSync.stream())
 }
 
@@ -143,7 +142,6 @@ function buildLibsBootstrapJS() {
         .pipe(uglify())
         .pipe(rename( {suffix: '.min'} ))
         .pipe(dest(`${paths.output.theme.libs}/bootstrap/`))
-        .pipe(dest(`${paths.output.plugins.efa.libs}bootstrap/`))
         .pipe(browserSync.stream())
 }
 
@@ -419,7 +417,10 @@ function watchTask() {
 
     // plugin essentials watch
     watch([
+        `${paths.plugins.efa.scss}abstracts/*.scss`,
         `${paths.plugins.efa.scss}addons/*.scss`,
+        `${paths.plugins.efa.scss}base/*.scss`,
+        `${paths.plugins.efa.scss}components/*.scss`,
         `${paths.plugins.efa.scss}efa-elementor.scss`
     ], buildStyleElementor)
 

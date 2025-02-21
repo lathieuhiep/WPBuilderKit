@@ -3,47 +3,6 @@
  * Action
  * */
 
-// add property
-add_action( 'wp_head', 'basictheme_opengraph', 5 );
-function basictheme_opengraph(): void {
-	global $post;
-
-	if ( is_single() ) :
-		if ( has_post_thumbnail( $post->ID ) ) :
-			$img_src = get_the_post_thumbnail_url( get_the_ID(), 'full' );
-		else :
-			$img_src = get_theme_file_uri( '/images/no-image.png' );
-		endif;
-
-		$excerpt = $post->post_excerpt;
-
-		if ( $excerpt ) :
-			$excerpt = strip_tags( $post->post_excerpt );
-			$excerpt = str_replace( "", "'", $excerpt );
-		else :
-			$excerpt = get_bloginfo( 'description' );
-		endif;
-
-		?>
-		<meta property="og:url" content="<?php the_permalink(); ?>" />
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content="<?php the_title(); ?>" />
-		<meta property="og:description" content="<?php echo esc_attr( $excerpt ); ?>" />
-		<meta property="og:image" content="<?php echo esc_url( $img_src ); ?>" />
-	<?php
-	endif;
-}
-
-// Sanitize Pagination
-add_action( 'navigation_markup_template', 'basictheme_sanitize_pagination' );
-function basictheme_sanitize_pagination( $basictheme_content ): string {
-	// Remove role attribute
-	$basictheme_content = str_replace( 'role="navigation"', '', $basictheme_content );
-
-	// Remove h2 tag
-	return preg_replace( '#<h2.*?>(.*?)<\/h2>#si', '', $basictheme_content );
-}
-
 //Disable emojis in WordPress
 add_action( 'init', 'basictheme_disable_emojis' );
 function basictheme_disable_emojis(): void {
@@ -64,6 +23,36 @@ function basictheme_disable_emojis_tinymce( $plugins ): array {
 		return array();
 	}
 }
+
+// add code to head
+function basictheme_custom_header_code(): void {
+	$header_code = basictheme_get_option( 'opt_header_code' );
+
+	if ($header_code) {
+		echo $header_code;
+	}
+}
+add_action('wp_head', 'basictheme_custom_header_code');
+
+// add code to body
+function basictheme_custom_body_code(): void {
+	$body_code = basictheme_get_option( 'opt_body_code' );
+
+	if ($body_code) {
+		echo $body_code;
+	}
+}
+add_action('wp_body_open', 'basictheme_custom_body_code');
+
+// add code to footer
+function basictheme_custom_footer_code(): void {
+	$footer_code = basictheme_get_option( 'opt_footer_code' );
+
+	if ($footer_code) {
+		echo $footer_code;
+	}
+}
+add_action('wp_footer', 'basictheme_custom_footer_code');
 
 /*
  * Filter
@@ -94,10 +83,9 @@ function basictheme_add_arrow( $output, $item, $depth, $args ){
 add_filter('script_loader_tag', 'add_async_attribute', 10, 2);
 function add_async_attribute($tag, $handle) {
 	$async_scripts = array(
-		'bootstrap.min.js',
+		'bootstrap.bundle.min.js',
 		'owl.carousel.min.js',
-		'custom.min.js',
-		'elementor-addon.js'
+		'custom.min.js'
 	);
 
 	$src = wp_scripts()->registered[$handle]->src;

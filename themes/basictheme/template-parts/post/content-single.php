@@ -2,7 +2,7 @@
 $show_related = basictheme_get_option('opt_post_single_related', '1');
 ?>
 
-<div id="post-<?php the_ID() ?>" class="single-post-content">
+<div id="post-<?php the_ID() ?>" <?php post_class('single-post-content'); ?>>
     <?php if ( has_post_thumbnail() ) :?>
         <div class="single-post-content__image">
             <?php the_post_thumbnail('full'); ?>

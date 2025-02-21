@@ -131,9 +131,9 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 #back-top {
   --theme-bt-square: 4rem;
   background-color: var(--theme-accent);
-  opacity: 0;
   width: var(--theme-bt-square);
   height: var(--theme-bt-square);
+  opacity: 0;
   bottom: 0;
   cursor: pointer;
   position: fixed;
@@ -142,10 +142,11 @@ form.wpcf7-form p:has(.wpcf7-submit) {
   transition: all 0.4s ease-in-out;
 }
 #back-top a {
-  display: block;
   color: var(--theme-white);
-  line-height: var(--theme-bt-square);
-  text-align: center;
+  height: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.25s ease-in-out;
 }
 #back-top.active_top {

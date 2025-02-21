@@ -18,8 +18,8 @@
   --#{$prefix-theme}bt-square: 4rem;
 
   background-color: $var-accent-color;
-  opacity: 0;
   @include square(var(--#{$prefix-theme}bt-square));
+  opacity: 0;
   bottom: 0;
   cursor: pointer;
   position: fixed;
@@ -28,10 +28,9 @@
   @include transition();
 
   a {
-    display: block;
     color: $var-white-color;
-    line-height: var(--#{$prefix-theme}bt-square);
-    text-align: center;
+    height: inherit;
+    @include flex-center();
     @include transition(all 0.25s ease-in-out);
   }
 

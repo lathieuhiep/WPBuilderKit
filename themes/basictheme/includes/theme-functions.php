@@ -212,16 +212,30 @@ function basictheme_get_form_cf7(): array {
 	return $options;
 }
 
-// Social Network
+// list social network
+function basictheme_list_social_network(): array {
+	return array(
+		'facebook-f'  => 'Facebook',
+		'twitter'     => 'Twitter',
+		'google'      => 'Google',
+		'linkedin-in' => 'Linkedin',
+		'youtube'     => 'Youtube',
+		'instagram'   => 'Instagram'
+	);
+}
+
 function basictheme_get_social_url(): void {
-	$opt_social_networks = basictheme_get_option( 'opt_social_network', '' );
+	$opt_social_networks = basictheme_get_option( 'opt_social_networks' );
 
 	if ( ! empty( $opt_social_networks ) ) :
 		foreach ( $opt_social_networks as $item ) :
+			if ( empty( $item['item'] ) ) {
+				continue;
+			}
 			?>
             <div class="social-network-item">
                 <a href="<?php echo esc_url( $item['url'] ); ?>" target="_blank">
-                    <i class="<?php echo $item['icon']; ?>"></i>
+                    <i class="fab fa-<?php echo esc_attr( $item['item'] ); ?>"></i>
                 </a>
             </div>
 		<?php
@@ -231,12 +245,11 @@ function basictheme_get_social_url(): void {
 }
 
 // replace number
-function basictheme_preg_replace_ony_number($string): string|null
-{
+function basictheme_preg_replace_ony_number( $string ): string|null {
 	$number = '';
 
-	if (!empty($string)) {
-		$number = preg_replace('/[^0-9]/', '', strip_tags($string));
+	if ( ! empty( $string ) ) {
+		$number = preg_replace( '/[^0-9]/', '', strip_tags( $string ) );
 	}
 
 	return $number;

@@ -1,21 +1,21 @@
 @import "../../../../shared/scss/abstracts/abstracts";
 @import "../abstracts/abstracts";
 
-.element-post-carousel {
+.#{$prefix-plugin-class-addon}post-carousel {
   --#{$prefix-plugin-essentials}bc-content: #{map-get($mt-colors, "primary")};
   --#{$prefix-plugin-essentials}fs-title: #{map-get($mt-font-sizes, xs)};
 
-  .item-post {
+  .item {
     @include flex-column;
     flex: 1;
+  }
 
-    &__content {
-      padding: 1.5rem;
-      border: .1rem solid var(--#{$prefix-plugin-essentials}bc-content);
+  .body {
+    padding: 1.5rem;
+    border: .1rem solid var(--#{$prefix-plugin-essentials}bc-content);
 
-      .title {
-        font-size: var(--#{$prefix-plugin-essentials}fs-title);
-      }
+    .title {
+      font-size: var(--#{$prefix-plugin-essentials}fs-title);
     }
   }
 

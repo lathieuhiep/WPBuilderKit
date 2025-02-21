@@ -1,0 +1,30 @@
+@import "../abstracts/abstracts";
+
+.#{$prefix-plugin-essentials}icon-mask {
+  --#{$prefix-plugin-essentials}icon-width: 1.6rem;
+  --#{$prefix-plugin-essentials}icon-height: 1.6rem;
+  --#{$prefix-plugin-essentials}icon-color: currentColor;
+
+  display: inline-block;
+  width: var(--#{$prefix-plugin-essentials}icon-width);
+  height: var(--#{$prefix-plugin-essentials}icon-height);
+  background-color: var(--#{$prefix-plugin-essentials}-icon-color);
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-position: center;
+
+  &-angle {
+    &-left {
+      mask-image: url("#{$icon-path}/angle-left.svg");
+      -webkit-mask-image: url("#{$icon-path}/angle-left.svg");
+    }
+
+    &-right {
+      mask-image: url("#{$icon-path}/angle-right.svg");
+      -webkit-mask-image: url("#{$icon-path}/angle-right.svg");
+    }
+  }
+}

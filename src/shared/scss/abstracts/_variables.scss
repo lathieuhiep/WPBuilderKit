@@ -1,5 +1,14 @@
 $prefix-theme: theme-;
 
+// breakpoints
+$mt-breakpoints: (
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+        xxl: 1400px
+);
+
 // color
 $mt-colors: (
         "primary": #3498db,
@@ -95,6 +104,7 @@ $paragraph-margin-bottom: $spacing-base * 3;
 $transition-base: all 0.4s ease-in-out;
 
 // Grid columns
+$grid-columns: 12;
 $grid-gutter-width: $spacing-base * 6;
 
 // border

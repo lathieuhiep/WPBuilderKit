@@ -1,12 +1,13 @@
 @import "../../../shared/scss/abstracts/abstracts";
 
 .search-form {
-  --#{$prefix-theme}search-field-padding: .9rem 1rem;
+  --#{$prefix-theme}search-field-min-height: 4rem;
+  --#{$prefix-theme}search-field-padding: 0 1rem;
 
   font-size: $var-fs-xs;
 
   .search-field {
-    height: auto;
+    min-height: var(--#{$prefix-theme}search-field-min-height);
     padding: var(--#{$prefix-theme}search-field-padding);
     @include border();
     @include border-radius();
@@ -26,7 +27,7 @@
 
 .widget {
   ~ .widget {
-    margin-top: var(--#{$prefix-theme}spacing-4);
+    margin-top: var(--#{$prefix-theme}spacing-6);
   }
 
   &:last-child {
@@ -76,100 +77,122 @@
     font-size: $var-fs-xs;
   }
 
-  &.widget_search {
-    .search-form {
-      display: flex;
-
-      .search-field {
-        flex: 1;
+  &.widget {
+    &_block {
+      .wp-block-heading {
+        @extend .widget-title;
       }
 
-      .search-submit {
-        margin-left: 1rem;
-      }
-    }
-  }
+      ol, ul {
+        padding-left: 0;
 
-  &.widget_archive,
-  &.widget_categories {
-    ul {
-      li {
-        a {
-          display: inline-block;
-          margin-right: .5rem;
+        li {
+          margin-bottom: 0;
+
+          ~ li {
+            margin-top: .8rem;
+          }
         }
       }
     }
-  }
 
-  &.widget_calendar {
-    table {
-      width: 100%;
+    &_search {
+      .search-form {
+        display: flex;
+        gap: var(--#{$prefix-theme}spacing-3);
 
-      caption {
-        padding: 0;
-        margin-top: var(--#{$prefix-theme}spacing-3);
-      }
-
-      tr {
-        border-bottom: 1px solid $var-primary-color;
-
-        th {
-          text-align: center;
+        .search-field {
+          flex: 1;
+          width: 100%;
         }
 
-        td {
-          padding: .5rem 0;
-          text-align: center;
+        .search-submit {
+          flex: 0 0 auto;
+        }
+      }
+    }
 
-          &#today {
-            background-color: $var-accent-color;
-            color: $var-white-color;
+    &_archive,
+    &_categories {
+      ul {
+        li {
+          a {
+            display: inline-block;
+            margin-right: .5rem;
+          }
+        }
+      }
+    }
 
-            a {
+    &_calendar {
+      table {
+        width: 100%;
+
+        caption {
+          padding: 0;
+          margin-top: var(--#{$prefix-theme}spacing-3);
+        }
+
+        tr {
+          border-bottom: 1px solid $var-primary-color;
+
+          th {
+            text-align: center;
+          }
+
+          td {
+            padding: .5rem 0;
+            text-align: center;
+
+            &#today {
+              background-color: $var-accent-color;
               color: $var-white-color;
+
+              a {
+                color: $var-white-color;
+              }
+            }
+
+            &#prev {
+              text-align: left;
+            }
+
+            &#next {
+              text-align: right;
             }
           }
+        }
+      }
+    }
 
-          &#prev {
-            text-align: left;
-          }
+    &_rss {
+      ul {
+        li {
+          padding-bottom: 2rem;
+          margin-bottom: 2rem;
 
-          &#next {
-            text-align: right;
+          .rssSummary {
+            font-size: $var-fs-xs;
           }
         }
       }
     }
-  }
 
-  &.widget_rss {
-    ul {
-      li {
-        padding-bottom: 2rem;
-        margin-bottom: 2rem;
+    &_tag_cloud,
+    &_product_tag_cloud {
+      .tagcloud {
+        a {
+          display: inline-block;
+          font-size: $var-fs-xs !important;
+          @include border();
+          padding: .5rem 1rem;
+          margin: 0 .2rem 5px;
 
-        .rssSummary {
-          font-size: $var-fs-xs;
-        }
-      }
-    }
-  }
-
-  &.widget_tag_cloud,
-  &.widget_product_tag_cloud {
-    .tagcloud {
-      a {
-        display: inline-block;
-        font-size: $var-fs-xs !important;
-        @include border();
-        padding: .5rem 1rem;
-        margin: 0 .2rem 5px;
-
-        &:hover {
-          background-color: $var-accent-color;
-          color: $var-white-color;
-          border-color: $var-accent-color;
+          &:hover {
+            background-color: $var-accent-color;
+            color: $var-white-color;
+            border-color: $var-accent-color;
+          }
         }
       }
     }

@@ -9,11 +9,12 @@
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<?php
-if ( !is_404() ) :
-	get_template_part('template-parts/header/header','main');
-endif;
-?>
 
-<!--Start Sticky Footer-->
-<div class="sticky-footer">
+<div class="main-warp">
+    <?php
+    if ( !is_404() ) :
+        get_template_part('template-parts/header/header','main');
+    endif;
+    ?>
+
+    <div class="sticky-footer">

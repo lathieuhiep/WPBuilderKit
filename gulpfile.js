@@ -51,9 +51,9 @@ const paths = {
 };
 
 // server
-// tạo file .env với biến PROXY="localhost/basicthem". Có thể thay đổi giá trị này.
+// tạo file .env với biến PROXY="localhost/basictheme". Có thể thay đổi giá trị này.
 require('dotenv').config()
-const proxy = process.env.PROXY || "localhost/basicthem";
+const proxy = process.env.PROXY || "localhost/basictheme";
 function server() {
     browserSync.init({
         proxy: proxy,

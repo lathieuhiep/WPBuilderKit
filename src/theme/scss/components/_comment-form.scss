@@ -112,18 +112,11 @@
   }
 
   .comment-form {
-    @include flex-column;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
+    @extend %flex-column;
+    gap: var(--#{$prefix-theme}spacing-6);
 
     .comment-notes {
       order: 1;
-    }
-
-    .comment-fields-row {
-      @media (min-width: 576px) {
-        margin-bottom: var(--#{$prefix-theme}spacing-6);
-      }
     }
 
     input,
@@ -135,8 +128,15 @@
       @include border-radius();
     }
 
-    .form-comment-field {
-      margin-bottom: var(--#{$prefix-theme}spacing-6);
+    &-cookies-consent {
+      display: flex;
+      gap: var(--#{$prefix-theme}spacing-3);
+
+      input {
+        min-height: auto;
+        @include square(1.6rem);
+        transform: translateY(4px);
+      }
     }
 
     .form-submit {

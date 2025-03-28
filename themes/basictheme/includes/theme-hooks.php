@@ -24,6 +24,13 @@ function basictheme_disable_emojis_tinymce( $plugins ): array {
 	}
 }
 
+// load google fonts
+add_action( 'wp_head', function() {
+	echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
+	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+	echo '<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Roboto+Slab:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">';
+}, 5);
+
 // add code to head
 function basictheme_custom_header_code(): void {
 	$header_code = basictheme_get_option( 'opt_header_code' );
@@ -77,24 +84,4 @@ function basictheme_add_arrow( $output, $item, $depth, $args ){
 	}
 
 	return $output;
-}
-
-// add async file scrip
-add_filter('script_loader_tag', 'add_async_attribute', 10, 2);
-function add_async_attribute($tag, $handle) {
-	$async_scripts = array(
-		'bootstrap.bundle.min.js',
-		'owl.carousel.min.js',
-		'custom.min.js'
-	);
-
-	$src = wp_scripts()->registered[$handle]->src;
-
-	foreach ($async_scripts as $async_script) {
-		if ( str_contains( $src, $async_script ) ) {
-			return str_replace(' src', ' async="async" src', $tag);
-		}
-	}
-
-	return $tag;
 }

@@ -24,12 +24,19 @@ function basictheme_disable_emojis_tinymce( $plugins ): array {
 	}
 }
 
-// load google fonts
+// Load preconnect and preload for fonts and fontawesome
 add_action( 'wp_head', function() {
+	// Preconnect and preload for Google Fonts
 	echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
 	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
 	echo '<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Roboto+Slab:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">';
+
+	// Preconnect and preload for Font Awesome
+	echo '<link rel="preconnect" href="https://cdnjs.cloudflare.com">';
+	echo '<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>';
+	echo '<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">';
 }, 5);
+
 
 // add code to head
 function basictheme_custom_header_code(): void {

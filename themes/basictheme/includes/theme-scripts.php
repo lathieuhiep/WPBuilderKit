@@ -19,6 +19,27 @@ function basictheme_remove_jquery_migrate( $scripts ): void {
 	}
 }
 
+// Remove WordPress block library CSS from loading on the front-end
+function remove_wp_block_library_css(): void {
+	wp_dequeue_style( 'wp-block-library' );
+	wp_dequeue_style( 'wp-block-library-theme' );
+	wp_dequeue_style( 'wc-block-style' ); // Nếu sử dụng WooCommerce
+}
+add_action( 'wp_enqueue_scripts', 'remove_wp_block_library_css', 100 );
+
+// Load preconnect and preload for fonts and fontawesome
+add_action( 'wp_head', function() {
+	// Preconnect and preload for Google Fonts
+	echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
+	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+	echo '<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Roboto+Slab:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">';
+
+	// Preconnect and preload for Font Awesome
+	echo '<link rel="preconnect" href="https://cdnjs.cloudflare.com">';
+	echo '<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>';
+	echo '<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">';
+}, 5);
+
 // load libs front-end style +scrip
 add_action('wp_enqueue_scripts', 'basictheme_front_end_libs', 5);
 function basictheme_front_end_libs(): void {

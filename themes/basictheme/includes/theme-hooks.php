@@ -3,9 +3,10 @@
  * Action
  * */
 
-//Disable emojis in WordPress
-add_action( 'init', 'basictheme_disable_emojis' );
-function basictheme_disable_emojis(): void {
+// optimize WordPress
+add_action('init', 'basictheme_optimize_wordpress');
+function basictheme_optimize_wordpress(): void {
+	// Disable WordPress Emoji
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 	remove_action( 'wp_print_styles', 'print_emoji_styles' );
@@ -14,6 +15,17 @@ function basictheme_disable_emojis(): void {
 	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
 	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
 	add_filter( 'tiny_mce_plugins', 'basictheme_disable_emojis_tinymce' );
+
+	// Disable WordPress REST API links
+	remove_action('wp_head', 'rest_output_link_wp_head');
+	remove_action('template_redirect', 'rest_output_link_header', 11);
+
+	// Disable RSD link and WLW manifest link
+	remove_action('wp_head', 'rsd_link');
+	remove_action('wp_head', 'wlwmanifest_link');
+
+	// Disable WordPress version
+	remove_action('wp_head', 'wp_generator');
 }
 
 function basictheme_disable_emojis_tinymce( $plugins ): array {
@@ -23,20 +35,6 @@ function basictheme_disable_emojis_tinymce( $plugins ): array {
 		return array();
 	}
 }
-
-// Load preconnect and preload for fonts and fontawesome
-add_action( 'wp_head', function() {
-	// Preconnect and preload for Google Fonts
-	echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
-	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-	echo '<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Roboto+Slab:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">';
-
-	// Preconnect and preload for Font Awesome
-	echo '<link rel="preconnect" href="https://cdnjs.cloudflare.com">';
-	echo '<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>';
-	echo '<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">';
-}, 5);
-
 
 // add code to head
 function basictheme_custom_header_code(): void {
@@ -71,6 +69,9 @@ add_action('wp_footer', 'basictheme_custom_footer_code');
 /*
  * Filter
  * */
+
+// disable WordPress xmlrpc
+add_filter('xmlrpc_enabled', '__return_false');
 
 // disable gutenberg editor
 add_filter("use_block_editor_for_post_type", "disable_gutenberg_editor");

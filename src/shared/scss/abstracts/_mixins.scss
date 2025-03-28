@@ -66,3 +66,9 @@
 @mixin border-radius($radius: $border-radius) {
   border-radius: $radius;
 }
+
+// mask image
+@mixin mask-image($url) {
+  mask-image: url("#{$url}");
+  -webkit-mask-image: url("#{$url}");
+}

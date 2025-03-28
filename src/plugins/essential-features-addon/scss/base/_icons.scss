@@ -1,3 +1,4 @@
+@import "../../../../shared/scss/abstracts/abstracts";
 @import "../abstracts/abstracts";
 
 .#{$prefix-plugin-essentials}icon-mask {
@@ -18,13 +19,11 @@
 
   &-angle {
     &-left {
-      mask-image: url("#{$icon-path}/angle-left.svg");
-      -webkit-mask-image: url("#{$icon-path}/angle-left.svg");
+      @include mask-image($icon-path/angle-left.svg);
     }
 
     &-right {
-      mask-image: url("#{$icon-path}/angle-right.svg");
-      -webkit-mask-image: url("#{$icon-path}/angle-right.svg");
+      @include mask-image($icon-path/angle-left.svg);
     }
   }
 }

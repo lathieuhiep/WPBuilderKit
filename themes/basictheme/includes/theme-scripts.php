@@ -20,12 +20,16 @@ function basictheme_remove_jquery_migrate( $scripts ): void {
 }
 
 // Remove WordPress block library CSS from loading on the front-end
-function remove_wp_block_library_css(): void {
-	wp_dequeue_style( 'wp-block-library' );
-	wp_dequeue_style( 'wp-block-library-theme' );
-	wp_dequeue_style( 'wc-block-style' ); // Nếu sử dụng WooCommerce
+function basictheme_remove_wp_block_library_css(): void {
+	// remove style gutenberg
+	wp_dequeue_style('wp-block-library');
+	wp_dequeue_style('wp-block-library-theme');
+	wp_dequeue_style( 'classic-theme-styles' );
+
+	wp_dequeue_style('wc-blocks-style');
+	wp_dequeue_style('storefront-gutenberg-blocks');
 }
-add_action( 'wp_enqueue_scripts', 'remove_wp_block_library_css', 100 );
+add_action( 'wp_enqueue_scripts', 'basictheme_remove_wp_block_library_css', 100 );
 
 // Load preconnect and preload for fonts and fontawesome
 add_action( 'wp_head', function() {
@@ -43,14 +47,6 @@ add_action( 'wp_head', function() {
 // load libs front-end style +scrip
 add_action('wp_enqueue_scripts', 'basictheme_front_end_libs', 5);
 function basictheme_front_end_libs(): void {
-	// remove style gutenberg
-	wp_dequeue_style('wp-block-library');
-	wp_dequeue_style('wp-block-library-theme');
-	wp_dequeue_style( 'classic-theme-styles' );
-
-	wp_dequeue_style('wc-blocks-style');
-	wp_dequeue_style('storefront-gutenberg-blocks');
-
 	// bootstrap css
 	wp_enqueue_style( 'bootstrap', get_theme_file_uri( '/assets/libs/bootstrap/bootstrap.min.css' ), array(), null );
 	wp_enqueue_script( 'bootstrap', get_theme_file_uri( '/assets/libs/bootstrap/bootstrap.bundle.min.js' ), array('jquery'), null, true );

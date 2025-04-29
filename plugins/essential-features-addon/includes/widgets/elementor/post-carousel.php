@@ -86,9 +86,9 @@ class EFA_Widget_Post_Carousel extends Widget_Base {
 			[
 				'label'   => esc_html__( 'Sắp xếp theo', 'essential-features-addon' ),
 				'type'    => Controls_Manager::SELECT,
-				'default' => 'id',
+				'default' => 'ID',
 				'options' => [
-					'id'    => esc_html__( 'ID', 'essential-features-addon' ),
+					'ID'    => esc_html__( 'ID', 'essential-features-addon' ),
 					'title' => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
 					'date'  => esc_html__( 'Ngày đăng', 'essential-features-addon' ),
 					'rand'  => esc_html__( 'Ngẫu nhiên', 'essential-features-addon' ),
@@ -630,7 +630,7 @@ class EFA_Widget_Post_Carousel extends Widget_Base {
 										the_post_thumbnail( $settings['image_size'] );
 									else:
 										?>
-                                        <img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/no-image.png' ) ) ?>"
+                                        <img src="<?php echo esc_url( EFA_PLUGIN_URL . 'assets/images/no-image.png' ); ?>"
                                              alt="<?php the_title(); ?>"/>
 									<?php endif; ?>
                                 </a>

@@ -327,9 +327,18 @@ class EFA_Widget_Post_Grid extends Widget_Base {
 			'posts_per_page'      => $limit_post,
 			'orderby'             => $order_by_post,
 			'order'               => $order_post,
-			'cat'                 => $cat_post,
 			'ignore_sticky_posts' => 1,
 		);
+
+		if ( ! empty( $cat_post ) && is_array( $cat_post ) ) {
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'category',
+					'field'    => 'term_id',
+					'terms'    => $cat_post,
+				),
+			);
+		}
 
 		$query = new WP_Query( $args );
 

@@ -19,11 +19,11 @@
 
   &-angle {
     &-left {
-      @include mask-image($icon-path/angle-left.svg);
+      @include mask-image("#{$icon-path}/angle-left.svg");
     }
 
     &-right {
-      @include mask-image($icon-path/angle-left.svg);
+      @include mask-image("#{$icon-path}/angle-left.svg");
     }
   }
 }

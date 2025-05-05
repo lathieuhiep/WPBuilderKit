@@ -3,11 +3,18 @@ const {src, dest, watch} = require('gulp')
 const sass = require('gulp-sass')(require('sass'))
 const sourcemaps = require('gulp-sourcemaps')
 const browserSync = require('browser-sync')
+const concat = require('gulp-concat');
 const uglify = require('gulp-uglify')
 const cleanCSS  = require('gulp-clean-css')
 const rename = require("gulp-rename")
 const plumber = require('gulp-plumber');
 const path = require('path');
+const gulpIf = require('gulp-if');
+
+require('dotenv').config()
+
+// setting NODE_ENV: development or production
+const isDev = (process.env.NODE_ENV === 'development');
 
 // Biến đại diện cho tên plugin và theme
 const pluginNameEFA = 'essential-features-addon';
@@ -52,7 +59,6 @@ const paths = {
 
 // server
 // tạo file .env với biến PROXY="localhost/basictheme". Có thể thay đổi giá trị này.
-require('dotenv').config()
 const proxy = process.env.PROXY || "localhost/basictheme";
 function server() {
     browserSync.init({
@@ -61,49 +67,6 @@ function server() {
         cors: true,
         ghostMode: false
     })
-}
-
-/*
-Task build Bootstrap
-* */
-
-// Task build style bootstrap
-function buildStyleBootstrap() {
-    return src(`${paths.shared.scss}vendors/bootstrap.scss`)
-        .pipe(plumber({
-            errorHandler: function (err) {
-                console.error(err.message);
-                this.emit('end');
-            }
-        }))
-        .pipe(sass({
-            outputStyle: 'expanded',
-            includePaths: [
-                path.resolve(__dirname, 'node_modules/')
-            ],
-            quietDeps: true
-        }, '').on('error', sass.logError))
-        .pipe(cleanCSS ({
-            level: 2
-        }))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(dest(`${paths.output.theme.libs}bootstrap/`))
-        .pipe(browserSync.stream())
-}
-
-// Task build js bootstrap
-function buildLibsBootstrapJS() {
-    return src( `${paths.node_modules}/bootstrap/dist/js/bootstrap.bundle.js`, {allowEmpty: true} )
-        .pipe(plumber({
-            errorHandler: function (err) {
-                console.error('Error in buildLibsBootstrapJS:', err.message);
-                this.emit('end');
-            }
-        }))
-        .pipe(uglify())
-        .pipe(rename( {suffix: '.min'} ))
-        .pipe(dest(`${paths.output.theme.libs}/bootstrap/`))
-        .pipe(browserSync.stream())
 }
 
 /*
@@ -154,22 +117,25 @@ function buildStyleTheme() {
                 this.emit('end');
             }
         }))
-        .pipe(sourcemaps.init())
+        .pipe(gulpIf(isDev, sourcemaps.init()))
         .pipe(sass({
             outputStyle: 'expanded'
         }, '').on('error', sass.logError))
-        .pipe(dest(`${paths.output.theme.css}`))
         .pipe(cleanCSS ({
             level: 2
         }))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(sourcemaps.write())
+        .pipe(rename({suffix: '.bundle.min'}))
+        .pipe(gulpIf(isDev, sourcemaps.write()))
         .pipe(dest(`${paths.output.theme.css}`))
         .pipe(browserSync.stream())
 }
 
 function buildJSTheme() {
-    return src(`${paths.theme.js}*.js`, {allowEmpty: true})
+    return src([
+        `${paths.node_modules}/bootstrap/dist/js/bootstrap.bundle.js`,
+        `${paths.theme.js}custom.js`
+    ], {allowEmpty: true})
+        .pipe(concat('main.bundle.js'))
         .pipe(plumber({
             errorHandler: function (err) {
                 console.error('Error in build js in theme:', err.message);
@@ -181,6 +147,7 @@ function buildJSTheme() {
         .pipe(dest(`${paths.output.theme.js}`))
         .pipe(browserSync.stream())
 }
+exports.buildJSTheme = buildJSTheme
 
 // Task build style custom post type
 function buildStyleCustomPostType() {
@@ -191,7 +158,7 @@ function buildStyleCustomPostType() {
                 this.emit('end');
             }
         }))
-        .pipe(sourcemaps.init())
+        .pipe(gulpIf(isDev, sourcemaps.init()))
         .pipe(sass({
             outputStyle: 'expanded'
         }, '').on('error', sass.logError))
@@ -199,7 +166,7 @@ function buildStyleCustomPostType() {
             level: 2
         }))
         .pipe(rename({suffix: '.min'}))
-        .pipe(sourcemaps.write())
+        .pipe(gulpIf(isDev, sourcemaps.write()))
         .pipe(dest(`${paths.output.theme.css}post-type/`))
         .pipe(browserSync.stream())
 }
@@ -213,7 +180,7 @@ function buildStylePageTemplate() {
                 this.emit('end');
             }
         }))
-        .pipe(sourcemaps.init())
+        .pipe(gulpIf(isDev, sourcemaps.init()))
         .pipe(sass({
             outputStyle: 'expanded'
         }, '').on('error', sass.logError))
@@ -221,7 +188,7 @@ function buildStylePageTemplate() {
             level: 2
         }))
         .pipe(rename({suffix: '.min'}))
-        .pipe(sourcemaps.write())
+        .pipe(gulpIf(isDev, sourcemaps.write()))
         .pipe(dest(`${paths.output.theme.css}page-templates/`))
         .pipe(browserSync.stream())
 }
@@ -235,7 +202,7 @@ function buildStyleShop() {
                 this.emit('end');
             }
         }))
-        .pipe(sourcemaps.init())
+        .pipe(gulpIf(isDev, sourcemaps.init()))
         .pipe(sass({
             outputStyle: 'expanded'
         }, '').on('error', sass.logError))
@@ -243,7 +210,7 @@ function buildStyleShop() {
             level: 2
         }))
         .pipe(rename({suffix: '.min'}))
-        .pipe(sourcemaps.write())
+        .pipe(gulpIf(isDev, sourcemaps.write()))
         .pipe(dest(`${paths.output.theme.extension}woocommerce/assets/css/`))
         .pipe(browserSync.stream())
 }
@@ -261,7 +228,7 @@ function buildStyleElementor() {
                 this.emit('end');
             }
         }))
-        .pipe(sourcemaps.init())
+        .pipe(gulpIf(isDev, sourcemaps.init()))
         .pipe(sass({
             outputStyle: 'expanded'
         }, '').on('error', sass.logError))
@@ -269,7 +236,7 @@ function buildStyleElementor() {
             level: 2
         }))
         .pipe(rename({suffix: '.min'}))
-        .pipe(sourcemaps.write())
+        .pipe(gulpIf(isDev, sourcemaps.write()))
         .pipe(dest(`${paths.output.plugins.efa.css}`))
         .pipe(browserSync.stream())
 }
@@ -283,7 +250,7 @@ function buildStyleCustomLogin() {
                 this.emit('end');
             }
         }))
-        .pipe(sourcemaps.init())
+        .pipe(gulpIf(isDev, sourcemaps.init()))
         .pipe(sass({
             outputStyle: 'expanded'
         }, '').on('error', sass.logError))
@@ -291,7 +258,7 @@ function buildStyleCustomLogin() {
             level: 2
         }))
         .pipe(rename({suffix: '.min'}))
-        .pipe(sourcemaps.write())
+        .pipe(gulpIf(isDev, sourcemaps.write()))
         .pipe(dest(`${paths.output.plugins.efa.css}`))
         .pipe(browserSync.stream())
 }
@@ -314,9 +281,6 @@ function buildJPluginEFA() {
 Task build project
 * */
 async function buildProject() {
-    await buildStyleBootstrap()
-    await buildLibsBootstrapJS()
-
     await buildStyleOwlCarousel()
     await buildJsOwlCarouse()
 
@@ -341,7 +305,6 @@ function watchTask() {
     watch([
         `${paths.shared.scss}abstracts/*.scss`
     ], gulp.series(
-        buildStyleBootstrap,
         buildStyleTheme,
         buildStyleElementor,
         buildStyleCustomLogin,
@@ -349,13 +312,9 @@ function watchTask() {
         buildStylePageTemplate
     ))
 
-    // watch lib bootstrap
-    watch([
-        `${paths.shared.vendors}bootstrap.scss`
-    ], buildStyleBootstrap)
-
     // theme watch
     watch([
+        `${paths.shared.vendors}bootstrap.scss`,
         `${paths.theme.scss}base/*.scss`,
         `${paths.theme.scss}utilities/*.scss`,
         `${paths.theme.scss}components/*.scss`,

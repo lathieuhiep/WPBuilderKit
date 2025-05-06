@@ -69,45 +69,6 @@ function server() {
     })
 }
 
-/*
-Task build owl carousel
-* */
-function buildStyleOwlCarousel() {
-    return src(`${paths.node_modules}/owl.carousel/dist/assets/owl.carousel.css`)
-        .pipe(plumber({
-            errorHandler: function (err) {
-                console.error(err.message);
-                this.emit('end');
-            }
-        }))
-        .pipe(sass({
-            outputStyle: 'expanded',
-            quietDeps: true
-        }, '').on('error', sass.logError))
-        .pipe(cleanCSS ({
-            level: 2
-        }))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(dest(`${paths.output.theme.libs}owl.carousel/`))
-        .pipe(dest(`${paths.output.plugins.efa.libs}owl.carousel/`))
-        .pipe(browserSync.stream())
-}
-
-function buildJsOwlCarouse() {
-    return src(`${paths.node_modules}/owl.carousel/dist/owl.carousel.js`, {allowEmpty: true})
-        .pipe(plumber({
-            errorHandler: function (err) {
-                console.error('Error in buildLibsOwlCarouseJS:', err.message);
-                this.emit('end');
-            }
-        }))
-        .pipe(uglify())
-        .pipe(rename({suffix: '.min'}))
-        .pipe(dest(`${paths.output.theme.libs}owl.carousel/`))
-        .pipe(dest(`${paths.output.plugins.efa.libs}owl.carousel/`))
-        .pipe(browserSync.stream())
-}
-
 // Task build style theme
 function buildStyleTheme() {
     return src(`${paths.theme.scss}style-theme.scss`)
@@ -147,7 +108,6 @@ function buildJSTheme() {
         .pipe(dest(`${paths.output.theme.js}`))
         .pipe(browserSync.stream())
 }
-exports.buildJSTheme = buildJSTheme
 
 // Task build style custom post type
 function buildStyleCustomPostType() {
@@ -281,9 +241,6 @@ function buildJPluginEFA() {
 Task build project
 * */
 async function buildProject() {
-    await buildStyleOwlCarousel()
-    await buildJsOwlCarouse()
-
     await buildStyleTheme()
     await buildJSTheme()
 

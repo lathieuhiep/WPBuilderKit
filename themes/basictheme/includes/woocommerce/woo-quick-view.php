@@ -3,8 +3,7 @@
 /*
 * Quick view product
 */
-function basictheme_button_quick_view() {
-
+function basictheme_button_quick_view(): void {
 	?>
     <a class="btn-quick-view-product" href="#" title="<?php esc_attr_e( 'Quick view product', 'basictheme' ); ?>"
        data-id-product="<?php echo esc_attr( get_the_ID() ); ?>" data-bs-toggle="modal"
@@ -35,7 +34,6 @@ function basictheme_popup_quick_view_product() {
         </div>
     </div>
 	<?php
-
 }
 
 /* Ajax quick view product */
@@ -54,7 +52,7 @@ function basictheme_get_quick_view_product() {
 
 	while ( $query->have_posts() ): $query->the_post();
 
-		get_template_part( 'extension/woocommerce/quickview/content', 'quickview' );
+		get_template_part( 'includes/woocommerce/quickview/content', 'quickview' );
 
 	endwhile;
 	wp_reset_postdata();
@@ -62,8 +60,8 @@ function basictheme_get_quick_view_product() {
 }
 
 /* Quick view product image */
-function basictheme_quick_view_product_image() {
-	get_template_part( 'extension/woocommerce/quickview/product', 'image' );
+function basictheme_quick_view_product_image(): void {
+	get_template_part( 'includes/woocommerce/quickview/product', 'image' );
 }
 
 

@@ -3,7 +3,6 @@ const {src, dest, watch} = require('gulp')
 const sass = require('gulp-sass')(require('sass'))
 const sourcemaps = require('gulp-sourcemaps')
 const browserSync = require('browser-sync')
-const concat = require('gulp-concat');
 const uglify = require('gulp-uglify')
 const cleanCSS = require('gulp-clean-css')
 const rename = require("gulp-rename")
@@ -93,10 +92,7 @@ function buildStyleTheme() {
         // --- Tạo bản minified ---
         .pipe(cleanCSS({level: 2}))
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulpIf(isDev, sourcemaps.write('.', {
-            includeContent: false,
-            sourceRoot: '../scss'
-        })))
+        .pipe(gulpIf(isDev, sourcemaps.write()))
         .pipe(dest(`${paths.output.theme.css}`))
         .pipe(browserSync.stream())
 }
@@ -207,7 +203,8 @@ function buildStyleShop() {
         }))
         .pipe(gulpIf(isDev, sourcemaps.init()))
         .pipe(sass({
-            outputStyle: 'expanded'
+            outputStyle: 'expanded',
+            includePaths: ['node_modules']
         }, '').on('error', sass.logError))
 
         // --- Xuất file chưa min ---
@@ -216,10 +213,7 @@ function buildStyleShop() {
         // --- Tạo bản minified ---
         .pipe(cleanCSS({level: 2}))
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulpIf(isDev, sourcemaps.write('.', {
-            includeContent: false,
-            sourceRoot: '../scss'
-        })))
+        .pipe(gulpIf(isDev, sourcemaps.write()))
         .pipe(dest(`${paths.output.theme.woo}css/`))
         .pipe(browserSync.stream())
 }
@@ -232,8 +226,42 @@ function buildJSShop() {
                 this.emit('end');
             }
         }))
-        .pipe(uglify())
-        .pipe(rename({suffix: '.min'}))
+        .pipe(webpack({
+            mode: 'production',
+            output: {
+                filename: 'woo-quick-view.min.js'
+            },
+            module: {
+                rules: [
+                    {
+                        test: /\.m?js$/,
+                        exclude: /node_modules/,
+                        use: {
+                            loader: 'babel-loader',
+                            options: {
+                                presets: ['@babel/preset-env']
+                            }
+                        }
+                    }
+                ]
+            },
+            resolve: {
+                extensions: ['.js']
+            },
+            optimization: {
+                minimize: true,
+                minimizer: [
+                    new TerserPlugin({
+                        extractComments: false,
+                        terserOptions: {
+                            format: {
+                                comments: false
+                            },
+                        },
+                    })
+                ]
+            }
+        }))
         .pipe(dest(`${paths.output.theme.woo}js/`))
         .pipe(browserSync.stream())
 }

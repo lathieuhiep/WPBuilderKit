@@ -24,7 +24,7 @@ function basictheme_show_products_per_page() {
 add_filter('loop_shop_columns', 'basictheme_loop_columns_product');
 
 function basictheme_loop_columns_product() {
-    return basictheme_get_option('opt_shop_cat_per_row', '4');
+    return basictheme_get_option('opt_shop_cat_per_row', 3);
 }
 /* End Change number of products per row */
 

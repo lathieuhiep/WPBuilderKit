@@ -45,7 +45,7 @@ const paths = {
             css: `themes/${themeName}/assets/css/`,
             js: `themes/${themeName}/assets/js/`,
             libs: `themes/${themeName}/assets/libs/`,
-            extension: `themes/${themeName}/extension/`
+            woo: `themes/${themeName}/includes/woocommerce/assets/`
         },
         plugins: {
             root: 'plugins/',
@@ -76,7 +76,7 @@ function buildStyleTheme() {
     return src(`${paths.theme.scss}style-theme.scss`)
         .pipe(plumber({
             errorHandler: function (err) {
-                console.error('SCSS Error:', err.message);
+                console.error('SCSS Style Theme Error:', err.message);
                 this.emit('end');
             }
         }))
@@ -198,10 +198,10 @@ function buildStylePageTemplate() {
 
 // Task build style shop
 function buildStyleShop() {
-    return src(`${paths.theme.scss}shop/shop.scss`)
+    return src(`${paths.theme.scss}shop/*.scss`)
         .pipe(plumber({
             errorHandler: function (err) {
-                console.error(err.message);
+                console.error('SCSS Shop Error:', err.message);
                 this.emit('end');
             }
         }))
@@ -209,12 +209,32 @@ function buildStyleShop() {
         .pipe(sass({
             outputStyle: 'expanded'
         }, '').on('error', sass.logError))
-        .pipe(cleanCSS({
-            level: 2
-        }))
+
+        // --- Xuất file chưa min ---
+        .pipe(dest(`${paths.output.theme.woo}css/`))
+
+        // --- Tạo bản minified ---
+        .pipe(cleanCSS({level: 2}))
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulpIf(isDev, sourcemaps.write()))
-        .pipe(dest(`${paths.output.theme.extension}woocommerce/assets/css/`))
+        .pipe(gulpIf(isDev, sourcemaps.write('.', {
+            includeContent: false,
+            sourceRoot: '../scss'
+        })))
+        .pipe(dest(`${paths.output.theme.woo}css/`))
+        .pipe(browserSync.stream())
+}
+
+function buildJSShop() {
+    return src(`${paths.theme.js}shop/*.js`, {allowEmpty: true})
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.error('Error in build js in shop:', err.message);
+                this.emit('end');
+            }
+        }))
+        .pipe(uglify())
+        .pipe(rename({suffix: '.min'}))
+        .pipe(dest(`${paths.output.theme.woo}js/`))
         .pipe(browserSync.stream())
 }
 
@@ -284,16 +304,20 @@ function buildJPluginEFA() {
 Task build project
 * */
 async function buildProject() {
-    await buildStyleTheme()
-    await buildJSTheme()
-
-    await buildStyleElementor()
+    // plugin
     await buildStyleCustomLogin()
+    await buildStyleElementor()
+
     await buildJPluginEFA()
 
+    // theme
+    await buildStyleTheme()
     await buildStyleCustomPostType()
-
     await buildStylePageTemplate()
+    await buildStyleShop()
+
+    await buildJSTheme()
+    await buildJSShop()
 }
 
 exports.buildProject = buildProject
@@ -310,28 +334,9 @@ function watchTask() {
         buildStyleElementor,
         buildStyleCustomLogin,
         buildStyleCustomPostType,
-        buildStylePageTemplate
+        buildStylePageTemplate,
+        buildStyleShop
     ))
-
-    // theme watch
-    watch([
-        `${paths.theme.scss}vendors/bootstrap.scss`,
-        `${paths.theme.scss}base/*.scss`,
-        `${paths.theme.scss}utilities/*.scss`,
-        `${paths.theme.scss}components/*.scss`,
-        `${paths.theme.scss}layout/*.scss`,
-        `${paths.theme.scss}style-theme.scss`,
-    ], buildStyleTheme)
-
-    watch([`${paths.theme.js}*.js`], buildJSTheme)
-
-    watch([
-        `${paths.theme.scss}post-type/*/**.scss`
-    ], buildStyleCustomPostType)
-
-    watch([
-        `${paths.theme.scss}page-templates/*.scss`
-    ], buildStylePageTemplate)
 
     // plugin essentials watch
     watch([
@@ -347,6 +352,31 @@ function watchTask() {
     ], buildStyleCustomLogin)
 
     watch([`${paths.plugins.efa.js}*.js`], buildJPluginEFA)
+
+    // theme watch
+    watch([
+        `${paths.theme.scss}vendors/bootstrap.scss`,
+        `${paths.theme.scss}base/*.scss`,
+        `${paths.theme.scss}utilities/*.scss`,
+        `${paths.theme.scss}components/*.scss`,
+        `${paths.theme.scss}layout/*.scss`,
+        `${paths.theme.scss}style-theme.scss`,
+    ], buildStyleTheme)
+
+    watch([
+        `${paths.theme.scss}post-type/*/**.scss`
+    ], buildStyleCustomPostType)
+
+    watch([
+        `${paths.theme.scss}page-templates/*.scss`
+    ], buildStylePageTemplate)
+
+    watch([
+        `${paths.theme.scss}shop/*.scss`
+    ], buildStyleShop)
+
+    watch([`${paths.theme.js}*.js`], buildJSTheme)
+    watch([`${paths.theme.js}shop/*.js`], buildJSShop)
 }
 
 exports.watchTask = watchTask

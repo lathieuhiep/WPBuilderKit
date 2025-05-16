@@ -40,7 +40,7 @@ section {
           }
 
           .ui-slider-handle {
-            top: -6px;
+            top: -0.6rem;
             background-color: $var-white-color;
             border: .1rem solid #e45914;
             border-radius: 0;
@@ -124,7 +124,7 @@ section {
       button[type=submit] {
         background-color: $var-accent-color;
         color: $var-white-color;
-        padding: 9px 1rem;
+        padding: .9rem 1rem;
         border: none;
         margin-left: .5rem;
         border-radius: .3rem;

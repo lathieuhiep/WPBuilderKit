@@ -1,7 +1,3 @@
-/**
- * Quick view product
- */
-
 (function ($) {
     "use strict";
 

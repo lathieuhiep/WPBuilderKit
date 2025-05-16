@@ -535,8 +535,8 @@
   margin: 0 0 1rem;
 }
 .woocommerce .site-shop-single div.product form.cart .quantity input {
-  padding: 5px 0;
-  border: 1px solid #eeeeee;
+  padding: 0.5rem 0;
+  border: 0.1rem solid #eeeeee;
 }
 .woocommerce .site-shop-single div.product form.cart .single_add_to_cart_button {
   background-color: var(--theme-accent);

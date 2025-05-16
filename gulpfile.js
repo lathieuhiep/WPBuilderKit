@@ -5,11 +5,12 @@ const sourcemaps = require('gulp-sourcemaps')
 const browserSync = require('browser-sync')
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify')
-const cleanCSS  = require('gulp-clean-css')
+const cleanCSS = require('gulp-clean-css')
 const rename = require("gulp-rename")
 const plumber = require('gulp-plumber');
-const path = require('path');
 const gulpIf = require('gulp-if');
+const webpack = require('webpack-stream');
+const TerserPlugin = require('terser-webpack-plugin');
 
 require('dotenv').config()
 
@@ -60,6 +61,7 @@ const paths = {
 // server
 // tạo file .env với biến PROXY="localhost/basictheme". Có thể thay đổi giá trị này.
 const proxy = process.env.PROXY || "localhost/basictheme";
+
 function server() {
     browserSync.init({
         proxy: proxy,
@@ -74,37 +76,78 @@ function buildStyleTheme() {
     return src(`${paths.theme.scss}style-theme.scss`)
         .pipe(plumber({
             errorHandler: function (err) {
-                console.error(err.message);
+                console.error('SCSS Error:', err.message);
                 this.emit('end');
             }
         }))
         .pipe(gulpIf(isDev, sourcemaps.init()))
         .pipe(sass({
-            outputStyle: 'expanded'
+            outputStyle: 'expanded',
+            includePaths: ['node_modules']
         }, '').on('error', sass.logError))
-        .pipe(cleanCSS ({
-            level: 2
-        }))
-        .pipe(rename({suffix: '.bundle.min'}))
-        .pipe(gulpIf(isDev, sourcemaps.write()))
+
+        // --- Xuất file chưa min ---
+        .pipe(rename({suffix: '.bundle'}))
+        .pipe(dest(`${paths.output.theme.css}`))
+
+        // --- Tạo bản minified ---
+        .pipe(cleanCSS({level: 2}))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(gulpIf(isDev, sourcemaps.write('.', {
+            includeContent: false,
+            sourceRoot: '../scss'
+        })))
         .pipe(dest(`${paths.output.theme.css}`))
         .pipe(browserSync.stream())
 }
+exports.buildStyleTheme = buildStyleTheme
 
 function buildJSTheme() {
     return src([
-        `${paths.node_modules}/bootstrap/dist/js/bootstrap.bundle.js`,
-        `${paths.theme.js}custom.js`
+        `${paths.theme.js}*.js`
     ], {allowEmpty: true})
-        .pipe(concat('main.bundle.js'))
         .pipe(plumber({
             errorHandler: function (err) {
                 console.error('Error in build js in theme:', err.message);
                 this.emit('end');
             }
         }))
-        .pipe(uglify())
-        .pipe(rename({suffix: '.min'}))
+        .pipe(webpack({
+            mode: 'production',
+            output: {
+                filename: 'main.bundle.min.js'
+            },
+            module: {
+                rules: [
+                    {
+                        test: /\.m?js$/,
+                        exclude: /node_modules/,
+                        use: {
+                            loader: 'babel-loader',
+                            options: {
+                                presets: ['@babel/preset-env']
+                            }
+                        }
+                    }
+                ]
+            },
+            resolve: {
+                extensions: ['.js']
+            },
+            optimization: {
+                minimize: true,
+                minimizer: [
+                    new TerserPlugin({
+                        extractComments: false,
+                        terserOptions: {
+                            format: {
+                                comments: false
+                            },
+                        },
+                    })
+                ]
+            }
+        }))
         .pipe(dest(`${paths.output.theme.js}`))
         .pipe(browserSync.stream())
 }
@@ -122,7 +165,7 @@ function buildStyleCustomPostType() {
         .pipe(sass({
             outputStyle: 'expanded'
         }, '').on('error', sass.logError))
-        .pipe(cleanCSS ({
+        .pipe(cleanCSS({
             level: 2
         }))
         .pipe(rename({suffix: '.min'}))
@@ -144,7 +187,7 @@ function buildStylePageTemplate() {
         .pipe(sass({
             outputStyle: 'expanded'
         }, '').on('error', sass.logError))
-        .pipe(cleanCSS ({
+        .pipe(cleanCSS({
             level: 2
         }))
         .pipe(rename({suffix: '.min'}))
@@ -166,7 +209,7 @@ function buildStyleShop() {
         .pipe(sass({
             outputStyle: 'expanded'
         }, '').on('error', sass.logError))
-        .pipe(cleanCSS ({
+        .pipe(cleanCSS({
             level: 2
         }))
         .pipe(rename({suffix: '.min'}))
@@ -192,7 +235,7 @@ function buildStyleElementor() {
         .pipe(sass({
             outputStyle: 'expanded'
         }, '').on('error', sass.logError))
-        .pipe(cleanCSS ({
+        .pipe(cleanCSS({
             level: 2
         }))
         .pipe(rename({suffix: '.min'}))
@@ -214,7 +257,7 @@ function buildStyleCustomLogin() {
         .pipe(sass({
             outputStyle: 'expanded'
         }, '').on('error', sass.logError))
-        .pipe(cleanCSS ({
+        .pipe(cleanCSS({
             level: 2
         }))
         .pipe(rename({suffix: '.min'}))
@@ -252,6 +295,7 @@ async function buildProject() {
 
     await buildStylePageTemplate()
 }
+
 exports.buildProject = buildProject
 
 // Task watch
@@ -271,7 +315,7 @@ function watchTask() {
 
     // theme watch
     watch([
-        `${paths.shared.vendors}bootstrap.scss`,
+        `${paths.theme.scss}vendors/bootstrap.scss`,
         `${paths.theme.scss}base/*.scss`,
         `${paths.theme.scss}utilities/*.scss`,
         `${paths.theme.scss}components/*.scss`,
@@ -279,7 +323,7 @@ function watchTask() {
         `${paths.theme.scss}style-theme.scss`,
     ], buildStyleTheme)
 
-    watch([`${paths.theme.js}custom.js`], buildJSTheme)
+    watch([`${paths.theme.js}*.js`], buildJSTheme)
 
     watch([
         `${paths.theme.scss}post-type/*/**.scss`

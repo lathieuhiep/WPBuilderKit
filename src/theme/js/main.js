@@ -1,8 +1,5 @@
-/**
- * Custom js v1.0.0
- * Copyright 2017-2020
- * Licensed under  ()
- */
+import 'bootstrap/js/dist/collapse';
+import 'bootstrap/js/dist/modal';
 
 (function ($) {
     "use strict";

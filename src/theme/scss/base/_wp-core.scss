@@ -60,7 +60,7 @@ a {
 .wp-caption {
   background-color: $var-white-color;
   max-width: 96%;
-  padding: .5rem .3rem 1rem;
+  padding: .4rem .2rem 1rem;
   text-align: center;
 
   &.alignnone {
@@ -97,7 +97,7 @@ a {
 
 /* Text meant only for screen readers. */
 .screen-reader-text {
-  clip: rect(.1rem, .1rem, .1rem, 1px);
+  clip: rect(.1rem, .1rem, .1rem, .1rem);
   position: absolute !important;
   white-space: nowrap;
   @include square(.1rem);

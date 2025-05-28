@@ -33,12 +33,12 @@ class EFA_Widget_Testimonial_Slider extends Widget_Base {
 
 	// widget style dependencies
 	public function get_style_depends(): array {
-		return [ 'owl.carousel' ];
+		return [ 'swiper' ];
 	}
 
 	// widget scripts dependencies
 	public function get_script_depends(): array {
-		return [ 'owl.carousel', 'efa-elementor-script' ];
+		return [ 'swiper', 'efa-elementor-script' ];
 	}
 
 	// widget controls
@@ -161,6 +161,18 @@ class EFA_Widget_Testimonial_Slider extends Widget_Base {
 		);
 
 		$this->add_control(
+			'speed',
+			[
+				'label'   => esc_html__( 'Tốc độ trượt (ms)', 'essential-features-addon' ),
+				'type'    => Controls_Manager::NUMBER,
+				'default' => 600,
+				'min'     => 100,
+				'max'     => 5000,
+				'step'    => 50,
+			]
+		);
+
+		$this->add_control(
 			'navigation',
 			[
 				'label'   => esc_html__( 'Thanh điều hướng', 'essential-features-addon' ),
@@ -183,54 +195,59 @@ class EFA_Widget_Testimonial_Slider extends Widget_Base {
 	protected function render(): void {
 		$settings = $this->get_settings_for_display();
 
-		$data_settings_owl = [
-			'items'    => 1,
+		$data_settings_swiper = [
+            'slidesPerView' => 1,
 			'loop'     => ( 'yes' === $settings['loop'] ),
-			'nav'      => $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows',
-			'dots'     => $settings['navigation'] == 'both' || $settings['navigation'] == 'dots',
-			'autoplay' => ( 'yes' === $settings['autoplay'] )
+			'autoplay' => ( 'yes' === $settings['autoplay'] ) ? [ 'delay' => 4000, 'disableOnInteraction' => false ] : false,
+			'speed'    => intval( $settings['speed'] ),
+			'navigation' => ( $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows' ),
+			'pagination' => ( $settings['navigation'] == 'both' || $settings['navigation'] == 'dots' ),
 		];
-		?>
-
-        <div class="efa-addon-testimonial-slider">
-            <div class="custom-owl-carousel owl-carousel owl-theme"
-                 data-settings-owl='<?php echo wp_json_encode( $data_settings_owl ); ?>'>
-				<?php
-				foreach ( $settings['list'] as $item ) :
-					$imageId = $item['list_image']['id'];
-					?>
-
-                    <div class="item text-center elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
+    ?>
+        <div class="efa-addon-testimonial-slider swiper custom-swiper-slider" data-settings-swiper='<?php echo esc_attr( wp_json_encode($data_settings_swiper) ); ?>'>
+            <div class="swiper-wrapper">
+                <?php
+                foreach ( $settings['list'] as $item ) :
+                    $imageId = $item['list_image']['id'];
+                ?>
+                    <div class="item swiper-slide elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
                         <div class="item__image">
-							<?php
-							if ( $imageId ) :
-								echo wp_get_attachment_image( $item['list_image']['id'], $settings['image_size'] );
-							else:
-								?>
+                            <?php
+                            if ( $imageId ) :
+                                echo wp_get_attachment_image( $item['list_image']['id'], $settings['image_size'] );
+                            else:
+                                ?>
                                 <img src="<?php echo esc_url( EFA_PLUGIN_URL . 'assets/images/user-avatar.png' ); ?>"
                                      alt="<?php echo esc_attr( $item['list_title'] ); ?>"/>
-							<?php endif; ?>
+                            <?php endif; ?>
                         </div>
 
                         <div class="item__content">
                             <div class="desc">
-								<?php echo wp_kses_post( $item['list_description'] ) ?>
+                                <?php echo wp_kses_post( $item['list_description'] ) ?>
                             </div>
 
                             <div class="name">
-								<?php echo esc_html( $item['list_title'] ); ?>
+                                <?php echo esc_html( $item['list_title'] ); ?>
                             </div>
 
                             <div class="position">
-								<?php echo esc_html( $item['list_position'] ); ?>
+                                <?php echo esc_html( $item['list_position'] ); ?>
                             </div>
                         </div>
                     </div>
-
-				<?php endforeach; ?>
+                <?php endforeach; ?>
             </div>
-        </div>
 
-		<?php
+	        <?php if ( $settings['navigation'] == 'both' || $settings['navigation'] == 'dots' ) : ?>
+                <div class="swiper-pagination"></div>
+	        <?php endif; ?>
+
+	        <?php if ( $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows' ) : ?>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+	        <?php endif; ?>
+        </div>
+    <?php
 	}
 }

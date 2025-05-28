@@ -1,11 +1,13 @@
 @import "../../../../shared/scss/abstracts/abstracts";
 @import "../abstracts/abstracts";
 
-.element-testimonial-slider {
+.efa-addon-testimonial-slider {
   --#{$prefix-plugin-essentials}fs-name: #{map-get($mt-font-sizes, md)};
   --#{$prefix-plugin-essentials}fw-name: #{map-get($mt-font-weights, bold)};
 
   .item {
+    text-align: center;
+
     &__image {
       width: 15rem;
       margin: 0 auto 1.2rem;

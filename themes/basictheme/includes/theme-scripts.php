@@ -19,9 +19,8 @@ function basictheme_remove_jquery_migrate( $scripts ): void {
 	}
 }
 
-// load libs front-end style +scrip
-add_action('wp_enqueue_scripts', 'basictheme_front_end_libs', 5);
-function basictheme_front_end_libs(): void {
+// Remove WordPress block library CSS from loading on the front-end
+function basictheme_remove_wp_block_library_css(): void {
 	// remove style gutenberg
 	wp_dequeue_style('wp-block-library');
 	wp_dequeue_style('wp-block-library-theme');
@@ -29,17 +28,21 @@ function basictheme_front_end_libs(): void {
 
 	wp_dequeue_style('wc-blocks-style');
 	wp_dequeue_style('storefront-gutenberg-blocks');
-
-	// font google
-	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Roboto+Slab:wght@400;500;700&display=swap', array(), null );
-
-	// bootstrap css
-	wp_enqueue_style( 'bootstrap', get_theme_file_uri( '/assets/libs/bootstrap/bootstrap.min.css' ), array(), null );
-	wp_enqueue_script( 'bootstrap', get_theme_file_uri( '/assets/libs/bootstrap/bootstrap.bundle.min.js' ), array('jquery'), null, true );
-
-	// fontawesome
-	wp_enqueue_style( 'fontawesome', get_theme_file_uri( '/assets/libs/fontawesome/css/fontawesome.min.css' ), array(), '6.7.2' );
 }
+add_action( 'wp_enqueue_scripts', 'basictheme_remove_wp_block_library_css', 100 );
+
+// Load preconnect and preload for fonts and fontawesome
+add_action( 'wp_head', function() {
+	// Preconnect and preload for Google Fonts
+	echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
+	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+	echo '<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Roboto+Slab:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">';
+
+	// Preconnect and preload for Font Awesome
+	echo '<link rel="preconnect" href="https://cdnjs.cloudflare.com">';
+	echo '<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>';
+	echo '<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">';
+}, 5);
 
 // load front-end styles
 add_action('wp_enqueue_scripts', 'basictheme_front_end_scripts', 22);
@@ -47,20 +50,20 @@ function basictheme_front_end_scripts (): void {
 	/** Load css **/
 
 	// style theme
-	wp_enqueue_style( 'basictheme-style', get_theme_file_uri( '/assets/css/style-theme.min.css' ), array(), basictheme_get_version_theme() );
+	wp_enqueue_style( 'basictheme-style', get_theme_file_uri( '/assets/css/style-theme.bundle.min.css' ), array(), basictheme_get_version_theme() );
 
 	// style post
 	if ( basictheme_is_blog() ) {
-		wp_enqueue_style( 'category-post', get_theme_file_uri( '/assets/css/post-type/post/archive.min.css' ), array(), basictheme_get_version_theme() );
+		wp_enqueue_style( 'basictheme-category-post', get_theme_file_uri( '/assets/css/post-type/post/archive.min.css' ), array(), basictheme_get_version_theme() );
 	}
 
 	if (is_singular('post')) {
-		wp_enqueue_style( 'single-post', get_theme_file_uri( '/assets/css/post-type/post/single.min.css' ), array(), basictheme_get_version_theme() );
+		wp_enqueue_style( 'basictheme-single-post', get_theme_file_uri( '/assets/css/post-type/post/single.min.css' ), array(), basictheme_get_version_theme() );
 	}
 
 	// style page 404
 	if ( is_404() ) {
-		wp_enqueue_style( 'page-404', get_theme_file_uri( '/assets/css/page-templates/page-404.min.css' ), array(), basictheme_get_version_theme() );
+		wp_enqueue_style( 'basictheme-page-404', get_theme_file_uri( '/assets/css/page-templates/page-404.min.css' ), array(), basictheme_get_version_theme() );
 	}
 
 	/** Load js **/
@@ -70,5 +73,5 @@ function basictheme_front_end_scripts (): void {
 	}
 
 	// custom js
-	wp_enqueue_script( 'basictheme-custom', get_theme_file_uri( '/assets/js/custom.min.js' ), array('jquery'), basictheme_get_version_theme(), true );
+	wp_enqueue_script( 'basictheme-main', get_theme_file_uri( '/assets/js/main.bundle.min.js' ), array('jquery'), basictheme_get_version_theme(), true );
 }

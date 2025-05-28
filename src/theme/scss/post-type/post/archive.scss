@@ -1,9 +1,6 @@
 @import "../../../../shared/scss/abstracts/abstracts";
 
 .content-archive-post {
-  display: grid;
-  grid-gap: 2.4rem;
-
   .item {
     padding: 2.5rem 1.5rem 1.5rem;
     border: .1rem solid $var-primary-color;
@@ -107,44 +104,5 @@
         padding: 0 .5rem;
       }
     }
-  }
-
-  @media (min-width: 1200px) {
-    &.grid-sidebar-col-3 {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    &.grid-sidebar-col-4 {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
-  @media (min-width: 992px) {
-    &.grid-col-3 {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    &.grid-col-4 {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
-  @media (min-width: 768px) and (max-width: 1199px) {
-    &.grid-sidebar-col-3,
-    &.grid-sidebar-col-4 {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 768px) and ( max-width: 991px ) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 576px) and ( max-width: 767px ) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 575px) {
-    grid-template-columns: 1fr;
   }
 }

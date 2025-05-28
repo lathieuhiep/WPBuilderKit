@@ -1,3 +1,5 @@
+$image-path: "../images";
+
 :root {
   --background: #f8f9fd;
   --color: #000;
@@ -30,6 +32,12 @@ body {
   h1 a:focus {
     outline: none;
     box-shadow: none;
+  }
+
+  .wp-login-logo {
+    a {
+      background-image: url("#{$image-path}/logo-login.png");
+    }
   }
 
   form {

@@ -53,20 +53,24 @@
       display: flex;
       flex-flow: row wrap;
 
+      &::before,
+      &::after {
+        display: none;
+      }
+
       li {
-        --column-product: 100%;
-
-        width: var(--column-product);
-
         &.first {
           clear: none;
         }
 
         &.product {
+          --column-product: 100%;
+
           float: none;
           margin: 0 0 1.6rem;
           padding: 0 1.6rem;
           display: flex;
+          width: var(--column-product) !important;
 
           .onsale {
             top: 1.6rem;

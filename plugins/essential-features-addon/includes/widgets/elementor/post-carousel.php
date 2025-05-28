@@ -86,9 +86,9 @@ class EFA_Widget_Post_Carousel extends Widget_Base {
 			[
 				'label'   => esc_html__( 'Sắp xếp theo', 'essential-features-addon' ),
 				'type'    => Controls_Manager::SELECT,
-				'default' => 'id',
+				'default' => 'ID',
 				'options' => [
-					'id'    => esc_html__( 'ID', 'essential-features-addon' ),
+					'ID'    => esc_html__( 'ID', 'essential-features-addon' ),
 					'title' => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
 					'date'  => esc_html__( 'Ngày đăng', 'essential-features-addon' ),
 					'rand'  => esc_html__( 'Ngẫu nhiên', 'essential-features-addon' ),
@@ -609,9 +609,18 @@ class EFA_Widget_Post_Carousel extends Widget_Base {
 			'posts_per_page'      => $limit_post,
 			'orderby'             => $order_by_post,
 			'order'               => $order_post,
-			'cat'                 => $cat_post,
 			'ignore_sticky_posts' => 1,
 		);
+
+		if ( ! empty( $cat_post ) && is_array( $cat_post ) ) {
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'category',
+					'field'    => 'term_id',
+					'terms'    => $cat_post,
+				),
+			);
+		}
 
 		$query = new WP_Query( $args );
 
@@ -630,7 +639,7 @@ class EFA_Widget_Post_Carousel extends Widget_Base {
 										the_post_thumbnail( $settings['image_size'] );
 									else:
 										?>
-                                        <img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/no-image.png' ) ) ?>"
+                                        <img src="<?php echo esc_url( EFA_PLUGIN_URL . 'assets/images/no-image.png' ); ?>"
                                              alt="<?php the_title(); ?>"/>
 									<?php endif; ?>
                                 </a>

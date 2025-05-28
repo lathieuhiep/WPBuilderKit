@@ -1,13 +1,9 @@
 <?php
-/**
- * Widget Name: Social Widget
- */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class BasicTheme_Social_Widget extends WP_Widget {
+class MyTheme_Social_Widget extends WP_Widget {
 	/* Widget setup */
 	public function __construct() {
 		$basictheme_social_widget_ops = array(
@@ -86,7 +82,7 @@ class BasicTheme_Social_Widget extends WP_Widget {
 
 // Register social widget
 function basictheme_register_social_widget(): void {
-	register_widget( 'BasicTheme_Social_Widget' );
+	register_widget( 'MyTheme_Social_Widget' );
 }
 
 add_action( 'widgets_init', 'basictheme_register_social_widget' );

@@ -3,11 +3,6 @@ $sidebar = basictheme_get_option('opt_post_cat_sidebar_position', 'right');
 $per_row = basictheme_get_option('opt_post_cat_per_row', '2');
 
 $class_col_content = basictheme_col_use_sidebar($sidebar, 'sidebar-main');
-
-$grid_col = 'grid-col-' . $per_row;
-if ( $sidebar !== 'hide' ) {
-    $grid_col = 'grid-sidebar-col-' . $per_row;
-}
 ?>
 
 <div class="site-container archive-post-warp">
@@ -15,7 +10,7 @@ if ( $sidebar !== 'hide' ) {
         <div class="row">
             <div class="<?php echo esc_attr( $class_col_content ); ?>">
                 <?php if ( have_posts() ) : ?>
-                    <div class="content-archive-post <?php echo esc_attr( $grid_col ); ?>">
+                    <div class="content-archive-post gap-6 theme-row-cols-sm-1 theme-row-cols-md-2 theme-row-cols-lg-<?php echo esc_attr( $per_row ); ?>">
 		                <?php
 		                while ( have_posts() ) :
 			                the_post();

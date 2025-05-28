@@ -2,7 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-class BasicTheme_Contact_Info_Widget extends WP_Widget {
+class MyTheme_Contact_Info_Widget extends WP_Widget {
 	public function __construct() {
 		$widget_ops = array(
 			'classname'   => 'contact-info-widget',
@@ -88,7 +88,7 @@ class BasicTheme_Contact_Info_Widget extends WP_Widget {
 }
 
 function basictheme_register_contact_info_widget(): void {
-	register_widget( 'BasicTheme_Contact_Info_Widget' );
+	register_widget( 'MyTheme_Contact_Info_Widget' );
 }
 
 add_action( 'widgets_init', 'basictheme_register_contact_info_widget' );

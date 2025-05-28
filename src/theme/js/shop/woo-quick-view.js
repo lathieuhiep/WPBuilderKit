@@ -1,6 +1,4 @@
-/**
- * Quick view product
- */
+import 'owl.carousel';
 
 (function ($) {
     "use strict";

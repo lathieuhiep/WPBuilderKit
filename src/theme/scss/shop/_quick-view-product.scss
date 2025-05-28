@@ -21,9 +21,6 @@
 .modal {
   &.mode-quick-view-product {
     .modal-dialog {
-      top: 50%;
-      transform: translateY(-50%);
-
       .modal-body {
         min-height: 10rem;
       }

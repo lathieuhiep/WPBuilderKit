@@ -3,9 +3,10 @@
  * Action
  * */
 
-//Disable emojis in WordPress
-add_action( 'init', 'basictheme_disable_emojis' );
-function basictheme_disable_emojis(): void {
+// optimize WordPress
+add_action('init', 'basictheme_optimize_wordpress');
+function basictheme_optimize_wordpress(): void {
+	// Disable WordPress Emoji
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 	remove_action( 'wp_print_styles', 'print_emoji_styles' );
@@ -14,6 +15,17 @@ function basictheme_disable_emojis(): void {
 	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
 	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
 	add_filter( 'tiny_mce_plugins', 'basictheme_disable_emojis_tinymce' );
+
+	// Disable WordPress REST API links
+	remove_action('wp_head', 'rest_output_link_wp_head');
+	remove_action('template_redirect', 'rest_output_link_header', 11);
+
+	// Disable RSD link and WLW manifest link
+	remove_action('wp_head', 'rsd_link');
+	remove_action('wp_head', 'wlwmanifest_link');
+
+	// Disable WordPress version
+	remove_action('wp_head', 'wp_generator');
 }
 
 function basictheme_disable_emojis_tinymce( $plugins ): array {
@@ -58,6 +70,9 @@ add_action('wp_footer', 'basictheme_custom_footer_code');
  * Filter
  * */
 
+// disable WordPress xmlrpc
+add_filter('xmlrpc_enabled', '__return_false');
+
 // disable gutenberg editor
 add_filter("use_block_editor_for_post_type", "disable_gutenberg_editor");
 function disable_gutenberg_editor(): bool {
@@ -77,24 +92,4 @@ function basictheme_add_arrow( $output, $item, $depth, $args ){
 	}
 
 	return $output;
-}
-
-// add async file scrip
-add_filter('script_loader_tag', 'add_async_attribute', 10, 2);
-function add_async_attribute($tag, $handle) {
-	$async_scripts = array(
-		'bootstrap.bundle.min.js',
-		'owl.carousel.min.js',
-		'custom.min.js'
-	);
-
-	$src = wp_scripts()->registered[$handle]->src;
-
-	foreach ($async_scripts as $async_script) {
-		if ( str_contains( $src, $async_script ) ) {
-			return str_replace(' src', ' async="async" src', $tag);
-		}
-	}
-
-	return $tag;
 }

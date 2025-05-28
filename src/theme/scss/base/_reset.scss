@@ -23,8 +23,10 @@ a {
 }
 
 p {
-  &:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
+
+  + p {
+    margin-top: var(--#{$prefix-theme}spacing-3);
   }
 }
 
@@ -55,6 +57,12 @@ button {
   @extend %outline-none;
 }
 
-input, button, textarea {
-  padding: var(--#{$prefix-theme}spacing-1) var(--#{$prefix-theme}spacing-6);
+input, button {
+  min-height: 4rem;
+  padding-left: var(--#{$prefix-theme}spacing-3);
+  padding-right: var(--#{$prefix-theme}spacing-3);
+}
+
+textarea {
+  padding: var(--#{$prefix-theme}spacing-3);
 }

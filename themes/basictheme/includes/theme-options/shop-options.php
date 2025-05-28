@@ -46,7 +46,7 @@ CSF::createSection( $prefix_theme_options, array(
 				'4' => esc_html__( '4', 'basictheme' ),
 				'5' => esc_html__( '5', 'basictheme' ),
 			),
-			'default' => '4'
+			'default' => '3'
 		),
 	)
 ) );

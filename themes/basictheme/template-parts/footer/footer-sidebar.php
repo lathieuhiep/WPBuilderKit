@@ -10,7 +10,16 @@ if( is_active_sidebar( 'sidebar-footer-column-1' ) || is_active_sidebar( 'sideba
 	            <?php
 	            for( $i = 0; $i < $opt_number_columns; $i++ ):
 		            $j = $i +1;
-		            $cols = basictheme_get_option( 'opt_footer_column_width_' .  $j, 3);
+		            $cols = basictheme_get_option( 'opt_footer_column_width_' .  $j );
+
+                    if ( empty( $cols ) ) {
+                        $cols = [
+                            'sm' => 12,
+                            'md' => 6,
+                            'lg' => 3,
+                            'xl' => 3
+                        ];
+                    }
 
 		            if( is_active_sidebar( 'sidebar-footer-column-'.$j ) ):
 			            ?>

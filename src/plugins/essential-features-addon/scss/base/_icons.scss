@@ -23,7 +23,7 @@
     }
 
     &-right {
-      @include mask-image("#{$icon-path}/angle-left.svg");
+      @include mask-image("#{$icon-path}/angle-right.svg");
     }
   }
 }

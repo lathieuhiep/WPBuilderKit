@@ -1,0 +1,30 @@
+@import "../../../../shared/scss/abstracts/abstracts";
+@import "../abstracts/abstracts";
+
+.#{$prefix-plugin-essentials}grid-layout {
+  display: grid;
+}
+
+.#{$prefix-plugin-essentials}custom-swiper-slider {
+  &.is-initializing {
+    visibility: hidden;
+    height: auto;
+  }
+
+  .swiper-pagination {
+    position: static;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    &:after {
+      display: none;
+    }
+  }
+}
+
+.#{$prefix-plugin-essentials}equal-height {
+  .swiper-slide {
+    @include flex-column;
+  }
+}

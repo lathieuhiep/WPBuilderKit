@@ -1,5 +1,6 @@
 <?php
 
+use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Elementor\Utils;
 use Elementor\Widget_Base;
@@ -165,7 +166,7 @@ class EFA_Widget_Testimonial_Slider extends Widget_Base {
 			[
 				'label'   => esc_html__( 'Tốc độ trượt (ms)', 'essential-features-addon' ),
 				'type'    => Controls_Manager::NUMBER,
-				'default' => 600,
+				'default' => 800,
 				'min'     => 100,
 				'max'     => 5000,
 				'step'    => 50,
@@ -189,6 +190,98 @@ class EFA_Widget_Testimonial_Slider extends Widget_Base {
 
 		$this->end_controls_section();
 
+		// Style title
+		$this->start_controls_section(
+			'style_title',
+			[
+				'label' => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
+				'tab'   => Controls_Manager::TAB_STYLE
+			]
+		);
+
+        $this->add_control(
+            'title_color',
+            [
+                'label'     => esc_html__( 'Màu sắc', 'essential-features-addon' ),
+                'type'      => Controls_Manager::COLOR,
+                'default'   => '',
+                'selectors' => [
+                    '{{WRAPPER}} .item__content .name' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'title_typography',
+				'selector' => '{{WRAPPER}} .item__content .name',
+			]
+		);
+
+		$this->end_controls_section();
+
+		// Style position
+		$this->start_controls_section(
+			'style_position',
+			[
+				'label' => esc_html__( 'Vị trí', 'essential-features-addon' ),
+				'tab'   => Controls_Manager::TAB_STYLE
+			]
+		);
+
+		$this->add_control(
+			'position_color',
+			[
+				'label'     => esc_html__( 'Màu sắc', 'essential-features-addon' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
+					'{{WRAPPER}} .item__content .position' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'position_typography',
+				'selector' => '{{WRAPPER}} .item__content .position',
+			]
+		);
+
+		$this->end_controls_section();
+
+		// Style desc
+		$this->start_controls_section(
+			'style_desc',
+			[
+				'label' => esc_html__( 'Văn bản', 'essential-features-addon' ),
+				'tab'   => Controls_Manager::TAB_STYLE
+			]
+		);
+
+		$this->add_control(
+			'desc_color',
+			[
+				'label'     => esc_html__( 'Màu sắc', 'essential-features-addon' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => [
+					'{{WRAPPER}} .item__content .desc' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'desc_typography',
+				'selector' => '{{WRAPPER}} .item__content .desc',
+			]
+		);
+
+		$this->end_controls_section();
 	}
 
 	// widget output on the frontend
@@ -196,15 +289,16 @@ class EFA_Widget_Testimonial_Slider extends Widget_Base {
 		$settings = $this->get_settings_for_display();
 
 		$data_settings_swiper = [
-            'slidesPerView' => 1,
-			'loop'     => ( 'yes' === $settings['loop'] ),
-			'autoplay' => ( 'yes' === $settings['autoplay'] ) ? [ 'delay' => 4000, 'disableOnInteraction' => false ] : false,
-			'speed'    => intval( $settings['speed'] ),
-			'navigation' => ( $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows' ),
-			'pagination' => ( $settings['navigation'] == 'both' || $settings['navigation'] == 'dots' ),
+			'slidesPerView' => 1,
+			'loop'          => ( 'yes' === $settings['loop'] ),
+			'autoplay'      => ( 'yes' === $settings['autoplay'] ),
+			'speed'         => intval( $settings['speed'] ),
+			'navigation'    => ( $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows' ),
+			'pagination'    => ( $settings['navigation'] == 'both' || $settings['navigation'] == 'dots' ),
 		];
+		$swiperOptions = wp_json_encode( $data_settings_swiper );
     ?>
-        <div class="efa-addon-testimonial-slider swiper custom-swiper-slider" data-settings-swiper='<?php echo esc_attr( wp_json_encode($data_settings_swiper) ); ?>'>
+        <div class="efa-addon-testimonial-slider swiper efa-custom-swiper-slider" data-settings-swiper='<?php echo esc_attr( $swiperOptions ); ?>'>
             <div class="swiper-wrapper">
                 <?php
                 foreach ( $settings['list'] as $item ) :
@@ -244,8 +338,13 @@ class EFA_Widget_Testimonial_Slider extends Widget_Base {
 	        <?php endif; ?>
 
 	        <?php if ( $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows' ) : ?>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev">
+                    <i class="efa-icon-mask efa-icon-mask-angle-left"></i>
+                </div>
+
+                <div class="swiper-button-next">
+                    <i class="efa-icon-mask efa-icon-mask-angle-right"></i>
+                </div>
 	        <?php endif; ?>
         </div>
     <?php

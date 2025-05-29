@@ -34,12 +34,12 @@ class EFA_Widget_Slides extends Widget_Base {
 
 	// widget style dependencies
 	public function get_style_depends(): array {
-		return [ 'owl.carousel' ];
+		return [ 'swiper' ];
 	}
 
 	// widget scripts dependencies
 	public function get_script_depends(): array {
-		return [ 'owl.carousel', 'efa-elementor-script' ];
+		return [ 'swiper', 'efa-elementor-script' ];
 	}
 
 	// widget controls
@@ -66,7 +66,7 @@ class EFA_Widget_Slides extends Widget_Base {
 					'url' => Utils::get_placeholder_image_src(),
 				],
 				'selectors' => [
-					'{{WRAPPER}} {{CURRENT_ITEM}} .element-slides__item--bg' => 'background-image: url({{URL}})',
+					'{{WRAPPER}} {{CURRENT_ITEM}} .efa-addon-slides__item--bg' => 'background-image: url({{URL}})',
 				],
 			]
 		);
@@ -83,7 +83,7 @@ class EFA_Widget_Slides extends Widget_Base {
 					'auto'    => esc_html__( 'Auto', 'essential-features-addon' ),
 				],
 				'selectors'  => [
-					'{{WRAPPER}} {{CURRENT_ITEM}} .element-slides__item--bg' => 'background-size: {{VALUE}}',
+					'{{WRAPPER}} {{CURRENT_ITEM}} .efa-addon-slides__item--bg' => 'background-size: {{VALUE}}',
 				],
 				'conditions' => [
 					'terms' => [
@@ -131,7 +131,7 @@ class EFA_Widget_Slides extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} {{CURRENT_ITEM}} .element-slides__item--inner .element-slides__item--overlay' => 'background-color: {{VALUE}}',
+					'{{WRAPPER}} {{CURRENT_ITEM}} .efa-addon-slides__item--inner .efa-addon-slides__item--overlay' => 'background-color: {{VALUE}}',
 				],
 			]
 		);
@@ -228,7 +228,7 @@ class EFA_Widget_Slides extends Widget_Base {
 					],
 				],
 				'selectors'            => [
-					'{{WRAPPER}} {{CURRENT_ITEM}} .element-slides__item--inner .element-slides__item--content' => '{{VALUE}}',
+					'{{WRAPPER}} {{CURRENT_ITEM}} .efa-addon-slides__item--inner .efa-addon-slides__item--content' => '{{VALUE}}',
 				],
 				'selectors_dictionary' => [
 					'left'   => 'margin-right: auto',
@@ -267,7 +267,7 @@ class EFA_Widget_Slides extends Widget_Base {
 					],
 				],
 				'selectors'            => [
-					'{{WRAPPER}} {{CURRENT_ITEM}} .element-slides__item--inner' => 'align-items: {{VALUE}}; -webkit-align-items: {{VALUE}};',
+					'{{WRAPPER}} {{CURRENT_ITEM}} .efa-addon-slides__item--inner' => 'align-items: {{VALUE}}; -webkit-align-items: {{VALUE}};',
 				],
 				'selectors_dictionary' => [
 					'top'    => 'flex-start',
@@ -306,7 +306,7 @@ class EFA_Widget_Slides extends Widget_Base {
 					],
 				],
 				'selectors'   => [
-					'{{WRAPPER}} {{CURRENT_ITEM}} .element-slides__item--inner' => 'text-align: {{VALUE}}',
+					'{{WRAPPER}} {{CURRENT_ITEM}} .efa-addon-slides__item--inner' => 'text-align: {{VALUE}}',
 				],
 				'conditions'  => [
 					'terms' => [
@@ -367,7 +367,7 @@ class EFA_Widget_Slides extends Widget_Base {
 				],
 				'size_units' => [ 'px', 'vh', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .element-slides__item' => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .efa-addon-slides__item' => 'height: {{SIZE}}{{UNIT}};',
 				],
 				'separator'  => 'before',
 			]
@@ -408,26 +408,29 @@ class EFA_Widget_Slides extends Widget_Base {
 		);
 
 		$this->add_control(
-			'nav',
+			'speed',
 			[
-				'label'        => esc_html__( 'nav Slider', 'essential-features-addon' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Có', 'essential-features-addon' ),
-				'label_off'    => esc_html__( 'Không', 'essential-features-addon' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
+				'label'   => esc_html__( 'Tốc độ trượt (ms)', 'essential-features-addon' ),
+				'type'    => Controls_Manager::NUMBER,
+				'default' => 800,
+				'min'     => 100,
+				'max'     => 5000,
+				'step'    => 50,
 			]
 		);
 
 		$this->add_control(
-			'dots',
+			'navigation',
 			[
-				'label'        => esc_html__( 'Dots Slider', 'essential-features-addon' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Có', 'essential-features-addon' ),
-				'label_off'    => esc_html__( 'Không', 'essential-features-addon' ),
-				'return_value' => 'yes',
-				'default'      => 'no',
+				'label'   => esc_html__( 'Thanh điều hướng', 'essential-features-addon' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'arrows',
+				'options' => [
+					'both'   => esc_html__( 'Mũi tên và Dấu chấm', 'essential-features-addon' ),
+					'arrows' => esc_html__( 'Mũi tên', 'essential-features-addon' ),
+					'dots'   => esc_html__( 'Dấu chấm', 'essential-features-addon' ),
+					'none'   => esc_html__( 'Không', 'essential-features-addon' ),
+				],
 			]
 		);
 
@@ -468,7 +471,7 @@ class EFA_Widget_Slides extends Widget_Base {
 					'unit' => '%',
 				],
 				'selectors'      => [
-					'{{WRAPPER}} .element-slides__item .element-slides__item--content' => 'max-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--content' => 'max-width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -480,7 +483,7 @@ class EFA_Widget_Slides extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .element-slides__item .element-slides__item--inner' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--inner' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -506,7 +509,7 @@ class EFA_Widget_Slides extends Widget_Base {
 						'icon'  => 'eicon-h-align-right',
 					],
 				],
-				'prefix_class' => 'element-slides--h-position-',
+				'prefix_class' => 'efa-addon-slides--h-position-',
 			]
 		);
 
@@ -531,7 +534,7 @@ class EFA_Widget_Slides extends Widget_Base {
 						'icon'  => 'eicon-v-align-bottom',
 					],
 				],
-				'prefix_class' => 'element-slides--v-position-',
+				'prefix_class' => 'efa-addon-slides--v-position-',
 			]
 		);
 
@@ -559,7 +562,7 @@ class EFA_Widget_Slides extends Widget_Base {
 				],
 				'default'     => 'center',
 				'selectors'   => [
-					'{{WRAPPER}} .element-slides__item--inner' => 'text-align: {{VALUE}}',
+					'{{WRAPPER}} .efa-addon-slides__item--inner' => 'text-align: {{VALUE}}',
 				],
 			]
 		);
@@ -586,7 +589,7 @@ class EFA_Widget_Slides extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .element-slides__item .element-slides__item--heading' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--heading' => 'margin-bottom: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
@@ -597,7 +600,7 @@ class EFA_Widget_Slides extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .element-slides__item .element-slides__item--heading' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--heading' => 'color: {{VALUE}}',
 
 				],
 			]
@@ -607,7 +610,7 @@ class EFA_Widget_Slides extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'heading_typography',
-				'selector' => '{{WRAPPER}} .element-slides__item .element-slides__item--heading',
+				'selector' => '{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--heading',
 			]
 		);
 
@@ -633,7 +636,7 @@ class EFA_Widget_Slides extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .element-slides__item .element-slides__item--description' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--description' => 'margin-bottom: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
@@ -644,7 +647,7 @@ class EFA_Widget_Slides extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .element-slides__item .element-slides__item--description' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--description' => 'color: {{VALUE}}',
 
 				],
 			]
@@ -654,7 +657,7 @@ class EFA_Widget_Slides extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'description_typography',
-				'selector' => '{{WRAPPER}} .element-slides__item .element-slides__item--description',
+				'selector' => '{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--description',
 			]
 		);
 
@@ -673,7 +676,7 @@ class EFA_Widget_Slides extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .element-slides__item .element-slides__item--link, {{WRAPPER}} .element-slides__item .element-slides__item--link a' => 'color: {{VALUE}}; border-color: {{VALUE}}',
+					'{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--link, {{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--link a' => 'color: {{VALUE}}; border-color: {{VALUE}}',
 				],
 			]
 		);
@@ -682,7 +685,7 @@ class EFA_Widget_Slides extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'button_typography',
-				'selector' => '{{WRAPPER}} .element-slides__item .element-slides__item--link',
+				'selector' => '{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--link',
 			]
 		);
 
@@ -698,7 +701,7 @@ class EFA_Widget_Slides extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .element-slides__item .element-slides__item--link' => 'border-width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--link' => 'border-width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -715,7 +718,7 @@ class EFA_Widget_Slides extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .element-slides__item .element-slides__item--link' => 'border-radius: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--link' => 'border-radius: {{SIZE}}{{UNIT}};',
 				],
 				'separator' => 'after',
 			]
@@ -731,7 +734,7 @@ class EFA_Widget_Slides extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .element-slides__item .element-slides__item--link, {{WRAPPER}} .element-slides__item .element-slides__item--link a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--link, {{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--link a' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -742,7 +745,7 @@ class EFA_Widget_Slides extends Widget_Base {
 				'label'     => esc_html__( 'Background Color', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .element-slides__item .element-slides__item--link' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--link' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -753,7 +756,7 @@ class EFA_Widget_Slides extends Widget_Base {
 				'label'     => esc_html__( 'Border Color', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .element-slides__item .element-slides__item--link' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--link' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -768,7 +771,7 @@ class EFA_Widget_Slides extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .element-slides__item .element-slides__item--link:hover, {{WRAPPER}} .element-slides__item .element-slides__item--link a:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--link:hover, {{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--link a:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -779,7 +782,7 @@ class EFA_Widget_Slides extends Widget_Base {
 				'label'     => esc_html__( 'Background Color', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .element-slides__item .element-slides__item--link:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--link:hover' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -790,7 +793,7 @@ class EFA_Widget_Slides extends Widget_Base {
 				'label'     => esc_html__( 'Border Color', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .element-slides__item .element-slides__item--link:hover' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .efa-addon-slides__item .efa-addon-slides__item--link:hover' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -800,251 +803,85 @@ class EFA_Widget_Slides extends Widget_Base {
 		$this->end_controls_tabs();
 
 		$this->end_controls_section();
-
-		$this->start_controls_section(
-			'section_style_navigation',
-			[
-				'label'      => esc_html__( 'Navigation', 'essential-features-addon' ),
-				'tab'        => Controls_Manager::TAB_STYLE,
-				'conditions' => [
-					'relation' => 'or',
-					'terms'    => [
-						[
-							'name'  => 'nav',
-							'value' => 'yes',
-						],
-						[
-							'name'  => 'dots',
-							'value' => 'yes',
-						],
-					],
-				],
-			]
-		);
-
-		$this->add_control(
-			'heading_style_arrows',
-			[
-				'label'      => esc_html__( 'Arrows', 'essential-features-addon' ),
-				'type'       => Controls_Manager::HEADING,
-				'separator'  => 'before',
-				'conditions' => [
-					'terms' => [
-						[
-							'name'  => 'nav',
-							'value' => 'yes',
-						],
-					],
-				],
-			]
-		);
-
-		$this->add_control(
-			'arrows_size',
-			[
-				'label'      => esc_html__( 'Arrows Size', 'essential-features-addon' ),
-				'type'       => Controls_Manager::SLIDER,
-				'range'      => [
-					'px' => [
-						'min' => 10,
-						'max' => 60,
-					],
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .element-slides.owl-carousel .owl-nav button i.fa' => 'font-size: {{SIZE}}{{UNIT}};',
-				],
-				'conditions' => [
-					'terms' => [
-						[
-							'name'  => 'nav',
-							'value' => 'yes',
-						],
-					],
-				],
-			]
-		);
-
-		$this->add_control(
-			'arrows_color',
-			[
-				'label'      => esc_html__( 'Arrows Color', 'essential-features-addon' ),
-				'type'       => Controls_Manager::COLOR,
-				'selectors'  => [
-					'{{WRAPPER}} .element-slides.owl-carousel .owl-nav button i.fa' => 'color: {{VALUE}};',
-				],
-				'conditions' => [
-					'terms' => [
-						[
-							'name'  => 'nav',
-							'value' => 'yes',
-						],
-					],
-				],
-			]
-		);
-
-		$this->add_control(
-			'arrows_color_hover',
-			[
-				'label'      => esc_html__( 'Arrows Color Hover', 'essential-features-addon' ),
-				'type'       => Controls_Manager::COLOR,
-				'selectors'  => [
-					'{{WRAPPER}} .element-slides.owl-carousel .owl-nav button i.fa:hover' => 'color: {{VALUE}};',
-				],
-				'conditions' => [
-					'terms' => [
-						[
-							'name'  => 'nav',
-							'value' => 'yes',
-						],
-					],
-				],
-			]
-		);
-
-		$this->add_control(
-			'heading_style_dots',
-			[
-				'label'      => esc_html__( 'Dots', 'essential-features-addon' ),
-				'type'       => Controls_Manager::HEADING,
-				'separator'  => 'before',
-				'conditions' => [
-					'terms' => [
-						[
-							'name'  => 'dots',
-							'value' => 'yes',
-						],
-					],
-				],
-			]
-		);
-
-		$this->add_control(
-			'dots_size',
-			[
-				'label'      => esc_html__( 'Dots Size', 'essential-features-addon' ),
-				'type'       => Controls_Manager::SLIDER,
-				'range'      => [
-					'px' => [
-						'min' => 5,
-						'max' => 60,
-					],
-				],
-				'selectors'  => [
-					'{{WRAPPER}} .element-slides.owl-carousel .owl-dots .owl-dot span' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-				],
-				'conditions' => [
-					'terms' => [
-						[
-							'name'  => 'dots',
-							'value' => 'yes',
-						],
-					],
-				],
-			]
-		);
-
-		$this->add_control(
-			'dots_color',
-			[
-				'label'      => esc_html__( 'Dots Color', 'essential-features-addon' ),
-				'type'       => Controls_Manager::COLOR,
-				'selectors'  => [
-					'{{WRAPPER}} .element-slides.owl-carousel .owl-dots .owl-dot span' => 'background-color: {{VALUE}};',
-				],
-				'conditions' => [
-					'terms' => [
-						[
-							'name'  => 'dots',
-							'value' => 'yes',
-						],
-					],
-				],
-			]
-		);
-
-		$this->add_control(
-			'dots_color_hover',
-			[
-				'label'      => esc_html__( 'Dots Color Hover', 'essential-features-addon' ),
-				'type'       => Controls_Manager::COLOR,
-				'selectors'  => [
-					'{{WRAPPER}} .element-slides.owl-carousel .owl-dots .owl-dot.active span, {{WRAPPER}} .element-slides.owl-carousel .owl-dots .owl-dot:hover span' => 'background-color: {{VALUE}};',
-				],
-				'conditions' => [
-					'terms' => [
-						[
-							'name'  => 'dots',
-							'value' => 'yes',
-						],
-					],
-				],
-			]
-		);
-
-		$this->end_controls_section();
-
 	}
 
 	// widget output on the frontend
 	protected function render(): void {
 		$settings          = $this->get_settings_for_display();
-		$data_settings_owl = [
-			'items'    => 1,
-			'loop'     => ( 'yes' === $settings['loop'] ),
-			'autoplay' => ( 'yes' === $settings['autoplay'] ),
-			'nav'      => ( 'yes' === $settings['nav'] ),
-			'dots'     => ( 'yes' === $settings['dots'] ),
+
+		$data_settings_swiper = [
+			'slidesPerView' => 1,
+			'loop'          => ( 'yes' === $settings['loop'] ),
+			'autoplay'      => ( 'yes' === $settings['autoplay'] ),
+			'speed'         => intval( $settings['speed'] ),
+			'navigation'    => ( $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows' ),
+			'pagination'    => ( $settings['navigation'] == 'both' || $settings['navigation'] == 'dots' ),
 		];
-		?>
-        <div class="efa-addon-slides custom-owl-carousel owl-carousel owl-theme"
-             data-settings-owl='<?php echo wp_json_encode( $data_settings_owl ); ?>'>
-			<?php
-			foreach ( $settings['slides_list'] as $item ) :
-				$efa_slides_link = $item['link'];
-				?>
-                <div class="efa-addon-slides__item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
-                    <div class="efa-addon-slides__item--bg"></div>
+		$swiperOptions = wp_json_encode( $data_settings_swiper );
+    ?>
+        <div class="efa-addon-slides swiper efa-custom-swiper-slider" data-settings-swiper='<?php echo esc_attr( $swiperOptions ); ?>'>
+            <div class="swiper-wrapper">
+                <?php
+                foreach ( $settings['slides_list'] as $item ) :
+                    $efa_slides_link = $item['link'];
+                ?>
+                    <div class="efa-addon-slides__item swiper-slide elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
+                        <div class="efa-addon-slides__item--bg"></div>
 
-                    <div class="efa-addon-slides__item--inner">
-						<?php if ( $item['background_overlay'] == 'yes' ) : ?>
-                            <div class="efa-addon-slides__item--overlay"></div>
-						<?php
-						endif;
+                        <div class="efa-addon-slides__item--inner">
+                            <?php if ( $item['background_overlay'] == 'yes' ) : ?>
+                                <div class="efa-addon-slides__item--overlay"></div>
+                            <?php
+                            endif;
 
-						if ( $item['show_content'] == 'yes' ) :
-							?>
-                            <div class="efa-addon-slides__item--content">
-								<?php if ( ! empty( $item['heading'] ) ) : ?>
-                                    <div class="efa-addon-slides__item--heading">
-										<?php echo esc_html( $item['heading'] ); ?>
-                                    </div>
-								<?php endif; ?>
+                            if ( $item['show_content'] == 'yes' ) :
+                                ?>
+                                <div class="efa-addon-slides__item--content">
+                                    <?php if ( ! empty( $item['heading'] ) ) : ?>
+                                        <div class="efa-addon-slides__item--heading">
+                                            <?php echo esc_html( $item['heading'] ); ?>
+                                        </div>
+                                    <?php endif; ?>
 
-								<?php if ( ! empty( $item['description'] ) ) : ?>
-                                    <div class="efa-addon-slides__item--description">
-										<?php echo esc_html( $item['description'] ); ?>
-                                    </div>
-								<?php endif; ?>
+                                    <?php if ( ! empty( $item['description'] ) ) : ?>
+                                        <div class="efa-addon-slides__item--description">
+                                            <?php echo esc_html( $item['description'] ); ?>
+                                        </div>
+                                    <?php endif; ?>
 
-								<?php if ( ! empty( $item['button_text'] ) ) : ?>
-                                    <div class="efa-addon-slides__item--link">
-										<?php if ( ! empty( $efa_slides_link['url'] ) ) : ?>
-                                            <a href="<?php echo esc_url( $efa_slides_link['url'] ); ?>" <?php echo( $efa_slides_link['is_external'] ? 'target="_blank"' : '' ); ?>>
-												<?php echo esc_html( $item['button_text'] ); ?>
-                                            </a>
-										<?php
-										else:
-											echo esc_html( $item['button_text'] );
-										endif;
-										?>
-                                    </div>
-								<?php endif; ?>
-                            </div>
-						<?php endif; ?>
+                                    <?php if ( ! empty( $item['button_text'] ) ) : ?>
+                                        <div class="efa-addon-slides__item--link">
+                                            <?php if ( ! empty( $efa_slides_link['url'] ) ) : ?>
+                                                <a href="<?php echo esc_url( $efa_slides_link['url'] ); ?>" <?php echo( $efa_slides_link['is_external'] ? 'target="_blank"' : '' ); ?>>
+                                                    <?php echo esc_html( $item['button_text'] ); ?>
+                                                </a>
+                                            <?php
+                                            else:
+                                                echo esc_html( $item['button_text'] );
+                                            endif;
+                                            ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
                     </div>
+                <?php endforeach; ?>
+            </div>
+
+	        <?php if ( $settings['navigation'] == 'both' || $settings['navigation'] == 'dots' ) : ?>
+                <div class="swiper-pagination"></div>
+	        <?php endif; ?>
+
+	        <?php if ( $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows' ) : ?>
+                <div class="swiper-button-prev">
+                    <i class="efa-icon-mask efa-icon-mask-angle-left"></i>
                 </div>
-			<?php endforeach; ?>
+
+                <div class="swiper-button-next">
+                    <i class="efa-icon-mask efa-icon-mask-angle-right"></i>
+                </div>
+	        <?php endif; ?>
         </div>
 		<?php
 	}

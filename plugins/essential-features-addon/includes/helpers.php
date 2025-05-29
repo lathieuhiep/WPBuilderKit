@@ -1,4 +1,6 @@
 <?php
+use Elementor\Controls_Manager;
+
 // Get Category Check Box
 function efa_check_get_cat( $type_taxonomy ): array {
 	$cat_check = array();
@@ -80,4 +82,68 @@ function efa_pagination(): void {
 		'next_text'          => esc_html__( 'Sau', 'essential-features-addon' ),
 		'screen_reader_text' => '&nbsp;',
 	) );
+}
+
+// Add Breakpoints Section
+function efa_add_breakpoints_section( $widget, $section_id, $label, $item_key, $space_key, $default_items = 3, $default_space = 16 ): void {
+	$widget->start_controls_section(
+		$section_id,
+		[
+			'label' => esc_html__( $label, 'essential-features-addon' ),
+			'tab'   => Controls_Manager::TAB_CONTENT,
+		]
+	);
+
+	$widget->add_control(
+		$item_key,
+		[
+			'label'   => esc_html__( 'Hiển thị', 'essential-features-addon' ),
+			'type'    => Controls_Manager::NUMBER,
+			'default' => $default_items,
+			'min'     => 1,
+			'max'     => 100,
+			'step'    => 1,
+		]
+	);
+
+	$widget->add_control(
+		$space_key,
+		[
+			'label'   => esc_html__( 'Khoảng cách', 'essential-features-addon' ),
+			'type'    => Controls_Manager::NUMBER,
+			'default' => $default_space,
+			'min'     => 0,
+			'max'     => 100,
+			'step'    => 1,
+		]
+	);
+
+	$widget->end_controls_section();
+}
+
+function efa_add_all_breakpoints_sections( $widget, $custom_defaults = [] ): void {
+	$breakpoints = [
+		[ 'mobile', esc_html__( 'Dưới 480px', 'essential-features-addon' ), 1, 4 ],
+		[ 'mobile_large', esc_html__( 'Từ 480px', 'essential-features-addon' ), 2, 8 ],
+		[ 'tablet_small', esc_html__( 'Từ 576px', 'essential-features-addon' ), 2, 12 ],
+		[ 'tablet_large', esc_html__( 'Từ 768px', 'essential-features-addon' ), 3, 16 ],
+		[ 'desktop_small', esc_html__( 'Từ 992px', 'essential-features-addon' ), 3, 20 ],
+		[ 'desktop_large', esc_html__( 'Từ 1200px', 'essential-features-addon' ), 4, 24 ],
+	];
+
+	foreach ( $breakpoints as $prefix => [ $label, $items, $space ] ) {
+		if ( isset( $custom_defaults[ $prefix ] ) ) {
+			[ $items, $space ] = $custom_defaults[ $prefix ];
+		}
+
+		efa_add_breakpoints_section(
+			$widget,
+			"{$prefix}_options",
+			$label,
+			"{$prefix}_items",
+			"{$prefix}_spaces_between",
+			$items,
+			$space
+		);
+	}
 }

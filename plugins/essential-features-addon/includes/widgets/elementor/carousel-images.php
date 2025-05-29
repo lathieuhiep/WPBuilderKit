@@ -33,12 +33,12 @@ class EFA_Widget_Carousel_Images extends Widget_Base {
 
 	// widget style dependencies
 	public function get_style_depends(): array {
-		return [ 'owl.carousel' ];
+		return [ 'swiper' ];
 	}
 
     // widget scripts dependencies
     public function get_script_depends(): array {
-		return [ 'owl.carousel', 'efa-elementor-script' ];
+		return [ 'swiper', 'efa-elementor-script' ];
 	}
 
     // widget keywords
@@ -143,6 +143,18 @@ class EFA_Widget_Carousel_Images extends Widget_Base {
 		);
 
 		$this->add_control(
+			'equal_height',
+			[
+				'label' => esc_html__( 'Đồng bộ chiều cao slide', 'essential-features-addon' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'Có', 'essential-features-addon' ),
+				'label_off' => esc_html__( 'Không', 'essential-features-addon' ),
+				'return_value' => 'yes',
+				'default' => '',
+			]
+		);
+
+		$this->add_control(
 			'loop',
 			[
 				'type'         => Controls_Manager::SWITCHER,
@@ -167,6 +179,18 @@ class EFA_Widget_Carousel_Images extends Widget_Base {
 		);
 
 		$this->add_control(
+			'speed',
+			[
+				'label'   => esc_html__( 'Tốc độ trượt (ms)', 'essential-features-addon' ),
+				'type'    => Controls_Manager::NUMBER,
+				'default' => 800,
+				'min'     => 100,
+				'max'     => 5000,
+				'step'    => 50,
+			]
+		);
+
+		$this->add_control(
 			'navigation',
 			[
 				'label' => esc_html__( 'Thanh điều hướng', 'essential-features-addon' ),
@@ -183,277 +207,82 @@ class EFA_Widget_Carousel_Images extends Widget_Base {
 
 		$this->end_controls_section();
 
-		// mobile options
-		$this->start_controls_section(
-			'mobile_options',
-			[
-				'label' => esc_html__( 'Dưới 480px', 'essential-features-addon' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'mobile_items',
-			[
-				'label'   => esc_html__( 'Hiển thị', 'essential-features-addon' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 1,
-				'min'     => 1,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->add_control(
-			'mobile_spaces_between',
-			[
-				'label'   => esc_html__( 'Khoảng cách', 'essential-features-addon' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 4,
-				'min'     => 0,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->end_controls_section();
-
-		// mobile large options
-		$this->start_controls_section(
-			'mobile_large_options',
-			[
-				'label' => esc_html__( 'Từ 480px', 'essential-features-addon' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'mobile_large_items',
-			[
-				'label'   => esc_html__( 'Hiển thị', 'essential-features-addon' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 2,
-				'min'     => 1,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->add_control(
-			'mobile_large_spaces_between',
-			[
-				'label'   => esc_html__( 'Khoảng cách', 'essential-features-addon' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 8,
-				'min'     => 1,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->end_controls_section();
-
-        // tablet small options
-		$this->start_controls_section(
-			'tablet_small_options',
-			[
-				'label' => esc_html__( 'Từ 576px', 'essential-features-addon' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'tablet_small_items',
-			[
-				'label'   => esc_html__( 'Hiển thị', 'essential-features-addon' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 2,
-				'min'     => 1,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->add_control(
-			'tablet_small_spaces_between',
-			[
-				'label'   => esc_html__( 'Khoảng cách', 'essential-features-addon' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 12,
-				'min'     => 0,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->end_controls_section();
-
-        // tablet large options
-		$this->start_controls_section(
-			'tablet_large_options',
-			[
-				'label' => esc_html__( 'Từ 768px', 'essential-features-addon' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'tablet_large_items',
-			[
-				'label'   => esc_html__( 'Hiển thị', 'essential-features-addon' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 3,
-				'min'     => 1,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->add_control(
-			'tablet_large_spaces_between',
-			[
-				'label'   => esc_html__( 'Khoảng cách', 'essential-features-addon' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 16,
-				'min'     => 0,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->end_controls_section();
-
-		// desktop small options
-		$this->start_controls_section(
-			'desktop_small_options',
-			[
-				'label' => esc_html__( 'Từ 992px', 'essential-features-addon' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'desktop_small_items',
-			[
-				'label'   => esc_html__( 'Hiển thị', 'essential-features-addon' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 3,
-				'min'     => 1,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->add_control(
-			'desktop_small_spaces_between',
-			[
-				'label'   => esc_html__( 'Khoảng cách', 'essential-features-addon' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 20,
-				'min'     => 0,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->end_controls_section();
-
-		// desktop large options
-		$this->start_controls_section(
-			'desktop_large_options',
-			[
-				'label' => esc_html__( 'Từ 1200px', 'essential-features-addon' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'desktop_large_items',
-			[
-				'label'   => esc_html__( 'Hiển thị', 'essential-features-addon' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 4,
-				'min'     => 1,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->add_control(
-			'desktop_large_spaces_between',
-			[
-				'label'   => esc_html__( 'Khoảng cách', 'essential-features-addon' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 24,
-				'min'     => 0,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->end_controls_section();
+        // Breakpoints options
+		efa_add_all_breakpoints_sections( $this );
 	}
 
 	// widget output on the frontend
 	protected function render(): void {
 		$settings = $this->get_settings_for_display();
 
-		$data_settings_owl = [
+		// Add classes for the slider wrapper
+		$classes = ['efa-addon-carousel-images swiper efa-custom-swiper-slider'];
+
+		if ( $settings['equal_height'] === 'yes' ) {
+			$classes[] = 'efa-equal-height';
+		}
+
+		$this->add_render_attribute( 'classes', 'class', $classes );
+
+        // set settings for swiper
+		$data_settings_swiper = [
 			'loop'       => ( 'yes' === $settings['loop'] ),
-			'nav'        => $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows',
-			'dots'       => $settings['navigation'] == 'both' || $settings['navigation'] == 'dots',
 			'autoplay'   => ( 'yes' === $settings['autoplay'] ),
-			'responsive' => [
-				'0' => array(
-					'items'  => $settings['mobile_items'],
-					'margin' => $settings['mobile_spaces_between']
-				),
-
-				'480' => array(
-					'items'  => $settings['mobile_large_items'],
-					'margin' => $settings['mobile_large_spaces_between']
-				),
-
-				'576' => array(
-					'items'  => $settings['tablet_small_items'],
-					'margin' => $settings['tablet_small_spaces_between']
-				),
-
-				'768' => array(
-					'items' => $settings['tablet_large_items'],
-					'margin' => $settings['tablet_large_spaces_between']
-				),
-
-				'992' => array(
-					'items' => $settings['desktop_small_items'],
-					'margin' => $settings['desktop_small_spaces_between']
-				),
-
-				'1200' => array(
-					'items' => $settings['desktop_large_items'],
-					'margin' => $settings['desktop_large_spaces_between']
-				),
+			'speed'      => intval( $settings['speed'] ),
+			'navigation' => ( $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows' ),
+			'pagination' => ( $settings['navigation'] == 'both' || $settings['navigation'] == 'dots' ),
+			'breakpoints' => [
+				0    => [
+					'slidesPerView' => intval( $settings['mobile_items'] ),
+					'spaceBetween'  => intval( $settings['mobile_spaces_between'] )
+				],
+				480  => [
+					'slidesPerView' => intval( $settings['mobile_large_items'] ),
+					'spaceBetween'  => intval( $settings['mobile_large_spaces_between'] )
+				],
+				576  => [
+					'slidesPerView' => intval( $settings['tablet_small_items'] ),
+					'spaceBetween'  => intval( $settings['tablet_small_spaces_between'] )
+				],
+				768  => [
+					'slidesPerView' => intval( $settings['tablet_large_items'] ),
+					'spaceBetween'  => intval( $settings['tablet_large_spaces_between'] )
+				],
+				992  => [
+					'slidesPerView' => intval( $settings['desktop_small_items'] ),
+					'spaceBetween'  => intval( $settings['desktop_small_spaces_between'] )
+				],
+				1200 => [
+					'slidesPerView' => intval( $settings['desktop_large_items'] ),
+					'spaceBetween'  => intval( $settings['desktop_large_spaces_between'] )
+				]
 			]
 		];
+		$swiperOptions = wp_json_encode( $data_settings_swiper );
 		?>
 
-        <div class="efa-addon-carousel-images">
-            <div class="custom-owl-carousel owl-carousel owl-theme"
-                 data-settings-owl='<?php echo wp_json_encode( $data_settings_owl ); ?>'>
+        <div <?php echo $this->get_render_attribute_string( 'classes' ); ?> data-settings-swiper='<?php echo esc_attr( $swiperOptions ); ?>'>
+            <div class="swiper-wrapper">
 				<?php
 				foreach ( $settings['list'] as $index => $item ) :
 					$image_id = $item['list_image']['id'];
 					$url = $item['list_link']['url'];
 					?>
 
-                    <div class="item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
+                    <div class="item swiper-slide elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
 						<?php
-						echo wp_get_attachment_image( $image_id, $settings['image_size'] );
+                        if ( $image_id ) :
+	                        echo wp_get_attachment_image( $image_id, $settings['image_size'] );
+                        else:
+                        ?>
+                            <img src="<?php echo esc_url( EFA_PLUGIN_URL . 'assets/images/no-image.png' ); ?>" alt="<?php the_title(); ?>"/>
+                        <?php
+                        endif;
 
 						if ( $url ) :
 							$link_key = 'link_' . $index;
 							$this->add_link_attributes( $link_key, $item['list_link'] );
-							?>
+                        ?>
 
                             <a class="item__link" <?php echo $this->get_render_attribute_string( $link_key ); ?>></a>
 
@@ -462,6 +291,20 @@ class EFA_Widget_Carousel_Images extends Widget_Base {
 
 				<?php endforeach; ?>
             </div>
+
+	        <?php if ( $settings['navigation'] == 'both' || $settings['navigation'] == 'dots' ) : ?>
+                <div class="swiper-pagination"></div>
+	        <?php endif; ?>
+
+	        <?php if ( $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows' ) : ?>
+                <div class="swiper-button-prev">
+                    <i class="efa-icon-mask efa-icon-mask-angle-left"></i>
+                </div>
+
+                <div class="swiper-button-next">
+                    <i class="efa-icon-mask efa-icon-mask-angle-right"></i>
+                </div>
+	        <?php endif; ?>
         </div>
 
 		<?php

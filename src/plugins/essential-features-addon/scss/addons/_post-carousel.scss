@@ -5,29 +5,13 @@
   --#{$prefix-plugin-essentials}bc-content: #{map-get($mt-colors, "primary")};
   --#{$prefix-plugin-essentials}fs-title: #{map-get($mt-font-sizes, xs)};
 
-  .item {
-    @include flex-column;
-    flex: 1;
-  }
-
   .body {
+    flex: 1;
     padding: 1.5rem;
     border: .1rem solid var(--#{$prefix-plugin-essentials}bc-content);
 
     .title {
       font-size: var(--#{$prefix-plugin-essentials}fs-title);
-    }
-  }
-
-  .owl-item {
-    box-shadow: 0 .4rem .4rem rgba(0, 0, 0, 0.25);
-  }
-
-  @media (max-width: 1199px) {
-    .owl-carousel {
-      .owl-nav {
-        display: none;
-      }
     }
   }
 }

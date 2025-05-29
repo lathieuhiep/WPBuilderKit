@@ -1,4 +1,14 @@
 (function ($) {
+    // callback function to chain multiple event handlers
+    const chainCallbacks = (existing, added) => {
+        if (!existing) return added;
+
+        return function (...args) {
+            existing.apply(this, args);
+            added.apply(this, args);
+        };
+    }
+
     // merge the default options with the user defined options
     const swiperOptions = (options, $slider) => {
         let defaults = {
@@ -6,7 +16,12 @@
             speed: 800,
             autoplay: false,
             navigation: false,
-            pagination: false
+            pagination: false,
+            breakpoints: {},
+            observer: true,
+            observeParents: true,
+            watchOverflow: true,
+            on: {}
         };
 
         // Merge options
@@ -37,71 +52,70 @@
         }
 
         // check autoplay
-        if(config.autoplay && typeof config.autoplay === 'object'){
-            // Do not change
-        } else if(config.autoplay === true){
+        if (config.autoplay === true) {
             config.autoplay = { delay: 4000, disableOnInteraction: false };
-        } else {
-            config.autoplay = false;
         }
 
         return config;
     }
 
-    // setting owlCarousel
-    const owlCarouselOptions = (options) => {
-        let defaults = {
-            loop: true,
-            smartSpeed: 800,
-            autoplaySpeed: 800,
-            navSpeed: 800,
-            dotsSpeed: 800,
-            dragEndSpeed: 800,
-            navText: ['<i class="efa-icon-mask efa-icon-mask-angle-left"></i>','<i class="efa-icon-mask efa-icon-mask-angle-right"></i>'],
-        }
-
-        // extend options
-        return $.extend(defaults, options)
-    }
-
-    /* Start Carousel slider */
-    let ElementCarouselSlider = function ($scope, $) {
-        let slider = $scope.find('.custom-owl-carousel');
-
-        if ( slider.length ) {
-            const options = slider.data('settings-owl');
-            slider.owlCarousel(owlCarouselOptions(options))
-        }
-    };
-
-    const EFAInitCarouselSliders = ($scope) => {
-        let $slider = $scope.find('.custom-swiper-slider');
+    // Initialize Swiper sliders
+    const EFAInitSwiperSliders = ($scope) => {
+        let $slider = $scope.find('.efa-custom-swiper-slider');
 
         if ( $slider.length && !$slider.hasClass('swiper-initialized') ) {
-            // Lấy config từ data attribute
+            // Check if Swiper is loaded
+            $slider.addClass('is-initializing');
+
+            // Get options from data attribute
             let options = $slider.data('settings-swiper');
             let config = swiperOptions(options, $slider);
 
-            // Khởi tạo Swiper
+            // check equal height
+            if ($slider.hasClass('efa-equal-height')) {
+                const equalize = () => {
+                    const $slides = $slider.find('.swiper-slide');
+                    $slides.css({ height: '', minHeight: '' });
+
+                    let maxHeight = 0;
+                    $slides.each(function () {
+                        maxHeight = Math.max(maxHeight, $(this).outerHeight());
+                    });
+
+                    $slides.css('min-height', maxHeight);
+                };
+
+                config.on = config.on || {};
+                config.on.imagesReady = chainCallbacks(config.on.imagesReady, equalize);
+                config.on.resize = chainCallbacks(config.on.resize, equalize);
+            }
+
+            // remove class to mark as initializing
+            config.on = config.on || {};
+            config.on.init = chainCallbacks(config.on.init, () => {
+                $slider.removeClass('is-initializing');
+            });
+
+            // create new Swiper instance
             new Swiper($slider.get(0), config);
 
-            // Đánh dấu đã init
+            // Add class to mark as initialized
             $slider.addClass('swiper-initialized');
         }
     }
 
     $(window).on('elementor/frontend/init', function () {
         /* Element slider */
-        elementorFrontend.hooks.addAction('frontend/element_ready/efa-slides.default', ElementCarouselSlider);
+        elementorFrontend.hooks.addAction('frontend/element_ready/efa-slides.default', EFAInitSwiperSliders);
 
-        /* Element post carousel */
-        elementorFrontend.hooks.addAction('frontend/element_ready/efa-post-carousel.default', ElementCarouselSlider);
+        // post carousel slider
+        elementorFrontend.hooks.addAction('frontend/element_ready/efa-post-carousel.default', EFAInitSwiperSliders);
 
-        /* Element testimonial slider */
-        elementorFrontend.hooks.addAction('frontend/element_ready/efa-testimonial-slider.default', EFAInitCarouselSliders);
+        // testimonial slider
+        elementorFrontend.hooks.addAction('frontend/element_ready/efa-testimonial-slider.default', EFAInitSwiperSliders);
 
-        /* Element carousel images */
-        elementorFrontend.hooks.addAction('frontend/element_ready/efa-carousel-images.default', ElementCarouselSlider);
+        // image carousel slider
+        elementorFrontend.hooks.addAction('frontend/element_ready/efa-carousel-images.default', EFAInitSwiperSliders);
     });
 
 })(jQuery);

@@ -2,14 +2,10 @@
 @import "../abstracts/abstracts";
 
 .#{$prefix-plugin-class-addon}post-grid {
-  .title {
-    text-align: center;
-  }
-
-  .item-post {
+  .item {
     --#{$prefix-plugin-essentials}fs-title: #{map-get($mt-font-sizes, md)};
 
-    &__thumbnail {
+    .thumbnail {
       margin-bottom: 1.5rem;
 
       a {
@@ -17,11 +13,7 @@
       }
     }
 
-    &__title {
-      font-size: var(--#{$prefix-plugin-essentials}fs-title);
-    }
-
-    &__content {
+    .content {
       margin-top: 1.5rem;
 
       p {

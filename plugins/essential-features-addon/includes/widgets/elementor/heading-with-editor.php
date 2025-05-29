@@ -95,6 +95,18 @@ class EFA_Widget_Heading_With_Editor extends Widget_Base {
 		);
 
 		$this->add_responsive_control(
+			'heading_margin',
+			[
+				'label' => esc_html__('Lề Ngoài', 'essential-features-addon'),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', '%', 'em'],
+				'selectors' => [
+					'{{WRAPPER}} .heading' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
 			'heading_align',
 			[
 				'label'     => esc_html__( 'Căn chỉnh', 'essential-features-addon' ),
@@ -121,7 +133,7 @@ class EFA_Widget_Heading_With_Editor extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .element-heading-with-editor .heading' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .heading' => 'text-align: {{VALUE}};',
 				],
 			]
 		);
@@ -132,7 +144,7 @@ class EFA_Widget_Heading_With_Editor extends Widget_Base {
 				'label'     => esc_html__( 'Màu', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .element-heading-with-editor .heading' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .heading' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -142,18 +154,30 @@ class EFA_Widget_Heading_With_Editor extends Widget_Base {
 			[
 				'name'     => 'heading_typography',
 				'label'    => esc_html__( 'Kiểu chữ', 'essential-features-addon' ),
-				'selector' => '{{WRAPPER}} .element-heading-with-editor .heading',
+				'selector' => '{{WRAPPER}} .heading',
 			]
 		);
 
 		$this->end_controls_section();
 
-		// Style Heading
+		// Style desc
 		$this->start_controls_section(
 			'style_description',
 			[
 				'label' => esc_html__( 'Văn bản', 'essential-features-addon' ),
 				'tab'   => Controls_Manager::TAB_STYLE
+			]
+		);
+
+		$this->add_responsive_control(
+			'desc_margin',
+			[
+				'label' => esc_html__('Lề Ngoài', 'essential-features-addon'),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', '%', 'em'],
+				'selectors' => [
+					'{{WRAPPER}} .desc' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
 			]
 		);
 
@@ -184,7 +208,7 @@ class EFA_Widget_Heading_With_Editor extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .element-heading-with-editor .desc' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .desc' => 'text-align: {{VALUE}};',
 				],
 			]
 		);
@@ -195,7 +219,7 @@ class EFA_Widget_Heading_With_Editor extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .element-heading-with-editor .desc' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .desc' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -205,7 +229,7 @@ class EFA_Widget_Heading_With_Editor extends Widget_Base {
 			[
 				'name'     => 'desc_typography',
 				'label'    => esc_html__( 'Kiểu chữ', 'essential-features-addon' ),
-				'selector' => '{{WRAPPER}} .element-heading-with-editor .desc',
+				'selector' => '{{WRAPPER}} .desc',
 			]
 		);
 

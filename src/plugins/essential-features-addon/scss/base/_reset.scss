@@ -4,29 +4,3 @@
 :root {
   --#{$prefix-plugin-essentials}gutter-width: #{$gutter-width};
 }
-
-.custom-swiper-slider {
-  .swiper-pagination {
-    position: static;
-  }
-
-  .swiper-button-prev,
-  .swiper-button-next {
-    --#{$prefix-plugin-essentials}icon-width: 2.4rem;
-    --#{$prefix-plugin-essentials}icon-height: 2.4rem;
-
-    @extend .#{$prefix-plugin-essentials}icon-mask;
-
-    &:after {
-      display: none;
-    }
-  }
-
-  .swiper-button-prev {
-    @include mask-image("#{$icon-path}/angle-left.svg");
-  }
-
-  .swiper-button-next {
-    @include mask-image("#{$icon-path}/angle-right.svg");
-  }
-}

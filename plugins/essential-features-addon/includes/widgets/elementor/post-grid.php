@@ -39,109 +39,9 @@ class EFA_Widget_Post_Grid extends Widget_Base {
 	// widget controls
 	protected function register_controls(): void {
 		// Content query
-		$this->start_controls_section(
-			'content_section',
-			[
-				'label' => esc_html__( 'Thiết lập bài viết', 'essential-features-addon' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'select_cat',
-			[
-				'label'       => esc_html__( 'Chọn danh mục', 'essential-features-addon' ),
-				'type'        => Controls_Manager::SELECT2,
-				'options'     => efa_check_get_cat( 'category' ),
-				'multiple'    => true,
-				'label_block' => true
-			]
-		);
-
-		$this->add_control(
-			'limit',
-			[
-				'label'   => esc_html__( 'Số bài lấy ra', 'essential-features-addon' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 6,
-				'min'     => 1,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->add_control(
-			'order_by',
-			[
-				'label'   => esc_html__( 'Sắp xếp theo', 'essential-features-addon' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'ID',
-				'options' => [
-					'ID'    => esc_html__( 'ID', 'essential-features-addon' ),
-					'title' => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
-					'date'  => esc_html__( 'Ngày đăng', 'essential-features-addon' ),
-					'rand'  => esc_html__( 'Ngẫu nhiên', 'essential-features-addon' ),
-				],
-			]
-		);
-
-		$this->add_control(
-			'order',
-			[
-				'label'   => esc_html__( 'Sắp xếp', 'essential-features-addon' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'DESC',
-				'options' => [
-					'ASC'  => esc_html__( 'Tăng dần', 'essential-features-addon' ),
-					'DESC' => esc_html__( 'Giảm dần', 'essential-features-addon' ),
-				],
-			]
-		);
-
-		$this->add_control(
-			'image_size',
-			[
-				'label' => esc_html__( 'Độ phân giải ảnh', 'lpbcolor' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'large',
-				'options' => efa_image_size_options(),
-				'label_block' => true
-			]
-		);
-
-		$this->add_control(
-			'show_excerpt',
-			[
-				'label'   => esc_html__( 'Hiên thị nôi dung tóm tắt', 'essential-features-addon' ),
-				'type'    => Controls_Manager::CHOOSE,
-				'options' => [
-					'show' => [
-						'title' => esc_html__( 'Có', 'essential-features-addon' ),
-						'icon'  => 'eicon-check',
-					],
-
-					'hide' => [
-						'title' => esc_html__( 'Không', 'essential-features-addon' ),
-						'icon'  => 'eicon-ban',
-					]
-				],
-				'default' => 'show'
-			]
-		);
-
-		$this->add_control(
-			'excerpt_length',
-			[
-				'label'     => esc_html__( 'Số lượng từ hiển thị', 'essential-features-addon' ),
-				'type'      => Controls_Manager::NUMBER,
-				'default'   => '10',
-				'condition' => [
-					'show_excerpt' => 'show',
-				],
-			]
-		);
-
-		$this->end_controls_section();
+		efa_add_query_controls( $this, '', 6, 'category', [], function ($widget) {
+			efa_add_image_size_control( $widget );
+		} );
 
 		// Content layout
 		$this->start_controls_section(
@@ -346,33 +246,10 @@ class EFA_Widget_Post_Grid extends Widget_Base {
 
 	// widget output on the frontend
 	protected function render(): void {
-
-		$settings      = $this->get_settings_for_display();
-		$cat_post      = $settings['select_cat'];
-		$limit_post    = $settings['limit'];
-		$order_by_post = $settings['order_by'];
-		$order_post    = $settings['order'];
+		$settings = $this->get_settings_for_display();
 
 		// Query
-		$args = array(
-			'post_type'           => 'post',
-			'posts_per_page'      => $limit_post,
-			'orderby'             => $order_by_post,
-			'order'               => $order_post,
-			'ignore_sticky_posts' => 1,
-		);
-
-		if ( ! empty( $cat_post ) && is_array( $cat_post ) ) {
-			$args['tax_query'] = array(
-				array(
-					'taxonomy' => 'category',
-					'field'    => 'term_id',
-					'terms'    => $cat_post,
-				),
-			);
-		}
-
-		$query = new WP_Query( $args );
+		$query = efa_build_post_query( $settings );
 
 		if ( $query->have_posts() ) :
         ?>

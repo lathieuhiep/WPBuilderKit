@@ -59,17 +59,10 @@ class EFA_Widget_Carousel_Images extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'image_size',
-			[
-				'label' => esc_html__( 'Độ phân giải ảnh', 'lpbcolor' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'large',
-				'options' => efa_image_size_options(),
-				'label_block' => true
-			]
-		);
+        // Add controls image size
+		efa_add_image_size_control($this);
 
+        // add control repeater
 		$repeater = new Repeater();
 
 		$repeater->add_control(
@@ -134,81 +127,10 @@ class EFA_Widget_Carousel_Images extends Widget_Base {
 		$this->end_controls_section();
 
 		// additional options
-		$this->start_controls_section(
-			'content_additional_options',
-			[
-				'label' => esc_html__( 'Tùy chọn bổ sung', 'essential-features-addon' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'equal_height',
-			[
-				'label' => esc_html__( 'Đồng bộ chiều cao slide', 'essential-features-addon' ),
-				'type' => Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'Có', 'essential-features-addon' ),
-				'label_off' => esc_html__( 'Không', 'essential-features-addon' ),
-				'return_value' => 'yes',
-				'default' => '',
-			]
-		);
-
-		$this->add_control(
-			'loop',
-			[
-				'type'         => Controls_Manager::SWITCHER,
-				'label'        => esc_html__( 'Vòng lặp', 'essential-features-addon' ),
-				'label_on'     => esc_html__( 'Có', 'essential-features-addon' ),
-				'label_off'    => esc_html__( 'Không', 'essential-features-addon' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
-			]
-		);
-
-		$this->add_control(
-			'autoplay',
-			[
-				'label'        => esc_html__( 'Tự động chạy', 'essential-features-addon' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Có', 'essential-features-addon' ),
-				'label_off'    => esc_html__( 'Không', 'essential-features-addon' ),
-				'return_value' => 'yes',
-				'default'      => '',
-			]
-		);
-
-		$this->add_control(
-			'speed',
-			[
-				'label'   => esc_html__( 'Tốc độ trượt (ms)', 'essential-features-addon' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 800,
-				'min'     => 100,
-				'max'     => 5000,
-				'step'    => 50,
-			]
-		);
-
-		$this->add_control(
-			'navigation',
-			[
-				'label' => esc_html__( 'Thanh điều hướng', 'essential-features-addon' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'arrows',
-				'options' => [
-					'both'  => esc_html__( 'Mũi tên và Dấu chấm', 'essential-features-addon' ),
-					'arrows'  => esc_html__( 'Mũi tên', 'essential-features-addon' ),
-					'dots'  => esc_html__( 'Dấu chấm', 'essential-features-addon' ),
-					'none' => esc_html__( 'Không', 'essential-features-addon' ),
-				],
-			]
-		);
-
-		$this->end_controls_section();
+		efa_add_additional_options_section( $this, true );
 
         // Breakpoints options
-		efa_add_all_breakpoints_sections( $this );
+		efa_add_breakpoints_controls_grouped( $this );
 	}
 
 	// widget output on the frontend
@@ -225,40 +147,7 @@ class EFA_Widget_Carousel_Images extends Widget_Base {
 		$this->add_render_attribute( 'classes', 'class', $classes );
 
         // set settings for swiper
-		$data_settings_swiper = [
-			'loop'       => ( 'yes' === $settings['loop'] ),
-			'autoplay'   => ( 'yes' === $settings['autoplay'] ),
-			'speed'      => intval( $settings['speed'] ),
-			'navigation' => ( $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows' ),
-			'pagination' => ( $settings['navigation'] == 'both' || $settings['navigation'] == 'dots' ),
-			'breakpoints' => [
-				0    => [
-					'slidesPerView' => intval( $settings['mobile_items'] ),
-					'spaceBetween'  => intval( $settings['mobile_spaces_between'] )
-				],
-				480  => [
-					'slidesPerView' => intval( $settings['mobile_large_items'] ),
-					'spaceBetween'  => intval( $settings['mobile_large_spaces_between'] )
-				],
-				576  => [
-					'slidesPerView' => intval( $settings['tablet_small_items'] ),
-					'spaceBetween'  => intval( $settings['tablet_small_spaces_between'] )
-				],
-				768  => [
-					'slidesPerView' => intval( $settings['tablet_large_items'] ),
-					'spaceBetween'  => intval( $settings['tablet_large_spaces_between'] )
-				],
-				992  => [
-					'slidesPerView' => intval( $settings['desktop_small_items'] ),
-					'spaceBetween'  => intval( $settings['desktop_small_spaces_between'] )
-				],
-				1200 => [
-					'slidesPerView' => intval( $settings['desktop_large_items'] ),
-					'spaceBetween'  => intval( $settings['desktop_large_spaces_between'] )
-				]
-			]
-		];
-		$swiperOptions = wp_json_encode( $data_settings_swiper );
+		$swiperOptions = efa_generate_slide_config( $settings );
 		?>
 
         <div <?php echo $this->get_render_attribute_string( 'classes' ); ?> data-settings-swiper='<?php echo esc_attr( $swiperOptions ); ?>'>

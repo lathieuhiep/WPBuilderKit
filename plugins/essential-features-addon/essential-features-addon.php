@@ -44,6 +44,12 @@ function efa_check_elementor(): void {
 		return;
 	}
 
+    // include elementor controls
+	require_once EFA_PLUGIN_PATH . 'includes/elementor-controls/control-helpers.php';
+	require_once EFA_PLUGIN_PATH . 'includes/elementor-controls/query-options.php';
+	require_once EFA_PLUGIN_PATH . 'includes/elementor-controls/select-options.php';
+	require_once EFA_PLUGIN_PATH . 'includes/elementor-controls/slide-options.php';
+
 	// include widget addons elementor
 	require_once EFA_PLUGIN_PATH . 'includes/inc-elementor.php';
 

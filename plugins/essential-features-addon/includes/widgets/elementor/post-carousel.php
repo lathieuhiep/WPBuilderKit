@@ -50,186 +50,15 @@ class EFA_Widget_Post_Carousel extends Widget_Base {
 	protected function register_controls(): void {
 
 		// Content section
-		$this->start_controls_section(
-			'content_section',
-			[
-				'label' => esc_html__( 'Thiết lập bài viết', 'essential-features-addon' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'select_cat',
-			[
-				'label'       => esc_html__( 'Chọn danh mục', 'essential-features-addon' ),
-				'type'        => Controls_Manager::SELECT2,
-				'options'     => efa_check_get_cat( 'category' ),
-				'multiple'    => true,
-				'label_block' => true
-			]
-		);
-
-		$this->add_control(
-			'limit',
-			[
-				'label'   => esc_html__( 'Số bài lấy ra', 'essential-features-addon' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 6,
-				'min'     => 1,
-				'max'     => 100,
-				'step'    => 1,
-			]
-		);
-
-		$this->add_control(
-			'order_by',
-			[
-				'label'   => esc_html__( 'Sắp xếp theo', 'essential-features-addon' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'ID',
-				'options' => [
-					'ID'    => esc_html__( 'ID', 'essential-features-addon' ),
-					'title' => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
-					'date'  => esc_html__( 'Ngày đăng', 'essential-features-addon' ),
-					'rand'  => esc_html__( 'Ngẫu nhiên', 'essential-features-addon' ),
-				],
-			]
-		);
-
-		$this->add_control(
-			'order',
-			[
-				'label'   => esc_html__( 'Sắp xếp', 'essential-features-addon' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'DESC',
-				'options' => [
-					'ASC'  => esc_html__( 'Tăng dần', 'essential-features-addon' ),
-					'DESC' => esc_html__( 'Giảm dần', 'essential-features-addon' ),
-				],
-			]
-		);
-
-		$this->add_control(
-			'show_excerpt',
-			[
-				'label'   => esc_html__( 'Hiên thị tóm tắt', 'essential-features-addon' ),
-				'type'    => Controls_Manager::CHOOSE,
-				'options' => [
-					'show' => [
-						'title' => esc_html__( 'Có', 'essential-features-addon' ),
-						'icon'  => 'eicon-check',
-					],
-
-					'hide' => [
-						'title' => esc_html__( 'Không', 'essential-features-addon' ),
-						'icon'  => 'eicon-ban',
-					],
-				],
-				'default' => 'show'
-			]
-		);
-
-		$this->add_control(
-			'excerpt_length',
-			[
-				'label'     => esc_html__( 'Số lượng từ hiển thị', 'essential-features-addon' ),
-				'type'      => Controls_Manager::NUMBER,
-				'default'   => '10',
-				'condition' => [
-					'show_excerpt' => 'show',
-				],
-			]
-		);
-
-		$this->add_control(
-			'image_size',
-			[
-				'label' => esc_html__( 'Độ phân giải ảnh', 'lpbcolor' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'large',
-				'options' => efa_image_size_options(),
-				'label_block' => true
-			]
-		);
-
-		$this->end_controls_section();
+		efa_add_query_controls( $this, '', 6, 'category', [], function ($widget) {
+			efa_add_image_size_control( $widget );
+        } );
 
 		// additional options
-		$this->start_controls_section(
-			'content_additional_options',
-			[
-				'label' => esc_html__( 'Tùy chọn bổ sung', 'essential-features-addon' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_control(
-			'equal_height',
-			[
-				'label' => esc_html__( 'Đồng bộ chiều cao slide', 'essential-features-addon' ),
-				'type' => Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'Có', 'essential-features-addon' ),
-				'label_off' => esc_html__( 'Không', 'essential-features-addon' ),
-				'return_value' => 'yes',
-				'default' => '',
-			]
-		);
-
-		$this->add_control(
-			'loop',
-			[
-				'type'         => Controls_Manager::SWITCHER,
-				'label'        => esc_html__( 'Vòng lặp', 'essential-features-addon' ),
-				'label_on'     => esc_html__( 'Có', 'essential-features-addon' ),
-				'label_off'    => esc_html__( 'Không', 'essential-features-addon' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
-			]
-		);
-
-		$this->add_control(
-			'autoplay',
-			[
-				'label'        => esc_html__( 'Tự động chạy', 'essential-features-addon' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Có', 'essential-features-addon' ),
-				'label_off'    => esc_html__( 'Không', 'essential-features-addon' ),
-				'return_value' => 'yes',
-				'default'      => '',
-			]
-		);
-
-		$this->add_control(
-			'speed',
-			[
-				'label'   => esc_html__( 'Tốc độ trượt (ms)', 'essential-features-addon' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => 800,
-				'min'     => 100,
-				'max'     => 5000,
-				'step'    => 50,
-			]
-		);
-
-		$this->add_control(
-			'navigation',
-			[
-				'label' => esc_html__( 'Thanh điều hướng', 'essential-features-addon' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'arrows',
-				'options' => [
-					'both'  => esc_html__( 'Mũi tên và Dấu chấm', 'essential-features-addon' ),
-					'arrows'  => esc_html__( 'Mũi tên', 'essential-features-addon' ),
-					'dots'  => esc_html__( 'Dấu chấm', 'essential-features-addon' ),
-					'none' => esc_html__( 'Không', 'essential-features-addon' ),
-				],
-			]
-		);
-
-		$this->end_controls_section();
+		efa_add_additional_options_section( $this, true );;
 
 		// Breakpoints options
-		efa_add_all_breakpoints_sections( $this );
+		efa_add_breakpoints_controls_grouped( $this );
 
 		// Style title
 		$this->start_controls_section(
@@ -376,7 +205,7 @@ class EFA_Widget_Post_Carousel extends Widget_Base {
 
 	// widget output on the frontend
 	protected function render(): void {
-		$settings      = $this->get_settings_for_display();
+		$settings = $this->get_settings_for_display();
 
         // Add classes for the slider wrapper
 		$classes = ['efa-addon-post-carousel swiper efa-custom-swiper-slider'];
@@ -387,67 +216,11 @@ class EFA_Widget_Post_Carousel extends Widget_Base {
 
 		$this->add_render_attribute( 'classes', 'class', $classes );
 
+		// set settings for swiper
+		$swiperOptions = efa_generate_slide_config( $settings );
+
         // query settings
-		$cat_post      = $settings['select_cat'];
-		$limit_post    = $settings['limit'];
-		$order_by_post = $settings['order_by'];
-		$order_post    = $settings['order'];
-
-		$data_settings_swiper = [
-			'loop'       => ( 'yes' === $settings['loop'] ),
-			'autoplay'   => ( 'yes' === $settings['autoplay'] ),
-			'speed'      => intval( $settings['speed'] ),
-			'navigation' => ( $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows' ),
-			'pagination' => ( $settings['navigation'] == 'both' || $settings['navigation'] == 'dots' ),
-			'breakpoints' => [
-				0    => [
-					'slidesPerView' => intval( $settings['mobile_items'] ),
-					'spaceBetween'  => intval( $settings['mobile_spaces_between'] )
-				],
-				480  => [
-					'slidesPerView' => intval( $settings['mobile_large_items'] ),
-					'spaceBetween'  => intval( $settings['mobile_large_spaces_between'] )
-				],
-				576  => [
-					'slidesPerView' => intval( $settings['tablet_small_items'] ),
-					'spaceBetween'  => intval( $settings['tablet_small_spaces_between'] )
-				],
-				768  => [
-					'slidesPerView' => intval( $settings['tablet_large_items'] ),
-					'spaceBetween'  => intval( $settings['tablet_large_spaces_between'] )
-				],
-				992  => [
-					'slidesPerView' => intval( $settings['desktop_small_items'] ),
-					'spaceBetween'  => intval( $settings['desktop_small_spaces_between'] )
-				],
-				1200 => [
-					'slidesPerView' => intval( $settings['desktop_large_items'] ),
-					'spaceBetween'  => intval( $settings['desktop_large_spaces_between'] )
-				]
-			]
-		];
-		$swiperOptions = wp_json_encode( $data_settings_swiper );
-
-		// Query
-		$args = array(
-			'post_type'           => 'post',
-			'posts_per_page'      => $limit_post,
-			'orderby'             => $order_by_post,
-			'order'               => $order_post,
-			'ignore_sticky_posts' => 1,
-		);
-
-		if ( ! empty( $cat_post ) && is_array( $cat_post ) ) {
-			$args['tax_query'] = array(
-				array(
-					'taxonomy' => 'category',
-					'field'    => 'term_id',
-					'terms'    => $cat_post,
-				),
-			);
-		}
-
-		$query = new WP_Query( $args );
+		$query = efa_build_post_query( $settings );
 
 		if ( $query->have_posts() ) :
         ?>

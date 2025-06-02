@@ -63,14 +63,7 @@ class EFA_Widget_Heading_With_Editor extends Widget_Base {
 				'label'   => esc_html__( 'HTML Tag', 'essential-features-addon' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'h2',
-				'options' => [
-					'h1' => 'H1',
-					'h2' => 'H2',
-					'h3' => 'H3',
-					'h4' => 'H4',
-					'h5' => 'H5',
-					'h6' => 'H6'
-				],
+				'options' => efa_html_tag_options(),
 			]
 		);
 
@@ -240,13 +233,17 @@ class EFA_Widget_Heading_With_Editor extends Widget_Base {
 	protected function render(): void {
 		$settings = $this->get_settings_for_display();
 		$tag = $settings['html_tag'];
-		?>
+    ?>
         <div class="efa-addon-heading-with-editor">
-            <?php if ( $settings['heading'] ) : ?>
-                <<?php echo esc_html( $tag ); ?> class="heading">
-		            <?php echo esc_html( $settings['heading'] ); ?>
-                </<?php echo esc_html( $tag ); ?>>
-            <?php endif; ?>
+            <?php
+            if ( $settings['heading'] ) :
+                printf(
+                    '<%1$s class="heading">%2$s</%1$s>',
+                    esc_attr( $tag ),
+                    esc_html( $settings['heading'] )
+                );
+            endif;
+            ?>
 
 			<?php if ( ! empty( $settings['description'] ) ) : ?>
                 <div class="desc">
@@ -254,7 +251,7 @@ class EFA_Widget_Heading_With_Editor extends Widget_Base {
                 </div>
 			<?php endif; ?>
         </div>
-		<?php
+    <?php
 	}
 
 	protected function content_template() {

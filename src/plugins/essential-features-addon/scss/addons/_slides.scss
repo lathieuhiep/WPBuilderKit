@@ -3,66 +3,6 @@
 
 .#{$prefix-plugin-class-addon}slides {
   position: relative;
-
-  &.owl-carousel {
-    .owl-nav {
-      margin: 0;
-
-      button {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-
-        &.owl-prev,
-        &.owl-next {
-          background-color: transparent;
-          margin: 0;
-          padding: 0 !important;
-        }
-
-        &.owl-prev {
-          left: 1.5rem;
-        }
-
-        &.owl-next {
-          right: 1.5rem;
-        }
-
-        i.fa {
-          --#{$prefix-plugin-essentials}ic-color-hover: #{map-get($mt-colors, "accent")};
-
-          font-size: 3rem;
-
-          &:hover {
-            color: var(--#{$prefix-plugin-essentials}ic-color-hover);
-          }
-        }
-      }
-    }
-
-    .owl-dots {
-      position: absolute;
-      width: 100%;
-      left: 0;
-      bottom: 1.5rem;
-      margin: 0;
-
-      .owl-dot {
-        span {
-          background-color: #ffffff;
-        }
-
-        &.active,
-        &:hover {
-          span {
-            --#{$prefix-plugin-essentials}bk-color-hover: #{map-get($mt-colors, "accent")};
-
-            background-color: var(--#{$prefix-plugin-essentials}bk-color-hover);
-          }
-        }
-      }
-    }
-  }
 }
 
 .#{$prefix-plugin-class-addon}slides__item {

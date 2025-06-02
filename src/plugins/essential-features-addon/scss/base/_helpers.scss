@@ -5,6 +5,10 @@
   display: grid;
 }
 
+.#{$prefix-plugin-essentials}flex {
+  display: flex;
+}
+
 .#{$prefix-plugin-essentials}custom-swiper-slider {
   &.is-initializing {
     visibility: hidden;

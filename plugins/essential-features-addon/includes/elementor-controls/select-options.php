@@ -25,3 +25,15 @@ function efa_image_object_position_options(): array {
 		'bottom right' => esc_html__( 'Phía dưới bên phải', 'essential-features-addon' ),
 	];
 }
+
+// html tag options
+function efa_html_tag_options(): array {
+	return [
+		'h1' => 'H1',
+		'h2' => 'H2',
+		'h3' => 'H3',
+		'h4' => 'H4',
+		'h5' => 'H5',
+		'h6' => 'H6'
+	];
+}

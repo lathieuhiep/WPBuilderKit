@@ -34,7 +34,7 @@ class EFA_Widget_Icon_Text_Grid extends Widget_Base {
 	// widget keywords
 	public function get_keywords(): array
 	{
-		return ['heading', 'editor', 'text'];
+		return ['icon', 'list', 'text'];
 	}
 
 	// widget controls
@@ -129,7 +129,7 @@ class EFA_Widget_Icon_Text_Grid extends Widget_Base {
 				'label'   => esc_html__( 'HTML Tag', 'essential-features-addon' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'h3',
-				'options' => efa_html_tag_options(),
+				'options' => efa_heading_tag_options(),
                 'description' => esc_html__('Chọn thẻ "H" cho tiêu đề', 'essential-features-addon')
 			]
 		);
@@ -162,12 +162,6 @@ class EFA_Widget_Icon_Text_Grid extends Widget_Base {
 						'type' => Controls_Manager::WYSIWYG,
 						'default' => esc_html__( 'List Content' , 'essential-features-addon' ),
 						'show_label' => false,
-					],
-					[
-						'name' => 'animation',
-						'label' => esc_html__( 'Hiệu ứng', 'essential-features-addon' ),
-						'type' => Controls_Manager::ANIMATION,
-						'default' => '',
 					],
 				],
 				'default' => [
@@ -341,10 +335,18 @@ class EFA_Widget_Icon_Text_Grid extends Widget_Base {
 	?>
 		<div class="efa-addon-ic-txt-grid efa-grid-layout">
 			<?php
+			$classList = ['list efa-flex'];
+
             foreach ($list as $item) :
-	            $animation_class = $item['animation'] ? 'elementor-animated ' . $item['animation'] : '';
+	            $classList[] = 'elementor-repeater-item-' . esc_attr($item['_id']);
+
+                if ( $item['animation'] ) {
+	                $classList[] = 'elementor-animated ' . esc_attr($item['animation']);
+                }
+
+	            $this->add_render_attribute( 'classList', 'class', $classList );
             ?>
-				<div class="animated list efa-flex elementor-repeater-item-<?php echo esc_attr( $item['_id'] . ' ' . esc_attr( $animation_class ) ); ?>">
+				<div <?php echo $this->get_render_attribute_string( 'classList' ); ?>>
 					<div class="icon-box">
 						<?php Icons_Manager::render_icon( $item['icon'], [ 'aria-hidden' => 'true' ] ); ?>
                     </div>
@@ -376,7 +378,7 @@ class EFA_Widget_Icon_Text_Grid extends Widget_Base {
         <div class="efa-addon-ic-txt-grid efa-grid-layout">
             <# if ( settings.list.length ) { #>
                 <# _.each( settings.list, function( item ) { #>
-                <div class="animated elementor-animated list efa-flex elementor-repeater-item-{{ item._id }} {{ item.animation }}">
+                <div class="list efa-flex elementor-repeater-item-{{ item._id }}">
                     <div class="icon-box">
                         <#
                         const iconHTML = elementor.helpers.renderIcon( view, item.icon, { 'aria-hidden': true }, 'i' , 'object' );

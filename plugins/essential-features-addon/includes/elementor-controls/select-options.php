@@ -27,7 +27,7 @@ function efa_image_object_position_options(): array {
 }
 
 // html tag options
-function efa_html_tag_options(): array {
+function efa_heading_tag_options(): array {
 	return [
 		'h1' => 'H1',
 		'h2' => 'H2',
@@ -35,5 +35,20 @@ function efa_html_tag_options(): array {
 		'h4' => 'H4',
 		'h5' => 'H5',
 		'h6' => 'H6'
+	];
+}
+
+// wrapper tag options
+function efa_text_wrapper_tag_options(): array {
+	return [
+		'h1'   => 'H1',
+		'h2'   => 'H2',
+		'h3'   => 'H3',
+		'h4'   => 'H4',
+		'h5'   => 'H5',
+		'h6'   => 'H6',
+		'div'  => 'div',
+		'span' => 'span',
+		'p'    => 'p',
 	];
 }

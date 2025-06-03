@@ -9,6 +9,14 @@
   display: flex;
 }
 
+.#{$prefix-plugin-essentials}flex-column {
+  flex-direction: column;
+}
+
+.#{$prefix-plugin-essentials}flex-grow-1 {
+  flex-grow: 1;
+}
+
 .#{$prefix-plugin-essentials}custom-swiper-slider {
   &.is-initializing {
     visibility: hidden;
@@ -31,4 +39,8 @@
   .swiper-slide {
     @include flex-column;
   }
+}
+
+.#{$prefix-plugin-essentials}m-0 {
+  margin: 0 !important;
 }

@@ -63,7 +63,7 @@ class EFA_Widget_Heading_With_Editor extends Widget_Base {
 				'label'   => esc_html__( 'HTML Tag', 'essential-features-addon' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'h2',
-				'options' => efa_html_tag_options(),
+				'options' => efa_heading_tag_options(),
 			]
 		);
 

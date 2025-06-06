@@ -1,6 +1,21 @@
 @import "../../../../shared/scss/abstracts/abstracts";
 @import "../abstracts/abstracts";
 
+.#{$prefix-plugin-essentials}icon {
+  --#{$prefix-plugin-essentials}icon-size: 5rem;
+
+  display: inline-block;
+  line-height: 1;
+  text-align: center;
+  font-size: var(--#{$prefix-plugin-essentials}icon-size);
+
+  svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+  }
+}
+
 .#{$prefix-plugin-essentials}icon-mask {
   --#{$prefix-plugin-essentials}icon-width: 1.6rem;
   --#{$prefix-plugin-essentials}icon-height: 1.6rem;

@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // define constants
 const EFA_PLUGIN_VERSION = '1.0';
+const EFA_PREFIX_PLUGIN = 'efa-';
 define( 'EFA_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'EFA_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 

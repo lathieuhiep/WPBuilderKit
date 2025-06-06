@@ -187,10 +187,10 @@ class EFA_Widget_Icon_Text extends Widget_Base {
 				],
 				'default' => [
 					'unit' => 'rem',
-					'size' => 5,
+					'size' => '',
 				],
 				'selectors' => [
-					'{{WRAPPER}} .icon-box' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .efa-icon' => '--'. EFA_PREFIX_PLUGIN .'icon-size: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -201,7 +201,7 @@ class EFA_Widget_Icon_Text extends Widget_Base {
 				'label'     => esc_html__( 'Màu', 'essential-features-addon' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .icon-box' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .efa-icon' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -280,7 +280,9 @@ class EFA_Widget_Icon_Text extends Widget_Base {
 	?>
 		<div class="efa-addon-ic-txt efa-flex">
             <div class="icon-box">
-                <?php Icons_Manager::render_icon( $settings['icon'], [ 'aria-hidden' => 'true' ] ); ?>
+                <div class="efa-icon">
+                    <?php Icons_Manager::render_icon( $settings['icon'], [ 'aria-hidden' => 'true' ] ); ?>
+                </div>
             </div>
 
             <div class="text-box efa-flex efa-flex-column efa-flex-grow-1">
@@ -303,11 +305,17 @@ class EFA_Widget_Icon_Text extends Widget_Base {
 	protected function content_template() {
     ?>
         <#
-        iconHTML = elementor.helpers.renderIcon( view, settings.icon, { 'aria-hidden': true }, 'i' , 'object' ),
+        const iconHTML = elementor.helpers.renderIcon( view, settings.icon, { 'aria-hidden': true }, 'i' , 'object' );
         #>
         <div class="efa-addon-ic-txt efa-flex">
             <div class="icon-box">
-                {{{ elementor.helpers.sanitize( iconHTML.value ) }}}
+                <div class="efa-icon">
+                    <# if ( iconHTML && iconHTML.rendered ) { #>
+                        {{{ iconHTML.value }}}
+                    <# } else { #>
+                        <i class="{{ settings.icon }}" aria-hidden="true"></i>
+                    <# } #>
+                </div>
             </div>
 
             <div class="text-box efa-flex efa-flex-column efa-flex-grow-1">

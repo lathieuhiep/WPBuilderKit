@@ -1,9 +1,12 @@
-@import "../../../../shared/scss/abstracts/abstracts";
+@use "sass:map";
+
+@import "shared/scss/abstracts/abstracts";
 @import "../abstracts/abstracts";
 
 .#{$prefix-plugin-class-addon}post-carousel {
-  --#{$prefix-plugin-essentials}bc-content: #{map-get($mt-colors, "primary")};
-  --#{$prefix-plugin-essentials}fs-title: #{map-get($mt-font-sizes, xs)};
+  --#{$prefix-plugin-essentials}bc-content: #{map.get($mt-colors, "primary")};
+  --#{$prefix-plugin-essentials}fs-title: #{map.get($mt-font-sizes, xs)};
+  --#{$prefix-plugin-essentials}fs-title: #{map.get($mt-font-sizes, xs)};
 
   .body {
     flex: 1;

@@ -1,8 +1,10 @@
 <?php
+const PREFIX_THEME_OPTIONS = 'basictheme_options';
+
 // A Custom function for get an option
 if ( ! function_exists( 'basictheme_get_option' ) ) {
 	function basictheme_get_option( $option = '', $default = null ) {
-		$options = get_option( 'options' );
+		$options = get_option( PREFIX_THEME_OPTIONS );
 
 		return ( isset( $options[ $option ] ) ) ? $options[ $option ] : $default;
 	}
@@ -10,15 +12,14 @@ if ( ! function_exists( 'basictheme_get_option' ) ) {
 
 
 // Control core classes for avoid errors
-if ( class_exists( 'CSF' ) ) {
+if ( is_admin() && class_exists( 'CSF' ) ) {
 	$facebook_url = esc_url( 'https://www.facebook.com/lathieuhiep' );
 
 	// Set a unique slug-like ID
-	$prefix_theme_options   = 'options';
 	$menu_title = esc_html__( 'Cài đặt theme', 'basictheme' );
 
 	// Create options
-	CSF::createOptions( $prefix_theme_options, array(
+	CSF::createOptions( PREFIX_THEME_OPTIONS, array(
 		'menu_title'          => $menu_title,
 		'menu_slug'           => 'theme-options',
 		'menu_position'       => 2,

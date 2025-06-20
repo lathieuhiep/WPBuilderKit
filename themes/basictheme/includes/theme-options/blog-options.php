@@ -1,16 +1,14 @@
 <?php
-global $prefix_theme_options;
-
 //
 // -> Create a section blog (parent)
-CSF::createSection( $prefix_theme_options, array(
+CSF::createSection( PREFIX_THEME_OPTIONS, array(
 	'id'    => 'opt_post_section',
 	'icon'  => 'fas fa-blog',
 	'title' => esc_html__( 'Bài viết', 'basictheme' ),
 ) );
 
 // Category Post
-CSF::createSection( $prefix_theme_options, array(
+CSF::createSection( PREFIX_THEME_OPTIONS, array(
 	'parent'      => 'opt_post_section',
 	'title'       => esc_html__( 'Danh mục', 'basictheme' ),
 	'description' => esc_html__( 'Sử dụng cho các trang archive, index, tìm kiếm', 'basictheme' ),
@@ -43,7 +41,7 @@ CSF::createSection( $prefix_theme_options, array(
 ) );
 
 // Single Post
-CSF::createSection( $prefix_theme_options, array(
+CSF::createSection( PREFIX_THEME_OPTIONS, array(
 	'parent' => 'opt_post_section',
 	'title'  => esc_html__( 'Bài viết chi tiết', 'basictheme' ),
 	'fields' => array(

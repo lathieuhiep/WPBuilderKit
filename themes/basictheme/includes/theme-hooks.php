@@ -4,7 +4,6 @@
  * */
 
 // optimize WordPress
-add_action('init', 'basictheme_optimize_wordpress');
 function basictheme_optimize_wordpress(): void {
 	// Disable WordPress Emoji
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
@@ -35,6 +34,8 @@ function basictheme_disable_emojis_tinymce( $plugins ): array {
 		return array();
 	}
 }
+
+add_action('init', 'basictheme_optimize_wordpress');
 
 // add code to head
 function basictheme_custom_header_code(): void {

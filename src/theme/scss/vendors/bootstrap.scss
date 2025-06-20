@@ -1,4 +1,6 @@
-@import "../../../shared/scss/abstracts/abstracts";
+@use "sass:map";
+
+@import "shared/scss/abstracts/abstracts";;
 
 // Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "bootstrap/scss/functions";
@@ -7,8 +9,8 @@
 $enable-rfs: false;
 
 // body
-$body-bg: map-get($mt-colors, "white");
-$body-color: map-get($mt-colors, "black");
+$body-bg: map.get($mt-colors, "white");
+$body-color: map.get($mt-colors, "black");
 $body-text-align: inherit;
 
 // stylelint-enable value-keyword-case
@@ -16,7 +18,7 @@ $font-family-sans-serif: $var-ff-base;
 $font-family-monospace: $var-ff-base;
 $font-family-base: $var-ff-base;
 
-$font-size-base: map-get($mt-font-sizes, sm);
+$font-size-base: map.get($mt-font-sizes, sm);
 $line-height-base: $line-height-base;
 
 // Grid columns
@@ -27,8 +29,8 @@ $grid-gutter-width: $grid-gutter-width;
 // Links
 //
 // Style anchor elements.
-$link-color: $body-color;
-$link-hover-color: map-get($mt-colors, "accent");
+$link-color: map.get($mt-colors, "primary");
+$link-hover-color: map.get($mt-colors, "accent");
 $link-decoration: none;
 
 // scss-docs-end caret-variables
@@ -58,6 +60,7 @@ $paragraph-margin-bottom: $paragraph-margin-bottom;
 // scss-docs-start nav-variables
 $nav-link-font-size: $var-fs-sm;
 $nav-link-font-weight: 400;
+$nav-link-color: $var-primary-color;
 
 // scss-docs-start container-max-widths
 $container-max-widths: (

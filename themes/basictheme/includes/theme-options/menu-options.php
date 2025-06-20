@@ -1,8 +1,6 @@
 <?php
-global $prefix_theme_options;
-
 // Create a section menu
-CSF::createSection( $prefix_theme_options, array(
+CSF::createSection( PREFIX_THEME_OPTIONS, array(
 	'title'  => esc_html__( 'Menu', 'basictheme' ),
 	'icon'   => 'fas fa-bars',
 	'fields' => array(

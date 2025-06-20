@@ -1,4 +1,4 @@
-@import "../../../../shared/scss/abstracts/abstracts";
+@import "shared/scss/abstracts/abstracts";;
 
 .content-archive-post {
   .item {
@@ -7,6 +7,7 @@
   }
 
   .post-title {
+    margin: 0;
     font-size: 2rem;
 
     a {
@@ -21,10 +22,6 @@
         color: $var-accent-color;
       }
     }
-  }
-
-  .post-thumbnail {
-    margin-bottom: 1rem;
   }
 
   .post-desc {
@@ -63,17 +60,12 @@
   }
 
   .post-meta {
-    font-size: 1.2rem;
-    margin-bottom: .5rem;
+    font-size: var(--#{$prefix-theme}fs-xs);
 
-    span {
-      display: inline-block;
-      margin-right: .5rem;
-
+    &__item {
       &:after {
         display: inline-block;
         content: '/';
-        margin-left: 1rem;
         margin-right: 0;
       }
 

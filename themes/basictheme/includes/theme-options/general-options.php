@@ -1,9 +1,8 @@
 <?php
-global $prefix_theme_options;
-
 $link = esc_url( 'https://loading.io/' );
+
 // Create a section general
-CSF::createSection( $prefix_theme_options, array(
+CSF::createSection( PREFIX_THEME_OPTIONS, array(
 	'title'  => esc_html__( 'Cài đặt chung', 'basictheme' ),
 	'icon'   => 'fas fa-cog',
 	'fields' => array(
@@ -20,7 +19,7 @@ CSF::createSection( $prefix_theme_options, array(
 		array(
 			'id'         => 'opt_general_loading',
 			'type'       => 'switcher',
-			'title'      => esc_html__( 'Hiện tải trang', 'basictheme' ),
+			'title'      => esc_html__( 'Hiện chờ tải trang', 'basictheme' ),
 			'text_on'    => esc_html__( 'Có', 'basictheme' ),
 			'text_off'   => esc_html__( 'Không', 'basictheme' ),
 			'text_width' => 80,

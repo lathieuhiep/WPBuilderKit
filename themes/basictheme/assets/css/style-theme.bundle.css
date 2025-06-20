@@ -106,8 +106,8 @@ form.wpcf7-form p:has(.wpcf7-submit) {
   --bs-tertiary-bg: #f8f9fa;
   --bs-tertiary-bg-rgb: 248, 249, 250;
   --bs-heading-color: var(--theme-primary);
-  --bs-link-color: #000000;
-  --bs-link-color-rgb: 0, 0, 0;
+  --bs-link-color: #3498db;
+  --bs-link-color-rgb: 52, 152, 219;
   --bs-link-decoration: none;
   --bs-link-hover-color: #e74c3c;
   --bs-link-hover-color-rgb: 231, 76, 60;
@@ -1975,7 +1975,7 @@ progress {
   --bs-nav-link-padding-y: 0.5rem;
   --bs-nav-link-font-size: var(--theme-fs-sm);
   --bs-nav-link-font-weight: 400;
-  --bs-nav-link-color: var(--bs-link-color);
+  --bs-nav-link-color: var(--theme-primary);
   --bs-nav-link-hover-color: var(--bs-link-hover-color);
   --bs-nav-link-disabled-color: var(--bs-secondary-color);
   display: flex;

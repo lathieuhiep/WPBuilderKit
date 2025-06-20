@@ -1,6 +1,4 @@
 <?php
-global $prefix_theme_options;
-
 $column_width_fields = [
 	[
 		'id'      => 'sm',
@@ -41,14 +39,14 @@ $column_width_fields = [
 
 //
 // -> Create a section footer
-CSF::createSection( $prefix_theme_options, array(
+CSF::createSection( PREFIX_THEME_OPTIONS, array(
 	'id'    => 'opt_footer_section',
 	'icon'  => 'fas fa-stream',
 	'title' => esc_html__( 'Chân trang', 'basictheme' ),
 ) );
 
 // footer columns
-CSF::createSection( $prefix_theme_options, array(
+CSF::createSection( PREFIX_THEME_OPTIONS, array(
 	'parent' => 'opt_footer_section',
 	'title'  => esc_html__( 'Cài đặt cột sidebar', 'basictheme' ),
 	'fields' => array(
@@ -106,7 +104,7 @@ CSF::createSection( $prefix_theme_options, array(
 ) );
 
 // Copyright
-CSF::createSection( $prefix_theme_options, array(
+CSF::createSection( PREFIX_THEME_OPTIONS, array(
 	'parent' => 'opt_footer_section',
 	'title'  => esc_html__( 'Copyright', 'basictheme' ),
 	'fields' => array(

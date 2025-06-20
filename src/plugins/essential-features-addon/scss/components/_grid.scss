@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "../abstracts/abstracts";
 
 // row
@@ -54,8 +56,8 @@
 // col: .efa-col-*
 @for $i from 1 through $grid-columns {
   .#{$prefix-plugin-essentials}col-#{$i} {
-    flex: 0 0 percentage($i / $grid-columns);
-    max-width: percentage($i / $grid-columns);
+    flex: 0 0 math.percentage(math.div($i, $grid-columns));
+    max-width: math.percentage(math.div($i, $grid-columns));
   }
 }
 
@@ -64,8 +66,8 @@
   @media (min-width: $size) {
     @for $i from 1 through $grid-columns {
       .#{$prefix-plugin-essentials}col-#{$breakpoint}-#{$i} {
-        flex: 0 0 percentage($i / $grid-columns);
-        max-width: percentage($i / $grid-columns);
+        flex: 0 0 math.percentage(math.div($i, $grid-columns));
+        max-width: math.percentage(math.div($i, $grid-columns));
       }
     }
   }

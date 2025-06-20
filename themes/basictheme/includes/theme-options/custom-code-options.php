@@ -1,7 +1,5 @@
 <?php
-global $prefix_theme_options;
-
-CSF::createSection( $prefix_theme_options, array(
+CSF::createSection( PREFIX_THEME_OPTIONS, array(
 	'title'  => esc_html__( 'Chèn Code', 'basictheme' ),
 	'icon'   => 'fas fa-code',
 	'fields' => array(

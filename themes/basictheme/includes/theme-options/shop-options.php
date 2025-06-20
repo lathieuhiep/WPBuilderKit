@@ -1,16 +1,14 @@
 <?php
-global $prefix_theme_options;
-
 //
 //  Create a section shop
-CSF::createSection( $prefix_theme_options, array(
+CSF::createSection( PREFIX_THEME_OPTIONS, array(
 	'id'    => 'opt_shop_section',
 	'title' => esc_html__( 'Của hàng', 'basictheme' ),
 	'icon'  => 'fas fa-shopping-cart',
 ) );
 
 // Category product
-CSF::createSection( $prefix_theme_options, array(
+CSF::createSection( PREFIX_THEME_OPTIONS, array(
 	'parent'      => 'opt_shop_section',
 	'title'       => esc_html__( 'Danh mục', 'basictheme' ),
 	'description' => esc_html__( 'Sử dụng cho danh mục và thẻ cửa hàng', 'basictheme' ),
@@ -52,7 +50,7 @@ CSF::createSection( $prefix_theme_options, array(
 ) );
 
 // Single product
-CSF::createSection( $prefix_theme_options, array(
+CSF::createSection( PREFIX_THEME_OPTIONS, array(
 	'parent'      => 'opt_shop_section',
 	'title'       => esc_html__( 'Chi tiết', 'basictheme' ),
 	'description' => esc_html__( 'Sử dụng cho chi tiết sản phẩm', 'basictheme' ),

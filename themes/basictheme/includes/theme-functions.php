@@ -150,30 +150,27 @@ function basictheme_col_sidebar(): string {
 
 // Post Meta
 function basictheme_post_meta(): void {
-	?>
-
-    <div class="post-meta">
-        <span class="post-meta__author">
+?>
+    <div class="post-meta d-flex flex-wrap gap-1">
+        <div class="post-meta__item post-meta__author">
             <?php esc_html_e( 'Tác giả:', 'basictheme' ); ?>
 
             <a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>">
                 <?php the_author(); ?>
             </a>
-        </span>
+        </div>
 
-        <span class="post-meta__date">
-            <?php esc_html_e( 'Ngày đăng: ', 'basictheme' );
-            the_date(); ?>
-        </span>
+        <div class="post-meta__item post-meta__date">
+            <?php esc_html_e( 'Ngày đăng: ', 'basictheme' ); echo get_the_date(); ?>
+        </div>
 
-        <span class="post-meta__comments">
+        <div class="post-meta__item post-meta__comments">
             <?php
             comments_popup_link( '0 ' . esc_html__( 'Bình luận', 'basictheme' ), '1 ' . esc_html__( 'Bình luận', 'basictheme' ), '% ' . esc_html__( 'Bình luận', 'basictheme' ) );
             ?>
-        </span>
+        </div>
     </div>
-
-	<?php
+<?php
 }
 
 // Link Pages

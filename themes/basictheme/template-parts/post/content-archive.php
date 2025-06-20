@@ -11,52 +11,48 @@ $class_col_content = basictheme_col_use_sidebar($sidebar, 'sidebar-main');
             <div class="<?php echo esc_attr( $class_col_content ); ?>">
                 <?php if ( have_posts() ) : ?>
                     <div class="content-archive-post gap-6 theme-row-cols-sm-1 theme-row-cols-md-2 theme-row-cols-lg-<?php echo esc_attr( $per_row ); ?>">
-		                <?php
-		                while ( have_posts() ) :
-			                the_post();
-                        ?>
-                            <div class="item">
-                                <div class="item__content">
-                                    <h2 class="post-title">
-                                        <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-							                <?php if (is_sticky() && is_home()) : ?>
-                                                <i class="fas fa-thumbtack"></i>
-							                <?php
-							                endif;
+		                <?php while ( have_posts() ) : the_post(); ?>
+                            <div class="item d-flex flex-column gap-3">
+                                <h2 class="post-title">
+                                    <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+                                        <?php if (is_sticky() && is_home()) : ?>
+                                            <i class="fas fa-thumbtack"></i>
+                                        <?php
+                                        endif;
+                                        the_title();
+                                        ?>
+                                    </a>
+                                </h2>
 
-							                the_title();
-							                ?>
-                                        </a>
-                                    </h2>
-
+                                <?php if ( has_post_thumbnail() ) : ?>
                                     <div class="post-thumbnail">
-						                <?php the_post_thumbnail('large'); ?>
+                                        <?php the_post_thumbnail('large'); ?>
                                     </div>
+                                <?php endif; ?>
 
-					                <?php basictheme_post_meta(); ?>
+                                <?php basictheme_post_meta(); ?>
 
-                                    <div class="post-desc">
-                                        <p>
-							                <?php
-							                if (has_excerpt()) :
-								                echo esc_html(get_the_excerpt());
-							                else:
-								                echo wp_trim_words(get_the_content(), 30, '...');
-							                endif;
-							                ?>
-                                        </p>
+                                <div class="post-desc">
+                                    <p>
+                                        <?php
+                                        if (has_excerpt()) :
+                                            echo esc_html(get_the_excerpt());
+                                        else:
+                                            echo wp_trim_words(get_the_content(), 30, '...');
+                                        endif;
+                                        ?>
+                                    </p>
 
-                                        <a href="<?php the_permalink(); ?>" class="text-read-more">
-							                <?php esc_html_e('Read more', 'basictheme'); ?>
-                                        </a>
+                                    <?php basictheme_link_page(); ?>
+                                </div>
 
-						                <?php basictheme_link_page(); ?>
-                                    </div>
+                                <div class="read-more flex-fill d-flex align-items-end">
+                                    <a href="<?php the_permalink(); ?>" class="text-read-more">
+                                        <?php esc_html_e('Đọc tiếp', 'basictheme'); ?>
+                                    </a>
                                 </div>
                             </div>
-		                <?php
-		                endwhile;
-		                wp_reset_postdata();
+		                <?php endwhile; wp_reset_postdata();
 		                ?>
                     </div>
                 <?php

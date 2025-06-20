@@ -1,6 +1,6 @@
 <?php
 // Setup Theme
-add_action( 'after_setup_theme', 'basictheme_setup' );
+
 function basictheme_setup(): void {
 	// Set the content width based on the theme's design and stylesheet.
 	global $content_width;
@@ -43,3 +43,4 @@ function basictheme_setup(): void {
 	// add theme support title-tag
 	add_theme_support( 'title-tag' );
 }
+add_action( 'after_setup_theme', 'basictheme_setup' );

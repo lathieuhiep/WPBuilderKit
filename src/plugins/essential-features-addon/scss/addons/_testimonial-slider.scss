@@ -1,9 +1,11 @@
-@import "../../../../shared/scss/abstracts/abstracts";
+@use "sass:map";
+
+@import "shared/scss/abstracts/abstracts";
 @import "../abstracts/abstracts";
 
 .efa-addon-testimonial-slider {
-  --#{$prefix-plugin-essentials}fs-name: #{map-get($mt-font-sizes, md)};
-  --#{$prefix-plugin-essentials}fw-name: #{map-get($mt-font-weights, bold)};
+  --#{$prefix-plugin-essentials}fs-name: #{map.get($mt-font-sizes, md)};
+  --#{$prefix-plugin-essentials}fw-name: #{map.get($mt-font-weights, bold)};
 
   .item {
     text-align: center;

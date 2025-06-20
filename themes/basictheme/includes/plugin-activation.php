@@ -37,14 +37,14 @@ function basictheme_register_required_plugins(): void {
 		array(
 			'name'      =>  'Woocommerce',
 			'slug'      =>  'woocommerce',
-			'required'  =>  true,
+			'required'  =>  false,
 		),
 
 		// This is an example of how to include a plugin from the WordPress Plugin Repository
 		array(
 			'name'      =>  'Breadcrumb Navxt',
 			'slug'      =>  'breadcrumb-navxt',
-			'required'  =>  true,
+			'required'  =>  false,
 		),
 
 		// This is an example of how to include a plugin from the WordPress Plugin Repository
@@ -52,6 +52,13 @@ function basictheme_register_required_plugins(): void {
 			'name'      =>  'Contact Form 7',
 			'slug'      =>  'contact-form-7',
 			'required'  =>  true,
+		),
+
+        // This is an example of how to include a plugin from the WordPress Plugin Repository
+		array(
+			'name'      =>  'Loco Translate',
+			'slug'      =>  'loco-translate',
+			'required'  =>  false,
 		),
 
 	);

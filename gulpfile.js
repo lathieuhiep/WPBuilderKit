@@ -82,7 +82,7 @@ function buildStyleTheme() {
         .pipe(gulpIf(isDev, sourcemaps.init()))
         .pipe(sass({
             outputStyle: 'expanded',
-            includePaths: ['node_modules']
+            includePaths: ['node_modules', 'src']
         }, '').on('error', sass.logError))
 
         // --- Xuất file chưa min ---
@@ -159,7 +159,8 @@ function buildStyleCustomPostType() {
         }))
         .pipe(gulpIf(isDev, sourcemaps.init()))
         .pipe(sass({
-            outputStyle: 'expanded'
+            outputStyle: 'expanded',
+            includePaths: ['node_modules', 'src']
         }, '').on('error', sass.logError))
         .pipe(cleanCSS({
             level: 2
@@ -181,7 +182,8 @@ function buildStylePageTemplate() {
         }))
         .pipe(gulpIf(isDev, sourcemaps.init()))
         .pipe(sass({
-            outputStyle: 'expanded'
+            outputStyle: 'expanded',
+            includePaths: ['node_modules', 'src']
         }, '').on('error', sass.logError))
         .pipe(cleanCSS({
             level: 2
@@ -204,7 +206,7 @@ function buildStyleShop() {
         .pipe(gulpIf(isDev, sourcemaps.init()))
         .pipe(sass({
             outputStyle: 'expanded',
-            includePaths: ['node_modules']
+            includePaths: ['node_modules', 'src']
         }, '').on('error', sass.logError))
 
         // --- Xuất file chưa min ---
@@ -281,7 +283,8 @@ function buildStyleElementor() {
         }))
         .pipe(gulpIf(isDev, sourcemaps.init()))
         .pipe(sass({
-            outputStyle: 'expanded'
+            outputStyle: 'expanded',
+            includePaths: ['node_modules', 'src']
         }, '').on('error', sass.logError))
         .pipe(cleanCSS({
             level: 2
@@ -303,7 +306,8 @@ function buildStyleCustomLogin() {
         }))
         .pipe(gulpIf(isDev, sourcemaps.init()))
         .pipe(sass({
-            outputStyle: 'expanded'
+            outputStyle: 'expanded',
+            includePaths: ['node_modules', 'src']
         }, '').on('error', sass.logError))
         .pipe(cleanCSS({
             level: 2

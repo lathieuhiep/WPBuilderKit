@@ -1,4 +1,10 @@
 <?php
+// check if Elementor is active
+function efa_check_elementor_builder()
+{
+    return get_post_meta( get_the_ID(), '_elementor_edit_mode', true );
+}
+
 // Get Category Check Box
 function efa_check_get_cat( $type_taxonomy ): array {
 	$cat_check = array();

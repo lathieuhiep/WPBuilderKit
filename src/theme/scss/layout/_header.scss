@@ -362,31 +362,33 @@
           }
         }
 
-        .woocommerce-mini-cart__total {
-          padding: 1.5rem 0 0 0;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
+        .woocommerce-mini-cart {
+          &__total {
+            padding: 1.5rem 0 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-          .woocommerce-Price-amount {
-            font-weight: $var-fw-bold;
-          }
-        }
-
-        .woocommerce-mini-cart__buttons {
-          &:before,
-          &:after {
-            display: none;
+            .woocommerce-Price-amount {
+              font-weight: $var-fw-bold;
+            }
           }
 
-          a {
-            padding: 0 4rem;
-            display: block;
-            text-align: center;
-            margin-bottom: 1rem;
+          &__buttons {
+            &:before,
+            &:after {
+              display: none;
+            }
 
-            &:last-child {
-              margin-bottom: 0;
+            a {
+              padding: 0 4rem;
+              display: block;
+              text-align: center;
+              margin-bottom: 1rem;
+
+              &:last-child {
+                margin-bottom: 0;
+              }
             }
           }
         }

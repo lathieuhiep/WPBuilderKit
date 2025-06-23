@@ -4,6 +4,25 @@ function basictheme_get_version_theme(): string {
 	return wp_get_theme()->get( 'Version' );
 }
 
+// set favicon default
+if ( ! function_exists( 'basictheme_fallback_favicon' ) ) {
+    add_action( 'wp_head', 'basictheme_fallback_favicon' );
+    function basictheme_fallback_favicon(): void
+    {
+        if ( ! has_site_icon() ) {
+            $base_favicon_url = get_theme_file_uri( '/assets/images/favicons/' );
+        ?>
+            <link rel="apple-touch-icon" sizes="180x180" href="<?php echo esc_url( $base_favicon_url . 'apple-touch-icon.png' ) ?>">
+            <link rel="icon" type="image/png" sizes="32x32" href="<?php echo esc_url( $base_favicon_url . 'favicon-96x96.png' ) ?>">
+            <link rel="icon" type="image/png" sizes="16x16" href="<?php echo esc_url( $base_favicon_url . 'favicon-96x96.png' ) ?>">
+            <link rel="icon" type="image/x-icon" href="<?php echo esc_url($base_favicon_url . 'favicon.ico') ?>">
+            <link rel="manifest" href="<?php echo esc_url($base_favicon_url . 'site.webmanifest') ?>">
+            <link rel="icon" type="image/svg+xml" href="<?php echo esc_url($base_favicon_url . 'favicon.svg') ?>">
+        <?php
+        }
+    }
+}
+
 // check is blog
 function basictheme_is_blog(): bool {
 	return ( is_archive() || is_category() || is_tag() || is_author() || is_home() || ( is_search() && get_post_type() === 'post' ) );

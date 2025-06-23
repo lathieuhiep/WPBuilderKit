@@ -36,7 +36,7 @@ function basictheme_setup(): void {
 	// This theme uses wp_nav_menu() in two locations.
 	register_nav_menus(
 		array(
-			'primary' => esc_html__( 'Primary Menu', 'basictheme' ),
+			'primary' => esc_html__( 'Menu chính', 'basictheme' ),
 		)
 	);
 

@@ -15,7 +15,7 @@ CSF::createSection( PREFIX_THEME_OPTIONS, array(
 				array(
 					'id'          => 'item',
 					'type'        => 'select',
-					'title'       => 'Select',
+					'title'       => esc_html__( 'Chọn mạng xã hội', 'basictheme' ),
 					'placeholder' => esc_html__( '--Chọn mạng xã hội--', 'basictheme' ),
 					'options'     => basictheme_list_social_network(),
 				),

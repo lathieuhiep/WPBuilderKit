@@ -58,7 +58,7 @@ class MyTheme_Contact_Info_Widget extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, $defaults );
 
 		$fields = [
-			'title'   => esc_html__( 'Title:', 'basictheme' ),
+			'title'   => esc_html__( 'Tiêu đề:', 'basictheme' ),
 			'address' => esc_html__( 'Địa chỉ:', 'basictheme' ),
 			'email'   => esc_html__( 'Email:', 'basictheme' ),
 			'phone'   => esc_html__( 'Số điện thoại:', 'basictheme' )

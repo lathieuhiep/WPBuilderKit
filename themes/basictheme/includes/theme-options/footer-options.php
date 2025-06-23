@@ -54,9 +54,9 @@ CSF::createSection( PREFIX_THEME_OPTIONS, array(
 		array(
 			'id'      => 'opt_footer_columns',
 			'type'    => 'select',
-			'title'   => esc_html__( 'Number of footer columns', 'basictheme' ),
+			'title'   => esc_html__( 'Số lượng cột hiển thị', 'basictheme' ),
 			'options' => array(
-				'0' => esc_html__( 'Hide', 'basictheme' ),
+				'0' => esc_html__( 'Ẩn', 'basictheme' ),
 				'1' => 1,
 				'2' => 2,
 				'3' => 3,

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BasicTheme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-20 09:37+0000\n"
+"POT-Creation-Date: 2025-06-23 09:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,25 +16,25 @@ msgstr ""
 "X-Loco-Version: 2.8.0; wp-6.8.1; php-8.3.16\n"
 "X-Domain: basictheme"
 
-#: includes/theme-functions.php:111
+#: includes/theme-functions.php:130
 msgid " Trước"
 msgstr ""
 
-#: includes/theme-options/social-network-options.php:21
+#: includes/theme-options/social-network-options.php:19
 msgid "--Chọn mạng xã hội--"
 msgstr ""
 
-#: includes/theme-options/blog-options.php:37
-#: includes/theme-options/shop-options.php:45
+#: includes/theme-options/blog-options.php:35
+#: includes/theme-options/shop-options.php:43
 msgid "3"
 msgstr ""
 
-#: includes/theme-options/blog-options.php:38
-#: includes/theme-options/shop-options.php:46
+#: includes/theme-options/blog-options.php:36
+#: includes/theme-options/shop-options.php:44
 msgid "4"
 msgstr ""
 
-#: includes/theme-options/shop-options.php:47
+#: includes/theme-options/shop-options.php:45
 msgid "5"
 msgstr ""
 
@@ -46,32 +46,36 @@ msgstr ""
 msgid "BasicTheme"
 msgstr ""
 
-#: includes/theme-options/blog-options.php:9
+#: includes/theme-options/blog-options.php:7
 msgid "Bài viết"
 msgstr ""
 
-#: includes/theme-options/blog-options.php:48
+#: includes/theme-options/blog-options.php:46
 msgid "Bài viết chi tiết"
+msgstr ""
+
+#: template-parts/post/inc-related-post.php:20
+msgid "Bài viết liên quan"
 msgstr ""
 
 #: includes/widgets/recent-post.php:103
 msgid "Bài viết mới nhất"
 msgstr ""
 
-#: comments.php:71 includes/theme-functions.php:169
-#: includes/theme-functions.php:169 includes/theme-functions.php:169
+#: comments.php:71 includes/theme-functions.php:188
+#: includes/theme-functions.php:188 includes/theme-functions.php:188
 msgid "Bình luận"
 msgstr ""
 
-#: includes/theme-functions.php:83
+#: includes/theme-functions.php:102
 msgid "Bình luận cũ hơn"
 msgstr ""
 
-#: includes/theme-functions.php:46
+#: includes/theme-functions.php:65
 msgid "Bình luận của bạn đang chờ kiểm duyệt."
 msgstr ""
 
-#: includes/theme-functions.php:87
+#: includes/theme-functions.php:106
 msgid "Bình luận mới hơn"
 msgstr ""
 
@@ -79,31 +83,27 @@ msgstr ""
 msgid "Bình luận đã đóng."
 msgstr ""
 
-#: template-parts/post/content-single.php:30
-msgid "Category: "
-msgstr ""
-
-#: includes/theme-options/shop-options.php:57
+#: includes/theme-options/shop-options.php:55
 msgid "Chi tiết"
 msgstr ""
 
-#: includes/theme-options/footer-options.php:47
+#: includes/theme-options/footer-options.php:45
 msgid "Chân trang"
 msgstr ""
 
-#: includes/theme-options/custom-code-options.php:5
+#: includes/theme-options/custom-code-options.php:3
 msgid "Chèn Code"
 msgstr ""
 
-#: includes/theme-options/custom-code-options.php:19
+#: includes/theme-options/custom-code-options.php:17
 msgid "Chèn sau body"
 msgstr ""
 
-#: includes/theme-options/custom-code-options.php:27
+#: includes/theme-options/custom-code-options.php:25
 msgid "Chèn vào footer"
 msgstr ""
 
-#: includes/theme-options/custom-code-options.php:11
+#: includes/theme-options/custom-code-options.php:9
 msgid "Chèn vào head"
 msgstr ""
 
@@ -117,15 +117,19 @@ msgstr ""
 msgid "Chọn danh mục:"
 msgstr ""
 
-#: includes/theme-functions.php:197
+#: includes/theme-options/social-network-options.php:18
+msgid "Chọn mạng xã hội"
+msgstr ""
+
+#: includes/theme-functions.php:216
 msgid "Chọn một mẫu liên hệ"
 msgstr ""
 
-#: includes/theme-options/general-options.php:14
+#: includes/theme-options/general-options.php:13
 msgid "Chọn ảnh logo"
 msgstr ""
 
-#: includes/theme-options/general-options.php:33
+#: includes/theme-options/general-options.php:32
 msgid "Chọn ảnh tải trang"
 msgstr ""
 
@@ -145,46 +149,56 @@ msgctxt "comments title"
 msgid "Một câu trả lời cho &ldquo;%s&rdquo;"
 msgstr ""
 
-#: includes/theme-options/footer-options.php:111
+#: includes/theme-options/footer-options.php:109
 msgid "Copyright"
 msgstr ""
 
-#: includes/theme-options/footer-options.php:130
+#: includes/theme-options/footer-options.php:128
 msgid "Copyright &copy; DiepLK"
 msgstr ""
 
-#: includes/theme-options/general-options.php:7
+#: includes/theme-options/general-options.php:6
 msgid "Cài đặt chung"
 msgstr ""
 
-#: includes/theme-options/footer-options.php:53
+#: includes/theme-options/footer-options.php:51
 msgid "Cài đặt cột sidebar"
 msgstr ""
 
-#: includes/theme-options.php:18
+#: includes/theme-options.php:20
 msgid "Cài đặt theme"
 msgstr ""
 
-#: includes/theme-options/blog-options.php:67
-#: includes/theme-options/footer-options.php:118
-#: includes/theme-options/general-options.php:24
-#: includes/theme-options/general-options.php:47
-#: includes/theme-options/menu-options.php:14
-#: includes/theme-options/menu-options.php:25
+#: includes/theme-options/blog-options.php:65
+#: includes/theme-options/footer-options.php:116
+#: includes/theme-options/general-options.php:23
+#: includes/theme-options/general-options.php:46
+#: includes/theme-options/menu-options.php:12
+#: includes/theme-options/menu-options.php:23
 msgid "Có"
 msgstr ""
 
-#: includes/theme-options.php:27
+#: template-parts/post/content-no-data.php:19
+msgid ""
+"Có vẻ như chúng tôi không tìm thấy những gì bạn đang tìm kiếm. Có lẽ tìm "
+"kiếm có thể giúp ích."
+msgstr ""
+
+#: includes/theme-options.php:29
 msgid "Cảm ơn bạn đã sử dụng theme của tôi"
 msgstr ""
 
-#: includes/theme-options/shop-options.php:8
+#: includes/theme-options/shop-options.php:6
 msgid "Của hàng"
 msgstr ""
 
-#: includes/theme-options/blog-options.php:15
-#: includes/theme-options/shop-options.php:15
+#: includes/theme-options/blog-options.php:13
+#: includes/theme-options/shop-options.php:13
 msgid "Danh mục"
+msgstr ""
+
+#: template-parts/post/content-single.php:30
+msgid "Danh mục: "
 msgstr ""
 
 #. Author of the theme
@@ -215,10 +229,6 @@ msgstr ""
 msgid "Giảm dần"
 msgstr ""
 
-#: includes/theme-options/footer-options.php:61
-msgid "Hide"
-msgstr ""
-
 #: includes/widgets/recent-post.php:11
 msgid "Hiển thị bài viết mới nhất"
 msgstr ""
@@ -231,23 +241,23 @@ msgstr ""
 msgid "Hiển thị thông tin liên hệ"
 msgstr ""
 
-#: includes/theme-options/general-options.php:23
+#: includes/theme-options/general-options.php:22
 msgid "Hiện chờ tải trang"
 msgstr ""
 
-#: includes/theme-options/general-options.php:46
+#: includes/theme-options/general-options.php:45
 msgid "Hiện nút quay về đầu trang"
 msgstr ""
 
-#: includes/theme-options/blog-options.php:66
+#: includes/theme-options/blog-options.php:64
 msgid "Hiện thị bài viết liên quan"
 msgstr ""
 
-#: includes/theme-options/footer-options.php:117
+#: includes/theme-options/footer-options.php:115
 msgid "Hiện thị copyright"
 msgstr ""
 
-#: includes/theme-options/menu-options.php:24
+#: includes/theme-options/menu-options.php:22
 msgid "Hiện thị giỏ hàng trên menu"
 msgstr ""
 
@@ -267,43 +277,45 @@ msgstr ""
 msgid "ID"
 msgstr ""
 
-#: template-parts/post/content-no-data.php:24
-msgid ""
-"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
-"searching can help."
-msgstr ""
-
-#: includes/theme-options/blog-options.php:68
-#: includes/theme-options/footer-options.php:119
-#: includes/theme-options/general-options.php:25
-#: includes/theme-options/general-options.php:48
-#: includes/theme-options/menu-options.php:15
-#: includes/theme-options/menu-options.php:26
+#: includes/theme-options/blog-options.php:66
+#: includes/theme-options/footer-options.php:117
+#: includes/theme-options/general-options.php:24
+#: includes/theme-options/general-options.php:47
+#: includes/theme-options/menu-options.php:13
+#: includes/theme-options/menu-options.php:24
 msgid "Không"
 msgstr ""
 
-#: includes/theme-options/footer-options.php:35
+#: template-parts/post/content-no-data.php:3
+msgid "Không có dữ liệu"
+msgstr ""
+
+#: includes/theme-options/footer-options.php:33
 msgid "lg: ≥1200px"
 msgstr ""
 
-#: includes/theme-options/footer-options.php:26
+#: includes/theme-options/footer-options.php:24
 msgid "lg: ≥992px"
 msgstr ""
 
-#: includes/theme-options/footer-options.php:17
+#: includes/theme-options/footer-options.php:15
 msgid "md: ≥768px"
 msgstr ""
 
-#: includes/theme-options/menu-options.php:6
+#: includes/theme-options/menu-options.php:4
 msgid "Menu"
 msgstr ""
 
-#: includes/theme-options/menu-options.php:13
+#: includes/theme-setup.php:39
+msgid "Menu chính"
+msgstr ""
+
+#: includes/theme-options/menu-options.php:11
 msgid "Menu cố định"
 msgstr ""
 
-#: includes/theme-options/social-network-options.php:8
-#: includes/theme-options/social-network-options.php:14
+#: includes/theme-options/social-network-options.php:6
+#: includes/theme-options/social-network-options.php:12
 #: includes/widgets/social-widget.php:45
 msgid "Mạng xã hội"
 msgstr ""
@@ -312,7 +324,7 @@ msgstr ""
 msgid "Ngày"
 msgstr ""
 
-#: includes/theme-functions.php:164
+#: includes/theme-functions.php:183
 msgid "Ngày đăng: "
 msgstr ""
 
@@ -320,22 +332,14 @@ msgstr ""
 msgid "Ngẫu nhiên"
 msgstr ""
 
-#: template-parts/post/content-no-data.php:3
-msgid "No Data"
-msgstr ""
-
-#: includes/theme-options/footer-options.php:59
-msgid "Number of footer columns"
-msgstr ""
-
-#: includes/theme-options/footer-options.php:128
+#: includes/theme-options/footer-options.php:126
 msgid "Nội dung"
 msgstr ""
 
-#: includes/theme-options/blog-options.php:26
-#: includes/theme-options/blog-options.php:57
-#: includes/theme-options/shop-options.php:26
-#: includes/theme-options/shop-options.php:68
+#: includes/theme-options/blog-options.php:24
+#: includes/theme-options/blog-options.php:55
+#: includes/theme-options/shop-options.php:24
+#: includes/theme-options/shop-options.php:66
 msgid "Phải"
 msgstr ""
 
@@ -344,29 +348,7 @@ msgctxt "placeholder"
 msgid "Tìm kiếm..."
 msgstr ""
 
-#: includes/woocommerce/quickview/content-quickview.php:39
-msgid "Please choose the quantity of items you wish to add to your cart…"
-msgstr ""
-
-#: includes/theme-setup.php:43
-msgid "Primary Menu"
-msgstr ""
-
-#: includes/woocommerce/woo-quick-view.php:8
-msgid "Quick view product"
-msgstr ""
-
-#: template-parts/post/content-no-data.php:10
-#, php-format
-msgid ""
-"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr ""
-
-#: template-parts/post/inc-related-post.php:20
-msgid "Related Post"
-msgstr ""
-
-#: includes/theme-functions.php:103 includes/theme-functions.php:112
+#: includes/theme-functions.php:122 includes/theme-functions.php:131
 msgid "Sau"
 msgstr ""
 
@@ -386,14 +368,8 @@ msgstr ""
 msgid "Sidebar sản phẩm"
 msgstr ""
 
-#: includes/theme-options/footer-options.php:8
+#: includes/theme-options/footer-options.php:6
 msgid "sm: ≥576px"
-msgstr ""
-
-#: template-parts/post/content-no-data.php:16
-msgid ""
-"Sorry, but nothing matched your search terms. Please try again with some "
-"different keywords."
 msgstr ""
 
 #: includes/widgets/recent-post.php:183
@@ -404,7 +380,14 @@ msgstr ""
 msgid "Sắp xếp:"
 msgstr ""
 
-#: includes/theme-options/blog-options.php:35
+#: template-parts/post/content-no-data.php:9
+#, php-format
+msgid ""
+"Sẵn sàng đăng bài viết đầu tiên của bạn chưa? <a href=\"%1$s\">Bắt đầu ở "
+"đây</a>."
+msgstr ""
+
+#: includes/theme-options/blog-options.php:33
 msgid "Số bài viết trên mỗi hàng"
 msgstr ""
 
@@ -412,15 +395,19 @@ msgstr ""
 msgid "Số lượng bài viết hiển thị:"
 msgstr ""
 
-#: includes/theme-options/blog-options.php:77
+#: includes/theme-options/blog-options.php:75
 msgid "Số lượng bài viết liên quan"
 msgstr ""
 
-#: includes/theme-options/shop-options.php:35
+#: includes/theme-options/footer-options.php:57
+msgid "Số lượng cột hiển thị"
+msgstr ""
+
+#: includes/theme-options/shop-options.php:33
 msgid "Số lượng sản phẩm hiển thị"
 msgstr ""
 
-#: includes/theme-options/shop-options.php:43
+#: includes/theme-options/shop-options.php:41
 msgid "Số sản phẩm trên một hàng"
 msgstr ""
 
@@ -428,24 +415,24 @@ msgstr ""
 msgid "Số điện thoại:"
 msgstr ""
 
-#: includes/theme-options/shop-options.php:58
+#: includes/theme-options/shop-options.php:56
 msgid "Sử dụng cho chi tiết sản phẩm"
 msgstr ""
 
-#: includes/theme-options/blog-options.php:16
+#: includes/theme-options/blog-options.php:14
 msgid "Sử dụng cho các trang archive, index, tìm kiếm"
 msgstr ""
 
-#: includes/theme-options/shop-options.php:16
+#: includes/theme-options/shop-options.php:14
 msgid "Sử dụng cho danh mục và thẻ cửa hàng"
 msgstr ""
 
-#: includes/theme-options/general-options.php:35
+#: includes/theme-options/general-options.php:34
 #, php-format
 msgid "Sử dụng ảnh .git %s"
 msgstr ""
 
-#: includes/theme-functions.php:55
+#: includes/theme-functions.php:74
 msgid "Sửa "
 msgstr ""
 
@@ -453,15 +440,7 @@ msgstr ""
 msgid "Tag: "
 msgstr ""
 
-#: includes/meta-box/cmb-post.php:15
-msgid "Test Title"
-msgstr ""
-
-#: includes/meta-box/cmb-post.php:17
-msgid "This is a title description"
-msgstr ""
-
-#: template-parts/header/header-main.php:42
+#: components/header/nav.php:14
 msgid "Thêm Menu"
 msgstr ""
 
@@ -469,14 +448,11 @@ msgstr ""
 msgid "Thông tin liên hệ"
 msgstr ""
 
-#: includes/widgets/contact-info-widget.php:61
-msgid "Title:"
-msgstr ""
-
-#: includes/widgets/recent-post.php:197
+#: includes/meta-box/cmb-post.php:15 includes/widgets/recent-post.php:197
 msgid "Tiêu đề"
 msgstr ""
 
+#: includes/widgets/contact-info-widget.php:61
 #: includes/widgets/recent-post.php:124 includes/widgets/social-widget.php:53
 msgid "Tiêu đề:"
 msgstr ""
@@ -491,22 +467,22 @@ msgstr ""
 msgid "Trang chủ"
 msgstr ""
 
-#: includes/theme-functions.php:179
+#: includes/theme-functions.php:198
 msgid "Trang:"
 msgstr ""
 
-#: includes/theme-options/blog-options.php:25
-#: includes/theme-options/blog-options.php:56
-#: includes/theme-options/shop-options.php:25
-#: includes/theme-options/shop-options.php:67
+#: includes/theme-options/blog-options.php:23
+#: includes/theme-options/blog-options.php:54
+#: includes/theme-options/shop-options.php:23
+#: includes/theme-options/shop-options.php:65
 msgid "Trái"
 msgstr ""
 
-#: includes/theme-functions.php:102
+#: includes/theme-functions.php:121
 msgid "Trước"
 msgstr ""
 
-#: includes/theme-functions.php:156
+#: includes/theme-functions.php:175
 msgid "Tác giả:"
 msgstr ""
 
@@ -518,7 +494,7 @@ msgstr ""
 msgid "Tăng dần"
 msgstr ""
 
-#: includes/theme-functions.php:204
+#: includes/theme-functions.php:223
 msgid "Tạo biểu mẫu trước tiên"
 msgstr ""
 
@@ -526,27 +502,42 @@ msgstr ""
 msgid "Tất cả"
 msgstr ""
 
-#: includes/theme-options/social-network-options.php:28
+#: includes/theme-options/social-network-options.php:26
 msgid "URL"
 msgstr ""
 
-#: includes/theme-options/blog-options.php:22
-#: includes/theme-options/blog-options.php:53
-#: includes/theme-options/shop-options.php:22
-#: includes/theme-options/shop-options.php:64
+#: includes/woocommerce/quickview/content-quickview.php:39
+msgid "Vui lòng chọn số lượng sản phẩm bạn muốn thêm vào giỏ hàng…"
+msgstr ""
+
+#: includes/theme-options/blog-options.php:20
+#: includes/theme-options/blog-options.php:51
+#: includes/theme-options/shop-options.php:20
+#: includes/theme-options/shop-options.php:62
 msgid "Vị trí sidebar"
 msgstr ""
 
+#: includes/woocommerce/woo-quick-view.php:8
 #: includes/woocommerce/woo-quick-view.php:11
 msgid "Xem nhanh"
+msgstr ""
+
+#: template-parts/post/content-no-data.php:13
+msgid ""
+"Xin lỗi, nhưng không có kết quả nào khớp với từ khóa tìm kiếm của bạn. Vui "
+"lòng thử lại với một số từ khóa khác."
 msgstr ""
 
 #: template-parts/parts/loading.php:9 template-parts/parts/loading.php:11
 msgid "Đang tải..."
 msgstr ""
 
-#: includes/theme-functions.php:78
+#: includes/theme-functions.php:97
 msgid "Điều hướng bình luận"
+msgstr ""
+
+#: includes/meta-box/cmb-post.php:17
+msgid "Đây là mô tả tiêu đề"
 msgstr ""
 
 #: comments.php:62
@@ -561,25 +552,26 @@ msgstr ""
 msgid "Đọc tiếp"
 msgstr ""
 
-#: includes/theme-options/footer-options.php:74
+#: includes/theme-options/footer-options.php:72
 msgid "Độ rộng cột 1"
 msgstr ""
 
-#: includes/theme-options/footer-options.php:83
+#: includes/theme-options/footer-options.php:81
 msgid "Độ rộng cột 2"
 msgstr ""
 
-#: includes/theme-options/footer-options.php:92
+#: includes/theme-options/footer-options.php:90
 msgid "Độ rộng cột 3"
 msgstr ""
 
-#: includes/theme-options/footer-options.php:101
+#: includes/theme-options/footer-options.php:99
 msgid "Độ rộng cột 4"
 msgstr ""
 
-#: includes/theme-options/blog-options.php:24
-#: includes/theme-options/blog-options.php:55
-#: includes/theme-options/shop-options.php:24
-#: includes/theme-options/shop-options.php:66
+#: includes/theme-options/blog-options.php:22
+#: includes/theme-options/blog-options.php:53
+#: includes/theme-options/footer-options.php:59
+#: includes/theme-options/shop-options.php:22
+#: includes/theme-options/shop-options.php:64
 msgid "Ẩn"
 msgstr ""

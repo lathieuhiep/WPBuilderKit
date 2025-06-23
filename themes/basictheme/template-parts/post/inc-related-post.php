@@ -17,7 +17,7 @@ if ( !empty( $term_ids ) ):
     ?>
         <div class="related-posts">
             <h3 class="related-posts__title">
-                <?php esc_html_e('Related Post', 'basictheme'); ?>
+                <?php esc_html_e('Bài viết liên quan', 'basictheme'); ?>
             </h3>
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">

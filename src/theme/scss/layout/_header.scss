@@ -256,6 +256,7 @@
     .sub-menu-toggle {
       font-size: $var-fs-xs;
       cursor: pointer;
+      color: var(--#{$prefix-theme}primary);
 
       &::after {
         display: inline-block;

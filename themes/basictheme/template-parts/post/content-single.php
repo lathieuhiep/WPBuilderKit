@@ -27,7 +27,7 @@ $show_related = basictheme_get_option('opt_post_single_related', '1');
 		<?php if( get_the_category() ): ?>
             <p class="post-category">
 				<?php
-				esc_html_e('Category: ','basictheme');
+				esc_html_e('Danh mục: ','basictheme');
 				the_category( ', ' );
 				?>
             </p>

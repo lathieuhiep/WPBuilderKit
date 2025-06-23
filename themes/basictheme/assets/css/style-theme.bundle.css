@@ -9959,6 +9959,7 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 .main-header .primary-menu .sub-menu-toggle {
   font-size: var(--theme-fs-xs);
   cursor: pointer;
+  color: var(--theme-primary);
 }
 .main-header .primary-menu .sub-menu-toggle::after {
   display: inline-block;

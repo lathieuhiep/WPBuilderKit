@@ -25,7 +25,7 @@ if ( ! function_exists( 'basictheme_fallback_favicon' ) ) {
 
 // check is blog
 function basictheme_is_blog(): bool {
-	return ( is_archive() || is_category() || is_tag() || is_author() || is_home() || ( is_search() && get_post_type() === 'post' ) );
+    return ( is_home() || ( is_archive() && get_post_type() === 'post' ) || ( is_search() && get_post_type() === 'post' ) );
 }
 
 // Callback Comment List

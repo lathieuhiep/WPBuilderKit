@@ -72,7 +72,7 @@ function server() {
 
 // Task build style theme
 function buildStyleTheme() {
-    return src(`${paths.theme.scss}style-theme.scss`)
+    return src(`${paths.theme.scss}main.scss`)
         .pipe(plumber({
             errorHandler: function (err) {
                 console.error('SCSS Style Theme Error:', err.message);
@@ -392,7 +392,7 @@ function watchTask() {
         `${paths.theme.scss}utilities/*.scss`,
         `${paths.theme.scss}components/*.scss`,
         `${paths.theme.scss}layout/*.scss`,
-        `${paths.theme.scss}style-theme.scss`,
+        `${paths.theme.scss}main.scss`,
     ], buildStyleTheme)
 
     watch([

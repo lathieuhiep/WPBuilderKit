@@ -10294,11 +10294,11 @@ form.wpcf7-form p:has(.wpcf7-submit) {
   flex-direction: column;
 }
 
-.global-footer__column {
+.footer__column {
   border-top: 0.1rem solid var(--theme-primary);
   padding: 3rem 0;
 }
-.global-footer__bottom {
+.footer__bottom {
   padding: 1rem 0;
   color: var(--theme-white);
   background-color: var(--theme-black);

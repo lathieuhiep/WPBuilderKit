@@ -12,19 +12,35 @@ function basictheme_register_sidebar( $name, $id, $description = '' ): void {
 	) );
 }
 
-add_action( 'widgets_init', 'basictheme_multiple_widget_init' );
+const PREFIX_SIDEBAR_FOOTER_COLUMN = 'sidebar-footer-column-';
 function basictheme_multiple_widget_init(): void {
-	basictheme_register_sidebar( esc_html__( 'Sidebar chính', 'basictheme' ), 'sidebar-main', 'Dùng ở các trang bài viết' );
+	basictheme_register_sidebar(
+        esc_html__( 'Sidebar chính', 'basictheme' ),
+        'sidebar-main',
+        esc_html__('Dùng ở các trang bài viết', 'basictheme' )
+    );
 
-	basictheme_register_sidebar( esc_html__( 'Sidebar shop', 'basictheme' ), 'sidebar-wc', esc_html__( 'Dùng ở trang danh mục sản phẩm.', 'basictheme' ) );
+	basictheme_register_sidebar(
+        esc_html__( 'Sidebar shop', 'basictheme' ),
+        'sidebar-wc',
+        esc_html__( 'Dùng ở trang danh mục sản phẩm.', 'basictheme' )
+    );
 
-	basictheme_register_sidebar( esc_html__( 'Sidebar sản phẩm', 'basictheme' ), 'sidebar-wc-product', esc_html__( 'Dùng cho trang chi tiết sản phẩm', 'basictheme' ) );
+	basictheme_register_sidebar(
+        esc_html__( 'Sidebar sản phẩm', 'basictheme' ),
+        'sidebar-wc-product',
+        esc_html__( 'Dùng cho trang chi tiết sản phẩm', 'basictheme' )
+    );
 
 	// sidebar footer
 	$opt_number_columns = basictheme_get_option( 'opt_footer_columns', '4' );
+
 	for ( $i = 1; $i <= $opt_number_columns; $i ++ ) {
-		basictheme_register_sidebar( sprintf( esc_html__( 'Sidebar chân trang cột %d', 'basictheme' ), $i ),
-			'sidebar-footer-column-' . $i,
-			esc_html__( 'Dùng ở chân trang', 'basictheme' ) );
+		basictheme_register_sidebar(
+            sprintf( esc_html__( 'Sidebar chân trang cột %d', 'basictheme' ), $i ),
+            PREFIX_SIDEBAR_FOOTER_COLUMN . $i,
+			esc_html__( 'Dùng ở chân trang', 'basictheme' )
+        );
 	}
 }
+add_action( 'widgets_init', 'basictheme_multiple_widget_init' );

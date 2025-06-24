@@ -30,7 +30,7 @@ $column_width_fields = [
 	[
 		'id'      => 'xl',
 		'type'    => 'slider',
-		'title'   => esc_html__( 'lg: ≥1200px', 'basictheme' ),
+		'title'   => esc_html__( 'xl: ≥1200px', 'basictheme' ),
 		'default' => 3,
 		'min'     => 1,
 		'max'     => 12,

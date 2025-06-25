@@ -23,6 +23,7 @@ const themeName = 'basictheme';
 // Đường dẫn file
 const paths = {
     node_modules: 'node_modules/',
+    vendors: 'src/vendors/',
     theme: {
         scss: 'src/theme/scss/',
         js: 'src/theme/js/'
@@ -61,7 +62,7 @@ const paths = {
 // tạo file .env với biến PROXY="localhost/basictheme". Có thể thay đổi giá trị này.
 const proxy = process.env.PROXY || "localhost/basictheme";
 
-function server() {
+const server = () => {
     browserSync.init({
         proxy: proxy,
         open: false,
@@ -70,8 +71,77 @@ function server() {
     })
 }
 
+// task build custom bootstrap
+const buildStyleCustomBootstrap = () => {
+    return src(`${paths.vendors}bootstrap/*.scss`)
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.error('SCSS Style Custom Bootstrap Error:', err.message);
+                this.emit('end');
+            }
+        }))
+        .pipe(sass({
+            outputStyle: 'expanded',
+            includePaths: ['node_modules', 'src']
+        }, '').on('error', sass.logError))
+        .pipe(cleanCSS({level: 2}))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(dest(`${paths.output.theme.root}vendors/bootstrap/`))
+        .pipe(browserSync.stream())
+}
+
+const buildJSCustomBootstrap = () => {
+    return src([
+        `${paths.vendors}bootstrap/*.js`
+    ], {allowEmpty: true})
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.error('Error in build js bootstrap:', err.message);
+                this.emit('end');
+            }
+        }))
+        .pipe(webpack({
+            mode: 'production',
+            output: {
+                filename: 'custom-bootstrap.min.js'
+            },
+            module: {
+                rules: [
+                    {
+                        test: /\.m?js$/,
+                        exclude: /node_modules/,
+                        use: {
+                            loader: 'babel-loader',
+                            options: {
+                                presets: ['@babel/preset-env']
+                            }
+                        }
+                    }
+                ]
+            },
+            resolve: {
+                extensions: ['.js']
+            },
+            optimization: {
+                minimize: true,
+                minimizer: [
+                    new TerserPlugin({
+                        extractComments: false,
+                        terserOptions: {
+                            format: {
+                                comments: false
+                            },
+                        },
+                    })
+                ]
+            }
+        }))
+        .pipe(dest(`${paths.output.theme.root}vendors/bootstrap/`))
+        .pipe(browserSync.stream())
+}
+
 // Task build style theme
-function buildStyleTheme() {
+const buildStyleTheme = () => {
     return src(`${paths.theme.scss}main.scss`)
         .pipe(plumber({
             errorHandler: function (err) {
@@ -86,7 +156,6 @@ function buildStyleTheme() {
         }, '').on('error', sass.logError))
 
         // --- Xuất file chưa min ---
-        .pipe(rename({suffix: '.bundle'}))
         .pipe(dest(`${paths.output.theme.css}`))
 
         // --- Tạo bản minified ---
@@ -96,9 +165,8 @@ function buildStyleTheme() {
         .pipe(dest(`${paths.output.theme.css}`))
         .pipe(browserSync.stream())
 }
-exports.buildStyleTheme = buildStyleTheme
 
-function buildJSTheme() {
+const buildJSTheme = () => {
     return src([
         `${paths.theme.js}*.js`
     ], {allowEmpty: true})
@@ -111,7 +179,7 @@ function buildJSTheme() {
         .pipe(webpack({
             mode: 'production',
             output: {
-                filename: 'main.bundle.min.js'
+                filename: 'main.min.js'
             },
             module: {
                 rules: [
@@ -149,7 +217,7 @@ function buildJSTheme() {
 }
 
 // Task build style custom post type
-function buildStyleCustomPostType() {
+const buildStyleCustomPostType = () => {
     return src(`${paths.theme.scss}post-type/*/**.scss`)
         .pipe(plumber({
             errorHandler: function (err) {
@@ -172,7 +240,7 @@ function buildStyleCustomPostType() {
 }
 
 // Task build style page templates
-function buildStylePageTemplate() {
+const buildStylePageTemplate = () => {
     return src(`${paths.theme.scss}page-templates/*.scss`)
         .pipe(plumber({
             errorHandler: function (err) {
@@ -195,7 +263,7 @@ function buildStylePageTemplate() {
 }
 
 // Task build style shop
-function buildStyleShop() {
+const buildStyleShop = () => {
     return src(`${paths.theme.scss}shop/*.scss`)
         .pipe(plumber({
             errorHandler: function (err) {
@@ -220,7 +288,7 @@ function buildStyleShop() {
         .pipe(browserSync.stream())
 }
 
-function buildJSShop() {
+const buildJSShop = () => {
     return src(`${paths.theme.js}shop/*.js`, {allowEmpty: true})
         .pipe(plumber({
             errorHandler: function (err) {
@@ -273,7 +341,7 @@ function buildJSShop() {
 * */
 
 // Task build style elementor addons
-function buildStyleElementor() {
+const buildStyleElementor = () => {
     return src(`${paths.plugins.efa.scss}efa-elementor.scss`)
         .pipe(plumber({
             errorHandler: function (err) {
@@ -296,7 +364,7 @@ function buildStyleElementor() {
 }
 
 // Task build style custom login
-function buildStyleCustomLogin() {
+const buildStyleCustomLogin = () => {
     return src(`${paths.plugins.efa.scss}efa-custom-login.scss`)
         .pipe(plumber({
             errorHandler: function (err) {
@@ -318,7 +386,7 @@ function buildStyleCustomLogin() {
         .pipe(browserSync.stream())
 }
 
-function buildJPluginEFA() {
+const buildJPluginEFA = () => {
     return src(`${paths.plugins.efa.js}*.js`, {allowEmpty: true})
         .pipe(plumber({
             errorHandler: function (err) {
@@ -335,33 +403,39 @@ function buildJPluginEFA() {
 /*
 Task build project
 * */
-async function buildProject() {
-    // plugin
-    await buildStyleCustomLogin()
-    await buildStyleElementor()
+const buildProject = async () => {
+    // Chạy các plugin styles song song
+    await Promise.all([
+        buildStyleCustomLogin(),
+        buildStyleElementor(),
+        buildJPluginEFA(),
+    ]);
 
-    await buildJPluginEFA()
+    // Chạy vendors style và các theme styles/JS song song
+    await Promise.all([
+        buildStyleCustomBootstrap(),
+        buildStyleTheme(),
+        buildStyleCustomPostType(),
+        buildStylePageTemplate(),
+        buildStyleShop(),
+        buildJSCustomBootstrap(),
+        buildJSTheme(),
+        buildJSShop(),
+    ]);
 
-    // theme
-    await buildStyleTheme()
-    await buildStyleCustomPostType()
-    await buildStylePageTemplate()
-    await buildStyleShop()
-
-    await buildJSTheme()
-    await buildJSShop()
+    console.log("Dự án đã được xây dựng hoàn tất!");
 }
-
 exports.buildProject = buildProject
 
 // Task watch
-function watchTask() {
+const watchTask = () => {
     server()
 
     // watch abstracts
     watch([
         `${paths.shared.scss}abstracts/*.scss`
     ], gulp.series(
+        buildStyleCustomBootstrap,
         buildStyleTheme,
         buildStyleElementor,
         buildStyleCustomLogin,
@@ -387,7 +461,10 @@ function watchTask() {
 
     // theme watch
     watch([
-        `${paths.theme.scss}vendors/bootstrap.scss`,
+        `${paths.vendors}bootstrap/*.scss`
+    ], buildStyleCustomBootstrap)
+
+    watch([
         `${paths.theme.scss}base/*.scss`,
         `${paths.theme.scss}utilities/*.scss`,
         `${paths.theme.scss}components/*.scss`,
@@ -407,8 +484,8 @@ function watchTask() {
         `${paths.theme.scss}shop/*.scss`
     ], buildStyleShop)
 
+    watch([`${paths.vendors}bootstrap/*.js`], buildJSCustomBootstrap)
     watch([`${paths.theme.js}*.js`], buildJSTheme)
     watch([`${paths.theme.js}shop/*.js`], buildJSShop)
 }
-
 exports.watchTask = watchTask

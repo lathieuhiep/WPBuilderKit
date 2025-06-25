@@ -1,6 +1,3 @@
-import 'bootstrap/js/dist/collapse';
-import 'bootstrap/js/dist/modal';
-
 (function ($) {
     "use strict";
 

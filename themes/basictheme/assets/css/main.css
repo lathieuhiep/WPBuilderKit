@@ -1595,64 +1595,6 @@ form.wpcf7-form p:has(.wpcf7-submit) {
   flex-direction: column;
 }
 
-.owl-carousel .owl-nav {
-  text-align: center;
-  margin-top: var(--theme-spacing-3);
-}
-.owl-carousel .owl-nav button.owl-prev, .owl-carousel .owl-nav button.owl-next {
-  margin: 0 var(--theme-spacing-2);
-  color: var(--theme-black);
-  font-size: var(--theme-fs-lg);
-  line-height: normal;
-  transition: all 0.4s ease-in-out;
-}
-.owl-carousel .owl-nav button.owl-prev:hover, .owl-carousel .owl-nav button.owl-next:hover {
-  color: var(--theme-accent);
-}
-.owl-carousel .owl-dots {
-  margin-top: var(--theme-spacing-4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.owl-carousel .owl-dots .owl-dot {
-  display: inline-block;
-  margin: 0 var(--theme-spacing-1);
-}
-.owl-carousel .owl-dots .owl-dot span {
-  display: block;
-  width: 1rem;
-  height: 1rem;
-  background-color: var(--theme-black);
-  border-radius: 50%;
-  transition: all 0.2s ease-in-out;
-}
-.owl-carousel .owl-dots .owl-dot.active span, .owl-carousel .owl-dots .owl-dot:hover span {
-  background-color: var(--theme-accent);
-}
-
-.custom-equal-height-owl .owl-stage {
-  display: flex;
-}
-.custom-equal-height-owl .owl-stage .owl-item {
-  display: flex;
-  flex: 1 0 auto;
-}
-
-a, button {
-  outline: none;
-}
-
-form.wpcf7-form p:has(.wpcf7-submit) {
-  display: flex;
-  align-items: center;
-}
-
-.main-warp, .comments-area .comment-form {
-  display: flex;
-  flex-direction: column;
-}
-
 .social-network-item {
   display: inline-block;
 }

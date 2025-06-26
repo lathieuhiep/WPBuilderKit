@@ -57,6 +57,7 @@ function basictheme_front_end_scripts(): void
 {
     // load custom bootstrap
     wp_enqueue_style('basictheme-bootstrap', get_theme_file_uri('/assets/vendors/bootstrap/custom-bootstrap.min.css'), array(), basictheme_get_version_theme());
+
     wp_enqueue_script('basictheme-bootstrap', get_theme_file_uri('/assets/vendors/bootstrap/custom-bootstrap.min.js'), array('jquery'), basictheme_get_version_theme(), true);
 
     // load main style

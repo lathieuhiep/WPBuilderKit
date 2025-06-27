@@ -14,23 +14,27 @@ function basictheme_register_sidebar( $name, $id, $description = '' ): void {
 
 const PREFIX_SIDEBAR_FOOTER_COLUMN = 'sidebar-footer-column-';
 function basictheme_multiple_widget_init(): void {
+    // sidebar main
 	basictheme_register_sidebar(
         esc_html__( 'Sidebar chính', 'basictheme' ),
         'sidebar-main',
         esc_html__('Dùng ở các trang bài viết', 'basictheme' )
     );
 
-	basictheme_register_sidebar(
-        esc_html__( 'Sidebar shop', 'basictheme' ),
-        'sidebar-wc',
-        esc_html__( 'Dùng ở trang danh mục sản phẩm.', 'basictheme' )
-    );
+    // sidebar woo
+    if ( class_exists( 'Woocommerce' ) ) :
+        basictheme_register_sidebar(
+            esc_html__( 'Sidebar shop', 'basictheme' ),
+            'sidebar-wc',
+            esc_html__( 'Dùng ở trang danh mục sản phẩm.', 'basictheme' )
+        );
 
-	basictheme_register_sidebar(
-        esc_html__( 'Sidebar sản phẩm', 'basictheme' ),
-        'sidebar-wc-product',
-        esc_html__( 'Dùng cho trang chi tiết sản phẩm', 'basictheme' )
-    );
+        basictheme_register_sidebar(
+            esc_html__( 'Sidebar sản phẩm', 'basictheme' ),
+            'sidebar-wc-product',
+            esc_html__( 'Dùng cho trang chi tiết sản phẩm', 'basictheme' )
+        );
+    endif;
 
 	// sidebar footer
 	$opt_number_columns = basictheme_get_option( 'opt_footer_columns', '4' );

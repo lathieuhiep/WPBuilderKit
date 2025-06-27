@@ -1,14 +1,9 @@
 <?php
-const PREFIX_THEME_OPTIONS = 'basictheme_options';
-
-// A Custom function for get an option
-if ( ! function_exists( 'basictheme_get_option' ) ) {
-	function basictheme_get_option( $option = '', $default = null ) {
-		$options = get_option( PREFIX_THEME_OPTIONS );
-
-		return ( isset( $options[ $option ] ) ) ? $options[ $option ] : $default;
-	}
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
 }
+
+require get_theme_file_path( '/includes/theme-options/helper-options.php' );
 
 // Control core classes for avoid errors
 function basictheme_register_theme_options(): void
@@ -46,7 +41,9 @@ function basictheme_register_theme_options(): void
         require get_theme_file_path( '/includes/theme-options/social-network-options.php' );
 
         // shop options
-        require get_theme_file_path( '/includes/theme-options/shop-options.php' );
+        if ( class_exists( 'Woocommerce' ) ) :
+            require get_theme_file_path( '/includes/theme-options/shop-options.php' );
+        endif;
 
         // footer options
         require get_theme_file_path( '/includes/theme-options/footer-options.php' );

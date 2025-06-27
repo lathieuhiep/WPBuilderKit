@@ -27,16 +27,12 @@ CSF::createSection( PREFIX_THEME_OPTIONS, array(
 		),
 
 		// Per Row
-		array(
-			'id'      => 'opt_post_cat_per_row',
-			'type'    => 'select',
-			'title'   => esc_html__( 'Số bài viết trên mỗi hàng', 'basictheme' ),
-			'options' => array(
-				'3' => esc_html__( '3', 'basictheme' ),
-				'4' => esc_html__( '4', 'basictheme' ),
-			),
-			'default' => '3'
-		),
+        array(
+            'id'         => 'opt_post_cat_per_row',
+            'type'       => 'fieldset',
+            'title'      => esc_html__( 'Số bài viết trên mỗi hàng', 'basictheme' ),
+            'fields'     => basictheme_column_width_fields(1, 4, 1, 2, 3, 3),
+        ),
 	)
 ) );
 

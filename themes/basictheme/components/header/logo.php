@@ -18,6 +18,6 @@ $logo = basictheme_get_option( 'opt_general_logo' );
 
     <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#primary-menu"
             aria-controls="site-menu" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
+        <i class="ic-mask ic-mask-bars"></i>
     </button>
 </div>

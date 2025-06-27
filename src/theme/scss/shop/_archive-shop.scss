@@ -154,14 +154,6 @@
               &:hover {
                 color: $var-accent-color;
               }
-
-              &:after {
-                content: "\f054";
-                font-family: $font-awesome-free;
-                font-weight: 900;
-                font-size: .9rem;
-                margin-left: .4rem;
-              }
             }
           }
 

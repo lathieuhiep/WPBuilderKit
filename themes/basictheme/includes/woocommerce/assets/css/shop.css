@@ -327,13 +327,6 @@
 .woocommerce ul.products li.product a.added_to_cart:hover {
   color: var(--theme-accent);
 }
-.woocommerce ul.products li.product a.added_to_cart:after {
-  content: "\f054";
-  font-family: "Font Awesome 6 Free", serif;
-  font-weight: 900;
-  font-size: 0.9rem;
-  margin-left: 0.4rem;
-}
 .woocommerce ul.products li.product .star-rating {
   margin: 0 auto 1rem;
 }
@@ -817,6 +810,9 @@ section.widget .woocommerce-product-search button[type=submit] {
 }
 .modal.mode-quick-view-product .content_product_detail form table tr td .reset_variations {
   margin-left: var(--theme-spacing-1);
+}
+.modal.mode-quick-view-product .content_product_detail form .added_to_cart {
+  padding-left: 1rem;
 }
 
 .loading-body {

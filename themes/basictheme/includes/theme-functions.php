@@ -233,7 +233,6 @@ function basictheme_list_social_network(): array {
 	return array(
 		'facebook-f'  => 'Facebook',
 		'twitter'     => 'Twitter',
-		'google'      => 'Google',
 		'linkedin-in' => 'Linkedin',
 		'youtube'     => 'Youtube',
 		'instagram'   => 'Instagram'
@@ -251,7 +250,7 @@ function basictheme_get_social_url(): void {
 			?>
             <div class="social-network-item">
                 <a href="<?php echo esc_url( $item['url'] ); ?>" target="_blank">
-                    <i class="fab fa-<?php echo esc_attr( $item['item'] ); ?>"></i>
+                    <i class="ic-mask ic-mask-<?php echo esc_attr( $item['item'] ); ?>"></i>
                 </a>
             </div>
 		<?php

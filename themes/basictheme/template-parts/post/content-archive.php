@@ -1,8 +1,24 @@
 <?php
 $sidebar = basictheme_get_option('opt_post_cat_sidebar_position', 'right');
-$per_row = basictheme_get_option('opt_post_cat_per_row', '2');
-
+$per_row = basictheme_get_option('opt_post_cat_per_row', 3);
 $class_col_content = basictheme_col_use_sidebar($sidebar, 'sidebar-main');
+
+if ( empty( $per_row ) ) {
+    $per_row = [
+        'sm' => 1,
+        'md' => 2,
+        'lg' => 3,
+        'xl' => 3
+    ];
+}
+
+$per_row_classes = sprintf(
+    'theme-row-cols-sm-%s theme-row-cols-md-%s theme-row-cols-lg-%s theme-row-cols-xl-%s',
+    $per_row['sm'],
+    $per_row['md'],
+    $per_row['lg'],
+    $per_row['xl']
+);
 ?>
 
 <div class="site-container archive-post-warp">
@@ -10,17 +26,12 @@ $class_col_content = basictheme_col_use_sidebar($sidebar, 'sidebar-main');
         <div class="row">
             <div class="<?php echo esc_attr( $class_col_content ); ?>">
                 <?php if ( have_posts() ) : ?>
-                    <div class="content-archive-post gap-6 theme-row-cols-sm-1 theme-row-cols-md-2 theme-row-cols-lg-<?php echo esc_attr( $per_row ); ?>">
+                    <div class="content-archive-post gap-6 <?php echo esc_attr( $per_row_classes ); ?>">
 		                <?php while ( have_posts() ) : the_post(); ?>
                             <div class="item d-flex flex-column gap-3">
                                 <h2 class="post-title">
                                     <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-                                        <?php if (is_sticky() && is_home()) : ?>
-                                            <i class="fas fa-thumbtack"></i>
-                                        <?php
-                                        endif;
-                                        the_title();
-                                        ?>
+                                        <?php the_title(); ?>
                                     </a>
                                 </h2>
 

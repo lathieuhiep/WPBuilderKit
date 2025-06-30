@@ -20,6 +20,10 @@
     @include mask-image("#{$ic-path-theme}/bars.svg");
   }
 
+  &-cart-plus {
+    @include mask-image("#{$ic-path-theme}/cart-plus.svg");
+  }
+
   &-cart-shopping {
     @include mask-image("#{$ic-path-theme}/cart-shopping.svg");
   }

@@ -1,0 +1,134 @@
+@import "shared/scss/abstracts/abstracts";
+
+.woocommerce {
+  .site-shop {
+    &__product-add-to-cart {
+      line-height: normal;
+    }
+  }
+
+  .site-post-item {
+    border-bottom: none;
+  }
+
+  &--result-count {
+    float: none;
+    margin: 0;
+  }
+
+  .woocommerce-result-count {
+    float: none;
+    margin: 0;
+  }
+
+  .woocommerce-ordering {
+    float: none;
+    margin: 0;
+
+    select {
+      padding: .4rem .8rem;
+      border: .1rem solid $var-primary-color;
+    }
+  }
+
+  .star-rating {
+    width: 7em;
+    font-size: $var-fs-xs;
+
+    > span {
+      color: $var-accent-color;
+    }
+
+    &:before,
+    > span:before {
+      letter-spacing: .32rem;
+    }
+  }
+
+  nav {
+    &.woocommerce-pagination {
+      margin-top: 3rem;
+
+      ul {
+        margin: 0;
+        border: none;
+        display: block;
+
+        li {
+          display: inline-block;
+          float: none;
+          border: none;
+
+          span,
+          a {
+            display: block;
+            cursor: pointer;
+            border: .1rem solid $var-primary-color;
+            padding: .4rem 1.2rem;
+            line-height: inherit;
+            min-width: inherit;
+            border-radius: .2rem;
+          }
+
+          a {
+            &:focus {
+              background-color: transparent;
+              color: $heading-color;
+            }
+          }
+
+          span.current,
+          a:hover {
+            color: $var-white-color;
+            background: $var-accent-color;
+            border-color: $var-accent-color;
+          }
+        }
+      }
+    }
+  }
+
+  #reviews {
+    .woocommerce-Reviews-title {
+      font-size: $var-fs-md;
+    }
+
+    #comments {
+      ol {
+        &.commentlist {
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  p.stars a,
+  .star-rating::before {
+    color: $var-accent-color;
+  }
+
+  a {
+    &.button {
+      &.alt {
+        background-color: $var-black-color;
+
+        &:hover {
+          background-color: $var-accent-color;
+        }
+      }
+    }
+  }
+}
+
+.woocommerce,
+.woocommerce-page {
+  .col2-set {
+    .col-1,
+    .col-2 {
+      @media (max-width: 767px) {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+    }
+  }
+}

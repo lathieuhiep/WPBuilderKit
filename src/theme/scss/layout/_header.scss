@@ -358,6 +358,33 @@
               animation: spin-block-ui 0.6s linear infinite;
             }
           }
+
+          .action {
+            .remove {
+              display: inline-flex;
+              align-items: center;
+              @include square(2.4rem);
+              color: $var-error-color;
+
+              &:hover {
+                color: $var-error-color !important;
+                background: transparent;
+              }
+            }
+          }
+        }
+      }
+
+      .mini-cart-footer {
+        .action {
+          a {
+            padding: .8rem 1.2rem;
+            display: block;
+            color: $var-white-color;
+            line-height: normal;
+            font-weight: normal;
+            background-color: $var-primary-color;
+          }
         }
       }
     }

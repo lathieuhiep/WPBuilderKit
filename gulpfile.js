@@ -6,10 +6,13 @@ const browserSync = require('browser-sync')
 const uglify = require('gulp-uglify')
 const cleanCSS = require('gulp-clean-css')
 const rename = require("gulp-rename")
-const plumber = require('gulp-plumber');
 const gulpIf = require('gulp-if');
-const webpack = require('webpack-stream');
+const plumber = require('gulp-plumber');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
 const TerserPlugin = require('terser-webpack-plugin');
+const glob = require('glob');
+const path = require('path');
 
 require('dotenv').config()
 
@@ -289,17 +292,24 @@ const buildStyleShop = () => {
 }
 
 const buildJSShop = () => {
-    return src(`${paths.theme.js}shop/*.js`, {allowEmpty: true})
+    const entries = glob.sync(`${paths.theme.js}shop/*.js`).reduce((result, file) => {
+        const name = path.basename(file, '.js');
+        result[name] = './' + file.replace(/\\/g, '/');
+        return result;
+    }, {});
+
+    return src(`${paths.theme.js}shop/*.js`, { allowEmpty: true })
         .pipe(plumber({
             errorHandler: function (err) {
-                console.error('Error in build js in shop:', err.message);
+                console.error('Error in buildJSShop:', err.message);
                 this.emit('end');
             }
         }))
-        .pipe(webpack({
+        .pipe(webpackStream({
             mode: 'production',
+            entry: entries,
             output: {
-                filename: 'woo-quick-view.min.js'
+                filename: '[name].min.js',
             },
             module: {
                 rules: [
@@ -331,10 +341,11 @@ const buildJSShop = () => {
                     })
                 ]
             }
-        }))
+        }, webpack))
         .pipe(dest(`${paths.output.theme.woo}js/`))
-        .pipe(browserSync.stream())
+        .pipe(browserSync.stream());
 }
+exports.buildJSShop = buildJSShop;
 
 /*
 ** Plugin
@@ -481,11 +492,15 @@ const watchTask = () => {
     ], buildStylePageTemplate)
 
     watch([
+        `${paths.theme.scss}shop/components/*.scss`,
         `${paths.theme.scss}shop/*.scss`
     ], buildStyleShop)
 
     watch([`${paths.vendors}bootstrap/*.js`], buildJSCustomBootstrap)
     watch([`${paths.theme.js}*.js`], buildJSTheme)
-    watch([`${paths.theme.js}shop/*.js`], buildJSShop)
+    watch([
+        `${paths.theme.js}shop/components/*.js`,
+        `${paths.theme.js}shop/*.js`
+    ], buildJSShop)
 }
 exports.watchTask = watchTask

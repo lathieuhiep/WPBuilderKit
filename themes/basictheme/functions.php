@@ -29,6 +29,7 @@ require get_parent_theme_file_path( '/includes/widgets/social-widget.php' );
 
 // Required: Woocommerce
 if ( class_exists( 'Woocommerce' ) ) :
+    require get_parent_theme_file_path( '/includes/woocommerce/woo-helpers.php' );
 	require get_parent_theme_file_path( '/includes/woocommerce/woo-scripts.php' );
 	require get_parent_theme_file_path( '/includes/woocommerce/woo-quick-view.php' );
 	require get_parent_theme_file_path( '/includes/woocommerce/woo-template-hooks.php' );

@@ -1,0 +1,10 @@
+$owl-image-path: "../images/";
+// libs
+@import "owl.carousel/src/scss/owl.carousel";
+
+// components
+@import "components/general";
+@import "components/archive-shop";
+@import "components/product-grid";
+@import "components/quick-view-product";
+@import "components/sidebar-shop";

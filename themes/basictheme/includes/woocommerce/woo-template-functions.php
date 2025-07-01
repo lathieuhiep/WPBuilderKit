@@ -3,38 +3,7 @@
  * General functions used to integrate this theme with WooCommerce.
  */
 
-add_action('after_setup_theme', 'basictheme_shop_setup');
-
-function basictheme_shop_setup(): void
-{
-    add_theme_support('woocommerce');
-    add_theme_support('wc-product-gallery-zoom');
-    add_theme_support('wc-product-gallery-lightbox');
-    add_theme_support('wc-product-gallery-slider');
-}
-
-/* Start limit product */
-add_filter('loop_shop_per_page', 'basictheme_show_products_per_page');
-
-function basictheme_show_products_per_page()
-{
-    return basictheme_get_option('opt_shop_cat_limit', 12);
-}
-
-/* End limit product */
-
-/* Start Change number of products per row */
-add_filter('loop_shop_columns', 'basictheme_loop_columns_product');
-
-function basictheme_loop_columns_product()
-{
-    return basictheme_get_option('opt_shop_cat_per_row', 3);
-}
-
-/* End Change number of products per row */
-
 /* Start get cart */
-
 function basictheme_get_cart(): void
 {
     $cart_count = WC()->cart->get_cart_contents_count();
@@ -270,7 +239,7 @@ if (!function_exists('basictheme_woo_product_thumbnail_open')) :
     {
 
         ?>
-        <div class="site-shop__product--item-image">
+        <div class="item__image">
         <?php
 
     }
@@ -288,9 +257,9 @@ if (!function_exists('basictheme_woo_product_thumbnail_close')) :
     {
         do_action('basictheme_woo_button_quick_view');
         ?>
-        </div><!-- .site-shop__product--item-image -->
+        </div><!-- .item__image -->
 
-        <div class="site-shop__product--item-content">
+        <div class="item__content">
         <?php
     }
 endif;
@@ -323,7 +292,7 @@ if (!function_exists('basictheme_woo_after_shop_loop_item_title')) :
     function basictheme_woo_after_shop_loop_item_title(): void
     {
         ?>
-        </div><!-- .site-shop__product--item-content -->
+        </div><!-- .item__content -->
         <?php
     }
 endif;
@@ -338,7 +307,7 @@ if (!function_exists('basictheme_woo_loop_add_to_cart_open')) :
     function basictheme_woo_loop_add_to_cart_open(): void
     {
         ?>
-        <div class="site-shop__product-add-to-cart">
+        <div class="item__action">
         <?php
     }
 
@@ -354,7 +323,7 @@ if (!function_exists('basictheme_woo_loop_add_to_cart_close')) :
     function basictheme_woo_loop_add_to_cart_close(): void
     {
         ?>
-        </div><!-- .site-shop__product-add-to-cart -->
+        </div><!-- .item__action -->
         <?php
     }
 
@@ -370,7 +339,7 @@ if (!function_exists('basictheme_woo_before_shop_loop_item')) :
     {
         ?>
 
-        <div class="site-shop__product--item">
+        <div class="item">
 
         <?php
     }
@@ -386,7 +355,7 @@ if (!function_exists('basictheme_woo_after_shop_loop_item')) :
     {
         ?>
 
-        </div><!-- .site-shop__product--item -->
+        </div><!-- .item -->
 
         <?php
     }

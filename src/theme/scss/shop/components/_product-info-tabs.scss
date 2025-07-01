@@ -48,6 +48,11 @@
           border: .1rem solid #eeeeee;
           padding: 1.6rem;
 
+          h2 {
+            font-size: $var-fs-md;
+            margin-bottom: 2.4rem;
+          }
+
           &.woocommerce-Tabs-panel {
             &--description {
               p {
@@ -55,11 +60,14 @@
               }
             }
           }
-        }
 
-        h2 {
-          font-size: $var-fs-md;
-          margin-bottom: 2.4rem;
+          .woocommerce-Reviews-title {
+            font-size: $var-fs-md;
+          }
+
+          .commentlist {
+            padding: 0;
+          }
         }
       }
     }

@@ -1,7 +1,10 @@
-@import "shared/scss/abstracts/abstracts";
+// libs
+@import "owl.carousel/src/scss/owl.carousel";
 
-@import "components/general";
+// base
+@import "base/general";
+
+// components
+@import "components/product_single";
+@import "components/product-info-tabs";
 @import "components/product-grid";
-@import "components/quick-view-product";
-@import "components/single-shop";
-@import "components/product-tabs";

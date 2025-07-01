@@ -16,13 +16,6 @@ function basictheme_register_front_end_woo(): void
     
     if (is_product()) {
         wp_enqueue_style('woo-single', get_theme_file_uri('/includes/woocommerce/assets/css/woo-single.min.css'), array(), basictheme_get_version_theme());
-
-        wp_enqueue_script('woo-single',
-            get_theme_file_uri('/includes/woocommerce/assets/js/woo-single.min.js'),
-            array('jquery'),
-            basictheme_get_version_theme(),
-            true
-        );
     }
 
     // include woo main
@@ -41,8 +34,7 @@ function basictheme_register_front_end_woo(): void
             get_theme_file_uri('/includes/woocommerce/assets/js/woo-archive.min.js'),
             array('jquery', 'wc-add-to-cart-variation'),
             basictheme_get_version_theme(),
-            true)
-        ;
+            true);
         wp_localize_script('woo-archive', 'woo_quick_view_product', $theme_woo_admin_ajax_url);
     }
 }

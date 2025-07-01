@@ -1,24 +1,7 @@
 <?php
 $sidebar = basictheme_get_option('opt_post_cat_sidebar_position', 'right');
-$per_row = basictheme_get_option('opt_post_cat_per_row', 3);
 $class_col_content = basictheme_col_use_sidebar($sidebar, 'sidebar-main');
-
-if ( empty( $per_row ) ) {
-    $per_row = [
-        'sm' => 1,
-        'md' => 2,
-        'lg' => 3,
-        'xl' => 3
-    ];
-}
-
-$per_row_classes = sprintf(
-    'theme-row-cols-sm-%s theme-row-cols-md-%s theme-row-cols-lg-%s theme-row-cols-xl-%s',
-    $per_row['sm'],
-    $per_row['md'],
-    $per_row['lg'],
-    $per_row['xl']
-);
+$per_row_classes = basictheme_get_responsive_row_class('opt_post_cat_per_row');
 ?>
 
 <div class="site-container archive-post-warp">

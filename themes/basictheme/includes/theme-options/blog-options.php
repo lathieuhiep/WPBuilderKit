@@ -53,11 +53,17 @@ CSF::createSection( PREFIX_THEME_OPTIONS, array(
 			'default' => 'right'
 		),
 
+        // heading related
+        array(
+            'type'    => 'heading',
+            'content' => esc_html__('Bài viết liên quan', 'basictheme'),
+        ),
+
 		// Show related post
 		array(
 			'id'         => 'opt_post_single_related',
 			'type'       => 'switcher',
-			'title'      => esc_html__( 'Hiện thị bài viết liên quan', 'basictheme' ),
+			'title'      => esc_html__( 'Hiện thị', 'basictheme' ),
 			'text_on'    => esc_html__( 'Có', 'basictheme' ),
 			'text_off'   => esc_html__( 'Không', 'basictheme' ),
 			'default'    => true,
@@ -68,7 +74,7 @@ CSF::createSection( PREFIX_THEME_OPTIONS, array(
 		array(
 			'id'      => 'opt_post_single_related_limit',
 			'type'    => 'number',
-			'title'   => esc_html__( 'Số lượng bài viết liên quan', 'basictheme' ),
+			'title'   => esc_html__( 'Số lượng', 'basictheme' ),
 			'default' => 3,
 		),
 	)

@@ -1,5 +1,26 @@
 @import "shared/scss/abstracts/abstracts";
 
+// list icon
+$ic-names: (
+        bars
+        cart-plus
+        cart-shopping
+        chevron-down
+        chevron-right
+        chevron-up
+        facebook-f
+        instagram
+        linkedin-in
+        location-dot
+        minus
+        paper-plane
+        phone
+        plus
+        twitter
+        xmark
+        youtube
+);
+
 .ic-mask {
   --#{$prefix-theme}ic-width: 1.6rem;
   --#{$prefix-theme}ic-height: 1.6rem;
@@ -16,71 +37,9 @@
   mask-position: center;
   -webkit-mask-position: center;
 
-  &-bars {
-    @include mask-image("#{$ic-path-theme}/bars.svg");
-  }
-
-  &-cart-plus {
-    @include mask-image("#{$ic-path-theme}/cart-plus.svg");
-  }
-
-  &-cart-shopping {
-    @include mask-image("#{$ic-path-theme}/cart-shopping.svg");
-  }
-
-  &-chevron-down {
-    @include mask-image("#{$ic-path-theme}/chevron-down.svg");
-  }
-
-  &-chevron-right {
-    @include mask-image("#{$ic-path-theme}/chevron-right.svg");
-  }
-
-  &-chevron-up {
-    @include mask-image("#{$ic-path-theme}/chevron-up.svg");
-  }
-
-  &-facebook-f {
-    @include mask-image("#{$ic-path-theme}/facebook-f.svg");
-  }
-
-  &-instagram {
-    @include mask-image("#{$ic-path-theme}/instagram.svg");
-  }
-
-  &-linkedin-in {
-    @include mask-image("#{$ic-path-theme}/linkedin-in.svg");
-  }
-
-  &-location-dot {
-    @include mask-image("#{$ic-path-theme}/location-dot.svg");
-  }
-
-  &-minus {
-    @include mask-image("#{$ic-path-theme}/minus.svg");
-  }
-
-  &-paper-plane {
-    @include mask-image("#{$ic-path-theme}/paper-plane.svg");
-  }
-
-  &-phone {
-    @include mask-image("#{$ic-path-theme}/phone.svg");
-  }
-
-  &-plus {
-    @include mask-image("#{$ic-path-theme}/plus.svg");
-  }
-
-  &-twitter {
-    @include mask-image("#{$ic-path-theme}/twitter.svg");
-  }
-
-  &-xmark {
-    @include mask-image("#{$ic-path-theme}/xmark.svg");
-  }
-
-  &-youtube {
-    @include mask-image("#{$ic-path-theme}/youtube.svg");
+  @each $name in $ic-names {
+    &-#{$name} {
+      @include mask-image("#{$ic-path-theme}/#{$name}.svg");
+    }
   }
 }

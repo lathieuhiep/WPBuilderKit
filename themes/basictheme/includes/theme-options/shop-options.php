@@ -35,17 +35,12 @@ CSF::createSection( PREFIX_THEME_OPTIONS, array(
 		),
 
 		// Per Row
-		array(
-			'id'      => 'opt_shop_cat_per_row',
-			'type'    => 'select',
-			'title'   => esc_html__( 'Số sản phẩm trên một hàng', 'basictheme' ),
-			'options' => array(
-				'3' => esc_html__( '3', 'basictheme' ),
-				'4' => esc_html__( '4', 'basictheme' ),
-				'5' => esc_html__( '5', 'basictheme' ),
-			),
-			'default' => '3'
-		),
+        array(
+            'id' => 'opt_shop_cat_per_row',
+            'type' => 'fieldset',
+            'title' => esc_html__('Số sản phẩm trên một hàng', 'basictheme'),
+            'fields' => basictheme_column_width_fields(1, 4, 1, 2, 3, 3),
+        ),
 	)
 ) );
 
@@ -66,6 +61,28 @@ CSF::createSection( PREFIX_THEME_OPTIONS, array(
 				'right' => esc_html__( 'Phải', 'basictheme' ),
 			),
 			'default' => 'left'
-		)
+		),
+
+        // heading related
+        array(
+            'type'    => 'heading',
+            'content' => esc_html__('Sản phẩm liên quan', 'basictheme'),
+        ),
+
+        // Limit related
+		array(
+            'id'      => 'opt_shop_single_related_limit',
+            'type'    => 'number',
+            'title'   => esc_html__( 'Số lượng sản phẩm hiển thị', 'basictheme' ),
+            'default' => 3,
+        ),
+
+        // Per Row related
+        array(
+            'id' => 'opt_shop_single_related_per_row',
+            'type' => 'fieldset',
+            'title' => esc_html__('Số sản phẩm trên một hàng', 'basictheme'),
+            'fields' => basictheme_column_width_fields(1, 4, 1, 2, 3, 3),
+        ),
 	)
 ) );

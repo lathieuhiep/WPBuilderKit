@@ -8,18 +8,27 @@ function basictheme_register_front_end_woo(): void
     $theme_woo_admin_ajax_url = array(
         'url' => admin_url('admin-ajax.php')
     );
-    
+
+    // include css product archive
     if (is_shop() || is_product_category() || is_product_tag()) {
-        // css
         wp_enqueue_style('woo-archive', get_theme_file_uri('/includes/woocommerce/assets/css/woo-archive.min.css'), array(), basictheme_get_version_theme());
     }
-    
+
+    // include css product single
     if (is_product()) {
         wp_enqueue_style('woo-single', get_theme_file_uri('/includes/woocommerce/assets/css/woo-single.min.css'), array(), basictheme_get_version_theme());
     }
 
-    // include woo main
-    if (!is_cart() || is_checkout()) {
+    if ( is_cart() ) {
+        wp_enqueue_style('woo-cart', get_theme_file_uri('/includes/woocommerce/assets/css/woo-cart.min.css'), array(), basictheme_get_version_theme());
+    }
+
+    if ( is_checkout() ) {
+        wp_enqueue_style('woo-checkout', get_theme_file_uri('/includes/woocommerce/assets/css/woo-checkout.min.css'), array(), basictheme_get_version_theme());
+    }
+
+    // include script main
+    if ( is_woocommerce() || is_cart() ) {
         wp_enqueue_script('woo-main',
             get_theme_file_uri('/includes/woocommerce/assets/js/woo-main.min.js'),
             array('jquery'),
@@ -28,6 +37,17 @@ function basictheme_register_front_end_woo(): void
         );
     }
 
+    // include script all page
+    if (!is_cart() || is_checkout()) {
+        wp_enqueue_script('woo-mini-cart',
+            get_theme_file_uri('/includes/woocommerce/assets/js/woo-mini-cart.min.js'),
+            array('jquery'),
+            basictheme_get_version_theme(),
+            true
+        );
+    }
+
+    // include script page shop, taxonomy, product
     if ( is_shop() || is_product_category() || is_product_tag() || is_product() ) {
         // js
         wp_enqueue_script('woo-archive',

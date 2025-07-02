@@ -5,6 +5,12 @@ button, a {
   outline: none;
 }
 
+.main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 form.wpcf7-form p:has(.wpcf7-submit) {
   display: flex;
   align-items: center;
@@ -50,6 +56,12 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 
 button, a {
   outline: none;
+}
+
+.main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 form.wpcf7-form p:has(.wpcf7-submit) {
@@ -128,6 +140,12 @@ a, button {
   outline: none;
 }
 
+.main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 form.wpcf7-form p:has(.wpcf7-submit) {
   display: flex;
   align-items: center;
@@ -201,6 +219,12 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 
 a, button {
   outline: none;
+}
+
+.main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 form.wpcf7-form p:has(.wpcf7-submit) {
@@ -321,6 +345,12 @@ a, button {
   outline: none;
 }
 
+.main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 form.wpcf7-form p:has(.wpcf7-submit) {
   display: flex;
   align-items: center;
@@ -422,6 +452,12 @@ a, button {
   outline: none;
 }
 
+.main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 form.wpcf7-form p:has(.wpcf7-submit) {
   display: flex;
   align-items: center;
@@ -508,6 +544,12 @@ a, button {
   outline: none;
 }
 
+.main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 form.wpcf7-form p:has(.wpcf7-submit) {
   display: flex;
   align-items: center;
@@ -568,6 +610,12 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 
 a, button {
   outline: none;
+}
+
+.main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 form.wpcf7-form p:has(.wpcf7-submit) {
@@ -828,6 +876,12 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 -----------------------------------------------------------------------------*/
 a, button {
   outline: none;
+}
+
+.main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 form.wpcf7-form p:has(.wpcf7-submit) {
@@ -1113,7 +1167,7 @@ form.wpcf7-form p:has(.wpcf7-submit) {
   position: relative;
   display: grid;
   gap: 0.8rem;
-  grid-template-columns: 5rem 1fr auto;
+  grid-template-columns: 5rem 1fr 2.4rem;
 }
 .main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item ~ .item {
   margin-top: 1.2rem;
@@ -1155,15 +1209,15 @@ form.wpcf7-form p:has(.wpcf7-submit) {
   animation: spin-block-ui 0.6s linear infinite;
 }
 .main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
-  display: inline-flex;
-  align-items: center;
+  --wc-red: var(--theme-error);
+  color: var(--wc-red);
   width: 2.4rem;
   height: 2.4rem;
-  color: var(--theme-error);
+  border-radius: 50%;
 }
 .main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove:hover {
-  color: var(--theme-error) !important;
-  background: transparent;
+  color: #fff;
+  background: var(--wc-red);
 }
 .main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-footer .action a {
   padding: 0.8rem 1.2rem;
@@ -1196,6 +1250,12 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 }
 a, button {
   outline: none;
+}
+
+.main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 form.wpcf7-form p:has(.wpcf7-submit) {
@@ -1384,6 +1444,12 @@ a, button {
   outline: none;
 }
 
+.main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 form.wpcf7-form p:has(.wpcf7-submit) {
   display: flex;
   align-items: center;
@@ -1411,6 +1477,12 @@ a, button {
   outline: none;
 }
 
+.main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 form.wpcf7-form p:has(.wpcf7-submit) {
   display: flex;
   align-items: center;
@@ -1428,6 +1500,12 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 
 a, button {
   outline: none;
+}
+
+.main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 form.wpcf7-form p:has(.wpcf7-submit) {
@@ -1507,6 +1585,12 @@ form.wpcf7-form.invalid .wpcf7-response-output {
 
 a, button {
   outline: none;
+}
+
+.main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 form.wpcf7-form p:has(.wpcf7-submit) {
@@ -1647,6 +1731,12 @@ a, button {
   outline: none;
 }
 
+.main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 form.wpcf7-form p:has(.wpcf7-submit) {
   display: flex;
   align-items: center;
@@ -1690,6 +1780,12 @@ form.wpcf7-form p:has(.wpcf7-submit) {
 
 a, button {
   outline: none;
+}
+
+.main-header .widget-cart-warp .mini-cart-dropdown .mini-cart-items .item .action .remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 form.wpcf7-form p:has(.wpcf7-submit) {

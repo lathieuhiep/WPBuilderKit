@@ -1,23 +1,7 @@
-@import "shared/scss/abstracts/abstracts";;
+@import "shared/scss/abstracts/abstracts";
+@import "abstracts/abstracts";
 
-.woocommerce-cart {
-  table {
-    &.cart {
-      td {
-        &.actions {
-          .coupon {
-            .input-text {
-              width: auto;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-.woocommerce,
-.woocommerce-page {
+.woocommerce-checkout {
   .col2-set {
     margin: 0 -1.2rem;
     flex-flow: wrap;

@@ -312,7 +312,7 @@
           position: relative;
           display: grid;
           gap: .8rem;
-          grid-template-columns: 5rem 1fr auto;
+          grid-template-columns: 5rem 1fr 2.4rem;
 
           ~ .item {
             margin-top: 1.2rem;
@@ -361,14 +361,15 @@
 
           .action {
             .remove {
-              display: inline-flex;
-              align-items: center;
-              @include square(2.4rem);
-              color: $var-error-color;
+              --wc-red: #{$var-error-color};
+
+              color: var(--wc-red);
+              @include square(2.4rem, 50%);
+              @extend %flex-align-center;
 
               &:hover {
-                color: $var-error-color !important;
-                background: transparent;
+                color: #fff;
+                background: var(--wc-red);
               }
             }
           }

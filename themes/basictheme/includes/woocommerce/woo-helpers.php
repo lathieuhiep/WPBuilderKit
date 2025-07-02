@@ -87,6 +87,3 @@ function basictheme_woo_quantity_plus_button(): void
 <?php
 }
 add_action( 'woocommerce_after_quantity_input_field', 'basictheme_woo_quantity_plus_button' );
-
-// remove cart text
-add_filter( 'woocommerce_product_single_add_to_cart_text', '__return_empty_string' );

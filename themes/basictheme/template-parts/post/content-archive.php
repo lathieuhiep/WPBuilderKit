@@ -11,7 +11,7 @@ $per_row_classes = basictheme_get_responsive_row_class('opt_post_cat_per_row');
                 <?php if ( have_posts() ) : ?>
                     <div class="content-archive-post gap-6 <?php echo esc_attr( $per_row_classes ); ?>">
 		                <?php while ( have_posts() ) : the_post(); ?>
-                            <div class="item d-flex flex-column gap-3">
+                            <div class="item d-flex flex-column gap-2">
                                 <h2 class="post-title">
                                     <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
                                         <?php the_title(); ?>

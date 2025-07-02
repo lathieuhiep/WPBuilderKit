@@ -172,7 +172,7 @@ function basictheme_post_meta(): void {
 ?>
     <div class="post-meta d-flex flex-wrap gap-1">
         <div class="post-meta__item post-meta__author">
-            <?php esc_html_e( 'Tác giả:', 'basictheme' ); ?>
+            <strong class="theme-fw-medium"><?php esc_html_e( 'Tác giả:', 'basictheme' ); ?></strong>
 
             <a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>">
                 <?php the_author(); ?>
@@ -180,7 +180,8 @@ function basictheme_post_meta(): void {
         </div>
 
         <div class="post-meta__item post-meta__date">
-            <?php esc_html_e( 'Ngày đăng: ', 'basictheme' ); echo get_the_date(); ?>
+            <strong class="theme-fw-medium"><?php esc_html_e( 'Ngày đăng: ', 'basictheme' ); ?></strong>
+            <span><?php echo get_the_date(); ?></span>
         </div>
 
         <div class="post-meta__item post-meta__comments">

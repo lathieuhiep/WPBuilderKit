@@ -31,8 +31,8 @@ form.wpcf7-form p:has(.wpcf7-submit) {
   --theme-info: #17a2b8;
   --theme-black: #000000;
   --theme-white: #ffffff;
-  --theme-ff-base: "Poppins", sans-serif;
-  --theme-ff-heading: "Roboto Slab", sans-serif;
+  --theme-ff-base: "Inter", sans-serif;
+  --theme-ff-heading: "Roboto Condensed", sans-serif;
   --theme-fs-xs: 1.4rem;
   --theme-fs-sm: 1.6rem;
   --theme-fs-md: 1.8rem;

@@ -2,7 +2,7 @@
 
 .content-archive-post {
   .item {
-    padding: 2.5rem 1.5rem 1.5rem;
+    padding: 2.4rem 1.2rem 1.2rem;
     border: .1rem solid $var-primary-color;
   }
 
@@ -14,7 +14,7 @@
       color: $heading-color;
 
       i {
-        margin-right: .5rem;
+        margin-right: .4rem;
         color: $var-accent-color;
       }
 
@@ -27,7 +27,7 @@
   .post-desc {
     ul {
       li {
-        margin-bottom: 1rem;
+        margin-bottom: .8rem;
 
         &:last-child {
           margin-bottom: 0;
@@ -91,8 +91,16 @@
 
       span {
         display: inline-block;
-        padding: 0 .5rem;
+        padding: 0 .4rem;
       }
     }
+  }
+}
+
+.search-no-data-warp {
+  .search-form {
+    display: grid;
+    gap: .8rem;
+    grid-template-columns: 30rem 4rem;
   }
 }

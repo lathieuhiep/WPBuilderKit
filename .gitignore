@@ -11,6 +11,9 @@ package-lock.json
 !plugins/essential-features-addon/
 !plugins/essential-features-addon/**
 
+!plugins/efa-product-ux/
+!plugins/efa-product-ux/**
+
 !themes/
 !themes/basictheme/
 !themes/basictheme/**

@@ -49,21 +49,19 @@ class MyTheme_Recent_Post_Widget extends WP_Widget {
 		$post_query = new WP_Query( $post_arg );
 
 		if ( $post_query->have_posts() ) :
-
-			?>
-            <div class="post-list">
-				<?php
-				while ( $post_query->have_posts() ) :
-					$post_query->the_post();
-					?>
+        ?>
+            <div class="post-list theme-row-cols-1 gap-2">
+				<?php while ( $post_query->have_posts() ) : $post_query->the_post(); ?>
                     <div class="item">
                         <div class="image">
 							<?php
 							if ( has_post_thumbnail() ):
-								the_post_thumbnail( 'medium' );
+								the_post_thumbnail( 'thumbnail' );
 							else:
 								?>
                                 <img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/no-image.png' ) ); ?>"
+                                     width="100"
+                                     height="70"
                                      alt="post">
 							<?php endif; ?>
                         </div>
@@ -75,16 +73,13 @@ class MyTheme_Recent_Post_Widget extends WP_Widget {
                                 </a>
                             </h4>
 
-                            <p class="meta">
-                                <i class="fas fa-calendar"></i>
-								<?php echo get_the_date(); ?>
+                            <p class="meta d-flex gap-1">
+                                <i class="ic-mask ic-mask-calendar-days"></i>
+								<span><?php echo get_the_date(); ?></span>
                             </p>
                         </div>
                     </div>
-				<?php
-				endwhile;
-				wp_reset_postdata();
-				?>
+				<?php endwhile; wp_reset_postdata(); ?>
             </div>
 		<?php
 		endif;
@@ -98,7 +93,6 @@ class MyTheme_Recent_Post_Widget extends WP_Widget {
 	 * @param array $instance The widget options
 	 */
 	function form( $instance ): void {
-
 		$defaults = array(
 			'title' => esc_html__('Bài viết mới nhất', 'basictheme'),
 			'order' => 'DESC'

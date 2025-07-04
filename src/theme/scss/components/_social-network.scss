@@ -5,5 +5,10 @@
 
   a {
     display: block;
+    color: $var-black-color;
+
+    &:hover {
+      color: $var-accent-color;
+    }
   }
 }

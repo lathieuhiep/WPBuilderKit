@@ -1,0 +1,50 @@
+.woocommerce div.product form.cart .variations:has(.efa-swatch) select {
+    display: none;
+}
+
+.woocommerce div.product form.cart .variations:has(.efa-swatch) tbody th,
+.woocommerce div.product form.cart .variations:has(.efa-swatch) tbody td {
+    display: block;
+    text-align: start;
+    width: auto;
+}
+
+.efa-swatch {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.efa-swatch-item {
+    all: unset;
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: normal;
+    text-align: center;
+    height: auto;
+    min-height: auto;
+    transition: all 0.2s ease;
+}
+
+.efa-swatch-item:hover {
+    background-color: #e8e8e8;
+}
+
+.efa-swatch-item.is-selected {
+    background-color: #0071a1;
+    border-color: #0071a1;
+    color: #fff;
+}
+
+.efa-swatch-item.disabled,
+.efa-swatch-item[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+}

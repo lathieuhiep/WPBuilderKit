@@ -13,6 +13,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 require_once __DIR__ . '/inc/class-efa-product-ux.php';
 
+// Activation hook to create necessary database tables
+register_activation_hook( __FILE__, function () {
+    $plugin = new EFA_Product_UX();
+    $plugin->activate();
+});
+
+// Load the plugin
 add_action( 'plugins_loaded', function () {
     $plugin = new EFA_Product_UX();
     $plugin->init();

@@ -72,6 +72,19 @@ final class EFA_Product_UX
         );
     }
 
+    public function activate(): void
+    {
+        if ( ! defined( 'EFA_PRODUCT_UX_PATH' ) ) {
+            define( 'EFA_PRODUCT_UX_PATH', $this->path );
+        }
+
+        require_once $this->path . 'inc/class-efa-product-db.php';
+
+        if ( class_exists( 'EFA_Product_DB' ) ) {
+            EFA_Product_DB::create_all_tables();
+        }
+    }
+
     private function load_core(): void
     {
         require_once $this->path . 'inc/enqueue-scripts.php';

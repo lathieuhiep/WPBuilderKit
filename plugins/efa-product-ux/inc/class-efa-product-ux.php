@@ -27,6 +27,7 @@ final class EFA_Product_UX
 
         $this->define_constants();
         $this->load_text_domain();
+        $this->load_db();
         $this->load_core();
     }
 
@@ -72,13 +73,15 @@ final class EFA_Product_UX
         );
     }
 
+    private function load_db(): void
+    {
+        require_once $this->path . 'inc/class-efa-product-db.php';
+        require_once $this->path . 'modules/swatches/class-efa-swatches-db.php';
+    }
+
     public function activate(): void
     {
-        if ( ! defined( 'EFA_PRODUCT_UX_PATH' ) ) {
-            define( 'EFA_PRODUCT_UX_PATH', $this->path );
-        }
-
-        require_once $this->path . 'inc/class-efa-product-db.php';
+        $this->load_db();
 
         if ( class_exists( 'EFA_Product_DB' ) ) {
             EFA_Product_DB::create_all_tables();

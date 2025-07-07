@@ -94,9 +94,9 @@ jQuery(document).ready(function ($) {
             taxonomy: taxonomy
         }, function (res) {
             if (res.success) {
-                console.log('Xoá metadata cho term:', termId);
+                console.log('Xoá thành công');
             } else {
-                console.warn('Không xoá được metadata:', res.data?.msg || 'Unknown');
+                console.warn('Đã có lỗi:', res.data?.msg || 'Unknown');
             }
         });
     });

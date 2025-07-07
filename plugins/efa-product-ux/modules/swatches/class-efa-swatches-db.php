@@ -5,8 +5,8 @@ namespace EFA_Product_UX\Swatches;
 
 final class EFA_Swatches_DB
 {
-    private const string TABLE_NAME_SWATCHES_ATTR = 'efa_product_swatches_attributes';
-    private const string TABLE_NAME_SWATCHES_TERM_META = 'efa_product_swatches_term_meta';
+    private const TABLE_NAME_SWATCHES_ATTR = 'efa_product_swatches_attributes';
+    private const TABLE_NAME_SWATCHES_TERM_META = 'efa_product_swatches_term_meta';
 
     public static function create_tables(): void
     {
@@ -153,5 +153,4 @@ final class EFA_Swatches_DB
 
         return $row ? (int)$row->attribute_id : null;
     }
-
 }

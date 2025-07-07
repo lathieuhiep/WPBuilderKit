@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+use EFA_Product_UX\EFA_Product_DB;
+
 final class EFA_Product_UX
 {
     public string $version;
@@ -81,9 +83,10 @@ final class EFA_Product_UX
 
     public function activate(): void
     {
+        $this->define_constants();
         $this->load_db();
 
-        if ( class_exists( 'EFA_Product_DB' ) ) {
+        if ( class_exists( EFA_Product_DB::class ) ) {
             EFA_Product_DB::create_all_tables();
         }
     }

@@ -41,21 +41,24 @@ function efa_product_ux_render_label_swatches(string $html, array $args): string
             switch ($display_type) {
                 case 'color':
                     $color = EFA_Swatches_DB::get_swatches_term_meta($term->term_id, 'color');
-                    if ($color) {
+
+                    if ($color) :
                         $swatch_html .= sprintf(
-                            '<button class="efa-swatch-item%3$s" type="button" data-value="%1$s" title="%2$s" style="background:%2$s"></button>',
+                            '<button class="efa-swatch-item%3$s item-color" type="button" data-value="%1$s" title="%1$s">
+                                        <span class="custom-attribute" style="background:%2$s"></span>
+                                    </button>',
                             $slug,
                             esc_attr($color),
                             $is_selected
                         );
-                    } else {
-                        // fallback nếu chưa có màu
+                    else :
                         $swatch_html .= sprintf(
-                            '<button class="efa-swatch-item%2$s" type="button" data-value="%1$s">?</button>',
+                            '<button class="efa-swatch-item%2$s item-btn" type="button" data-value="%1$s">%1$s</button>',
                             $slug,
                             $is_selected
                         );
-                    }
+                    endif;
+
                     break;
 
                 case 'image':
@@ -69,9 +72,8 @@ function efa_product_ux_render_label_swatches(string $html, array $args): string
                             $img_html
                         );
                     } else {
-                        // fallback nếu chưa có ảnh
                         $swatch_html .= sprintf(
-                            '<button class="efa-swatch-item%2$s" type="button" data-value="%1$s">?</button>',
+                            '<button class="efa-swatch-item%2$s item-btn" type="button" data-value="%1$s">%1$s</button>',
                             $slug,
                             $is_selected
                         );
@@ -81,9 +83,9 @@ function efa_product_ux_render_label_swatches(string $html, array $args): string
                 case 'button':
                 default:
                     $meta_label = EFA_Swatches_DB::get_swatches_term_meta($term->term_id, 'button');
-                    $label = $meta_label ?: $label ?: $slug; // fallback nếu chưa có trong bảng riêng
+                    $label = $meta_label ?: $label ?: $slug;
                     $swatch_html .= sprintf(
-                        '<button class="efa-swatch-item%3$s" type="button" data-value="%1$s">%2$s</button>',
+                        '<button class="efa-swatch-item%3$s item-btn" type="button" data-value="%1$s">%2$s</button>',
                         $slug,
                         $label,
                         $is_selected

@@ -44,9 +44,20 @@ function efa_register_color_term_hooks(): void
 
         // Hiển thị cột màu trong danh sách
         add_filter("manage_edit-{$taxonomy}_columns", function ($columns) {
-            $columns['color'] = 'Mã màu';
-            return $columns;
+            $new_columns = [];
+
+            foreach ($columns as $key => $value) {
+                if ($key === 'posts') {
+                    // Chèn cột 'color' trước cột 'posts'
+                    $new_columns['color'] = 'Mã màu';
+                }
+
+                $new_columns[$key] = $value;
+            }
+
+            return $new_columns;
         });
+
 
         add_filter("manage_{$taxonomy}_custom_column", function ($out, $column, $term_id) use ($attribute_id) {
             if ($column === 'color') {
@@ -63,12 +74,6 @@ function efa_register_color_term_hooks(): void
             }
             return $out;
         }, 10, 3);
-
-        // Enqueue color picker
-        add_action('admin_enqueue_scripts', function () {
-            wp_enqueue_style('wp-color-picker');
-            wp_enqueue_script('wp-color-picker');
-        });
     });
 
     // Lưu khi chỉnh sửa term
@@ -104,3 +109,16 @@ function efa_register_color_term_hooks(): void
         EFA_Swatches_DB::save_swatches_term_meta($term_id, $attribute_id, 'color', $color);
     }, 10, 3);
 }
+
+add_action('wp_ajax_efa_delete_term_meta_by_term_id', function () {
+    $term_id = absint($_POST['term_id'] ?? 0);
+    $taxonomy = sanitize_text_field($_POST['taxonomy'] ?? '');
+
+    if (!$term_id || !taxonomy_is_product_attribute($taxonomy)) {
+        wp_send_json_error(['msg' => 'Term ID hoặc taxonomy không hợp lệ']);
+    }
+
+    EFA_Swatches_DB::delete_swatches_term_meta($term_id);
+
+    wp_send_json_success(['msg' => 'Đã xoá metadata']);
+});

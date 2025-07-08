@@ -42,12 +42,13 @@ final class EFA_Swatches_DB
         ) $charset_collate;";
 
         // Execute the SQL queries
-        foreach ( $sql as $query ) {
-            dbDelta( $query );
+        foreach ($sql as $query) {
+            dbDelta($query);
         }
     }
 
-    public static function get_attribute_id_by_taxonomy(string $taxonomy): ?int {
+    public static function get_attribute_id_by_taxonomy(string $taxonomy): ?int
+    {
         global $wpdb;
 
         // Chỉ xử lý taxonomy có tiền tố 'pa_'
@@ -66,7 +67,8 @@ final class EFA_Swatches_DB
         return $row ? (int)$row->attribute_id : null;
     }
 
-    public static function save_swatches_attributes(int $attribute_id, string $type): void {
+    public static function save_swatches_attributes(int $attribute_id, string $type): void
+    {
         global $wpdb;
         $table = $wpdb->prefix . self::TABLE_NAME_SWATCHES_ATTR;
 
@@ -94,7 +96,8 @@ final class EFA_Swatches_DB
         }
     }
 
-    public static function get_display_type_swatches_attribute(int $attribute_id): string {
+    public static function get_display_type_swatches_attribute(int $attribute_id): string
+    {
         global $wpdb;
         $table = $wpdb->prefix . self::TABLE_NAME_SWATCHES_ATTR;
 
@@ -103,7 +106,8 @@ final class EFA_Swatches_DB
         ) ?: 'button';
     }
 
-    public static function save_swatches_term_meta(int $term_id, int $attribute_id, string $meta_key, $meta_value): void {
+    public static function save_swatches_term_meta(int $term_id, int $attribute_id, string $meta_key, $meta_value): void
+    {
         global $wpdb;
         $table = $wpdb->prefix . self::TABLE_NAME_SWATCHES_TERM_META;
 
@@ -141,7 +145,8 @@ final class EFA_Swatches_DB
         }
     }
 
-    public static function get_swatches_term_meta(int $term_id, string $meta_key) {
+    public static function get_swatches_term_meta(int $term_id, string $meta_key)
+    {
         global $wpdb;
         $table = $wpdb->prefix . self::TABLE_NAME_SWATCHES_TERM_META;
 
@@ -154,13 +159,15 @@ final class EFA_Swatches_DB
         return maybe_unserialize($value);
     }
 
-    public static function delete_swatches_term_meta(int $term_id): void {
+    public static function delete_swatches_term_meta(int $term_id): void
+    {
         global $wpdb;
         $table = $wpdb->prefix . self::TABLE_NAME_SWATCHES_TERM_META;
         $wpdb->delete($table, ['term_id' => $term_id], ['%d']);
     }
 
-    public static function delete_swatches_by_attribute(int $attribute_id): void {
+    public static function delete_swatches_by_attribute(int $attribute_id): void
+    {
         global $wpdb;
 
         // Xóa cài đặt attribute
@@ -170,5 +177,37 @@ final class EFA_Swatches_DB
         // Xóa metadata của tất cả term thuộc attribute này
         $term_meta_table = $wpdb->prefix . self::TABLE_NAME_SWATCHES_TERM_META;
         $wpdb->delete($term_meta_table, ['attribute_id' => $attribute_id], ['%d']);
+    }
+
+    public static function get_attributes_with_display_type(): array
+    {
+        global $wpdb;
+
+        $swatch_table = $wpdb->prefix . self::TABLE_NAME_SWATCHES_ATTR;
+        $swatch_map = $wpdb->get_results("SELECT attribute_id, display_type FROM {$swatch_table}", OBJECT_K);
+
+        $label_map = efa_product_ux_swatches();
+
+        $attributes = wc_get_attribute_taxonomies();
+
+        $items = [];
+
+        foreach ($attributes as $attr) {
+            $id = (int) $attr->attribute_id;
+            $raw_type = $swatch_map[$id]->display_type ?? '';
+            $display_label = $label_map[$raw_type] ?? '—';
+
+            $items[] = [
+                'id'           => $id,
+                'name'         => $attr->attribute_name,
+                'label'        => $attr->attribute_label,
+                'display_type' => $display_label,
+            ];
+        }
+
+        return [
+            'column_label' => esc_html__('Kiểu hiển thị', EFA_PRODUCT_TEXT_DOMAIN),
+            'items'        => $items
+        ];
     }
 }

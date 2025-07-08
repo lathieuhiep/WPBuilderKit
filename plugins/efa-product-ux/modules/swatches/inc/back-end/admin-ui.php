@@ -8,15 +8,11 @@ function efa_render_swatch_type_select($selected = ''): void
 {
 ?>
     <select name="efa_swatch_type" id="efa_swatch_type">
-        <option value="button" <?php selected($selected, 'button'); ?>>
-            <?php esc_html_e('Nút chữ', EFA_PRODUCT_TEXT_DOMAIN); ?>
-        </option>
-        <option value="color" <?php selected($selected, 'color'); ?>>
-            <?php esc_html_e('Màu sắc', EFA_PRODUCT_TEXT_DOMAIN); ?>
-        </option>
-        <option value="image" <?php selected($selected, 'image'); ?>>
-            <?php esc_html_e('Hình ảnh', EFA_PRODUCT_TEXT_DOMAIN); ?>
-        </option>
+        <?php foreach (efa_product_ux_swatches() as $key => $text): ?>
+            <option value="<?php echo esc_attr( $key ); ?>" <?php selected($selected, $key); ?>>
+                <?php echo esc_html( $text ); ?>
+            </option>
+        <?php endforeach; ?>
     </select>
 <?php
 }

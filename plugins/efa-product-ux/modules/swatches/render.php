@@ -66,14 +66,14 @@ function efa_product_ux_render_label_swatches(string $html, array $args): string
                     if ($img_id) {
                         $img_html = wp_get_attachment_image($img_id, 'thumbnail', false, ['alt' => $label]);
                         $swatch_html .= sprintf(
-                            '<button class="efa-swatch-item%2$s" type="button" data-value="%1$s">%3$s</button>',
+                            '<button class="efa-swatch-item%2$s item-image" type="button" data-value="%1$s" title="%1$s">%3$s</button>',
                             $slug,
                             $is_selected,
                             $img_html
                         );
                     } else {
                         $swatch_html .= sprintf(
-                            '<button class="efa-swatch-item%2$s item-btn" type="button" data-value="%1$s">%1$s</button>',
+                            '<button class="efa-swatch-item%2$s item-btn" type="button" data-value="%1$s" title="%1$s">%1$s</button>',
                             $slug,
                             $is_selected
                         );

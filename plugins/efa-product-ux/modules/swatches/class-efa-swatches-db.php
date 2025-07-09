@@ -113,23 +113,24 @@ final class EFA_Swatches_DB
 
         // Kiểm tra đã có chưa
         $exists = $wpdb->get_var($wpdb->prepare(
-            "SELECT id FROM $table WHERE term_id = %d AND attribute_id = %d AND meta_key = %s",
+            "SELECT id FROM $table WHERE term_id = %d AND attribute_id = %d",
             $term_id,
-            $attribute_id,
-            $meta_key
+            $attribute_id
         ));
 
         if ($exists) {
             $wpdb->update(
                 $table,
-                ['meta_value' => maybe_serialize($meta_value)],
+                [
+                    'meta_key' => $meta_key,
+                    'meta_value' => maybe_serialize($meta_value)
+                ],
                 [
                     'term_id' => $term_id,
-                    'attribute_id' => $attribute_id,
-                    'meta_key' => $meta_key
+                    'attribute_id' => $attribute_id
                 ],
-                ['%s'],
-                ['%d', '%d', '%s']
+                ['%s', '%s'],
+                ['%d', '%d']
             );
         } else {
             $wpdb->insert(

@@ -22,7 +22,7 @@ function efa_register_image_term_hooks(): void
             ?>
             <div class="form-field">
                 <label for="term_image">Ảnh swatch</label>
-                <button class="button efa-upload-image">Chọn ảnh</button>
+                <button type="button" class="button efa-upload-image">Chọn ảnh</button>
                 <input type="hidden" name="term_image" id="term_image" value="" />
                 <div class="efa-image-preview" style="margin-top:10px;"></div>
             </div>
@@ -37,7 +37,7 @@ function efa_register_image_term_hooks(): void
             <tr class="form-field">
                 <th scope="row"><label for="term_image">Ảnh swatch</label></th>
                 <td>
-                    <button class="button efa-upload-image">Chọn ảnh</button>
+                    <button type="button" class="button efa-upload-image">Chọn ảnh</button>
                     <input type="hidden" name="term_image" id="term_image" value="<?php echo esc_attr($image_id); ?>" />
                     <div class="efa-image-preview" style="margin-top:10px;">
                         <?php if ($image_url): ?>

@@ -29,19 +29,3 @@ add_action('wp_ajax_efa_delete_term_meta_by_term_id', function () {
 
     wp_send_json_success(['msg' => 'Đã xoá metadata']);
 });
-
-//
-// PHP – trả dữ liệu
-add_action( 'wp_ajax_efa_get_attribute_display_types', 'efa_get_attribute_display_types' );
-
-function efa_get_attribute_display_types(): void
-{
-    if ( ! current_user_can( 'manage_woocommerce' ) ) {
-        wp_send_json_error( [ 'message' => 'Permission denied' ] );
-    }
-
-    // Lấy dữ liệu kiểu hiển thị
-    $data = EFA_Swatches_DB::get_attributes_with_display_type();
-
-    wp_send_json_success( $data );
-}

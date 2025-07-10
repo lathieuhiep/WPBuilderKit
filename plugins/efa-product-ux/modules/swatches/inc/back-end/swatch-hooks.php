@@ -29,3 +29,13 @@ add_action('wp_ajax_efa_delete_term_meta_by_term_id', function () {
 
     wp_send_json_success(['msg' => 'Đã xoá metadata']);
 });
+
+//
+add_action('wp_ajax_efa_get_attribute_types', 'efa_get_attribute_types');
+function efa_get_attribute_types(): void
+{
+    check_ajax_referer('efa_product_attribute_nonce', 'security');
+    wp_send_json_success([
+        'attributeList' => EFA_Swatches_DB::get_attributes_with_display_type()
+    ]);
+}

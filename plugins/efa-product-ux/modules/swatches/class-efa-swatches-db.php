@@ -201,14 +201,10 @@ final class EFA_Swatches_DB
             $items[] = [
                 'id'           => $id,
                 'name'         => $attr->attribute_name,
-                'label'        => $attr->attribute_label,
                 'display_type' => $display_label,
             ];
         }
 
-        return [
-            'column_label' => esc_html__('Kiểu hiển thị', EFA_PRODUCT_TEXT_DOMAIN),
-            'items'        => $items
-        ];
+        return $items;
     }
 }

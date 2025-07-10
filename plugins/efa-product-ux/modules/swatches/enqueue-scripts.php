@@ -17,6 +17,13 @@ add_action('admin_enqueue_scripts', function () {
             EFA_PRODUCT_UX_VERSION,
             true
         );
+
+        wp_localize_script('efa-admin-attribute', 'efaAttrVars', [
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'nonce'    => wp_create_nonce('efa_product_attribute_nonce'),
+            'text_column' => esc_html__('Kiểu hiển thị', EFA_PRODUCT_TEXT_DOMAIN),
+            'text_row' => esc_html__('Đang tải...', EFA_PRODUCT_TEXT_DOMAIN),
+        ]);
     }
 
     if ( ! $screen || empty($screen->taxonomy) || ! taxonomy_is_product_attribute($screen->taxonomy) ) {
@@ -51,18 +58,20 @@ add_action('admin_enqueue_scripts', function () {
 
 // load frontend assets
 add_action( 'wp_enqueue_scripts', function () {
-    wp_enqueue_style(
-        'efa-swatch-css',
-        EFA_PRODUCT_UX_URL . 'modules/swatches/assets/user/swatches.css',
-        [],
-        EFA_PRODUCT_UX_VERSION
-    );
+    if ( is_product() ) {
+        wp_enqueue_style(
+            'efa-swatch-css',
+            EFA_PRODUCT_UX_URL . 'modules/swatches/assets/user/swatches.css',
+            [],
+            EFA_PRODUCT_UX_VERSION
+        );
 
-    wp_enqueue_script(
-        'efa-swatch-js',
-        EFA_PRODUCT_UX_URL . 'modules/swatches/assets/user/swatches.js',
-        [ 'jquery' ],
-        EFA_PRODUCT_UX_VERSION,
-        true
-    );
+        wp_enqueue_script(
+            'efa-swatch-js',
+            EFA_PRODUCT_UX_URL . 'modules/swatches/assets/user/swatches.js',
+            [ 'jquery' ],
+            EFA_PRODUCT_UX_VERSION,
+            true
+        );
+    }
 } );

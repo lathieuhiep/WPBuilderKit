@@ -6,6 +6,7 @@
 
 .woocommerce-cart table.shop_table td.product-quantity .quantity {
   display: flex;
+  margin-right: 12px;
 }
 .woocommerce-cart table.shop_table td.product-quantity .quantity input {
   padding: 0.5rem 0;

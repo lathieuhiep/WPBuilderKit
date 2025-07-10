@@ -492,6 +492,7 @@ const watchTask = () => {
     ], buildStylePageTemplate)
 
     watch([
+        `${paths.theme.scss}shop/abstracts/*.scss`,
         `${paths.theme.scss}shop/components/*.scss`,
         `${paths.theme.scss}shop/*.scss`
     ], buildStyleShop)

@@ -249,6 +249,7 @@
 
 .woocommerce .modal.mode-quick-view-product .content_product_detail form .quantity {
   display: flex;
+  margin-right: 12px;
 }
 .woocommerce .modal.mode-quick-view-product .content_product_detail form .quantity input {
   padding: 0.5rem 0;

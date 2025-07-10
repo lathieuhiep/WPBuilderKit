@@ -3,17 +3,24 @@
 
     // event qty
     const updateQty = (input, delta) => {
-        const current = parseFloat(input.val());
-        const min = parseFloat(input.attr('min')) || 0;
+        let current = parseFloat(input.val());
+        const min = parseFloat(input.attr('min')) || 1;
         const max = parseFloat(input.attr('max')) || Infinity;
         const step = parseFloat(input.attr('step')) || 1;
-        let newVal = current + (delta * step);
+
+        let newVal;
+
+        if (isNaN(current)) {
+            newVal = 1;
+        } else {
+            newVal = current + (delta * step);
+        }
 
         if (newVal < min) newVal = min;
         if (newVal > max) newVal = max;
 
         input.val(newVal).trigger('change');
-    }
+    };
 
     $(document).on('click', '.qty-minus', function() {
         const input = $(this).siblings('input.qty');

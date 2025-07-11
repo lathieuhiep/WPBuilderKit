@@ -1,0 +1,73 @@
+:root {
+    --su-crm-form-gap: 1.6rem;
+    --su-crm-form-fs: 1.4rem;
+    --su-crm-form-radius: .8rem;
+    --su-crm-form-label-color: #333;
+    --su-crm-form-border-color: #ccc;
+    --su-crm-form-btn-bg: #0073aa;
+    --su-crm-form-btn-hover: #005c8c;
+    --su-crm-form-btn-color: #fff;
+}
+
+[class^="su-crm-"] {
+    font-size: 10px;
+}
+
+[class^="su-crm-"] > * {
+    font-size: var(--su-crm-form-fs);
+}
+
+.su-crm-form {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fafafa;
+    border: 1px solid #eee;
+    border-radius: var(--su-crm-form-radius);
+}
+
+.su-crm-form .su-form-group {
+    margin-bottom: var(--su-crm-form-gap);
+}
+
+.su-crm-form label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    color: var(--su-crm-form-label-color);
+}
+
+.su-crm-form .required {
+    color: red;
+    margin-left: 0.2rem;
+}
+
+.su-crm-form input,
+.su-crm-form textarea {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    border: 1px solid var(--su-crm-form-border-color);
+    border-radius: var(--su-crm-form-radius);
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.su-crm-form textarea {
+    resize: vertical;
+}
+
+.su-crm-form button[type="submit"] {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--su-crm-form-btn-bg);
+    color: var(--su-crm-form-btn-color);
+    border: none;
+    border-radius: var(--su-crm-form-radius);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.su-crm-form button[type="submit"]:hover {
+    background-color: var(--su-crm-form-btn-hover);
+}

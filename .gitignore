@@ -14,6 +14,9 @@ package-lock.json
 !plugins/efa-product-ux/
 !plugins/efa-product-ux/**
 
+!plugins/simple-user-crm/
+!plugins/simple-user-crm/**
+
 !themes/
 !themes/basictheme/
 !themes/basictheme/**

@@ -1,6 +1,8 @@
 <?php
 namespace SimpleUserCRM\Core;
 
+use SimpleUserCRM\Core\Form\User\UserFormHandler;
+
 defined('ABSPATH') || exit;
 
 class CoreLoader
@@ -10,6 +12,15 @@ class CoreLoader
     {
         // load helpers
         new Helpers();
+
+        // load DB layer
+        require_once Constants::path() . 'core/Database/DBHelper.php';
+
+        // load form handler
+        require_once Constants::path() . 'core/Form/BaseValidator.php';
+        require_once Constants::path() . 'core/Form/User/UserValidator.php';
+
+        (new UserFormHandler())->init();
 
         // register shortcodes
         ShortcodeRegistry::init();

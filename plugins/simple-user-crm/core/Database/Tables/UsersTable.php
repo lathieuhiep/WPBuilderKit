@@ -1,7 +1,7 @@
 <?php
-namespace SimpleUserCRM\Core\Database;
+namespace SimpleUserCRM\core\Database\Tables;
 
-use SimpleUserCRM\Core\Database;
+use SimpleUserCRM\core\Database\TableManager;
 
 class UsersTable
 {
@@ -10,7 +10,7 @@ class UsersTable
         global $wpdb;
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
-        $table = Database::table_users();
+        $table = TableManager::table_users();
         $charset = $wpdb->get_charset_collate();
 
         $sql = "

@@ -1,13 +1,13 @@
 <?php
-namespace SimpleUserCRM\Core;
 
-use SimpleUserCRM\Core\Database\ReferralsTable;
-use SimpleUserCRM\Core\Database\UsersTable;
+namespace SimpleUserCRM\core\Database;
 
-defined('ABSPATH') || exit;
-class Database
+use SimpleUserCRM\core\Database\Tables\ReferralsTable;
+use SimpleUserCRM\core\Database\Tables\UsersTable;
+
+class TableManager
 {
-    // Constants for table names
+// Constants for table names
     public const TABLE_USERS = 'su_crm_users';
     public const TABLE_REFERRALS = 'su_crm_referrals';
 

@@ -1,7 +1,7 @@
 <?php
-namespace SimpleUserCRM\Core\Database;
+namespace SimpleUserCRM\core\Database\Tables;
 
-use SimpleUserCRM\Core\Database;
+use SimpleUserCRM\core\Database\TableManager;
 
 class ReferralsTable
 {
@@ -10,7 +10,7 @@ class ReferralsTable
         global $wpdb;
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
-        $table = Database::table_referrals();
+        $table = TableManager::table_referrals();
         $charset = $wpdb->get_charset_collate();
 
         $sql = "

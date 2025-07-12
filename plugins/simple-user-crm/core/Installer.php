@@ -2,6 +2,8 @@
 
 namespace SimpleUserCRM\Core;
 
+use SimpleUserCRM\core\Database\TableManager;
+
 defined('ABSPATH') || exit;
 
 class Installer
@@ -9,7 +11,7 @@ class Installer
     // This method is called when the plugin is activated
     public static function activate(): void
     {
-        Database::create_tables();
+        TableManager::create_tables();
         self::create_register_pages();
     }
 

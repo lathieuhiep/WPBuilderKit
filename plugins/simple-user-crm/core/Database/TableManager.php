@@ -2,21 +2,20 @@
 
 namespace SimpleUserCRM\core\Database;
 
+use SimpleUserCRM\constants\TableConstants;
 use SimpleUserCRM\core\Database\Tables\ReferralsTable;
 use SimpleUserCRM\core\Database\Tables\UsersTable;
 
 class TableManager
 {
-// Constants for table names
-    public const TABLE_USERS = 'su_crm_users';
-    public const TABLE_REFERRALS = 'su_crm_referrals';
+
 
     // Method to create the users table
     public static function table_users(): string
     {
         global $wpdb;
 
-        return $wpdb->prefix . self::TABLE_USERS;
+        return $wpdb->prefix . TableConstants::TABLE_USERS;
     }
 
     // Method to create the referrals table
@@ -24,7 +23,7 @@ class TableManager
     {
         global $wpdb;
 
-        return $wpdb->prefix . self::TABLE_REFERRALS;
+        return $wpdb->prefix . TableConstants::TABLE_REFERRALS;
     }
 
     // Method to create the database tables

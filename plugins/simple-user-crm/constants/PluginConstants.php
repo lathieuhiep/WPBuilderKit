@@ -1,10 +1,9 @@
 <?php
-
-namespace SimpleUserCRM\Core;
+namespace SimpleUserCRM\Constants;
 
 defined('ABSPATH') || exit;
 
-class Constants
+class PluginConstants
 {
     // Define plugin constants
     public const VERSION = '1.0.0';

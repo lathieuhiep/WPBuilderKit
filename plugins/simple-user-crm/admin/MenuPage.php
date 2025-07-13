@@ -1,7 +1,7 @@
 <?php
 namespace SimpleUserCRM\Admin;
 
-use SimpleUserCRM\Core\Constants;
+use SimpleUserCRM\Constants\PluginConstants;
 
 defined('ABSPATH') || exit;
 
@@ -16,8 +16,8 @@ class MenuPage
     public function register_menu(): void
     {
         add_menu_page(
-            esc_html__('Cài đặt CRM', Constants::TEXT_DOMAIN),
-            esc_html__('CRM Settings', Constants::TEXT_DOMAIN),
+            esc_html__('Cài đặt CRM', PluginConstants::TEXT_DOMAIN),
+            esc_html__('CRM Settings', PluginConstants::TEXT_DOMAIN),
             'manage_options',
             'su_crm_settings',
             [$this, 'render_settings_page'],
@@ -30,7 +30,7 @@ class MenuPage
     {
         ?>
         <div class="wrap">
-            <h1><?php esc_html_e('Cài đặt Simple User CRM', Constants::TEXT_DOMAIN); ?></h1>
+            <h1><?php esc_html_e('Cài đặt Simple User CRM', PluginConstants::TEXT_DOMAIN); ?></h1>
             <form method="post" action="options.php">
                 <?php
                 settings_fields('su_crm_settings_group');
@@ -46,29 +46,29 @@ class MenuPage
     {
         add_settings_section(
             'su_crm_page_section',
-            esc_html__('Trang Plugin', Constants::TEXT_DOMAIN),
+            esc_html__('Trang Plugin', PluginConstants::TEXT_DOMAIN),
             '',
             'su_crm_settings'
         );
 
         add_settings_field(
-            Constants::KEY_OPTION_REGISTER_PAGE,
-            esc_html__('Trang đăng ký học viên', Constants::TEXT_DOMAIN),
+            PluginConstants::KEY_OPTION_REGISTER_PAGE,
+            esc_html__('Trang đăng ký học viên', PluginConstants::TEXT_DOMAIN),
             [$this, 'render_page_dropdown'],
             'su_crm_settings',
             'su_crm_page_section'
         );
 
-        register_setting('su_crm_settings_group', Constants::KEY_OPTION_REGISTER_PAGE);
+        register_setting('su_crm_settings_group', PluginConstants::KEY_OPTION_REGISTER_PAGE);
     }
 
     public function render_page_dropdown(): void
     {
-        $selected = get_option(Constants::KEY_OPTION_REGISTER_PAGE);
+        $selected = get_option(PluginConstants::KEY_OPTION_REGISTER_PAGE);
         wp_dropdown_pages([
-            'name'              => Constants::KEY_OPTION_REGISTER_PAGE,
+            'name'              => PluginConstants::KEY_OPTION_REGISTER_PAGE,
             'selected'          => $selected,
-            'show_option_none'  => esc_html__('— Chọn một trang —', Constants::TEXT_DOMAIN),
+            'show_option_none'  => esc_html__('— Chọn một trang —', PluginConstants::TEXT_DOMAIN),
             'option_none_value' => '',
         ]);
     }

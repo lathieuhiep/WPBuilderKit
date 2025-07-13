@@ -1,6 +1,8 @@
 <?php
 namespace SimpleUserCRM\Core;
 
+use SimpleUserCRM\Constants\PluginConstants;
+
 defined('ABSPATH') || exit;
 
 class ContentInjector
@@ -12,7 +14,7 @@ class ContentInjector
 
     public static function inject_register_page_form($content)
     {
-        $page_id = get_option(Constants::KEY_OPTION_REGISTER_PAGE);
+        $page_id = get_option(PluginConstants::KEY_OPTION_REGISTER_PAGE);
 
         if (!is_page($page_id) || !in_the_loop() || !is_main_query()) {
             return $content;

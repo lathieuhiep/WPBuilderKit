@@ -2,18 +2,13 @@
 
 namespace SimpleUserCRM\Core\Form\User;
 
+use SimpleUserCRM\constants\FormConstants;
 use SimpleUserCRM\Core\Database\DBHelper;
 use SimpleUserCRM\core\Database\TableManager;
 use SimpleUserCRM\Core\Form\BaseValidator;
 
 class UserFormHandler
 {
-    public const FORM_CREATE_ACTION = 'su_crm_register_form_action';
-    public const FORM_CREATE_NONCE = 'su_crm_register_form_nonce';
-
-    public const FORM_UPDATE_ACTION = 'su_crm_update_user_form_action';
-    public const FORM_UPDATE_NONCE = 'su_crm_update_user_form_nonce';
-
     public function init(): void
     {
         add_action('init', [$this, 'handle_create']);
@@ -28,7 +23,7 @@ class UserFormHandler
             return;
         }
 
-        if (!BaseValidator::verify_nonce($_POST, self::FORM_CREATE_NONCE, self::FORM_CREATE_ACTION)) {
+        if (!BaseValidator::verify_nonce($_POST, FormConstants::FORM_CREATE_NONCE, FormConstants::FORM_CREATE_ACTION)) {
             return;
         }
 

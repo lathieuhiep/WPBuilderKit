@@ -2,6 +2,7 @@
 
 namespace SimpleUserCRM\Core;
 
+use SimpleUserCRM\Constants\PluginConstants;
 use SimpleUserCRM\core\Database\TableManager;
 
 defined('ABSPATH') || exit;
@@ -18,7 +19,7 @@ class Installer
     // This method creates a registration page if it doesn't exist
     protected static function create_register_pages(): void
     {
-        $option_key = Constants::KEY_OPTION_REGISTER_PAGE;
+        $option_key = PluginConstants::KEY_OPTION_REGISTER_PAGE;
         $title = 'Đăng ký thành viên';
 
         // check if the page already exists

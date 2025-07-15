@@ -1,10 +1,9 @@
 <?php
 use SimpleUserCRM\Admin\MenuPage;
 use SimpleUserCRM\Constants\PluginConstants;
-
 ?>
 
-<aside class="su-crm-sidebar">
+<aside class="main-sidebar">
     <h2 class="logo">Simple User CRM</h2>
 
     <nav class="nav-main">
@@ -24,7 +23,8 @@ use SimpleUserCRM\Constants\PluginConstants;
 
     <div class="action-box">
         <a class="back-to-admin" href="<?= esc_url(admin_url()) ?>">
-            ← Trở về bảng quản trị WP
+            <span class="dashicons dashicons-admin-generic"></span>
+            <?= esc_html__('Quay lại trang quản trị', PluginConstants::TEXT_DOMAIN); ?>
         </a>
     </div>
 </aside>

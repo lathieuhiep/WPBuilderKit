@@ -22,13 +22,13 @@ class MenuPage
                 'slug' => 'su_crm_dashboard',
                 'title' => 'Tổng quan'
             ],
-            'students' => [
-                'slug' => 'su_crm_students',
-                'title' => 'Học viên'
+            'contacts' => [
+                'slug' => 'su_crm_contacts',
+                'title' => 'Danh sách đăng kí'
             ],
-            'create' => [
-                'slug' => 'su_crm_create',
-                'title' => 'Tạo mới'
+            'create_contact' => [
+                'slug' => 'su_crm_create_contact',
+                'title' => 'Thêm người đăng ký'
             ],
             'reports' => [
                 'slug' => 'su_crm_reports',

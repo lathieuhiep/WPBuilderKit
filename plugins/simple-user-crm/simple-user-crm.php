@@ -29,5 +29,7 @@ spl_autoload_register(function ($class) {
 // Activation hook to create necessary database tables
 register_activation_hook(__FILE__, ['SimpleUserCRM\Core\Installer', 'activate']);
 
+add_action('plugins_loaded', ['SimpleUserCRM\Core\Plugin', 'loadTextDomain']);
+
 // Initialize the plugin
 add_action('plugins_loaded', ['SimpleUserCRM\Core\Plugin', 'init']);

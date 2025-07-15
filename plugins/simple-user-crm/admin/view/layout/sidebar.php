@@ -1,5 +1,7 @@
 <?php
 use SimpleUserCRM\Admin\MenuPage;
+use SimpleUserCRM\Constants\PluginConstants;
+
 ?>
 
 <aside class="su-crm-sidebar">
@@ -13,7 +15,7 @@ use SimpleUserCRM\Admin\MenuPage;
             ?>
                 <li class="<?= esc_attr($is_active) ?>">
                     <a href="<?php echo admin_url('admin.php?page=' . $value['slug']); ?>">
-                        <?php echo esc_html( $value['title'] ) ?>
+                        <?= esc_html__( $value['title'], PluginConstants::TEXT_DOMAIN ); ?>
                     </a>
                 </li>
             <?php endforeach; ?>

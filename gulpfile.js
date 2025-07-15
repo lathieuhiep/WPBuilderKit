@@ -23,6 +23,27 @@ const isDev = (process.env.NODE_ENV === 'development');
 const pluginNameEFA = 'essential-features-addon';
 const themeName = 'basictheme';
 
+// function build scss pipeline
+const buildScssPipeline = ({ input, output, includePaths = ['node_modules', 'src'] }) => {
+    return src(input)
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.error(err.message);
+                this.emit('end');
+            }
+        }))
+        .pipe(gulpIf(isDev, sourcemaps.init()))
+        .pipe(sass({
+            outputStyle: 'expanded',
+            includePaths: includePaths
+        }).on('error', sass.logError))
+        .pipe(cleanCSS({ level: 2 }))
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulpIf(isDev, sourcemaps.write()))
+        .pipe(dest(output))
+        .pipe(browserSync.stream());
+};
+
 // Đường dẫn file
 const paths = {
     node_modules: 'node_modules/',
@@ -36,6 +57,20 @@ const paths = {
         efa: {
             scss: `src/plugins/${pluginNameEFA}/scss/`,
             js: `src/plugins/${pluginNameEFA}/js/`
+        },
+        su_crm: {
+            admin: {
+                scss: 'src/plugins/simple-user-crm/admin/scss/',
+                js: 'src/plugins/simple-user-crm/admin/js/',
+                cssOut: 'plugins/simple-user-crm/admin/assets/css/',
+                jsOut: 'plugins/simple-user-crm/admin/assets/js/'
+            },
+            frontend: {
+                scss: 'src/plugins/simple-user-crm/frontend/scss/',
+                js: 'src/plugins/simple-user-crm/frontend/js/',
+                cssOut: 'plugins/simple-user-crm/frontend/assets/css/',
+                jsOut: 'plugins/simple-user-crm/frontend/assets/js/'
+            }
         }
     },
     shared: {
@@ -353,25 +388,10 @@ exports.buildJSShop = buildJSShop;
 
 // Task build style elementor addons
 const buildStyleElementor = () => {
-    return src(`${paths.plugins.efa.scss}efa-elementor.scss`)
-        .pipe(plumber({
-            errorHandler: function (err) {
-                console.error(err.message);
-                this.emit('end');
-            }
-        }))
-        .pipe(gulpIf(isDev, sourcemaps.init()))
-        .pipe(sass({
-            outputStyle: 'expanded',
-            includePaths: ['node_modules', 'src']
-        }, '').on('error', sass.logError))
-        .pipe(cleanCSS({
-            level: 2
-        }))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(gulpIf(isDev, sourcemaps.write()))
-        .pipe(dest(`${paths.output.plugins.efa.css}`))
-        .pipe(browserSync.stream())
+    return buildScssPipeline({
+        input: `${paths.plugins.efa.scss}efa-elementor.scss`,
+        output: `${paths.output.plugins.efa.css}`
+    })
 }
 
 // Task build style custom login
@@ -409,6 +429,21 @@ const buildJPluginEFA = () => {
         .pipe(rename({suffix: '.min'}))
         .pipe(dest(`${paths.output.plugins.efa.js}`))
         .pipe(browserSync.stream())
+}
+
+// Task build plugin simple-user-crm
+const buildStyleBESimpleUserCrm = () => {
+    return buildScssPipeline({
+        input: `${paths.plugins.su_crm.admin.scss}*.scss`,
+        output: `${paths.plugins.su_crm.admin.cssOut}`
+    })
+}
+
+const buildStyleFESimpleUserCrm = () => {
+    return buildScssPipeline({
+        input: `${paths.plugins.su_crm.frontend.scss}*.scss`,
+        output: `${paths.plugins.su_crm.frontend.cssOut}`
+    })
 }
 
 /*
@@ -469,6 +504,15 @@ const watchTask = () => {
     ], buildStyleCustomLogin)
 
     watch([`${paths.plugins.efa.js}*.js`], buildJPluginEFA)
+
+    // watch su_crm admin
+    watch([
+        `${paths.plugins.su_crm.admin.scss}*.scss`
+    ], buildStyleBESimpleUserCrm)
+
+    watch([
+        `${paths.plugins.su_crm.frontend.scss}*.scss`
+    ], buildStyleFESimpleUserCrm)
 
     // theme watch
     watch([

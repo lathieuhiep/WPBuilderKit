@@ -7,12 +7,12 @@ defined('ABSPATH') || exit;
 
 class MenuPage
 {
-    public function __construct()
+    public static function init(): void
     {
-        add_action('admin_menu', [$this, 'register_menu']);
-        add_action('admin_init', [$this, 'register_settings']);
+        add_action('admin_menu', [self::class, 'register_menu']);
+        add_action('admin_init', [self::class, 'register_settings']);
 
-        $this->hook_assets_if_needed();
+        self::hook_assets_if_needed();
     }
 
     public static function crm_pages(): array
@@ -20,23 +20,23 @@ class MenuPage
         return [
             'dashboard' => [
                 'slug' => 'su_crm_dashboard',
-                'title' => esc_html__('Tổng quan', PluginConstants::TEXT_DOMAIN)
+                'title' => 'Tổng quan'
             ],
             'students' => [
                 'slug' => 'su_crm_students',
-                'title' => esc_html__('Học viên', PluginConstants::TEXT_DOMAIN)
+                'title' => 'Học viên'
             ],
             'create' => [
                 'slug' => 'su_crm_create',
-                'title' => esc_html__('Tạo mới', PluginConstants::TEXT_DOMAIN)
+                'title' => 'Tạo mới'
             ],
             'reports' => [
                 'slug' => 'su_crm_reports',
-                'title' => esc_html__('Báo cáo', PluginConstants::TEXT_DOMAIN)
+                'title' => 'Báo cáo'
             ],
             'settings' => [
                 'slug' => 'su_crm_settings',
-                'title' => esc_html__('Cài đặt', PluginConstants::TEXT_DOMAIN)
+                'title' => 'Cài đặt'
             ]
         ];
     }
@@ -46,14 +46,14 @@ class MenuPage
         return array_column(self::crm_pages(), 'slug');
     }
 
-    protected function should_load_crm_assets(): bool
+    protected static function should_load_crm_assets(): bool
     {
         return isset($_GET['page']) && in_array($_GET['page'], self::crm_page_slugs(), true);
     }
 
-    protected function hook_assets_if_needed(): void
+    protected static function hook_assets_if_needed(): void
     {
-        if (!$this->should_load_crm_assets()) {
+        if (!self::should_load_crm_assets()) {
             return;
         }
 
@@ -61,7 +61,7 @@ class MenuPage
             $path_assets_js = 'admin/assets/js/';
             $path_assets_css = 'admin/assets/css/';
 
-            wp_enqueue_style('be-su-crm', PluginConstants::url() . $path_assets_css . 'be-su-crm.css', [], PluginConstants::VERSION);
+            wp_enqueue_style('be-su-crm', PluginConstants::url() . $path_assets_css . 'be-su-crm.min.css', [], PluginConstants::VERSION);
             wp_enqueue_script('be-su-crm', PluginConstants::url() . $path_assets_js . 'be-su-crm.js', ['jquery'], PluginConstants::VERSION, true);
         });
 
@@ -70,7 +70,7 @@ class MenuPage
         });
     }
 
-    public function register_menu(): void
+    public static function register_menu(): void
     {
         add_menu_page(
             esc_html__('Quản Lý CRM', PluginConstants::TEXT_DOMAIN),
@@ -96,7 +96,7 @@ class MenuPage
         }
     }
 
-    public function register_settings(): void
+    public static function register_settings(): void
     {
         add_settings_section(
             'su_crm_page_section',
@@ -108,7 +108,7 @@ class MenuPage
         add_settings_field(
             PluginConstants::KEY_OPTION_REGISTER_PAGE,
             esc_html__('Trang đăng ký học viên', PluginConstants::TEXT_DOMAIN),
-            [$this, 'render_page_dropdown'],
+            [self::class, 'render_page_dropdown'],
             'su_crm_settings',
             'su_crm_page_section'
         );
@@ -116,7 +116,7 @@ class MenuPage
         register_setting('su_crm_settings_group', PluginConstants::KEY_OPTION_REGISTER_PAGE);
     }
 
-    public function render_page_dropdown(): void
+    public static function render_page_dropdown(): void
     {
         $selected = get_option(PluginConstants::KEY_OPTION_REGISTER_PAGE);
         wp_dropdown_pages([

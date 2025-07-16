@@ -2,6 +2,8 @@
 
 namespace SimpleUserCRM\Core\Database;
 
+use SimpleUserCRM\Constants\PluginConstants;
+
 defined('ABSPATH') || exit;
 
 class DBHelper
@@ -272,9 +274,11 @@ class DBHelper
 
         if ($clause['sql']) {
             $sql .= ' WHERE ' . $clause['sql'];
+            return (int) $wpdb->get_var($wpdb->prepare($sql, ...$clause['values']));
         }
 
-        return (int) $wpdb->get_var($wpdb->prepare($sql, ...$clause['values']));
+        // Không có điều kiện, không cần prepare
+        return (int) $wpdb->get_var($sql);
     }
 
     /**
@@ -307,11 +311,11 @@ class DBHelper
      */
     public static function get_advanced_slice(
         string $table,
+        int $offset = 0,
         array $where = [],
         string $columns = '*',
-        int $limit = 20,
-        int $offset = 0,
-        string $order_by = 'id DESC'
+        int $limit = PluginConstants::KEY_LIMIT_PER_PAGE,
+        string $order_by = PluginConstants::KEY_ORDER_BY
     ): array {
         global $wpdb;
 

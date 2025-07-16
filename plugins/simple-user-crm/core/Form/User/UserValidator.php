@@ -2,7 +2,7 @@
 
 namespace SimpleUserCRM\Core\Form\User;
 
-use SimpleUserCRM\Core\Database\TableManager;
+use SimpleUserCRM\Constants\TableConstants;
 use SimpleUserCRM\Support\Helpers;
 use SimpleUserCRM\Support\Messages;
 
@@ -15,7 +15,7 @@ class UserValidator
      */
     public static function validate_user_data(array $input): array
     {
-        $table_users = TableManager::table_users();
+        $table_users = TableConstants::table_users();
         $errors = [];
         $data = [];
 

@@ -2,6 +2,7 @@
 
 namespace SimpleUserCRM\Support;
 
+use SimpleUserCRM\Constants\PluginConstants;
 use SimpleUserCRM\Core\Database\DBHelper;
 
 class Helpers
@@ -44,40 +45,55 @@ class Helpers
         return $row === null;
     }
 
+    // get pagination data
+    public static function get_pagination_data(int $total_items, int $default_per_page = PluginConstants::KEY_LIMIT_PER_PAGE): array
+    {
+        $per_page = $default_per_page;
+        $current_page = isset($_GET['paged']) ? max(1, (int)$_GET['paged']) : 1;
+        $offset = ($current_page - 1) * $per_page;
+        $total_pages = (int)ceil($total_items / $per_page);
+
+        return compact('per_page', 'current_page', 'offset', 'total_pages');
+    }
+
     /**
      * Hiển thị HTML phân trang dạng admin, tách biệt HTML & logic
      *
-     * @param int $total_items Tổng số dòng dữ liệu
-     * @param int $per_page Số dòng mỗi trang (mặc định 20)
-     * @param int $current_page Trang hiện tại (mặc định 1)
+     * @param int $total_pages
+     * @param int $current_page
+     * @return void
      */
-    public static function render_admin_pagination(int $total_items, int $per_page = 20, int $current_page = 1): void
+    public static function render_admin_pagination_links(int $total_pages, int $current_page): void
     {
-        $total_pages = (int)ceil($total_items / $per_page);
         if ($total_pages < 2) {
             return;
         }
 
+        $base_args = $_GET;
+        $base_args['paged'] = '%#%';
+
+        $safe_args = array_map('sanitize_text_field', $base_args);
+
         $pagination = paginate_links([
-            'base'      => add_query_arg('paged', '%#%'),
-            'format'    => '',
-            'prev_text' => '« Trước',
-            'next_text' => 'Tiếp »',
-            'total'     => $total_pages,
-            'current'   => $current_page,
-            'type'      => 'array',
+            'base' => add_query_arg($safe_args),
+            'format' => '',
+            'prev_text' => esc_html__('Trước', PluginConstants::TEXT_DOMAIN),
+            'next_text' => esc_html__('Sau', PluginConstants::TEXT_DOMAIN),
+            'total' => $total_pages,
+            'current' => $current_page,
+            'type' => 'array',
         ]);
 
-        if (!empty($pagination)) {
-            ?>
-            <div class="tablenav-pages su-crm-pagination">
-                <div class="pagination-links">
-                    <?php foreach ($pagination as $link) : ?>
-                        <?= wp_kses_post($link); ?>
-                    <?php endforeach; ?>
-                </div>
+        if (!empty($pagination)) :
+        ?>
+            <div class="su-crm-pagination">
+                <?php
+                foreach ($pagination as $link) :
+                    echo wp_kses_post($link);
+                endforeach;
+                ?>
             </div>
-            <?php
-        }
+        <?php
+        endif;
     }
 }

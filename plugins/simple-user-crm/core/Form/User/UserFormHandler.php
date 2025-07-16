@@ -3,8 +3,8 @@
 namespace SimpleUserCRM\Core\Form\User;
 
 use SimpleUserCRM\constants\FormConstants;
+use SimpleUserCRM\Constants\TableConstants;
 use SimpleUserCRM\Core\Database\DBHelper;
-use SimpleUserCRM\core\Database\TableManager;
 use SimpleUserCRM\Core\Form\BaseValidator;
 
 class UserFormHandler
@@ -61,7 +61,7 @@ class UserFormHandler
         }
 
         // save user data
-        $success = DBHelper::insert(TableManager::table_users(), $result['data']);
+        $success = DBHelper::insert(TableConstants::table_users(), $result['data']);
 
         if ($success) {
             set_transient(FormConstants::FORM_USER_REGISTER_STATUS, 'success', 30);

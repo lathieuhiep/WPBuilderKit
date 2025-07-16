@@ -12,6 +12,10 @@ class PluginConstants
     // Define key options
     public const KEY_OPTION_REGISTER_PAGE = 'su_crm_register_page_id';
 
+    // Define key meta fields
+    public const KEY_LIMIT_PER_PAGE = 20;
+    public const KEY_ORDER_BY = 'id DESC';
+
     public static function path(): string
     {
         return plugin_dir_path(dirname(__FILE__, 1));

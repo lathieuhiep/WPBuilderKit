@@ -1,18 +1,19 @@
-// Variables - Định nghĩa các biến để dễ dàng thay đổi giá trị sau này
+// === Variables ===
 $color-dark-blue: #1e293b;
 $color-light-gray: #cbd5e1;
 $color-white: #fff;
 $color-bg-light: #f8fafc;
+$color-bg-table: #fcfcfc;
 $sidebar-width: 22rem;
 $padding-base: 2rem;
 $font-family-base: sans-serif;
 
-// Mixins - Các đoạn mã có thể tái sử dụng
+// === Mixins ===
 @mixin reset-display() {
   display: none !important;
 }
 
-/* --- Reset Styles --- */
+// === Reset Styles ===
 html {
   font-size: 62.5%;
 
@@ -24,6 +25,7 @@ html {
 body {
   line-height: 1.5;
   font-size: 1.4rem;
+  font-family: $font-family-base;
 
   #adminmenumain,
   #adminmenuwrap,
@@ -62,6 +64,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
+  color: inherit;
   margin: 0;
 }
 
@@ -72,19 +75,15 @@ a {
   }
 }
 
-p {
+p, ul {
   margin: 0;
 }
 
-ul {
+ul li {
   margin: 0;
 
-  li {
-    margin: 0;
-
-    ~ li {
-      margin-top: 1.2rem;
-    }
+  ~ li {
+    margin-top: 1.2rem;
   }
 }
 
@@ -94,14 +93,19 @@ ul {
   margin: 0;
 }
 
-/* --- CRM Layout --- */
-.su-crm-app {
-  display: flex;
+.su-fw {
+  font-weight: 600;
+}
+
+;
+
+// === CRM Layout ===
+.su-crm-app-layout {
   min-height: 100vh;
-  font-family: $font-family-base;
+  display: grid;
+  grid-template-columns: 22rem minmax(0, 1fr);
 
   .main-sidebar {
-    width: $sidebar-width;
     background: $color-dark-blue;
     color: $color-white;
     padding: $padding-base;
@@ -120,28 +124,203 @@ ul {
       ul {
         list-style: none;
         padding: 0;
-      }
 
-      a {
-        color: $color-light-gray;
-        text-decoration: none;
-        display: block;
-      }
+        li {
+          a {
+            color: $color-light-gray;
+            text-decoration: none;
+            display: block;
 
-      .active a,
-      a:hover {
-        color: $color-white;
+            &:hover {
+              color: $color-white;
+            }
+          }
+
+          &.active {
+            a {
+              color: $color-white;
+            }
+          }
+        }
       }
+    }
+
+    .back-to-admin {
+      color: $color-white;
     }
   }
 
-  .main-warp {
-    flex: 1;
+  .main-content {
     padding: $padding-base;
-    background: $color-bg-light;
-  }
-
-  .back-to-admin {
+    background: #2b3035;
     color: $color-white;
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+
+    .page-title {
+      font-size: 1.8rem;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .content-table {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 1.2rem;
+      justify-content: space-between;
+      min-height: 0;
+      min-width: 0;
+    }
+
+    .table-wrapper {
+      max-height: 58rem;
+      overflow: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #64748b #2b3035;
+
+      &::-webkit-scrollbar {
+        width: .8rem;
+        height: .8rem;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #2b3035;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #64748b;
+        border-radius: 1rem;
+        border: .2rem solid #2b3035;
+      }
+    }
+
+    .tbl {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 100rem;
+      table-layout: fixed;
+      border-radius: 0.8rem;
+      background-color: #343a40;
+
+      th,
+      td {
+        padding: 1.2rem .8rem;
+        text-align: left;
+        vertical-align: top;
+
+        &:nth-child(1),
+        &:nth-child(2) {
+          position: sticky;
+        }
+
+        &:nth-child(1) {
+          left: 0;
+        }
+
+        &:nth-child(2) {
+          left: 5rem;
+        }
+      }
+
+      th {
+        &:nth-child(1),
+        &:nth-child(2) {
+          z-index: 2;
+        }
+      }
+
+      thead {
+        th {
+          position: sticky;
+          top: 0;
+          z-index: 1;
+          background-color: #343a40;
+          border-bottom: 0.4rem solid #2b3035;
+          color: $color-white;
+          font-weight: 600;
+          width: 10rem;
+
+          &.stt {
+            width: 5rem;
+          }
+
+          &.full-name {
+            width: 18rem;
+          }
+
+          &.email {
+            width: 20rem;
+          }
+
+          &.referral-code,
+          &.created-at {
+            width: 12rem;
+          }
+
+          &.phone,
+          &.date,
+          &.status {
+            width: 10rem;
+          }
+        }
+      }
+
+      tbody {
+        td {
+          background: #25252b;
+          border-bottom: 0.3rem solid #2b3035;
+          color: $color-white;
+          white-space: normal;
+          overflow-wrap: anywhere;
+          word-break: break-word;
+          transition: 0.3s all ease;
+        }
+
+        tr:last-child td {
+          border-bottom: none;
+        }
+
+        tr:hover {
+          box-shadow: 0 2px 10px -5px rgba(0, 0, 0, 0.1);
+
+          td {
+            background: rgba(255, 255, 255, 0.075);
+          }
+        }
+      }
+    }
+
+    .su-crm-pagination {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      justify-content: center;
+
+      a,
+      span {
+        display: inline-block;
+        padding: 0.4rem 1.2rem;
+        text-align: center;
+        border-radius: .4rem;
+        background-color: #fff;
+        color: #000;
+        text-decoration: none;
+        transition: all 0.2s;
+
+        &:hover {
+          background-color: #e2e8f0;
+        }
+      }
+
+      .current {
+        background-color: #000;
+        color: #fff;
+        pointer-events: none;
+      }
+    }
   }
 }

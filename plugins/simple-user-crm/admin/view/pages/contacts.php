@@ -25,15 +25,53 @@ $users = UserRepository::list($pagination['offset']);
 </header>
 
 <div class="content-filters">
-    <!-- form lọc, tìm kiếm -->
-    <form method="get">
-        <input type="text" name="s" placeholder="Tìm kiếm theo tên..." />
-        <select name="status">
-            <option value="">Tất cả trạng thái</option>
-            <option value="pending">Chờ duyệt</option>
-            <option value="approved">Đã duyệt</option>
-        </select>
-        <button type="submit">Lọc</button>
+    <form method="get" class="filter-form">
+        <input type="hidden" name="page" value="<?php echo esc_attr($_GET['page'] ?? ''); ?>" />
+
+        <div class="filter-fields">
+            <!-- full name -->
+            <div class="field-box">
+                <label for="filter_full_name">
+                    <strong><?php esc_html_e('Họ tên', PluginConstants::TEXT_DOMAIN); ?></strong>
+                </label>
+                <input type="text" id="filter_full_name" class="form-control" name="full_name" value="<?php echo esc_attr($_GET['full_name'] ?? ''); ?>" />
+            </div>
+
+            <!-- phone -->
+            <div class="field-box">
+                <label for="filter_phone">
+                    <strong><?php esc_html_e('Số điện thoại', PluginConstants::TEXT_DOMAIN); ?></strong>
+                </label>
+
+                <input type="text" id="filter_phone" class="form-control" name="phone" value="<?php echo esc_attr($_GET['phone'] ?? ''); ?>" />
+            </div>
+
+            <!-- status -->
+            <div class="field-box">
+                <label for="filter_status">
+                    <strong><?php esc_html_e('Trạng thái', PluginConstants::TEXT_DOMAIN); ?></strong>
+                </label>
+
+                <select id="filter_status" class="form-control" name="status">
+                    <option value=""><?php esc_html_e('-- Tất cả --', PluginConstants::TEXT_DOMAIN); ?></option>
+                    <?php
+                    use SimpleUserCRM\Support\UserStatus;
+
+                    $selected_status = $_GET['status'] ?? '';
+                    foreach (UserStatus::all() as $value => $label) {
+                        $selected = selected($selected_status, $value, false);
+                        echo "<option value=\"" . esc_attr($value) . "\" $selected>$label</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+
+        <div class="action-box">
+            <button type="submit" class="btn btn-filter form-control">
+                <?php esc_html_e('Tìm kiếm', PluginConstants::TEXT_DOMAIN); ?>
+            </button>
+        </div>
     </form>
 </div>
 

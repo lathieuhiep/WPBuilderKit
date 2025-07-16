@@ -95,9 +95,11 @@ ul li {
 
 .su-fw {
   font-weight: 600;
-}
+};
 
-;
+button {
+  cursor: pointer;
+}
 
 // === CRM Layout ===
 .su-crm-app-layout {
@@ -164,6 +166,50 @@ ul li {
 
     a {
       color: inherit;
+    }
+
+    .filter-form {
+      display: grid;
+      gap: 1.2rem;
+      grid-template-columns: 1fr auto;
+      align-items: flex-end;
+
+      .filter-fields {
+        display: grid;
+        gap: 1.2rem;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .field-box {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+
+      label {
+        display: block;
+      }
+
+      .form-control {
+        padding: .4rem 1.2rem;
+        display: block;
+        width: 100%;
+        height: 3.6rem;
+        color: #fff;
+        border: transparent;
+        border-radius: 0.4rem;
+        background-color: #111111;
+
+        &:focus {
+          border-color: #0073aa;
+          outline: none;
+          box-shadow: 0 0 0 2px rgba(0, 115, 170, 0.2);
+        }
+      }
+
+      select {
+        max-width: 100%;
+      }
     }
 
     .content-table {

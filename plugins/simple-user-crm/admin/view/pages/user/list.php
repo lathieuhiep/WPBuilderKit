@@ -10,6 +10,8 @@ $filter_input = [
     'full_name' => trim($_GET['full_name'] ?? ''),
     'email'     => trim($_GET['email'] ?? ''),
     'phone'     => trim($_GET['phone'] ?? ''),
+    'created_from' => trim($_GET['created_from'] ?? ''),
+    'created_to'   => trim($_GET['created_to'] ?? ''),
     'status'    => trim($_GET['status'] ?? ''),
 ];
 
@@ -26,6 +28,26 @@ if ($filter_input['email'] !== '') {
 
 if ($filter_input['phone'] !== '') {
     $filters[] = ['column' => 'phone', 'op' => 'LIKE', 'value' => '%' . $filter_input['phone'] . '%'];
+}
+
+if ($filter_input['created_from'] && $filter_input['created_to']) {
+    $filters[] = [
+        'column' => 'created_at',
+        'op'     => 'BETWEEN',
+        'value'  => [$filter_input['created_from'], $filter_input['created_to']],
+    ];
+} elseif ($filter_input['created_from']) {
+    $filters[] = [
+        'column' => 'created_at',
+        'op'     => '>=',
+        'value'  => $filter_input['created_from'],
+    ];
+} elseif ($filter_input['created_to']) {
+    $filters[] = [
+        'column' => 'created_at',
+        'op'     => '<=',
+        'value'  => $filter_input['created_to'],
+    ];
 }
 
 if ($filter_input['status'] !== '') {

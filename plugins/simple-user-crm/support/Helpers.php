@@ -2,6 +2,7 @@
 
 namespace SimpleUserCRM\Support;
 
+use DateTime;
 use SimpleUserCRM\Constants\PluginConstants;
 use SimpleUserCRM\Core\Database\DBHelper;
 
@@ -95,5 +96,13 @@ class Helpers
             </div>
         <?php
         endif;
+    }
+
+    // format a date string from 'Y-m-d' to a specified format
+    public static function format_date(?string $date, string $format = 'd/m/Y'): string
+    {
+        if (!$date) return '';
+        $dt = DateTime::createFromFormat('Y-m-d', $date);
+        return $dt ? $dt->format($format) : $date;
     }
 }

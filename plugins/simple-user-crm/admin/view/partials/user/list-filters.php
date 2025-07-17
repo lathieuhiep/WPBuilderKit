@@ -1,6 +1,7 @@
 <?php
 
 use SimpleUserCRM\Constants\PluginConstants;
+use SimpleUserCRM\Support\Helpers;
 
 /**
  * @var array $input
@@ -9,6 +10,7 @@ use SimpleUserCRM\Constants\PluginConstants;
 
 $filter_labels = [];
 
+// show filter labels full name
 if ($input['full_name'] !== '') {
     $filter_labels[] = [
         'label' => esc_html__('Họ tên:', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">“' . esc_html($input['full_name']) . '”</span>',
@@ -16,6 +18,7 @@ if ($input['full_name'] !== '') {
     ];
 }
 
+// show filter labels email
 if ($input['email'] !== '') {
     $filter_labels[] = [
         'label' => esc_html__('Email:', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">“' . esc_html($input['email']) . '”</span>',
@@ -23,6 +26,7 @@ if ($input['email'] !== '') {
     ];
 }
 
+// show filter labels phone
 if ($input['phone'] !== '') {
     $filter_labels[] = [
         'label' => esc_html__('Số điện thoại:', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">“' . esc_html($input['phone']) . '”</span>',
@@ -30,6 +34,28 @@ if ($input['phone'] !== '') {
     ];
 }
 
+// show filter labels created date
+$from = $input['created_from'];
+$to   = $input['created_to'];
+
+if ( $from && $to ) {
+    $filter_labels[] = [
+        'label' => esc_html__('Ngày tạo từ', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">' . esc_html(Helpers::format_date($from)) . '</span> '. esc_html__('đến', PluginConstants::TEXT_DOMAIN) .' <span class="highlight-text">' . esc_html(Helpers::format_date($to)) . '</span>',
+        'remove_url' => remove_query_arg(['created_from', 'created_to']),
+    ];
+} elseif ( $from ) {
+    $filter_labels[] = [
+        'label' => esc_html__('Ngày tạo từ', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">' . esc_html(Helpers::format_date($from)) . '</span>',
+        'remove_url' => remove_query_arg('created_from'),
+    ];
+} elseif ( $to ) {
+    $filter_labels[] = [
+        'label' => esc_html__('Ngày tạo đến', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">' . esc_html(Helpers::format_date($to)) . '</span>',
+        'remove_url' => remove_query_arg('created_to'),
+    ];
+}
+
+// show filter labels status
 if ($input['status'] !== '') {
     $filter_labels[] = [
         'label' => esc_html__('Trạng thái:', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">“' . esc_html($statuses[$input['status']] ?? $input['status']) . '”</span>',
@@ -87,6 +113,37 @@ if ($input['status'] !== '') {
                        value="<?php echo esc_attr($input['phone'] ?? ''); ?>"
                        placeholder="<?php esc_attr_e('Nhập số điện thoại...', PluginConstants::TEXT_DOMAIN); ?>"
                 />
+            </div>
+
+            <!-- created to -->
+            <div class="field-box field-box-between">
+                <div class="item">
+                    <label for="filter_created_from">
+                        <strong><?php esc_html_e('Ngày tạo từ', PluginConstants::TEXT_DOMAIN); ?></strong>
+                    </label>
+
+                    <input type="date"
+                           id="filter_created_from"
+                           class="form-control"
+                           name="created_from"
+                           value="<?php echo esc_attr($input['created_from'] ?? ''); ?>"
+                           placeholder="<?php esc_attr_e('Ngày bắt đầu...', PluginConstants::TEXT_DOMAIN); ?>"
+                    />
+                </div>
+
+                <div class="item">
+                    <label for="filter_created_to">
+                        <strong><?php esc_html_e('Đến ngày', PluginConstants::TEXT_DOMAIN); ?></strong>
+                    </label>
+
+                    <input type="date"
+                           id="filter_created_to"
+                           class="form-control"
+                           name="created_to"
+                           value="<?php echo esc_attr($input['created_to'] ?? ''); ?>"
+                           placeholder="<?php esc_attr_e('Đến ngày...', PluginConstants::TEXT_DOMAIN); ?>"
+                    />
+                </div>
             </div>
 
             <!-- status -->

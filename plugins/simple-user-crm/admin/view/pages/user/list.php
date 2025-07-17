@@ -17,24 +17,49 @@ $filter_input = [
 
 // parameters for filtering users
 $filters = [];
+$filter_labels = [];
 
+// filter by full name
 if ($filter_input['full_name'] !== '') {
     $filters[] = ['column' => 'full_name', 'op' => 'LIKE', 'value' => '%' . $filter_input['full_name'] . '%'];
+
+    $filter_labels[] = [
+        'label' => esc_html__('Họ tên:', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">“' . esc_html($filter_input['full_name']) . '”</span>',
+        'remove_url' => remove_query_arg('full_name'),
+    ];
 }
 
+// filter by email
 if ($filter_input['email'] !== '') {
     $filters[] = ['column' => 'email', 'op' => 'LIKE', 'value' => '%' . $filter_input['email'] . '%'];
+
+    $filter_labels[] = [
+        'label' => esc_html__('Email:', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">“' . esc_html($filter_input['email']) . '”</span>',
+        'remove_url' => remove_query_arg('email'),
+    ];
 }
 
+// filter by phone
 if ($filter_input['phone'] !== '') {
     $filters[] = ['column' => 'phone', 'op' => 'LIKE', 'value' => '%' . $filter_input['phone'] . '%'];
+
+    $filter_labels[] = [
+        'label' => esc_html__('Số điện thoại:', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">“' . esc_html($filter_input['phone']) . '”</span>',
+        'remove_url' => remove_query_arg('phone'),
+    ];
 }
 
+// filter by created date
 if ($filter_input['created_from'] && $filter_input['created_to']) {
     $filters[] = [
         'column' => 'created_at',
         'op'     => 'BETWEEN',
         'value'  => [$filter_input['created_from'], $filter_input['created_to']],
+    ];
+
+    $filter_labels[] = [
+        'label' => esc_html__('Ngày tạo từ', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">' . esc_html(Helpers::format_date($filter_input['created_from'])) . '</span> ' . esc_html__('đến', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">' . esc_html(Helpers::format_date($filter_input['created_to'])) . '</span>',
+        'remove_url' => remove_query_arg(['created_from', 'created_to']),
     ];
 } elseif ($filter_input['created_from']) {
     $filters[] = [
@@ -42,16 +67,32 @@ if ($filter_input['created_from'] && $filter_input['created_to']) {
         'op'     => '>=',
         'value'  => $filter_input['created_from'],
     ];
+
+    $filter_labels[] = [
+        'label' => esc_html__('Ngày tạo từ', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">' . esc_html(Helpers::format_date($filter_input['created_from'])) . '</span>',
+        'remove_url' => remove_query_arg('created_from'),
+    ];
 } elseif ($filter_input['created_to']) {
     $filters[] = [
         'column' => 'created_at',
         'op'     => '<=',
         'value'  => $filter_input['created_to'],
     ];
+
+    $filter_labels[] = [
+        'label' => esc_html__('Ngày tạo đến', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">' . esc_html(Helpers::format_date($filter_input['created_to'])) . '</span>',
+        'remove_url' => remove_query_arg('created_to'),
+    ];
 }
 
+// filter by status
 if ($filter_input['status'] !== '') {
     $filters[] = ['column' => 'status', 'op' => '=', 'value' => $filter_input['status']];
+
+    $filter_labels[] = [
+        'label' => esc_html__('Trạng thái:', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">“' . esc_html(UserStatus::get_label($filter_input['status'])) . '”</span>',
+        'remove_url' => remove_query_arg('status'),
+    ];
 }
 
 // get total users
@@ -79,7 +120,8 @@ $view_base = 'partials/user/';
 
 Layout::render_partial($view_base . 'list-filters', [
     'input' => $filter_input,
-    'statuses' => UserStatus::all()
+    'statuses' => UserStatus::all(),
+    'filter_labels' => $filter_labels,
 ]);
 
 Layout::render_partial($view_base . 'list-table', [

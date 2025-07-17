@@ -10,24 +10,13 @@
     .filter-fields {
       display: grid;
       gap: 1.2rem;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(6, 1fr);
     }
 
     .field-box {
       display: flex;
       flex-direction: column;
       gap: 1.2rem;
-    }
-
-    .field-box-between {
-      flex-direction: row;
-      align-items: flex-end;
-
-      .item {
-        display: flex;
-        flex-direction: column;
-        gap: 1.2rem;
-      }
     }
   }
 

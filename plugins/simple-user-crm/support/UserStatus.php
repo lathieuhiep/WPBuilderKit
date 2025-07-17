@@ -13,7 +13,7 @@ class UserStatus
     public const REJECTED  = 'rejected';
     public const ARCHIVED  = 'archived';
 
-    public static function getLabel(string $status): string
+    public static function get_label(string $status): string
     {
         return match ($status) {
             self::PENDING   => esc_html__('Chờ duyệt', PluginConstants::TEXT_DOMAIN),
@@ -40,11 +40,11 @@ class UserStatus
     public static function all(): array
     {
         return [
-            self::PENDING   => self::getLabel(self::PENDING),
-            self::APPROVED  => self::getLabel(self::APPROVED),
-            self::CONVERTED => self::getLabel(self::CONVERTED),
-            self::REJECTED  => self::getLabel(self::REJECTED),
-            self::ARCHIVED  => self::getLabel(self::ARCHIVED),
+            self::PENDING   => self::get_label(self::PENDING),
+            self::APPROVED  => self::get_label(self::APPROVED),
+            self::CONVERTED => self::get_label(self::CONVERTED),
+            self::REJECTED  => self::get_label(self::REJECTED),
+            self::ARCHIVED  => self::get_label(self::ARCHIVED),
         ];
     }
 }

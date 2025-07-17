@@ -1,0 +1,51 @@
+// grid columns
+.grid-x-1 {
+  display: grid;
+  column-gap: .4rem;
+}
+
+.grid-x-2 {
+  display: grid;
+  column-gap: .8rem;
+}
+
+.grid-x-3 {
+  display: grid;
+  column-gap: 1.2rem;
+}
+
+.grid-x-4 {
+  display: grid;
+  column-gap: 1.6rem;
+}
+
+.grid-x-5 {
+  display: grid;
+  column-gap: 2rem;
+}
+
+// grid rows
+.grid-y-1 {
+  display: grid;
+  row-gap: .4rem;
+}
+
+.grid-y-2 {
+  display: grid;
+  row-gap: .8rem;
+}
+
+.grid-y-3 {
+  display: grid;
+  row-gap: 1.2rem;
+}
+
+.grid-y-4 {
+  display: grid;
+  row-gap: 1.6rem;
+}
+
+.grid-y-5 {
+  display: grid;
+  row-gap: 2rem;
+}

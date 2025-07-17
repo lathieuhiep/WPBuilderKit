@@ -507,7 +507,7 @@ const watchTask = () => {
 
     // watch su_crm admin
     watch([
-        `${paths.plugins.su_crm.admin.scss}*.scss`
+        `${paths.plugins.su_crm.admin.scss}**/*.scss`
     ], buildStyleBESimpleUserCrm)
 
     watch([

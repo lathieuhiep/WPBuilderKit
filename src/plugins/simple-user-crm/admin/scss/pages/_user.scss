@@ -1,0 +1,54 @@
+@import "../abstracts/abstracts";
+
+.su-crm-app-layout {
+  .filter-form {
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: 1fr auto;
+    align-items: flex-end;
+
+    .filter-fields {
+      display: grid;
+      gap: 1.2rem;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .field-box {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+  }
+
+  .filter-tags,
+  .tag-list {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+  }
+
+  .filter-tags {
+    .reset-all {
+      &:hover {
+        color: $color-danger;
+      }
+    }
+  }
+
+  .tag-list {
+    .tag {
+      background-color: #25252b;
+      padding: 0.8rem 1.2rem;
+      border-radius: 1.2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 1.2rem;
+
+      a {
+        &:hover {
+          color: $color-danger;
+        }
+      }
+    }
+  }
+}

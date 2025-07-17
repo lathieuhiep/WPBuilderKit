@@ -1,0 +1,76 @@
+@import "../abstracts/abstracts";
+
+html {
+  font-size: 62.5%;
+
+  &.wp-toolbar {
+    --wp-admin--admin-bar--height: 0;
+  }
+}
+
+body {
+  line-height: 1.5;
+  font-size: 1.4rem;
+  font-family: $font-family-base;
+
+  #adminmenumain,
+  #adminmenuwrap,
+  #adminmenu,
+  #wpadminbar,
+  #wpfooter,
+  .update-nag,
+  #screen-meta-links,
+  #screen-meta,
+  .notice {
+    @include reset-display();
+  }
+
+  #wpcontent {
+    margin-left: 0 !important;
+    padding: 0 !important;
+  }
+
+  #wpbody-content {
+    padding: 0;
+  }
+}
+
+#wpwrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#wpcontent,
+#wpbody,
+#wpbody-content,
+.su-crm-dashboard {
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: inherit;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+p, ul {
+  margin: 0;
+}
+
+ul li {
+  margin: 0;
+
+  ~ li {
+    margin-top: 1.2rem;
+  }
+}

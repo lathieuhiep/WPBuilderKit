@@ -1,0 +1,48 @@
+@import "../abstracts/abstracts";
+
+.reset-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.su-fw {
+  font-weight: 600;
+}
+
+;
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+.su-crm-app-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 22rem minmax(0, 1fr);
+
+  .main-content {
+    padding: $padding-base;
+    background: #2b3035;
+    color: $color-white;
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+
+    .page-title {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+.highlight-text {
+  color: #FFD54F;
+}
+
+.text-align-center {
+  text-align: center;
+}

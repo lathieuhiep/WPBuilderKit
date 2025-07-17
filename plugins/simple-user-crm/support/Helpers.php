@@ -77,8 +77,8 @@ class Helpers
         $pagination = paginate_links([
             'base' => add_query_arg($safe_args),
             'format' => '',
-            'prev_text' => esc_html__('Trước', PluginConstants::TEXT_DOMAIN),
-            'next_text' => esc_html__('Sau', PluginConstants::TEXT_DOMAIN),
+            'prev_text' => esc_html__('&larr; Trước', PluginConstants::TEXT_DOMAIN),
+            'next_text' => esc_html__('Sau &rarr;', PluginConstants::TEXT_DOMAIN),
             'total' => $total_pages,
             'current' => $current_page,
             'type' => 'array',

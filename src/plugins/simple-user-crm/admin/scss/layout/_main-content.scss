@@ -1,0 +1,13 @@
+@import "../abstracts/abstracts";
+
+.su-crm-app-layout {
+  .content-table {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 1.2rem;
+    justify-content: space-between;
+    min-height: 0;
+    min-width: 0;
+  }
+}

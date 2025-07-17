@@ -1,0 +1,119 @@
+@import "../abstracts/abstracts";
+
+.table-wrapper {
+  max-height: 58rem;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #64748b #2b3035;
+
+  &::-webkit-scrollbar {
+    width: .8rem;
+    height: .8rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #2b3035;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #64748b;
+    border-radius: 1rem;
+    border: .2rem solid #2b3035;
+  }
+
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 100rem;
+    table-layout: fixed;
+    border-radius: 0.8rem;
+    background-color: #343a40;
+
+    th,
+    td {
+      padding: 1.2rem .8rem;
+      text-align: left;
+      vertical-align: top;
+
+      &:nth-child(1),
+      &:nth-child(2) {
+        position: sticky;
+      }
+
+      &:nth-child(1) {
+        left: 0;
+      }
+
+      &:nth-child(2) {
+        left: 5rem;
+      }
+    }
+
+    th {
+      &:nth-child(1),
+      &:nth-child(2) {
+        z-index: 2;
+      }
+    }
+
+    thead {
+      th {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background-color: #343a40;
+        border-bottom: 0.4rem solid #2b3035;
+        color: $color-white;
+        font-weight: 600;
+        width: 10rem;
+
+        &.stt {
+          width: 5rem;
+        }
+
+        &.full-name {
+          width: 18rem;
+        }
+
+        &.email {
+          width: 20rem;
+        }
+
+        &.referral-code,
+        &.created-at {
+          width: 12rem;
+        }
+
+        &.phone,
+        &.date,
+        &.status {
+          width: 10rem;
+        }
+      }
+    }
+
+    tbody {
+      td {
+        background: #25252b;
+        border-bottom: 0.3rem solid #2b3035;
+        color: $color-white;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        transition: 0.3s all ease;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      tr:hover {
+        box-shadow: 0 2px 10px -5px rgba(0, 0, 0, 0.1);
+
+        td {
+          background: rgba(255, 255, 255, 0.075);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+@import "../abstracts/abstracts";
+
+.status-label {
+  display: block;
+  padding: .8rem;
+  border-radius: .4rem;
+  text-transform: capitalize;
+  text-align: center;
+  color: white;
+  font-weight: normal;
+  font-size: 1.2rem;
+  max-width: 8rem;
+
+  &.status-pending {
+    background-color: #f0ad4e;
+  }
+
+  &.status-approved {
+    background-color: #5cb85c;
+  }
+
+  &.status-converted {
+    background-color: #0275d8;
+  }
+
+  &.status-rejected {
+    background-color: #d9534f;
+  }
+
+  &.status-archived {
+    background-color: #6c757d;
+  }
+
+  &.status-unknown {
+    background-color: #999;
+  }
+}

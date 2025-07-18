@@ -44,6 +44,21 @@ const buildScssPipeline = ({ input, output, includePaths = ['node_modules', 'src
         .pipe(browserSync.stream());
 };
 
+// function buildJSPipeline
+const buildJsPipeline = ({ input, output }) => {
+    return src(input, { allowEmpty: true })
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.error(`Error in build JS in ${label}:`, err.message);
+                this.emit('end');
+            }
+        }))
+        .pipe(uglify())
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(dest(output))
+        .pipe(browserSync.stream());
+}
+
 // Đường dẫn file
 const paths = {
     node_modules: 'node_modules/',
@@ -418,24 +433,23 @@ const buildStyleCustomLogin = () => {
 }
 
 const buildJPluginEFA = () => {
-    return src(`${paths.plugins.efa.js}*.js`, {allowEmpty: true})
-        .pipe(plumber({
-            errorHandler: function (err) {
-                console.error('Error in build js in plugin EFA:', err.message);
-                this.emit('end');
-            }
-        }))
-        .pipe(uglify())
-        .pipe(rename({suffix: '.min'}))
-        .pipe(dest(`${paths.output.plugins.efa.js}`))
-        .pipe(browserSync.stream())
+    return buildJsPipeline({
+        input: `${paths.plugins.efa.js}*.js`,
+        output: `${paths.output.plugins.efa.js}`
+    })
 }
 
 // Task build plugin simple-user-crm
-const buildStyleBESimpleUserCrm = () => {
+const buildCssPluginSimpleUserCrmBE = () => {
     return buildScssPipeline({
         input: `${paths.plugins.su_crm.admin.scss}*.scss`,
         output: `${paths.plugins.su_crm.admin.cssOut}`
+    })
+}
+const buildJsPluginSimpleUserCrmBE = () => {
+    return buildJsPipeline({
+        input: `${paths.plugins.su_crm.admin.js}*.js`,
+        output: `${paths.plugins.su_crm.admin.jsOut}`
     })
 }
 
@@ -508,7 +522,11 @@ const watchTask = () => {
     // watch su_crm admin
     watch([
         `${paths.plugins.su_crm.admin.scss}**/*.scss`
-    ], buildStyleBESimpleUserCrm)
+    ], buildCssPluginSimpleUserCrmBE)
+
+    watch([
+        `${paths.plugins.su_crm.admin.js}*.js`
+    ], buildJsPluginSimpleUserCrmBE)
 
     watch([
         `${paths.plugins.su_crm.frontend.scss}*.scss`

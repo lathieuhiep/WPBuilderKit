@@ -23,7 +23,7 @@ class AssetsEnqueue
             $path_assets_css = 'admin/assets/css/';
 
             wp_enqueue_style('be-su-crm', PluginConstants::url() . $path_assets_css . 'be-su-crm.min.css', [], PluginConstants::VERSION);
-            wp_enqueue_script('be-su-crm', PluginConstants::url() . $path_assets_js . 'be-su-crm.js', ['jquery'], PluginConstants::VERSION, true);
+            wp_enqueue_script('be-su-crm', PluginConstants::url() . $path_assets_js . 'be-su-crm.min.js', ['jquery'], PluginConstants::VERSION, true);
         });
 
         add_filter('admin_body_class', function ($classes) {

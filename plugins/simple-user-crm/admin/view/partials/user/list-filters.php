@@ -52,7 +52,7 @@ use SimpleUserCRM\Support\Helpers;
                     <strong><?php esc_html_e('Số điện thoại', PluginConstants::TEXT_DOMAIN); ?></strong>
                 </label>
 
-                <input type="text"
+                <input type="tel"
                        id="filter_phone"
                        class="form-control"
                        name="phone"
@@ -124,7 +124,11 @@ use SimpleUserCRM\Support\Helpers;
             <div class="tag-list">
                 <?php foreach ($filter_labels as $tag): ?>
                     <div class="tag">
-                        <span><?= $tag['label'] ?></span>
+                        <div class="tag__field">
+                            <span class="label"><?= $tag['label'] ?>:</span>
+                            <span class="highlight-text"><?= esc_html( $tag['value'] ); ?></span>
+                        </div>
+
                         <a href="<?= esc_url($tag['remove_url']) ?>" class="remove">&#10005;</a>
                     </div>
                 <?php endforeach; ?>

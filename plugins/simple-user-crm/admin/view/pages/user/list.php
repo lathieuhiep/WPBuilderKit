@@ -109,10 +109,6 @@ $users = UserRepository::list($pagination['offset'], $filters);
     <h1 class="page-title">
         <?php esc_html_e('Danh sách người đăng ký', PluginConstants::TEXT_DOMAIN); ?>
     </h1>
-
-    <div class="actions">
-        <a href="#" class="btn btn-primary">+ <?php esc_html_e('Thêm mới', PluginConstants::TEXT_DOMAIN); ?></a>
-    </div>
 </header>
 
 <?php

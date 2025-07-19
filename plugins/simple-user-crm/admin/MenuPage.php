@@ -29,6 +29,11 @@ class MenuPage
                 'title' => 'Danh sách đăng kí',
                 'view' => 'user/list',
             ],
+            'user_create' => [
+                'slug' => 'su_crm_user_create',
+                'title' => 'Thêm đăng ký',
+                'view' => 'user/create',
+            ],
             'settings' => [
                 'slug' => 'su_crm_settings',
                 'title' => 'Cài đặt',
@@ -48,7 +53,6 @@ class MenuPage
     {
         return isset($_GET['page']) && in_array($_GET['page'], self::crm_page_slugs(), true);
     }
-
 
     // Registers the main menu and submenus for the CRM plugin.
     public static function register_menu(): void

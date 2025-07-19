@@ -19,6 +19,7 @@ class UserFormHandler
     // create user form handler
     public function handle_create(): void
     {
+        var_dump($_POST['su_crm']);
         // check if the form is submitted
         if (empty($_POST['su_crm']) || empty($_POST['su_crm_register_form_submit'])) {
             return;

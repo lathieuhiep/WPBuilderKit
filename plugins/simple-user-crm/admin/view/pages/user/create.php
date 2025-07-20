@@ -9,6 +9,6 @@ use SimpleUserCRM\Core\ShortcodeRegistry;
     </h1>
 </header>
 
-<div>
+<div class="content-body">
     <?php echo do_shortcode('[' . ShortcodeRegistry::get_shortcode_tag( ShortcodeRegistry::SHORTCODE_FORM_REGISTER ) . ']'); ?>
 </div>

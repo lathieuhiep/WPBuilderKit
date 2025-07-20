@@ -123,7 +123,7 @@ class RegisterForm
 
                 <input type="hidden" name="su_crm[ts]" value="<?php echo time(); ?>">
 
-                <div class="su-form-group">
+                <div class="su-form-group action-form-box">
                     <?php wp_nonce_field(FormConstants::FORM_USER_CREATE_ACTION, FormConstants::FORM_USER_CREATE_NONCE); ?>
                     <button type="submit" name="su_crm_register_form_submit" value="1">
                         <?php esc_html_e('Đăng ký', PluginConstants::TEXT_DOMAIN); ?>

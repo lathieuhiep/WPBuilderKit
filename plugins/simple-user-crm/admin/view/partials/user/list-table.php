@@ -1,6 +1,7 @@
 <?php
 use SimpleUserCRM\Constants\PluginConstants;
 use SimpleUserCRM\Support\Helpers;
+use SimpleUserCRM\Support\UserStatus;
 
 /**
  * @var array $users
@@ -42,7 +43,11 @@ use SimpleUserCRM\Support\Helpers;
                         <td><?= esc_html($user['address'] ?? '-') ?></td>
                         <td><?= esc_html($user['referral_code'] ?? '-') ?></td>
                         <td><?= esc_html($user['note'] ?? '-') ?></td>
-                        <td><?= esc_html($user['status'] ?? '-') ?></td>
+                        <td>
+                            <span class="status-label <?= 'status-' . esc_html($user['status'] ?? '') ?>">
+                                <?= esc_html( $user['status'] ? UserStatus::get_label( $user['status'] ) : '-') ?>
+                            </span>
+                        </td>
                         <td>
                             <?= !empty($user['created_at']) ? esc_html(date('d/m/Y', strtotime($user['created_at']))) : '-' ?>
                         </td>

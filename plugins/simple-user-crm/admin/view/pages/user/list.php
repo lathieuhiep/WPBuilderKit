@@ -1,4 +1,5 @@
 <?php
+
 use SimpleUserCRM\Admin\Layout;
 use SimpleUserCRM\Constants\PluginConstants;
 use SimpleUserCRM\Repositories\UserRepository;
@@ -8,11 +9,11 @@ use SimpleUserCRM\Support\UserStatus;
 // get filter inputs
 $filter_input = [
     'full_name' => trim($_GET['full_name'] ?? ''),
-    'email'     => trim($_GET['email'] ?? ''),
-    'phone'     => trim($_GET['phone'] ?? ''),
+    'email' => trim($_GET['email'] ?? ''),
+    'phone' => trim($_GET['phone'] ?? ''),
     'created_from' => trim($_GET['created_from'] ?? ''),
-    'created_to'   => trim($_GET['created_to'] ?? ''),
-    'status'    => trim($_GET['status'] ?? ''),
+    'created_to' => trim($_GET['created_to'] ?? ''),
+    'status' => trim($_GET['status'] ?? ''),
 ];
 
 // parameters for filtering users
@@ -24,7 +25,8 @@ if ($filter_input['full_name'] !== '') {
     $filters[] = ['column' => 'full_name', 'op' => 'LIKE', 'value' => '%' . $filter_input['full_name'] . '%'];
 
     $filter_labels[] = [
-        'label' => esc_html__('Họ tên:', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">“' . esc_html($filter_input['full_name']) . '”</span>',
+        'label' => esc_html__('Họ tên', PluginConstants::TEXT_DOMAIN),
+        'value' => $filter_input['full_name'],
         'remove_url' => remove_query_arg('full_name'),
     ];
 }
@@ -34,7 +36,8 @@ if ($filter_input['email'] !== '') {
     $filters[] = ['column' => 'email', 'op' => 'LIKE', 'value' => '%' . $filter_input['email'] . '%'];
 
     $filter_labels[] = [
-        'label' => esc_html__('Email:', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">“' . esc_html($filter_input['email']) . '”</span>',
+        'label' => esc_html__('Email', PluginConstants::TEXT_DOMAIN),
+        'value' => $filter_input['email'],
         'remove_url' => remove_query_arg('email'),
     ];
 }
@@ -44,7 +47,8 @@ if ($filter_input['phone'] !== '') {
     $filters[] = ['column' => 'phone', 'op' => 'LIKE', 'value' => '%' . $filter_input['phone'] . '%'];
 
     $filter_labels[] = [
-        'label' => esc_html__('Số điện thoại:', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">“' . esc_html($filter_input['phone']) . '”</span>',
+        'label' => esc_html__('Số điện thoại', PluginConstants::TEXT_DOMAIN),
+        'value' => $filter_input['phone'],
         'remove_url' => remove_query_arg('phone'),
     ];
 }
@@ -53,34 +57,37 @@ if ($filter_input['phone'] !== '') {
 if ($filter_input['created_from'] && $filter_input['created_to']) {
     $filters[] = [
         'column' => 'created_at',
-        'op'     => 'BETWEEN',
-        'value'  => [$filter_input['created_from'], $filter_input['created_to']],
+        'op' => 'BETWEEN',
+        'value' => [$filter_input['created_from'], $filter_input['created_to']],
     ];
 
     $filter_labels[] = [
-        'label' => esc_html__('Ngày tạo từ', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">' . esc_html(Helpers::format_date($filter_input['created_from'])) . '</span> ' . esc_html__('đến', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">' . esc_html(Helpers::format_date($filter_input['created_to'])) . '</span>',
+        'label' => esc_html__('Từ ngày', PluginConstants::TEXT_DOMAIN),
+        'value' => Helpers::format_date($filter_input['created_from']) . ' - ' . Helpers::format_date($filter_input['created_to']),
         'remove_url' => remove_query_arg(['created_from', 'created_to']),
     ];
 } elseif ($filter_input['created_from']) {
     $filters[] = [
         'column' => 'created_at',
-        'op'     => '>=',
-        'value'  => $filter_input['created_from'],
+        'op' => '>=',
+        'value' => $filter_input['created_from'],
     ];
 
     $filter_labels[] = [
-        'label' => esc_html__('Ngày tạo từ', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">' . esc_html(Helpers::format_date($filter_input['created_from'])) . '</span>',
+        'label' => esc_html__('Sau ngày', PluginConstants::TEXT_DOMAIN),
+        'value' => Helpers::format_date($filter_input['created_from']),
         'remove_url' => remove_query_arg('created_from'),
     ];
 } elseif ($filter_input['created_to']) {
     $filters[] = [
         'column' => 'created_at',
-        'op'     => '<=',
-        'value'  => $filter_input['created_to'],
+        'op' => '<=',
+        'value' => $filter_input['created_to'],
     ];
 
     $filter_labels[] = [
-        'label' => esc_html__('Ngày tạo đến', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">' . esc_html(Helpers::format_date($filter_input['created_to'])) . '</span>',
+        'label' => esc_html__('Trước ngày', PluginConstants::TEXT_DOMAIN),
+        'value' => Helpers::format_date($filter_input['created_to']),
         'remove_url' => remove_query_arg('created_to'),
     ];
 }
@@ -90,7 +97,8 @@ if ($filter_input['status'] !== '') {
     $filters[] = ['column' => 'status', 'op' => '=', 'value' => $filter_input['status']];
 
     $filter_labels[] = [
-        'label' => esc_html__('Trạng thái:', PluginConstants::TEXT_DOMAIN) . ' <span class="highlight-text">“' . esc_html(UserStatus::get_label($filter_input['status'])) . '”</span>',
+        'label' => esc_html__('Trạng thái', PluginConstants::TEXT_DOMAIN),
+        'value' => UserStatus::get_label($filter_input['status']),
         'remove_url' => remove_query_arg('status'),
     ];
 }

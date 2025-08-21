@@ -13,6 +13,11 @@ body {
   }
 }
 
+#login {
+  max-width: 380px;
+  width: 100%;
+}
+
 .login {
   #backtoblog a,
   #nav a {
@@ -37,6 +42,9 @@ body {
   .wp-login-logo {
     a {
       background-image: url("#{$image-path}/logo-login.png");
+      background-size: 100px;
+      width: 100px;
+      height: 100px;
     }
   }
 
@@ -92,7 +100,7 @@ body {
           cursor: pointer;
 
           &:before {
-            content:'';
+            content: '';
             border-radius: 5px;
             padding: 10px;
             display: inline-block;

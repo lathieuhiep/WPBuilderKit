@@ -17,6 +17,8 @@ use ExtendSite\Core\Plugin;
 defined('ABSPATH') || exit;
 
 // Define constants for the plugin
+if (!defined('EXTEND_SITE_VERSION')) define('EXTEND_SITE_VERSION', '1.0.0');
+
 if (!defined('EXTEND_SITE_FILE'))     define('EXTEND_SITE_FILE', __FILE__);
 if (!defined('EXTEND_SITE_PATH'))     define('EXTEND_SITE_PATH', plugin_dir_path(EXTEND_SITE_FILE));
 if (!defined('EXTEND_SITE_URL'))      define('EXTEND_SITE_URL',  plugin_dir_url(EXTEND_SITE_FILE));

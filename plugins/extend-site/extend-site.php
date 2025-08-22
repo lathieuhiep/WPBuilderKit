@@ -1,0 +1,31 @@
+<?php
+/**
+ * Plugin Name: Extend Site
+ * Description: Essential toolkit for WordPress: custom post types, widgets, and site extensions.
+ * Version:     1.0.0
+ * Author:      La Thieu Hiep
+ * Text Domain: extend-site
+ * Requires at least: 6.0
+ * Tested up to: 6.6
+ * Requires PHP: 7.4
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ */
+
+use ExtendSite\Core\Plugin;
+
+defined('ABSPATH') || exit;
+
+// Define constants for the plugin
+if (!defined('EXTEND_SITE_FILE'))     define('EXTEND_SITE_FILE', __FILE__);
+if (!defined('EXTEND_SITE_PATH'))     define('EXTEND_SITE_PATH', plugin_dir_path(EXTEND_SITE_FILE));
+if (!defined('EXTEND_SITE_URL'))      define('EXTEND_SITE_URL',  plugin_dir_url(EXTEND_SITE_FILE));
+if (!defined('EXTEND_SITE_BASENAME')) define('EXTEND_SITE_BASENAME', plugin_basename(EXTEND_SITE_FILE));
+
+// Include necessary files
+require_once __DIR__ . '/includes/Core/Plugin.php';
+
+// Load the plugin
+add_action('plugins_loaded', static function () {
+    (new Plugin())->boot();
+});

@@ -17,6 +17,9 @@ package-lock.json
 !plugins/simple-user-crm/
 !plugins/simple-user-crm/**
 
+!plugins/extend-site/
+!plugins/extend-site/**
+
 !themes/
 !themes/basictheme/
 !themes/basictheme/**

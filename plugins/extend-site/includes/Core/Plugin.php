@@ -2,6 +2,7 @@
 
 namespace ExtendSite\Core;
 
+use ExtendSite\PostType\PortfolioPostType;
 use ExtendSite\ElementorAddon\ElementorAddon;
 
 defined('ABSPATH') || exit;
@@ -12,6 +13,7 @@ class Plugin
     {
         self::load_text_domain();
         self::includes();
+        self::register_custom_post_types();
         self::load_elementor_addon();
     }
 
@@ -30,6 +32,14 @@ class Plugin
     private static function includes(): void
     {
         require_once EXTEND_SITE_PATH . 'functions/helpers.php';
+    }
+
+    /**
+     * Register custom post types.
+     */
+    public static function register_custom_post_types(): void
+    {
+       new PortfolioPostType();
     }
 
     /**

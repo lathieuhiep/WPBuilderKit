@@ -1,4 +1,5 @@
 <?php
+
 namespace ExtendSite\Core;
 
 use ExtendSite\ElementorAddon\ElementorAddon;
@@ -29,7 +30,6 @@ class Plugin
     private static function includes(): void
     {
         require_once EXTEND_SITE_PATH . 'functions/helpers.php';
-        require_once EXTEND_SITE_PATH . 'includes/ElementorAddon/ElementorAddon.php';
     }
 
     /**
@@ -37,6 +37,7 @@ class Plugin
      */
     private static function load_elementor_addon(): void
     {
+        Enqueue::boot();
         ElementorAddon::boot();
     }
 }

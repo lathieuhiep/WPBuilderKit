@@ -1,7 +1,14 @@
 <?php
 namespace ExtendSite\ElementorAddon;
 
-use ExtendSite\ElementorAddon\Widgets\Example;
+use ExtendSite\ElementorAddon\Widgets\CarouselImages;
+use ExtendSite\ElementorAddon\Widgets\ContactForm;
+use ExtendSite\ElementorAddon\Widgets\HeadingEditor;
+use ExtendSite\ElementorAddon\Widgets\IconText;
+use ExtendSite\ElementorAddon\Widgets\IconTextGrid;
+use ExtendSite\ElementorAddon\Widgets\PostCarousel;
+use ExtendSite\ElementorAddon\Widgets\PostGrid;
+use ExtendSite\ElementorAddon\Widgets\TestimonialSlider;
 
 defined('ABSPATH') || exit;
 
@@ -48,7 +55,7 @@ class ElementorAddon
     public static function register_category($manager): void
     {
         $manager->add_category(
-            'extend-site-addons',
+            'es-addons',
             [
                 'title' => esc_html__('Extend Site Addons', 'extend-site'),
                 'icon'  => 'fa fa-plug',
@@ -61,8 +68,18 @@ class ElementorAddon
      */
     public static function register_widgets($widgets_manager): void
     {
-        // Include and register Elementor widgets here
-        require_once EXTEND_SITE_PATH . 'includes/ElementorAddon/Widgets/Example.php';
-        $widgets_manager->register(new Example());
+        // register addon elementor here
+        $widgets_manager->register(new CarouselImages());
+
+        if (function_exists('wpcf7')) {
+            $widgets_manager->register(new ContactForm());
+        }
+
+        $widgets_manager->register(new HeadingEditor());
+        $widgets_manager->register(new IconText());
+        $widgets_manager->register(new IconTextGrid());
+        $widgets_manager->register(new PostCarousel());
+        $widgets_manager->register(new PostGrid());
+        $widgets_manager->register(new TestimonialSlider());
     }
 }

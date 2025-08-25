@@ -1,5 +1,4 @@
 <?php
-
 namespace ExtendSite\Core;
 
 defined('ABSPATH') || exit;
@@ -22,7 +21,7 @@ class Enqueue
     public static function enqueue_scripts_login(): void
     {
         wp_enqueue_style(
-            'extend-site-login',
+            'es-login',
             EXTEND_SITE_URL . 'assets/css/backend/custom-login.min.css',
             [],
             EXTEND_SITE_VERSION
@@ -40,11 +39,24 @@ class Enqueue
      */
     public static function enqueue_scripts_frontend(): void
     {
-        wp_enqueue_style(
-            'extend-site-frontend',
-            EXTEND_SITE_URL . 'assets/css/frontend/elementor-addon.min.css',
-            [],
-            EXTEND_SITE_VERSION
-        );
+        // Check if Elementor is used to build the current page
+        $page_builder = es_check_elementor_builder();
+
+        if ( $page_builder ) {
+            // load frontend style
+            wp_enqueue_style('es-addons-elementor',
+                EXTEND_SITE_URL . 'assets/css/frontend/addons-elementor.min.css',
+                [],
+                EXTEND_SITE_VERSION
+            );
+
+            // load frontend script
+            wp_register_script( 'es-addons-elementor',
+                EXTEND_SITE_URL . 'assets/js/frontend/addons-elementor.min.js',
+                array( 'jquery', 'swiper' ),
+                EXTEND_SITE_VERSION,
+                true
+            );
+        }
     }
 }

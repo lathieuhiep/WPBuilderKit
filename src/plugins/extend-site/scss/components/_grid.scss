@@ -4,7 +4,6 @@
 
 // row
 .#{$prefix-plugin-essentials} {
-  // row: .efa-row
   &row {
     display: flex;
     flex-wrap: wrap;
@@ -17,7 +16,6 @@
     }
   }
 
-  // column: .efa-col & .efa-col-[size]
   &col {
     flex: 1 1 0;
   }
@@ -53,7 +51,6 @@
   }
 }
 
-// col: .efa-col-*
 @for $i from 1 through $grid-columns {
   .#{$prefix-plugin-essentials}col-#{$i} {
     flex: 0 0 math.percentage(math.div($i, $grid-columns));
@@ -61,7 +58,7 @@
   }
 }
 
-// Responsive Grid: .efa-col-sm-* .efa-col-md-* .efa-col-lg-*
+// Responsive Grid
 @each $breakpoint, $size in $breakpoints {
   @media (min-width: $size) {
     @for $i from 1 through $grid-columns {
@@ -73,19 +70,19 @@
   }
 }
 
-// row-cols: .efa-row-cols-*
+// row-cols
 @for $i from 1 through $grid-columns {
-  .efa-row-cols-#{$i} > * {
+  .#{$prefix-plugin-essentials}row-cols-#{$i} > * {
     flex: 0 0 calc(100% / #{$i});
     max-width: calc(100% / #{$i});
   }
 }
 
-// Responsive row-cols: .efa-row-cols-sm-* .efa-row-cols-md-* .efa-row-cols-lg-*
+// Responsive row-cols
 @each $breakpoint, $size in $breakpoints {
   @media (min-width: $size) {
     @for $i from 1 through $grid-columns {
-      .efa-row-cols-#{$breakpoint}-#{$i} > * {
+      .#{$prefix-plugin-essentials}row-cols-#{$breakpoint}-#{$i} > * {
         flex: 0 0 calc(100% / #{$i});
         max-width: calc(100% / #{$i});
       }

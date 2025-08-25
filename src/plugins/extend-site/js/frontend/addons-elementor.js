@@ -60,8 +60,8 @@
     }
 
     // Initialize Swiper sliders
-    const EFAInitSwiperSliders = ($scope) => {
-        let $slider = $scope.find('.efa-custom-swiper-slider');
+    const InitSwiperSliders = ($scope) => {
+        let $slider = $scope.find('.es-custom-swiper-slider');
 
         if ( $slider.length && !$slider.hasClass('swiper-initialized') ) {
             // Check if Swiper is loaded
@@ -72,7 +72,7 @@
             let config = swiperOptions(options, $slider);
 
             // check equal height
-            if ($slider.hasClass('efa-equal-height')) {
+            if ($slider.hasClass('es-equal-height')) {
                 const equalize = () => {
                     const $slides = $slider.find('.swiper-slide');
                     $slides.css({ height: '', minHeight: '' });
@@ -106,16 +106,16 @@
 
     $(window).on('elementor/frontend/init', function () {
         /* Element slider */
-        elementorFrontend.hooks.addAction('frontend/element_ready/efa-slides.default', EFAInitSwiperSliders);
+        elementorFrontend.hooks.addAction('frontend/element_ready/es-slides.default', InitSwiperSliders);
 
         // post carousel slider
-        elementorFrontend.hooks.addAction('frontend/element_ready/efa-post-carousel.default', EFAInitSwiperSliders);
+        elementorFrontend.hooks.addAction('frontend/element_ready/es-post-carousel.default', InitSwiperSliders);
 
         // testimonial slider
-        elementorFrontend.hooks.addAction('frontend/element_ready/efa-testimonial-slider.default', EFAInitSwiperSliders);
+        elementorFrontend.hooks.addAction('frontend/element_ready/es-testimonial-slider.default', InitSwiperSliders);
 
         // image carousel slider
-        elementorFrontend.hooks.addAction('frontend/element_ready/efa-carousel-images.default', EFAInitSwiperSliders);
+        elementorFrontend.hooks.addAction('frontend/element_ready/es-carousel-images.default', InitSwiperSliders);
     });
 
 })(jQuery);

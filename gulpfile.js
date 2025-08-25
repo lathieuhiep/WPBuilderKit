@@ -21,6 +21,7 @@ const isDev = (process.env.NODE_ENV === 'development');
 
 // Biến đại diện cho tên plugin và theme
 const pluginNameEFA = 'essential-features-addon';
+const pluginExtendSite = 'extend-site';
 const themeName = 'basictheme';
 
 // function build scss pipeline
@@ -69,9 +70,9 @@ const paths = {
     },
     plugins: {
         root: 'src/plugins/',
-        efa: {
-            scss: `src/plugins/${pluginNameEFA}/scss/`,
-            js: `src/plugins/${pluginNameEFA}/js/`
+        es: {
+            scss: `src/plugins/${pluginExtendSite}/scss/`,
+            js: `src/plugins/${pluginExtendSite}/js/`
         },
         su_crm: {
             admin: {
@@ -102,10 +103,10 @@ const paths = {
         },
         plugins: {
             root: 'plugins/',
-            efa: {
-                css: `plugins/${pluginNameEFA}/assets/css/`,
-                js: `plugins/${pluginNameEFA}/assets/js/`,
-                libs: `plugins/${pluginNameEFA}/assets/libs/`
+            es: {
+                css: `plugins/${pluginExtendSite}/assets/css/`,
+                js: `plugins/${pluginExtendSite}/assets/js/`,
+                libs: `plugins/${pluginExtendSite}/assets/libs/`
             }
         }
     }
@@ -398,44 +399,29 @@ const buildJSShop = () => {
 exports.buildJSShop = buildJSShop;
 
 /*
-** Plugin
+** Plugin Extend Site
 * */
-
-// Task build style elementor addons
-const buildStyleElementor = () => {
-    return buildScssPipeline({
-        input: `${paths.plugins.efa.scss}efa-elementor.scss`,
-        output: `${paths.output.plugins.efa.css}`
-    })
-}
 
 // Task build style custom login
 const buildStyleCustomLogin = () => {
-    return src(`${paths.plugins.efa.scss}efa-custom-login.scss`)
-        .pipe(plumber({
-            errorHandler: function (err) {
-                console.error(err.message);
-                this.emit('end');
-            }
-        }))
-        .pipe(gulpIf(isDev, sourcemaps.init()))
-        .pipe(sass({
-            outputStyle: 'expanded',
-            includePaths: ['node_modules', 'src']
-        }, '').on('error', sass.logError))
-        .pipe(cleanCSS({
-            level: 2
-        }))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(gulpIf(isDev, sourcemaps.write()))
-        .pipe(dest(`${paths.output.plugins.efa.css}`))
-        .pipe(browserSync.stream())
+    return buildScssPipeline({
+        input: `${paths.plugins.es.scss}custom-login.scss`,
+        output: `${paths.output.plugins.es.css}backend/`
+    })
 }
 
-const buildJPluginEFA = () => {
+// Task build style elementor addons
+const buildStyleAddonsPluginExtendSite = () => {
+    return buildScssPipeline({
+        input: `${paths.plugins.es.scss}addons-elementor.scss`,
+        output: `${paths.output.plugins.es.css}frontend/`
+    })
+}
+
+const buildJPluginExtendSite = () => {
     return buildJsPipeline({
-        input: `${paths.plugins.efa.js}*.js`,
-        output: `${paths.output.plugins.efa.js}`
+        input: `${paths.plugins.es.js}*/**.js`,
+        output: `${paths.output.plugins.es.js}`
     })
 }
 
@@ -467,8 +453,8 @@ const buildProject = async () => {
     // Chạy các plugin styles song song
     await Promise.all([
         buildStyleCustomLogin(),
-        buildStyleElementor(),
-        buildJPluginEFA(),
+        buildStyleAddonsPluginExtendSite(),
+        buildJPluginExtendSite(),
     ]);
 
     // Chạy vendors style và các theme styles/JS song song
@@ -497,7 +483,7 @@ const watchTask = () => {
     ], gulp.series(
         buildStyleCustomBootstrap,
         buildStyleTheme,
-        buildStyleElementor,
+        buildStyleAddonsPluginExtendSite,
         buildStyleCustomLogin,
         buildStyleCustomPostType,
         buildStylePageTemplate,
@@ -506,18 +492,18 @@ const watchTask = () => {
 
     // plugin essentials watch
     watch([
-        `${paths.plugins.efa.scss}abstracts/*.scss`,
-        `${paths.plugins.efa.scss}addons/*.scss`,
-        `${paths.plugins.efa.scss}base/*.scss`,
-        `${paths.plugins.efa.scss}components/*.scss`,
-        `${paths.plugins.efa.scss}efa-elementor.scss`
-    ], buildStyleElementor)
+        `${paths.plugins.es.scss}abstracts/*.scss`,
+        `${paths.plugins.es.scss}addons/*.scss`,
+        `${paths.plugins.es.scss}base/*.scss`,
+        `${paths.plugins.es.scss}components/*.scss`,
+        `${paths.plugins.es.scss}addons-elementor.scss`
+    ], buildStyleAddonsPluginExtendSite)
 
     watch([
-        `${paths.plugins.efa.scss}efa-custom-login.scss`
+        `${paths.plugins.es.scss}custom-login.scss`
     ], buildStyleCustomLogin)
 
-    watch([`${paths.plugins.efa.js}*.js`], buildJPluginEFA)
+    watch([`${paths.plugins.es.js}*/**.js`], buildJPluginExtendSite)
 
     // watch su_crm admin
     watch([

@@ -1,4 +1,5 @@
 <?php
+
 namespace ExtendSite\PostType;
 
 defined('ABSPATH') || exit;
@@ -18,9 +19,6 @@ abstract class BasePostType
     /** tên số nhiều – dùng hiển thị */
     public const PLURAL = 'Items';
 
-    /** text domain */
-    protected string $text_domain = 'extend-site';
-
     /** Extra args merge vào */
     protected array $args = [];
 
@@ -33,33 +31,33 @@ abstract class BasePostType
     public function register_ctp(): void
     {
         $labels = [
-            'name'               => _x(static::PLURAL, 'Post type general name', $this->text_domain),
-            'singular_name'      => _x(static::SINGULAR, 'Post type singular name', $this->text_domain),
-            'menu_name'          => _x(static::PLURAL, 'Admin Menu text', $this->text_domain),
-            'name_admin_bar'     => _x(static::SINGULAR, 'Add New on Toolbar', $this->text_domain),
-            'add_new'            => __('Add New', $this->text_domain),
-            'add_new_item'       => sprintf(__('Add New %s', $this->text_domain), static::SINGULAR),
-            'new_item'           => sprintf(__('New %s', $this->text_domain), static::SINGULAR),
-            'edit_item'          => sprintf(__('Edit %s', $this->text_domain), static::SINGULAR),
-            'view_item'          => sprintf(__('View %s', $this->text_domain), static::SINGULAR),
-            'all_items'          => sprintf(__('All %s', $this->text_domain), static::PLURAL),
-            'search_items'       => sprintf(__('Search %s', $this->text_domain), static::PLURAL),
-            'parent_item_colon'  => sprintf(__('Parent %s:', $this->text_domain), static::PLURAL),
-            'not_found'          => __('Not found.', $this->text_domain),
-            'not_found_in_trash' => __('Not found in Trash.', $this->text_domain),
+            'name' => _x(static::PLURAL, 'Post type general name', 'extend-site'),
+            'singular_name' => _x(static::SINGULAR, 'Post type singular name', 'extend-site'),
+            'menu_name' => _x(static::PLURAL, 'Admin Menu text', 'extend-site'),
+            'name_admin_bar' => _x(static::SINGULAR, 'Add New on Toolbar', 'extend-site'),
+            'add_new' => __('Add New', 'extend-site'),
+            'add_new_item' => sprintf(__('Add New %s', 'extend-site'), static::SINGULAR),
+            'new_item' => sprintf(__('New %s', 'extend-site'), static::SINGULAR),
+            'edit_item' => sprintf(__('Edit %s', 'extend-site'), static::SINGULAR),
+            'view_item' => sprintf(__('View %s', 'extend-site'), static::SINGULAR),
+            'all_items' => sprintf(__('All %s', 'extend-site'), static::PLURAL),
+            'search_items' => sprintf(__('Search %s', 'extend-site'), static::PLURAL),
+            'parent_item_colon' => sprintf(__('Parent %s:', 'extend-site'), static::PLURAL),
+            'not_found' => __('Not found.', 'extend-site'),
+            'not_found_in_trash' => __('Not found in Trash.', 'extend-site'),
         ];
 
         $default_args = [
-            'labels'             => $labels,
-            'public'             => true,
-            'has_archive'        => true,
-            'show_in_rest'       => false,           // Gutenberg + REST
-            'hierarchical'       => false,
-            'supports'           => ['title','editor','thumbnail','excerpt','revisions'],
-            'menu_position'      => 20,
-            'menu_icon'          => 'dashicons-portfolio',
-            'rewrite'            => ['slug' => static::SLUG, 'with_front' => false],
-            'capability_type'    => 'post',
+            'labels' => $labels,
+            'public' => true,
+            'has_archive' => true,
+            'show_in_rest' => false,           // Gutenberg + REST
+            'hierarchical' => false,
+            'supports' => ['title', 'editor', 'thumbnail', 'excerpt', 'author', 'revisions'],
+            'menu_position' => 20,
+            'menu_icon' => 'dashicons-portfolio',
+            'rewrite' => ['slug' => static::SLUG, 'with_front' => false],
+            'capability_type' => 'post',
         ];
 
         register_post_type(static::SLUG, array_replace_recursive($default_args, $this->args));
@@ -71,24 +69,25 @@ abstract class BasePostType
     protected function register_taxonomy(string $tax_slug, string $singular, string $plural, array $args = []): void
     {
         $labels = [
-            'name'          => _x($plural, 'taxonomy general name', $this->text_domain),
-            'singular_name' => _x($singular, 'taxonomy singular name', $this->text_domain),
-            'search_items'  => sprintf(__('Search %s', $this->text_domain), $plural),
-            'all_items'     => sprintf(__('All %s', $this->text_domain), $plural),
-            'edit_item'     => sprintf(__('Edit %s', $this->text_domain), $singular),
-            'update_item'   => sprintf(__('Update %s', $this->text_domain), $singular),
-            'add_new_item'  => sprintf(__('Add New %s', $this->text_domain), $singular),
-            'new_item_name' => sprintf(__('New %s Name', $this->text_domain), $singular),
-            'menu_name'     => $plural,
+            'name' => _x($plural, 'taxonomy general name', 'extend-site'),
+            'singular_name' => _x($singular, 'taxonomy singular name', 'extend-site'),
+            'search_items' => sprintf(__('Search %s', 'extend-site'), $plural),
+            'all_items' => sprintf(__('All %s', 'extend-site'), $plural),
+            'edit_item' => sprintf(__('Edit %s', 'extend-site'), $singular),
+            'update_item' => sprintf(__('Update %s', 'extend-site'), $singular),
+            'add_new_item' => sprintf(__('Add New %s', 'extend-site'), $singular),
+            'new_item_name' => sprintf(__('New %s Name', 'extend-site'), $singular),
+            'menu_name' => $plural,
         ];
 
         $defaults = [
-            'labels'       => $labels,
-            'public'       => true,
+            'labels' => $labels,
+            'public' => true,
             'hierarchical' => true,
-            'show_ui'      => true,
+            'show_ui' => true,
             'show_in_rest' => true,
-            'rewrite'      => ['slug' => $tax_slug, 'with_front' => false],
+            'rewrite' => ['slug' => $tax_slug, 'with_front' => false],
+            'show_admin_column' => true,
         ];
 
         register_taxonomy($tax_slug, [static::SLUG], array_replace_recursive($defaults, $args));

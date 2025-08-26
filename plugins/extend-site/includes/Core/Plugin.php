@@ -32,6 +32,7 @@ class Plugin
     private static function includes(): void
     {
         require_once EXTEND_SITE_PATH . 'functions/helpers.php';
+        require_once EXTEND_SITE_PATH . 'functions/cpt-helpers.php';
     }
 
     /**

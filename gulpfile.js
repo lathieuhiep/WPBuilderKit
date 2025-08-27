@@ -418,6 +418,13 @@ const buildStyleAddonsPluginExtendSite = () => {
     })
 }
 
+const buildStyleCPTPluginExtendSite = () => {
+    return buildScssPipeline({
+        input: `${paths.plugins.es.scss}post-type/*/**.scss`,
+        output: `${paths.output.plugins.es.css}frontend/post-type/`
+    })
+}
+
 const buildJPluginExtendSite = () => {
     return buildJsPipeline({
         input: `${paths.plugins.es.js}*/**.js`,
@@ -492,6 +499,10 @@ const watchTask = () => {
 
     // plugin essentials watch
     watch([
+        `${paths.plugins.es.scss}custom-login.scss`
+    ], buildStyleCustomLogin)
+
+    watch([
         `${paths.plugins.es.scss}abstracts/*.scss`,
         `${paths.plugins.es.scss}addons/*.scss`,
         `${paths.plugins.es.scss}base/*.scss`,
@@ -499,9 +510,13 @@ const watchTask = () => {
         `${paths.plugins.es.scss}addons-elementor.scss`
     ], buildStyleAddonsPluginExtendSite)
 
+
     watch([
-        `${paths.plugins.es.scss}custom-login.scss`
-    ], buildStyleCustomLogin)
+        `${paths.plugins.es.scss}abstracts/*.scss`,
+        `${paths.plugins.es.scss}base/*.scss`,
+        `${paths.plugins.es.scss}components/*.scss`,
+        `${paths.plugins.es.scss}post-type/*/**.scss`
+    ], buildStyleCPTPluginExtendSite)
 
     watch([`${paths.plugins.es.js}*/**.js`], buildJPluginExtendSite)
 

@@ -1,6 +1,8 @@
 <?php
 namespace ExtendSite\Core;
 
+use ExtendSite\PostType\PortfolioPostType;
+
 defined('ABSPATH') || exit;
 
 class Enqueue
@@ -56,6 +58,15 @@ class Enqueue
                 array( 'jquery', 'swiper' ),
                 EXTEND_SITE_VERSION,
                 true
+            );
+        }
+
+        if ( is_singular(PortfolioPostType::SLUG) ) {
+            // load portfolio style
+            wp_enqueue_style('es-single-portfolio',
+                EXTEND_SITE_URL . 'assets/css/frontend/post-type/portfolio/single-portfolio.min.css',
+                [],
+                EXTEND_SITE_VERSION
             );
         }
     }

@@ -10,6 +10,12 @@ defined('ABSPATH') || exit;
  */
 abstract class BasePostType
 {
+    /** @var array Lưu trữ danh sách các loại post type đã đăng ký */
+    protected static array $registry = [];
+
+    /** @var array Lưu trữ danh sách các template cần tải */
+    protected static array $templates = [];
+
     /** slug post type (không quá 20 ký tự) */
     public const SLUG = 'item';
 
@@ -19,6 +25,11 @@ abstract class BasePostType
     /** tên số nhiều – dùng hiển thị */
     public const PLURAL = 'Items';
 
+    /** tên file */
+    public const TEMPLATE_SINGLE = '';
+    public const TEMPLATE_ARCHIVE = '';
+    public const TEMPLATE_TAX_CAT = '';
+
     /** Extra args merge vào */
     protected array $args = [];
 
@@ -26,6 +37,42 @@ abstract class BasePostType
     {
         $this->args = $args;
         add_action('init', [$this, 'register_ctp']);
+
+        // Tự động đăng ký thông tin post type và template
+        self::$registry[static::SLUG] = [
+            'singular' => static::SINGULAR,
+            'plural' => static::PLURAL,
+        ];
+
+        // Lấy danh sách template từ lớp con nếu có
+        $reflection = new \ReflectionClass($this);
+        $constants = $reflection->getConstants();
+
+        if (!empty($constants['TEMPLATE_SINGLE'])) {
+            self::$templates[static::SLUG]['single'] = $constants['TEMPLATE_SINGLE'];
+        }
+        if (!empty($constants['TEMPLATE_ARCHIVE'])) {
+            self::$templates[static::SLUG]['archive'] = $constants['TEMPLATE_ARCHIVE'];
+        }
+        if (!empty($constants['TEMPLATE_TAX_CAT'])) {
+            self::$templates[static::TAX_SLUG]['taxonomy'] = $constants['TEMPLATE_TAX_CAT'];
+        }
+    }
+
+    /**
+     * Lấy danh sách post type đã đăng ký.
+     */
+    public static function get_registry(): array
+    {
+        return self::$registry;
+    }
+
+    /**
+     * Lấy danh sách các template đã đăng ký.
+     */
+    public static function get_templates(): array
+    {
+        return self::$templates;
     }
 
     public function register_ctp(): void
@@ -35,7 +82,7 @@ abstract class BasePostType
             'singular_name' => _x(static::SINGULAR, 'Post type singular name', 'extend-site'),
             'menu_name' => _x(static::PLURAL, 'Admin Menu text', 'extend-site'),
             'name_admin_bar' => _x(static::SINGULAR, 'Add New on Toolbar', 'extend-site'),
-            'add_new' => __('Add New', 'extend-site'),
+            'add_new' => esc_html__('Add New', 'extend-site'),
             'add_new_item' => sprintf(__('Add New %s', 'extend-site'), static::SINGULAR),
             'new_item' => sprintf(__('New %s', 'extend-site'), static::SINGULAR),
             'edit_item' => sprintf(__('Edit %s', 'extend-site'), static::SINGULAR),
@@ -43,8 +90,8 @@ abstract class BasePostType
             'all_items' => sprintf(__('All %s', 'extend-site'), static::PLURAL),
             'search_items' => sprintf(__('Search %s', 'extend-site'), static::PLURAL),
             'parent_item_colon' => sprintf(__('Parent %s:', 'extend-site'), static::PLURAL),
-            'not_found' => __('Not found.', 'extend-site'),
-            'not_found_in_trash' => __('Not found in Trash.', 'extend-site'),
+            'not_found' => esc_html__('Not found.', 'extend-site'),
+            'not_found_in_trash' => esc_html__('Not found in Trash.', 'extend-site'),
         ];
 
         $default_args = [

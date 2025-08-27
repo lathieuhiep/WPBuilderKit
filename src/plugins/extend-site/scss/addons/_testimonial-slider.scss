@@ -4,8 +4,8 @@
 @import "../abstracts/abstracts";
 
 .#{$prefix-plugin-class-addon}addon-testimonial-slider {
-  --#{$prefix-plugin-essentials}fs-name: #{map.get($mt-font-sizes, md)};
-  --#{$prefix-plugin-essentials}fw-name: #{map.get($mt-font-weights, bold)};
+  --#{$prefix-plugin-class}fs-name: #{map.get($mt-font-sizes, md)};
+  --#{$prefix-plugin-class}fw-name: #{map.get($mt-font-weights, bold)};
 
   .item {
     text-align: center;
@@ -23,8 +23,8 @@
       }
 
       .name {
-        font-size: var(--#{$prefix-plugin-essentials}fs-name);
-        font-weight: var(--#{$prefix-plugin-essentials}fw-name);
+        font-size: var(--#{$prefix-plugin-class}fs-name);
+        font-weight: var(--#{$prefix-plugin-class}fw-name);
       }
     }
   }

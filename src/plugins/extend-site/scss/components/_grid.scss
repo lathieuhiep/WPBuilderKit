@@ -3,16 +3,16 @@
 @import "../abstracts/abstracts";
 
 // row
-.#{$prefix-plugin-essentials} {
+.#{$prefix-plugin-class} {
   &row {
     display: flex;
     flex-wrap: wrap;
-    margin-right: calc(-1 * var(--#{$prefix-plugin-essentials}gutter-width));
-    margin-left: calc(-1 * var(--#{$prefix-plugin-essentials}gutter-width));
+    margin-right: calc(-1 * var(--#{$prefix-plugin-class}gutter-width));
+    margin-left: calc(-1 * var(--#{$prefix-plugin-class}gutter-width));
 
     > * {
-      padding-right: var(--#{$prefix-plugin-essentials}gutter-width);
-      padding-left: var(--#{$prefix-plugin-essentials}gutter-width);
+      padding-right: var(--#{$prefix-plugin-class}gutter-width);
+      padding-left: var(--#{$prefix-plugin-class}gutter-width);
     }
   }
 
@@ -23,7 +23,7 @@
 
 // row-gap & col-gap
 @for $i from 1 through 24 {
-  .#{$prefix-plugin-essentials} {
+  .#{$prefix-plugin-class} {
     &row-gap-#{$i} {
       row-gap: #{$i * $spacing-base};
     }
@@ -38,7 +38,7 @@
 @each $breakpoint, $size in $breakpoints {
   @media (min-width: $size) {
     @for $i from 1 through 24 {
-      .#{$prefix-plugin-essentials} {
+      .#{$prefix-plugin-class} {
         &row-gap-#{$breakpoint}-#{$i} {
           row-gap: #{$i * $spacing-base};
         }
@@ -52,7 +52,7 @@
 }
 
 @for $i from 1 through $grid-columns {
-  .#{$prefix-plugin-essentials}col-#{$i} {
+  .#{$prefix-plugin-class}col-#{$i} {
     flex: 0 0 math.percentage(math.div($i, $grid-columns));
     max-width: math.percentage(math.div($i, $grid-columns));
   }
@@ -62,7 +62,7 @@
 @each $breakpoint, $size in $breakpoints {
   @media (min-width: $size) {
     @for $i from 1 through $grid-columns {
-      .#{$prefix-plugin-essentials}col-#{$breakpoint}-#{$i} {
+      .#{$prefix-plugin-class}col-#{$breakpoint}-#{$i} {
         flex: 0 0 math.percentage(math.div($i, $grid-columns));
         max-width: math.percentage(math.div($i, $grid-columns));
       }
@@ -72,7 +72,7 @@
 
 // row-cols
 @for $i from 1 through $grid-columns {
-  .#{$prefix-plugin-essentials}row-cols-#{$i} > * {
+  .#{$prefix-plugin-class}row-cols-#{$i} > * {
     flex: 0 0 calc(100% / #{$i});
     max-width: calc(100% / #{$i});
   }
@@ -82,7 +82,7 @@
 @each $breakpoint, $size in $breakpoints {
   @media (min-width: $size) {
     @for $i from 1 through $grid-columns {
-      .#{$prefix-plugin-essentials}row-cols-#{$breakpoint}-#{$i} > * {
+      .#{$prefix-plugin-class}row-cols-#{$breakpoint}-#{$i} > * {
         flex: 0 0 calc(100% / #{$i});
         max-width: calc(100% / #{$i});
       }

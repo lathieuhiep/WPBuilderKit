@@ -5,7 +5,7 @@
 
 .#{$prefix-plugin-class-addon}post-grid {
   .item {
-    --#{$prefix-plugin-essentials}fs-title: #{map.get($mt-font-sizes, md)};
+    --#{$prefix-plugin-class}fs-title: #{map.get($mt-font-sizes, md)};
 
     .thumbnail {
       margin-bottom: 1.5rem;

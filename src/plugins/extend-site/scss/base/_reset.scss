@@ -2,5 +2,5 @@
 @import "../abstracts/abstracts";
 
 :root {
-  --#{$prefix-plugin-essentials}gutter-width: #{$gutter-width};
+  --#{$prefix-plugin-class}gutter-width: #{$gutter-width};
 }

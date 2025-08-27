@@ -4,17 +4,15 @@
 @import "../abstracts/abstracts";
 
 .#{$prefix-plugin-class-addon}post-carousel {
-  --#{$prefix-plugin-essentials}bc-content: #{map.get($mt-colors, "primary")};
-  --#{$prefix-plugin-essentials}fs-title: #{map.get($mt-font-sizes, xs)};
-  --#{$prefix-plugin-essentials}fs-title: #{map.get($mt-font-sizes, xs)};
+  --#{$prefix-plugin-class}bc-content: #{map.get($mt-colors, "primary")};
+  --#{$prefix-plugin-class}fs-title: #{map.get($mt-font-sizes, xs)};
+  --#{$prefix-plugin-class}fs-title: #{map.get($mt-font-sizes, xs)};
 
   .body {
     flex: 1;
-    padding: 1.5rem;
-    border: .1rem solid var(--#{$prefix-plugin-essentials}bc-content);
 
     .title {
-      font-size: var(--#{$prefix-plugin-essentials}fs-title);
+      font-size: var(--#{$prefix-plugin-class}fs-title);
     }
   }
 }

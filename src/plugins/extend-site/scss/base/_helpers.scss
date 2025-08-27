@@ -1,23 +1,23 @@
 @import "shared/scss/abstracts/abstracts";
 @import "../abstracts/abstracts";
 
-.#{$prefix-plugin-essentials}grid-layout {
+.#{$prefix-plugin-class}grid-layout {
   display: grid;
 }
 
-.#{$prefix-plugin-essentials}flex {
+.#{$prefix-plugin-class}flex {
   display: flex;
 }
 
-.#{$prefix-plugin-essentials}flex-column {
+.#{$prefix-plugin-class}flex-column {
   flex-direction: column;
 }
 
-.#{$prefix-plugin-essentials}flex-grow-1 {
+.#{$prefix-plugin-class}flex-grow-1 {
   flex-grow: 1;
 }
 
-.#{$prefix-plugin-essentials}custom-swiper-slider {
+.#{$prefix-plugin-class}custom-swiper-slider {
   &.is-initializing {
     visibility: hidden;
     height: auto;
@@ -35,12 +35,12 @@
   }
 }
 
-.#{$prefix-plugin-essentials}equal-height {
+.#{$prefix-plugin-class}equal-height {
   .swiper-slide {
     @include flex-column;
   }
 }
 
-.#{$prefix-plugin-essentials}m-0 {
+.#{$prefix-plugin-class}m-0 {
   margin: 0 !important;
 }

@@ -4,6 +4,7 @@ namespace ExtendSite\Core;
 
 use ExtendSite\PostType\PortfolioPostType;
 use ExtendSite\ElementorAddon\ElementorAddon;
+use ExtendSite\PostType\TemplateLoader;
 
 defined('ABSPATH') || exit;
 
@@ -12,15 +13,16 @@ class Plugin
     public function boot(): void
     {
         self::load_text_domain();
-        self::includes();
-        self::register_custom_post_types();
-        self::load_elementor_addon();
+        self::active_core();
+        self::include_files();
+        self::active_elementor_addon();
+        self::active_custom_post_types();
     }
 
     /**
      * Load the plugin text domain for translations.
      */
-    public static function load_text_domain(): void
+    private static function load_text_domain(): void
     {
         load_plugin_textdomain(
             'extend-site',
@@ -29,26 +31,37 @@ class Plugin
         );
     }
 
-    private static function includes(): void
+    /**
+     * Load core functionalities.
+     */
+    private static function active_core(): void
+    {
+        Enqueue::boot();
+    }
+
+    /**
+     * Include necessary files.
+     */
+    private static function include_files(): void
     {
         require_once EXTEND_SITE_PATH . 'functions/helpers.php';
         require_once EXTEND_SITE_PATH . 'functions/cpt-helpers.php';
     }
 
     /**
-     * Register custom post types.
+     * Load the Elementor addon.
      */
-    public static function register_custom_post_types(): void
+    private static function active_elementor_addon(): void
     {
-       new PortfolioPostType();
+        ElementorAddon::boot();
     }
 
     /**
-     * Load the Elementor addon.
+     * Load custom post types.
      */
-    private static function load_elementor_addon(): void
+    private static function active_custom_post_types(): void
     {
-        Enqueue::boot();
-        ElementorAddon::boot();
+        new PortfolioPostType();
+        TemplateLoader::boot();
     }
 }

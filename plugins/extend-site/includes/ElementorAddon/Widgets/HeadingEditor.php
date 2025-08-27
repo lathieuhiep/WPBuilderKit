@@ -234,7 +234,7 @@ class HeadingEditor extends Widget_Base {
 		$settings = $this->get_settings_for_display();
 		$tag = $settings['html_tag'];
     ?>
-        <div class="es-addon-heading-with-editor">
+        <div class="es-addon-widget es-addon-heading-with-editor">
             <?php
             if ( $settings['heading'] ) :
                 printf(
@@ -260,7 +260,7 @@ class HeadingEditor extends Widget_Base {
         var tag = settings.html_tag;
         #>
 
-        <div class="es-addon-heading-with-editor">
+        <div class="es-addon-widget es-addon-heading-with-editor">
             <{{{ tag }}} class="heading">
                 {{{ settings.heading }}}
             </{{{ tag }}}>

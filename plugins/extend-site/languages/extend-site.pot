@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Extend Site\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-27 07:51+0000\n"
+"POT-Creation-Date: 2025-08-27 09:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,22 +16,18 @@ msgstr ""
 "X-Loco-Version: 2.8.0; wp-6.8.2; php-8.3.16\n"
 "X-Domain: extend-site"
 
-#: includes/PostType/BasePostType.php:85
-msgid "Add New"
-msgstr ""
-
-#: includes/PostType/BasePostType.php:86 includes/PostType/BasePostType.php:125
+#: includes/PostType/BasePostType.php:95
 #, php-format
-msgid "Add New %s"
-msgstr ""
-
-#: includes/PostType/BasePostType.php:90 includes/PostType/BasePostType.php:122
-#, php-format
-msgid "All %s"
+msgid "Cha của %s:"
 msgstr ""
 
 #: includes/ElementorAddon/Base/ControlOptions.php:26
 msgid "Chính giữa"
+msgstr ""
+
+#: includes/PostType/BasePostType.php:91 includes/PostType/BasePostType.php:126
+#, php-format
+msgid "Chỉnh sửa %s"
 msgstr ""
 
 #: includes/ElementorAddon/Traits/HasQueryControls.php:76
@@ -57,6 +53,16 @@ msgstr ""
 msgid "Có"
 msgstr ""
 
+#: includes/PostType/BasePostType.php:127
+#, php-format
+msgid "Cập nhật %s"
+msgstr ""
+
+#: includes/PostType/BasePostType.php:122
+#, php-format
+msgid "Danh mục %s"
+msgstr ""
+
 #: includes/ElementorAddon/Traits/HasSliderControls.php:105
 msgid "Dưới 480px"
 msgstr ""
@@ -75,11 +81,6 @@ msgstr ""
 
 #: includes/ElementorAddon/Traits/HasSliderControls.php:85
 msgid "Dấu chấm"
-msgstr ""
-
-#: includes/PostType/BasePostType.php:88 includes/PostType/BasePostType.php:123
-#, php-format
-msgid "Edit %s"
 msgstr ""
 
 #. Description of the plugin
@@ -146,6 +147,14 @@ msgstr ""
 msgid "Không"
 msgstr ""
 
+#: includes/PostType/BasePostType.php:97
+msgid "Không tìm thấy trong Thùng rác."
+msgstr ""
+
+#: includes/PostType/BasePostType.php:96
+msgid "Không tìm thấy."
+msgstr ""
+
 #. Author of the plugin
 msgid "La Thieu Hiep"
 msgstr ""
@@ -170,40 +179,17 @@ msgstr ""
 msgid "Mũi tên và Dấu chấm"
 msgstr ""
 
-#: includes/PostType/BasePostType.php:87
+#: includes/PostType/BasePostType.php:90
 #, php-format
-msgid "New %s"
-msgstr ""
-
-#: includes/PostType/BasePostType.php:126
-#, php-format
-msgid "New %s Name"
+msgid "Mới %s"
 msgstr ""
 
 #: includes/ElementorAddon/Traits/HasQueryControls.php:111
 msgid "Ngày đăng"
 msgstr ""
 
-#: includes/PostType/BasePostType.php:94
-msgid "Not found in Trash."
-msgstr ""
-
-#: includes/PostType/BasePostType.php:93
-msgid "Not found."
-msgstr ""
-
-#: includes/PostType/BasePostType.php:92
-#, php-format
-msgid "Parent %s:"
-msgstr ""
-
 #: functions/helpers.php:63
 msgid "Sau"
-msgstr ""
-
-#: includes/PostType/BasePostType.php:91 includes/PostType/BasePostType.php:121
-#, php-format
-msgid "Search %s"
 msgstr ""
 
 #: functions/helpers.php:43
@@ -238,6 +224,15 @@ msgstr ""
 msgid "Thumbnail (150 x 150)"
 msgstr ""
 
+#: includes/PostType/BasePostType.php:89 includes/PostType/BasePostType.php:128
+#, php-format
+msgid "Thêm %s"
+msgstr ""
+
+#: includes/PostType/BasePostType.php:88
+msgid "Thêm mới"
+msgstr ""
+
 #: includes/ElementorAddon/Traits/HasQueryControls.php:110
 msgid "Tiêu đề"
 msgstr ""
@@ -258,6 +253,16 @@ msgstr ""
 msgid "Trước"
 msgstr ""
 
+#: includes/PostType/BasePostType.php:129
+#, php-format
+msgid "Tên %s"
+msgstr ""
+
+#: includes/PostType/BasePostType.php:94 includes/PostType/BasePostType.php:124
+#, php-format
+msgid "Tìm kiếm %s"
+msgstr ""
+
 #: includes/ElementorAddon/Traits/HasSliderControls.php:21
 msgid "Tùy chọn bổ sung"
 msgstr ""
@@ -268,6 +273,11 @@ msgstr ""
 
 #: includes/ElementorAddon/Traits/HasQueryControls.php:126
 msgid "Tăng dần"
+msgstr ""
+
+#: includes/PostType/BasePostType.php:93 includes/PostType/BasePostType.php:125
+#, php-format
+msgid "Tất cả %s"
 msgstr ""
 
 #: functions/cpt-helpers.php:29
@@ -302,18 +312,13 @@ msgstr ""
 msgid "Tự động chạy"
 msgstr ""
 
-#: includes/PostType/BasePostType.php:124
-#, php-format
-msgid "Update %s"
-msgstr ""
-
-#: includes/PostType/BasePostType.php:89
-#, php-format
-msgid "View %s"
-msgstr ""
-
 #: includes/ElementorAddon/Traits/HasSliderControls.php:44
 msgid "Vòng lặp"
+msgstr ""
+
+#: includes/PostType/BasePostType.php:92
+#, php-format
+msgid "Xem %s"
 msgstr ""
 
 #: includes/ElementorAddon/Traits/HasSliderControls.php:30

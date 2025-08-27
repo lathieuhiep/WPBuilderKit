@@ -104,7 +104,7 @@ abstract class BasePostType
             'show_in_rest' => false,           // Gutenberg + REST
             'hierarchical' => false,
             'supports' => ['title', 'editor', 'thumbnail', 'excerpt', 'author', 'revisions'],
-            'menu_position' => 20,
+            'menu_position' => 5,
             'menu_icon' => 'dashicons-portfolio',
             'rewrite' => ['slug' => static::SLUG, 'with_front' => false],
             'capability_type' => 'post',
@@ -119,7 +119,7 @@ abstract class BasePostType
     protected function register_taxonomy(string $tax_slug, string $singular, string $plural, array $args = []): void
     {
         $labels = [
-            'name' => _x(static::TAX_NAME, 'taxonomy general name', 'extend-site'),
+            'name' => sprintf(__('Danh mục %s', 'extend-site'), static::SLUG),
             'singular_name' => _x($singular, 'taxonomy singular name', 'extend-site'),
             'search_items' => sprintf(__('Tìm kiếm %s', 'extend-site'), $plural),
             'all_items' => sprintf(__('Tất cả %s', 'extend-site'), $plural),

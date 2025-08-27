@@ -25,6 +25,9 @@ abstract class BasePostType
     /** tên số nhiều – dùng hiển thị */
     public const PLURAL = 'Items';
 
+    /** tên danh mục cho nav-menu nếu có */
+    public const TAX_NAME = 'Items';
+
     /** tên file */
     public const TEMPLATE_SINGLE = '';
     public const TEMPLATE_ARCHIVE = '';
@@ -82,16 +85,16 @@ abstract class BasePostType
             'singular_name' => _x(static::SINGULAR, 'Post type singular name', 'extend-site'),
             'menu_name' => _x(static::PLURAL, 'Admin Menu text', 'extend-site'),
             'name_admin_bar' => _x(static::SINGULAR, 'Add New on Toolbar', 'extend-site'),
-            'add_new' => esc_html__('Add New', 'extend-site'),
-            'add_new_item' => sprintf(__('Add New %s', 'extend-site'), static::SINGULAR),
-            'new_item' => sprintf(__('New %s', 'extend-site'), static::SINGULAR),
-            'edit_item' => sprintf(__('Edit %s', 'extend-site'), static::SINGULAR),
-            'view_item' => sprintf(__('View %s', 'extend-site'), static::SINGULAR),
-            'all_items' => sprintf(__('All %s', 'extend-site'), static::PLURAL),
-            'search_items' => sprintf(__('Search %s', 'extend-site'), static::PLURAL),
-            'parent_item_colon' => sprintf(__('Parent %s:', 'extend-site'), static::PLURAL),
-            'not_found' => esc_html__('Not found.', 'extend-site'),
-            'not_found_in_trash' => esc_html__('Not found in Trash.', 'extend-site'),
+            'add_new' => esc_html__('Thêm mới', 'extend-site'),
+            'add_new_item' => sprintf(__('Thêm %s', 'extend-site'), static::SINGULAR),
+            'new_item' => sprintf(__('Mới %s', 'extend-site'), static::SINGULAR),
+            'edit_item' => sprintf(__('Chỉnh sửa %s', 'extend-site'), static::SINGULAR),
+            'view_item' => sprintf(__('Xem %s', 'extend-site'), static::SINGULAR),
+            'all_items' => sprintf(__('Tất cả %s', 'extend-site'), static::PLURAL),
+            'search_items' => sprintf(__('Tìm kiếm %s', 'extend-site'), static::PLURAL),
+            'parent_item_colon' => sprintf(__('Cha của %s:', 'extend-site'), static::PLURAL),
+            'not_found' => esc_html__('Không tìm thấy.', 'extend-site'),
+            'not_found_in_trash' => esc_html__('Không tìm thấy trong Thùng rác.', 'extend-site'),
         ];
 
         $default_args = [
@@ -116,14 +119,14 @@ abstract class BasePostType
     protected function register_taxonomy(string $tax_slug, string $singular, string $plural, array $args = []): void
     {
         $labels = [
-            'name' => _x($plural, 'taxonomy general name', 'extend-site'),
+            'name' => _x(static::TAX_NAME, 'taxonomy general name', 'extend-site'),
             'singular_name' => _x($singular, 'taxonomy singular name', 'extend-site'),
-            'search_items' => sprintf(__('Search %s', 'extend-site'), $plural),
-            'all_items' => sprintf(__('All %s', 'extend-site'), $plural),
-            'edit_item' => sprintf(__('Edit %s', 'extend-site'), $singular),
-            'update_item' => sprintf(__('Update %s', 'extend-site'), $singular),
-            'add_new_item' => sprintf(__('Add New %s', 'extend-site'), $singular),
-            'new_item_name' => sprintf(__('New %s Name', 'extend-site'), $singular),
+            'search_items' => sprintf(__('Tìm kiếm %s', 'extend-site'), $plural),
+            'all_items' => sprintf(__('Tất cả %s', 'extend-site'), $plural),
+            'edit_item' => sprintf(__('Chỉnh sửa %s', 'extend-site'), $singular),
+            'update_item' => sprintf(__('Cập nhật %s', 'extend-site'), $singular),
+            'add_new_item' => sprintf(__('Thêm %s', 'extend-site'), $singular),
+            'new_item_name' => sprintf(__('Tên %s', 'extend-site'), $singular),
             'menu_name' => $plural,
         ];
 

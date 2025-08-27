@@ -13,6 +13,7 @@ class PortfolioPostType extends BasePostType
     public const TAX_SLUG = 'portfolio_category';
     public const SINGULAR = 'Portfolio';
     public const PLURAL = 'Portfolios';
+    public const TAX_NAME = 'Danh mục Portfolio';
 
     // name file template
     public const TEMPLATE_SINGLE = 'single-portfolio.php';
@@ -25,7 +26,7 @@ class PortfolioPostType extends BasePostType
 
         // Đăng ký taxonomy kèm theo (vd: portfolio_category)
         add_action('init', function () {
-            $this->register_taxonomy(self::TAX_SLUG, 'Category', 'Categories', [
+            $this->register_taxonomy(self::TAX_SLUG, 'Danh mục', 'Danh mục', [
                 'hierarchical' => true,
                 'rewrite' => ['slug' => 'portfolio-category'],
             ]);

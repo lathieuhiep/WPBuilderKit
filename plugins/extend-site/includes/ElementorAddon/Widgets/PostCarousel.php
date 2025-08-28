@@ -22,7 +22,7 @@ class PostCarousel extends Widget_Base {
 
 	// widget title
 	public function get_title(): string {
-		return esc_html__( 'Slider bài viết', 'essential-features-addon' );
+		return esc_html__( 'Slider bài viết', 'extend-site' );
 	}
 
 	// widget icon
@@ -69,7 +69,7 @@ class PostCarousel extends Widget_Base {
 		$this->start_controls_section(
 			'style_title',
 			[
-				'label' => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
+				'label' => esc_html__( 'Tiêu đề', 'extend-site' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -77,7 +77,7 @@ class PostCarousel extends Widget_Base {
 		$this->add_control(
 			'title_color',
 			[
-				'label'     => esc_html__( 'Màu', 'essential-features-addon' ),
+				'label'     => esc_html__( 'Màu', 'extend-site' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -89,7 +89,7 @@ class PostCarousel extends Widget_Base {
 		$this->add_control(
 			'title_color_hover',
 			[
-				'label'     => esc_html__( 'Màu khi di chuột', 'essential-features-addon' ),
+				'label'     => esc_html__( 'Màu khi di chuột', 'extend-site' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -109,26 +109,26 @@ class PostCarousel extends Widget_Base {
 		$this->add_responsive_control(
 			'title_align',
 			[
-				'label'     => esc_html__( 'Căn chỉnh', 'essential-features-addon' ),
+				'label'     => esc_html__( 'Căn chỉnh', 'extend-site' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left' => [
-						'title' => esc_html__( 'Trái', 'essential-features-addon' ),
+						'title' => esc_html__( 'Trái', 'extend-site' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 
 					'center' => [
-						'title' => esc_html__( 'Giữa', 'essential-features-addon' ),
+						'title' => esc_html__( 'Giữa', 'extend-site' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 
 					'right' => [
-						'title' => esc_html__( 'Phải', 'essential-features-addon' ),
+						'title' => esc_html__( 'Phải', 'extend-site' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 
 					'justify' => [
-						'title' => esc_html__( 'Căn đều hai lề', 'essential-features-addon' ),
+						'title' => esc_html__( 'Căn đều hai lề', 'extend-site' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],
@@ -144,7 +144,7 @@ class PostCarousel extends Widget_Base {
 		$this->start_controls_section(
 			'style_excerpt',
 			[
-				'label'     => esc_html__( 'Nôi dung tóm tắt', 'essential-features-addon' ),
+				'label'     => esc_html__( 'Nôi dung tóm tắt', 'extend-site' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'show_excerpt' => 'show',
@@ -155,7 +155,7 @@ class PostCarousel extends Widget_Base {
 		$this->add_control(
 			'excerpt_color',
 			[
-				'label'     => esc_html__( 'Màu', 'essential-features-addon' ),
+				'label'     => esc_html__( 'Màu', 'extend-site' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -175,26 +175,26 @@ class PostCarousel extends Widget_Base {
 		$this->add_responsive_control(
 			'excerpt_align',
 			[
-				'label'     => esc_html__( 'Căn chỉnh', 'essential-features-addon' ),
+				'label'     => esc_html__( 'Căn chỉnh', 'extend-site' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'left' => [
-						'title' => esc_html__( 'Trái', 'essential-features-addon' ),
+						'title' => esc_html__( 'Trái', 'extend-site' ),
 						'icon'  => 'eicon-text-align-left',
 					],
 
 					'center' => [
-						'title' => esc_html__( 'Giữa', 'essential-features-addon' ),
+						'title' => esc_html__( 'Giữa', 'extend-site' ),
 						'icon'  => 'eicon-text-align-center',
 					],
 
 					'right' => [
-						'title' => esc_html__( 'Phải', 'essential-features-addon' ),
+						'title' => esc_html__( 'Phải', 'extend-site' ),
 						'icon'  => 'eicon-text-align-right',
 					],
 
 					'justify' => [
-						'title' => esc_html__( 'Căn đều hai lề', 'essential-features-addon' ),
+						'title' => esc_html__( 'Căn đều hai lề', 'extend-site' ),
 						'icon'  => 'eicon-text-align-justify',
 					],
 				],

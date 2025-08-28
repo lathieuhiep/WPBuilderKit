@@ -22,7 +22,7 @@ class TestimonialSlider extends Widget_Base {
 
 	// widget title
 	public function get_title(): string {
-		return esc_html__( 'Slider lời chứng thực', 'essential-features-addon' );
+		return esc_html__( 'Slider lời chứng thực', 'extend-site' );
 	}
 
 	// widget icon
@@ -52,7 +52,7 @@ class TestimonialSlider extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Nội dung', 'essential-features-addon' ),
+				'label' => esc_html__( 'Nội dung', 'extend-site' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -63,9 +63,9 @@ class TestimonialSlider extends Widget_Base {
 
 		$repeater->add_control(
 			'list_title', [
-				'label'       => esc_html__( 'Tên', 'essential-features-addon' ),
+				'label'       => esc_html__( 'Tên', 'extend-site' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'John Doe', 'essential-features-addon' ),
+				'default'     => esc_html__( 'John Doe', 'extend-site' ),
 				'label_block' => true,
 			]
 		);
@@ -73,9 +73,9 @@ class TestimonialSlider extends Widget_Base {
 		$repeater->add_control(
 			'list_position',
 			[
-				'label'       => esc_html__( 'Vị trí', 'essential-features-addon' ),
+				'label'       => esc_html__( 'Vị trí', 'extend-site' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Vị trí', 'essential-features-addon' ),
+				'default'     => esc_html__( 'Vị trí', 'extend-site' ),
 				'label_block' => true
 			]
 		);
@@ -83,7 +83,7 @@ class TestimonialSlider extends Widget_Base {
 		$repeater->add_control(
 			'list_image',
 			[
-				'label'   => esc_html__( 'Chọn ảnh', 'essential-features-addon' ),
+				'label'   => esc_html__( 'Chọn ảnh', 'extend-site' ),
 				'type'    => Controls_Manager::MEDIA,
 				'default' => [
 					'url' => Utils::get_placeholder_image_src(),
@@ -94,26 +94,26 @@ class TestimonialSlider extends Widget_Base {
 		$repeater->add_control(
 			'list_description',
 			[
-				'label'       => esc_html__( 'Văn bản', 'essential-features-addon' ),
+				'label'       => esc_html__( 'Văn bản', 'extend-site' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'rows'        => 10,
-				'default'     => esc_html__( 'GEMs are robotics algorithm for modules that built & optimized for NVIDIA AGX Data should underlie every business decision. Data should underlie every business Yet too often some very down the certain routes.', 'essential-features-addon' ),
-				'placeholder' => esc_html__( 'Nhập văn bản', 'essential-features-addon' ),
+				'default'     => esc_html__( 'GEMs are robotics algorithm for modules that built & optimized for NVIDIA AGX Data should underlie every business decision. Data should underlie every business Yet too often some very down the certain routes.', 'extend-site' ),
+				'placeholder' => esc_html__( 'Nhập văn bản', 'extend-site' ),
 			]
 		);
 
 		$this->add_control(
 			'list',
 			[
-				'label'       => esc_html__( 'Danh sách', 'essential-features-addon' ),
+				'label'       => esc_html__( 'Danh sách', 'extend-site' ),
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
 				'default'     => [
 					[
-						'list_title' => esc_html__( 'Tiêu đề #1', 'essential-features-addon' ),
+						'list_title' => esc_html__( 'Tiêu đề #1', 'extend-site' ),
 					],
 					[
-						'list_title' => esc_html__( 'Tiêu đề #2', 'essential-features-addon' ),
+						'list_title' => esc_html__( 'Tiêu đề #2', 'extend-site' ),
 					],
 				],
 				'title_field' => '{{{ list_title }}}',
@@ -132,7 +132,7 @@ class TestimonialSlider extends Widget_Base {
 		$this->start_controls_section(
 			'style_title',
 			[
-				'label' => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
+				'label' => esc_html__( 'Tiêu đề', 'extend-site' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -140,7 +140,7 @@ class TestimonialSlider extends Widget_Base {
         $this->add_control(
             'title_color',
             [
-                'label'     => esc_html__( 'Màu sắc', 'essential-features-addon' ),
+                'label'     => esc_html__( 'Màu sắc', 'extend-site' ),
                 'type'      => Controls_Manager::COLOR,
                 'default'   => '',
                 'selectors' => [
@@ -163,7 +163,7 @@ class TestimonialSlider extends Widget_Base {
 		$this->start_controls_section(
 			'style_position',
 			[
-				'label' => esc_html__( 'Vị trí', 'essential-features-addon' ),
+				'label' => esc_html__( 'Vị trí', 'extend-site' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -171,7 +171,7 @@ class TestimonialSlider extends Widget_Base {
 		$this->add_control(
 			'position_color',
 			[
-				'label'     => esc_html__( 'Màu sắc', 'essential-features-addon' ),
+				'label'     => esc_html__( 'Màu sắc', 'extend-site' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [
@@ -194,7 +194,7 @@ class TestimonialSlider extends Widget_Base {
 		$this->start_controls_section(
 			'style_desc',
 			[
-				'label' => esc_html__( 'Văn bản', 'essential-features-addon' ),
+				'label' => esc_html__( 'Văn bản', 'extend-site' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -202,7 +202,7 @@ class TestimonialSlider extends Widget_Base {
 		$this->add_control(
 			'desc_color',
 			[
-				'label'     => esc_html__( 'Màu sắc', 'essential-features-addon' ),
+				'label'     => esc_html__( 'Màu sắc', 'extend-site' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => [

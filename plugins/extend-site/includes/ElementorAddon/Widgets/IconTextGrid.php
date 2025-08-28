@@ -18,7 +18,7 @@ class IconTextGrid extends Widget_Base {
 
 	// widget title
 	public function get_title(): string {
-		return esc_html__( 'Lưới Icon và Nội dung', 'essential-features-addon' );
+		return esc_html__( 'Lưới Icon và Nội dung', 'extend-site' );
 	}
 
 	// widget icon
@@ -43,7 +43,7 @@ class IconTextGrid extends Widget_Base {
 		$this->start_controls_section(
 			'content_layout_section',
 			[
-				'label' => esc_html__( 'Bố cục', 'essential-features-addon' ),
+				'label' => esc_html__( 'Bố cục', 'extend-site' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -83,7 +83,7 @@ class IconTextGrid extends Widget_Base {
 		$this->add_responsive_control(
 			'row_gap',
 			[
-				'label' => esc_html__( 'Khoảng cách hàng', 'essential-features-addon' ),
+				'label' => esc_html__( 'Khoảng cách hàng', 'extend-site' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em', 'rem' ],
 				'default' => [
@@ -99,7 +99,7 @@ class IconTextGrid extends Widget_Base {
 		$this->add_responsive_control(
 			'column_gap',
 			[
-				'label' => esc_html__( 'Khoảng cách cột', 'essential-features-addon' ),
+				'label' => esc_html__( 'Khoảng cách cột', 'extend-site' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em', 'rem' ],
 				'default' => [
@@ -118,7 +118,7 @@ class IconTextGrid extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Nội dung', 'essential-features-addon' ),
+				'label' => esc_html__( 'Nội dung', 'extend-site' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -126,30 +126,30 @@ class IconTextGrid extends Widget_Base {
 		$this->add_control(
 			'html_tag',
 			[
-				'label'   => esc_html__( 'HTML Tag', 'essential-features-addon' ),
+				'label'   => esc_html__( 'HTML Tag', 'extend-site' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'h3',
 				'options' => ControlOptions::heading_tags(),
-                'description' => esc_html__('Chọn thẻ "H" cho tiêu đề', 'essential-features-addon')
+                'description' => esc_html__('Chọn thẻ "H" cho tiêu đề', 'extend-site')
 			]
 		);
 
 		$this->add_control(
 			'list',
 			[
-				'label' => esc_html__( 'Danh sách', 'essential-features-addon' ),
+				'label' => esc_html__( 'Danh sách', 'extend-site' ),
 				'type' => Controls_Manager::REPEATER,
 				'fields' => [
 					[
 						'name' => 'title',
-						'label' => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
+						'label' => esc_html__( 'Tiêu đề', 'extend-site' ),
 						'type' => Controls_Manager::TEXT,
-						'default' => esc_html__( 'List Title' , 'essential-features-addon' ),
+						'default' => esc_html__( 'List Title' , 'extend-site' ),
 						'label_block' => true,
 					],
 					[
 						'name' => 'icon',
-						'label' => esc_html__( 'Icon', 'essential-features-addon' ),
+						'label' => esc_html__( 'Icon', 'extend-site' ),
 						'type' => Controls_Manager::ICONS,
 						'default' => [
 							'value' => 'fas fa-star',
@@ -158,24 +158,24 @@ class IconTextGrid extends Widget_Base {
 					],
 					[
 						'name' => 'content',
-						'label' => esc_html__( 'Văn bản', 'essential-features-addon' ),
+						'label' => esc_html__( 'Văn bản', 'extend-site' ),
 						'type' => Controls_Manager::WYSIWYG,
-						'default' => esc_html__( 'List Content' , 'essential-features-addon' ),
+						'default' => esc_html__( 'List Content' , 'extend-site' ),
 						'show_label' => false,
 					],
 				],
 				'default' => [
 					[
-						'title' => esc_html__( 'Title #1', 'essential-features-addon' ),
-						'content' => esc_html__( 'Nội dung mục. Nhấn nút chỉnh sửa để thay đổi nội dung này.', 'essential-features-addon' ),
+						'title' => esc_html__( 'Title #1', 'extend-site' ),
+						'content' => esc_html__( 'Nội dung mục. Nhấn nút chỉnh sửa để thay đổi nội dung này.', 'extend-site' ),
 					],
 					[
-						'title' => esc_html__( 'Title #2', 'essential-features-addon' ),
-						'content' => esc_html__( 'Nội dung mục. Nhấn nút chỉnh sửa để thay đổi nội dung này.', 'essential-features-addon' ),
+						'title' => esc_html__( 'Title #2', 'extend-site' ),
+						'content' => esc_html__( 'Nội dung mục. Nhấn nút chỉnh sửa để thay đổi nội dung này.', 'extend-site' ),
 					],
 					[
-						'title' => esc_html__( 'Title #3', 'essential-features-addon' ),
-						'content' => esc_html__( 'Nội dung mục. Nhấn nút chỉnh sửa để thay đổi nội dung này.', 'essential-features-addon' ),
+						'title' => esc_html__( 'Title #3', 'extend-site' ),
+						'content' => esc_html__( 'Nội dung mục. Nhấn nút chỉnh sửa để thay đổi nội dung này.', 'extend-site' ),
 					],
 				],
 				'title_field' => '{{{ title }}}',
@@ -188,7 +188,7 @@ class IconTextGrid extends Widget_Base {
 		$this->start_controls_section(
 			'style_icon',
 			[
-				'label' => esc_html__( 'Icon', 'essential-features-addon' ),
+				'label' => esc_html__( 'Icon', 'extend-site' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -223,7 +223,7 @@ class IconTextGrid extends Widget_Base {
 		$this->add_control(
 			'icon_color',
 			[
-				'label'     => esc_html__( 'Màu', 'essential-features-addon' ),
+				'label'     => esc_html__( 'Màu', 'extend-site' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .icon-box' => 'color: {{VALUE}}',
@@ -237,7 +237,7 @@ class IconTextGrid extends Widget_Base {
 		$this->start_controls_section(
 			'style_heading',
 			[
-				'label' => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
+				'label' => esc_html__( 'Tiêu đề', 'extend-site' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -272,7 +272,7 @@ class IconTextGrid extends Widget_Base {
 		$this->add_control(
 			'heading_color',
 			[
-				'label'     => esc_html__( 'Màu', 'essential-features-addon' ),
+				'label'     => esc_html__( 'Màu', 'extend-site' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .text-box .heading' => 'color: {{VALUE}}',
@@ -284,7 +284,7 @@ class IconTextGrid extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'heading_typography',
-				'label'    => esc_html__( 'Kiểu chữ', 'essential-features-addon' ),
+				'label'    => esc_html__( 'Kiểu chữ', 'extend-site' ),
 				'selector' => '{{WRAPPER}} .text-box .heading',
 			]
 		);
@@ -295,7 +295,7 @@ class IconTextGrid extends Widget_Base {
 		$this->start_controls_section(
 			'style_description',
 			[
-				'label' => esc_html__( 'Văn bản', 'essential-features-addon' ),
+				'label' => esc_html__( 'Văn bản', 'extend-site' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -303,7 +303,7 @@ class IconTextGrid extends Widget_Base {
 		$this->add_control(
 			'desc_color',
 			[
-				'label'     => esc_html__( 'Color', 'essential-features-addon' ),
+				'label'     => esc_html__( 'Color', 'extend-site' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .text-box .content' => 'color: {{VALUE}}',
@@ -315,7 +315,7 @@ class IconTextGrid extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'desc_typography',
-				'label'    => esc_html__( 'Kiểu chữ', 'essential-features-addon' ),
+				'label'    => esc_html__( 'Kiểu chữ', 'extend-site' ),
 				'selector' => '{{WRAPPER}} .text-box .content',
 			]
 		);

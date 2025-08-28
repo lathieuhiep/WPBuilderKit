@@ -18,7 +18,7 @@ class IconText extends Widget_Base {
 
 	// widget title
 	public function get_title(): string {
-		return esc_html__( 'Icon và Nội dung', 'essential-features-addon' );
+		return esc_html__( 'Icon và Nội dung', 'extend-site' );
 	}
 
 	// widget icon
@@ -43,7 +43,7 @@ class IconText extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Nội dung', 'essential-features-addon' ),
+				'label' => esc_html__( 'Nội dung', 'extend-site' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -52,7 +52,7 @@ class IconText extends Widget_Base {
 			'icon',
 			[
 				'name'    => 'icon',
-				'label'   => esc_html__( 'Icon', 'essential-features-addon' ),
+				'label'   => esc_html__( 'Icon', 'extend-site' ),
 				'type'    => Controls_Manager::ICONS,
 				'default' => [
 					'value'   => 'fas fa-star',
@@ -64,9 +64,9 @@ class IconText extends Widget_Base {
 		$this->add_control(
 			'heading',
 			[
-				'label'       => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
+				'label'       => esc_html__( 'Tiêu đề', 'extend-site' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
+				'default'     => esc_html__( 'Tiêu đề', 'extend-site' ),
 				'label_block' => true
 			]
 		);
@@ -75,9 +75,9 @@ class IconText extends Widget_Base {
 			'content',
 			[
 				'name' => 'content',
-				'label' => esc_html__( 'Văn bản', 'essential-features-addon' ),
+				'label' => esc_html__( 'Văn bản', 'extend-site' ),
 				'type' => Controls_Manager::WYSIWYG,
-				'default' => esc_html__( 'List Content' , 'essential-features-addon' ),
+				'default' => esc_html__( 'List Content' , 'extend-site' ),
 				'show_label' => false,
 			],
 		);
@@ -85,7 +85,7 @@ class IconText extends Widget_Base {
 		$this->add_control(
 			'heading_tag',
 			[
-				'label'   => esc_html__( 'Tiêu đề thẻ HTML', 'essential-features-addon' ),
+				'label'   => esc_html__( 'Tiêu đề thẻ HTML', 'extend-site' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'h3',
 				'options' => ControlOptions::text_wrappers(),
@@ -98,7 +98,7 @@ class IconText extends Widget_Base {
 		$this->start_controls_section(
 			'style_box',
 			[
-				'label' => esc_html__( 'Hộp', 'essential-features-addon' ),
+				'label' => esc_html__( 'Hộp', 'extend-site' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -106,7 +106,7 @@ class IconText extends Widget_Base {
 		$this->add_responsive_control(
 			'icon_space',
 			[
-				'label' => esc_html__( 'Khoảng cách các Icon', 'essential-features-addon' ),
+				'label' => esc_html__( 'Khoảng cách các Icon', 'extend-site' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
 				'range' => [
@@ -133,7 +133,7 @@ class IconText extends Widget_Base {
 		$this->add_responsive_control(
 			'content_spacer',
 			[
-				'label' => esc_html__( 'Khoảng cách nội dung', 'essential-features-addon' ),
+				'label' => esc_html__( 'Khoảng cách nội dung', 'extend-site' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
 				'range' => [
@@ -163,7 +163,7 @@ class IconText extends Widget_Base {
 		$this->start_controls_section(
 			'style_icon',
 			[
-				'label' => esc_html__( 'Icon', 'essential-features-addon' ),
+				'label' => esc_html__( 'Icon', 'extend-site' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -171,7 +171,7 @@ class IconText extends Widget_Base {
 		$this->add_responsive_control(
 			'icon_width',
 			[
-				'label' => esc_html__( 'Độ rộng', 'essential-features-addon' ),
+				'label' => esc_html__( 'Độ rộng', 'extend-site' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'range' => [
@@ -198,7 +198,7 @@ class IconText extends Widget_Base {
 		$this->add_control(
 			'icon_color',
 			[
-				'label'     => esc_html__( 'Màu', 'essential-features-addon' ),
+				'label'     => esc_html__( 'Màu', 'extend-site' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .es-icon' => 'color: {{VALUE}}',
@@ -212,7 +212,7 @@ class IconText extends Widget_Base {
 		$this->start_controls_section(
 			'style_heading',
 			[
-				'label' => esc_html__( 'Tiêu đề', 'essential-features-addon' ),
+				'label' => esc_html__( 'Tiêu đề', 'extend-site' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -220,7 +220,7 @@ class IconText extends Widget_Base {
 		$this->add_control(
 			'heading_color',
 			[
-				'label'     => esc_html__( 'Màu', 'essential-features-addon' ),
+				'label'     => esc_html__( 'Màu', 'extend-site' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .text-box .heading' => 'color: {{VALUE}}',
@@ -232,7 +232,7 @@ class IconText extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'heading_typography',
-				'label'    => esc_html__( 'Kiểu chữ', 'essential-features-addon' ),
+				'label'    => esc_html__( 'Kiểu chữ', 'extend-site' ),
 				'selector' => '{{WRAPPER}} .text-box .heading',
 			]
 		);
@@ -243,7 +243,7 @@ class IconText extends Widget_Base {
 		$this->start_controls_section(
 			'style_description',
 			[
-				'label' => esc_html__( 'Văn bản', 'essential-features-addon' ),
+				'label' => esc_html__( 'Văn bản', 'extend-site' ),
 				'tab'   => Controls_Manager::TAB_STYLE
 			]
 		);
@@ -251,7 +251,7 @@ class IconText extends Widget_Base {
 		$this->add_control(
 			'desc_color',
 			[
-				'label'     => esc_html__( 'Color', 'essential-features-addon' ),
+				'label'     => esc_html__( 'Color', 'extend-site' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .text-box .content' => 'color: {{VALUE}}',
@@ -263,7 +263,7 @@ class IconText extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'desc_typography',
-				'label'    => esc_html__( 'Kiểu chữ', 'essential-features-addon' ),
+				'label'    => esc_html__( 'Kiểu chữ', 'extend-site' ),
 				'selector' => '{{WRAPPER}} .text-box .content',
 			]
 		);

@@ -21,7 +21,7 @@ class CarouselImages extends Widget_Base {
 
 	// widget title
 	public function get_title(): string {
-		return esc_html__( 'Ảnh trình chiếu', 'essential-features-addon' );
+		return esc_html__( 'Ảnh trình chiếu', 'extend-site' );
 	}
 
 	// widget icon
@@ -57,7 +57,7 @@ class CarouselImages extends Widget_Base {
 		$this->start_controls_section(
 			'section_carousel_images',
 			[
-				'label' => esc_html__( 'Trình chiếu ảnh', 'essential-features-addon' ),
+				'label' => esc_html__( 'Trình chiếu ảnh', 'extend-site' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -70,9 +70,9 @@ class CarouselImages extends Widget_Base {
 
 		$repeater->add_control(
 			'list_title', [
-				'label'       => esc_html__( 'Tên', 'essential-features-addon' ),
+				'label'       => esc_html__( 'Tên', 'extend-site' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Tên #1', 'essential-features-addon' ),
+				'default'     => esc_html__( 'Tên #1', 'extend-site' ),
 				'label_block' => true,
 			]
 		);
@@ -80,7 +80,7 @@ class CarouselImages extends Widget_Base {
 		$repeater->add_control(
 			'list_image',
 			[
-				'label'   => esc_html__( 'Chọn ảnh', 'essential-features-addon' ),
+				'label'   => esc_html__( 'Chọn ảnh', 'extend-site' ),
 				'type'    => Controls_Manager::MEDIA,
 				'default' => [
 					'url' => Utils::get_placeholder_image_src(),
@@ -91,9 +91,9 @@ class CarouselImages extends Widget_Base {
 		$repeater->add_control(
 			'list_link',
 			[
-				'label'       => esc_html__( 'URL', 'essential-features-addon' ),
+				'label'       => esc_html__( 'URL', 'extend-site' ),
 				'type'        => Controls_Manager::URL,
-				'placeholder' => esc_html__( 'https://your-link.com', 'essential-features-addon' ),
+				'placeholder' => esc_html__( 'https://your-link.com', 'extend-site' ),
 				'default'     => [
 					'url'               => '',
 					'is_external'       => true,
@@ -106,21 +106,21 @@ class CarouselImages extends Widget_Base {
 		$this->add_control(
 			'list',
 			[
-				'label'       => esc_html__( 'Danh sách', 'essential-features-addon' ),
+				'label'       => esc_html__( 'Danh sách', 'extend-site' ),
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
 				'default'     => [
 					[
-						'list_title' => __( 'Tên #1', 'essential-features-addon' ),
+						'list_title' => __( 'Tên #1', 'extend-site' ),
 					],
 					[
-						'list_title' => __( 'Tên #2', 'essential-features-addon' ),
+						'list_title' => __( 'Tên #2', 'extend-site' ),
 					],
 					[
-						'list_title' => __( 'Tên #3', 'essential-features-addon' ),
+						'list_title' => __( 'Tên #3', 'extend-site' ),
 					],
 					[
-						'list_title' => __( 'Tên #4', 'essential-features-addon' ),
+						'list_title' => __( 'Tên #4', 'extend-site' ),
 					],
 				],
 				'title_field' => '{{{ list_title }}}',

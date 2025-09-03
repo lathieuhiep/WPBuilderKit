@@ -48,7 +48,7 @@ class PostCarousel extends Widget_Base {
 	// widget keywords
 	public function get_keywords(): array
 	{
-		return ['carousel', 'post', 'slider'];
+        return ['post', 'carousel', 'slider', 'extend site'];
 	}
 
 	// widget controls

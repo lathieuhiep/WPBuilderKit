@@ -4,7 +4,7 @@ namespace ExtendSite\ElementorAddon;
 use ExtendSite\ElementorAddon\Widgets\CarouselImages;
 use ExtendSite\ElementorAddon\Widgets\ContactForm;
 use ExtendSite\ElementorAddon\Widgets\HeadingEditor;
-use ExtendSite\ElementorAddon\Widgets\IconText;
+use ExtendSite\ElementorAddon\Widgets\InfoBox;
 use ExtendSite\ElementorAddon\Widgets\IconTextGrid;
 use ExtendSite\ElementorAddon\Widgets\PostCarousel;
 use ExtendSite\ElementorAddon\Widgets\PostGrid;
@@ -76,7 +76,7 @@ class ElementorAddon
         }
 
         $widgets_manager->register(new HeadingEditor());
-        $widgets_manager->register(new IconText());
+        $widgets_manager->register(new InfoBox());
         $widgets_manager->register(new IconTextGrid());
         $widgets_manager->register(new PostCarousel());
         $widgets_manager->register(new PostGrid());

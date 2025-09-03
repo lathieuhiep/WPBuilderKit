@@ -34,7 +34,7 @@ class IconTextGrid extends Widget_Base {
 	// widget keywords
 	public function get_keywords(): array
 	{
-		return ['icon', 'list', 'text'];
+		return ['icon', 'list', 'text', 'extend site'];
 	}
 
 	// widget controls

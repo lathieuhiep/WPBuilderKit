@@ -35,6 +35,12 @@ class TestimonialSlider extends Widget_Base {
 		return array( 'es-addons' );
 	}
 
+    // widget keywords
+    public function get_keywords(): array
+    {
+        return ['testimonial', 'slider', 'review', 'extend site'];
+    }
+
 	// widget style dependencies
 	public function get_style_depends(): array {
 		return [ 'swiper' ];
@@ -251,7 +257,7 @@ class TestimonialSlider extends Widget_Base {
                                 echo wp_get_attachment_image( $item['list_image']['id'], $settings['image_size'] );
                             else:
                                 ?>
-                                <img src="<?php echo esc_url( EFA_PLUGIN_URL . 'assets/images/user-avatar.png' ); ?>"
+                                <img src="<?php echo esc_url( EXTEND_SITE_URL . 'assets/images/user-avatar.png' ); ?>"
                                      alt="<?php echo esc_attr( $item['list_title'] ); ?>"/>
                             <?php endif; ?>
                         </div>

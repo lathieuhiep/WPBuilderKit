@@ -36,7 +36,7 @@ class PostGrid extends Widget_Base {
 	// widget keywords
 	public function get_keywords(): array
 	{
-		return ['post', 'grid'];
+        return ['post', 'grid', 'extend site'];
 	}
 
 	// widget controls

@@ -28,6 +28,12 @@ class ContactForm extends Widget_Base {
 		return array( 'es-addons' );
 	}
 
+    // widget keywords
+    public function get_keywords(): array
+    {
+        return ['contact', 'form', 'contact form', 'contact form 7', 'extend site'];
+    }
+
 	// widget controls
 	protected function register_controls(): void {
 		// Content section

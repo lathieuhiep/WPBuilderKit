@@ -33,7 +33,7 @@ class HeadingEditor extends Widget_Base {
 	// widget keywords
 	public function get_keywords(): array
 	{
-		return ['heading', 'editor', 'text'];
+		return ['heading', 'editor', 'text', 'extend site'];
 	}
 
 	// widget controls

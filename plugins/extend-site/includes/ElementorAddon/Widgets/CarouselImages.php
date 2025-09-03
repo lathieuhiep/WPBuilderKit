@@ -47,7 +47,7 @@ class CarouselImages extends Widget_Base {
     // widget keywords
 	public function get_keywords(): array
 	{
-		return ['carousel', 'image', 'slider'];
+		return ['carousel', 'image', 'slider', 'extend site'];
 	}
 
 	// widget controls
@@ -167,7 +167,7 @@ class CarouselImages extends Widget_Base {
 	                        echo wp_get_attachment_image( $image_id, $settings['image_size'] );
                         else:
                         ?>
-                            <img src="<?php echo esc_url( EFA_PLUGIN_URL . 'assets/images/no-image.png' ); ?>" alt="<?php the_title(); ?>"/>
+                            <img src="<?php echo esc_url( EXTEND_SITE_URL . 'assets/images/no-image.png' ); ?>" alt="<?php the_title(); ?>"/>
                         <?php
                         endif;
 

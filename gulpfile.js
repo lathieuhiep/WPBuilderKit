@@ -17,12 +17,24 @@ const path = require('path');
 require('dotenv').config()
 
 // setting NODE_ENV: development or production
+// NODE_ENV="development" trong file .env để chạy ở chế độ phát triển (có sourcemap)
 const isDev = (process.env.NODE_ENV === 'development');
+
+// server
+// tạo file .env với biến PROXY="localhost/basictheme". Có thể thay đổi giá trị này.
+const proxy = process.env.PROXY || "localhost/basictheme";
+
+const server = () => {
+    browserSync.init({
+        proxy: proxy,
+        open: false,
+        cors: true,
+        ghostMode: false
+    })
+}
 
 // Biến đại diện cho tên plugin và theme
 const pluginNameEFA = 'essential-features-addon';
-const pluginExtendSite = 'extend-site';
-const themeName = 'basictheme';
 
 // function build scss pipeline
 const buildScssPipeline = ({ input, output, includePaths = ['node_modules', 'src'] }) => {
@@ -46,7 +58,7 @@ const buildScssPipeline = ({ input, output, includePaths = ['node_modules', 'src
 };
 
 // function buildJSPipeline
-const buildJsPipeline = ({ input, output }) => {
+const buildJsPipeline = ({ input, output, label = 'JS Pipeline' }) => {
     return src(input, { allowEmpty: true })
         .pipe(plumber({
             errorHandler: function (err) {
@@ -60,93 +72,124 @@ const buildJsPipeline = ({ input, output }) => {
         .pipe(browserSync.stream());
 }
 
-// Đường dẫn file
-const paths = {
-    node_modules: 'node_modules/',
-    vendors: 'src/vendors/',
-    theme: {
-        scss: 'src/theme/scss/',
-        js: 'src/theme/js/'
-    },
-    plugins: {
-        root: 'src/plugins/',
-        es: {
-            scss: `src/plugins/${pluginExtendSite}/scss/`,
-            js: `src/plugins/${pluginExtendSite}/js/`
-        },
-        su_crm: {
-            admin: {
-                scss: 'src/plugins/simple-user-crm/admin/scss/',
-                js: 'src/plugins/simple-user-crm/admin/js/',
-                cssOut: 'plugins/simple-user-crm/admin/assets/css/',
-                jsOut: 'plugins/simple-user-crm/admin/assets/js/'
-            },
-            frontend: {
-                scss: 'src/plugins/simple-user-crm/frontend/scss/',
-                js: 'src/plugins/simple-user-crm/frontend/js/',
-                cssOut: 'plugins/simple-user-crm/frontend/assets/css/',
-                jsOut: 'plugins/simple-user-crm/frontend/assets/js/'
-            }
-        }
-    },
-    shared: {
-        scss: 'src/shared/scss/',
-        vendors: 'src/shared/scss/vendors/',
-    },
-    output: {
-        theme: {
-            root: `themes/${themeName}/assets/`,
-            css: `themes/${themeName}/assets/css/`,
-            js: `themes/${themeName}/assets/js/`,
-            libs: `themes/${themeName}/assets/libs/`,
-            woo: `themes/${themeName}/includes/woocommerce/assets/`
-        },
-        plugins: {
-            root: 'plugins/',
-            es: {
-                css: `plugins/${pluginExtendSite}/assets/css/`,
-                js: `plugins/${pluginExtendSite}/assets/js/`,
-                libs: `plugins/${pluginExtendSite}/assets/libs/`
-            }
-        }
-    }
-};
+/**
+ * ---------------------------
+ * Build Plugins
+ * ---------------------------
+ */
 
-// server
-// tạo file .env với biến PROXY="localhost/basictheme". Có thể thay đổi giá trị này.
-const proxy = process.env.PROXY || "localhost/basictheme";
+// function make plugin paths
+const makePluginPaths = (slug) => {
+    const root = `src/plugins/${slug}`;
+    const dist = `plugins/${slug}/assets`;
 
-const server = () => {
-    browserSync.init({
-        proxy: proxy,
-        open: false,
-        cors: true,
-        ghostMode: false
+    return {
+        input: {
+            scss: `${root}/scss/`,
+            js: `${root}/js/`
+        },
+        output: {
+            css: `${dist}/css/`,
+            js: `${dist}/js/`
+        }
+    };
+}
+
+/** Plugin Extend Site paths */
+const pathPluginES = makePluginPaths('extend-site');
+
+/** Task build style custom login */
+const pluginEsBuildStyleCustomLogin = () => {
+    return buildScssPipeline({
+        input: `${pathPluginES.input.scss}custom-login.scss`,
+        output: `${pathPluginES.output.css}be/`
     })
 }
 
-// task build custom bootstrap
-const buildStyleCustomBootstrap = () => {
-    return src(`${paths.vendors}bootstrap/*.scss`)
-        .pipe(plumber({
-            errorHandler: function (err) {
-                console.error('SCSS Style Custom Bootstrap Error:', err.message);
-                this.emit('end');
-            }
-        }))
-        .pipe(sass({
-            outputStyle: 'expanded',
-            includePaths: ['node_modules', 'src']
-        }, '').on('error', sass.logError))
-        .pipe(cleanCSS({level: 2}))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(dest(`${paths.output.theme.root}vendors/bootstrap/`))
-        .pipe(browserSync.stream())
+/** Task build style addons */
+const pluginEsBuildStyleAddons = () => {
+    return buildScssPipeline({
+        input: `${pathPluginES.input.scss}addons-elementor.scss`,
+        output: `${pathPluginES.output.css}fe/`
+    })
 }
 
+/** Task build style custom post type */
+const pluginEsBuildStyleCPT = () => {
+    return buildScssPipeline({
+        input: `${pathPluginES.input.scss}cpt/**/*.scss`,
+        output: `${pathPluginES.output.css}fe/cpt/`
+    })
+}
+
+/** Task build js plugin extend site */
+const pluginEsBuildJs = () => {
+    return buildJsPipeline({
+        input: `${pathPluginES.input.js}*/**.js`,
+        output: `${pathPluginES.output.js}`
+    })
+}
+
+/** Watch all plugin extend site */
+const pluginEsWatchAll = () => {
+    watch([
+        `${pathPluginES.input.scss}abstracts/*.scss`,
+        `${pathPluginES.input.scss}base/*.scss`,
+        `${pathPluginES.input.scss}components/*.scss`,
+    ], gulp.series(
+        pluginEsBuildStyleAddons,
+        pluginEsBuildStyleCPT
+    ))
+
+    watch([
+        `${pathPluginES.input.scss}custom-login.scss`
+    ], pluginEsBuildStyleCustomLogin)
+
+    watch([
+        `${pathPluginES.input.scss}addons/*.scss`,
+        `${pathPluginES.input.scss}addons-elementor.scss`
+    ], pluginEsBuildStyleAddons)
+
+    watch([
+        `${pathPluginES.input.scss}cpt/**/*.scss`
+    ], pluginEsBuildStyleCPT)
+
+    watch([
+        `${pathPluginES.input.js}*/**.js`
+    ], pluginEsBuildJs)
+}
+
+/** ---------------------------
+ * Build vendors
+ * ---------------------------
+ */
+const themeName = 'basictheme';
+
+// function make vendor paths
+const makeVendorPaths = (slug) => {
+    const root = `src/vendors/${slug}`;
+    const dist = `themes/${themeName}/assets/vendors/${slug}`;
+
+    return {
+        input: `${root}/`,
+        output: `${dist}/`
+    };
+}
+
+const pathVendorBootstrap = makeVendorPaths('bootstrap');
+
+/** task build style custom bootstrap */
+const buildStyleCustomBootstrap = () => {
+    return buildScssPipeline({
+        input: `${pathVendorBootstrap.input}*.scss`,
+        output: `${pathVendorBootstrap.output}`
+    })
+}
+
+/** task build js custom bootstrap */
 const buildJSCustomBootstrap = () => {
     return src([
-        `${paths.vendors}bootstrap/*.js`
+        `${pathVendorBootstrap.input}*.js`
     ], {allowEmpty: true})
         .pipe(plumber({
             errorHandler: function (err) {
@@ -154,7 +197,7 @@ const buildJSCustomBootstrap = () => {
                 this.emit('end');
             }
         }))
-        .pipe(webpack({
+        .pipe(webpackStream({
             mode: 'production',
             output: {
                 filename: 'custom-bootstrap.min.js'
@@ -190,39 +233,77 @@ const buildJSCustomBootstrap = () => {
                 ]
             }
         }))
-        .pipe(dest(`${paths.output.theme.root}vendors/bootstrap/`))
+        .pipe(dest(`${pathVendorBootstrap.output}`))
         .pipe(browserSync.stream())
 }
 
-// Task build style theme
+const vendorWatchAll = () => {
+    watch([
+        `${pathVendorBootstrap.input}*.scss`
+    ], buildStyleCustomBootstrap)
+
+    watch([
+        `${pathVendorBootstrap.input}*.js`
+    ], buildJSCustomBootstrap)
+}
+
+/** ---------------------------
+ * Build Theme
+ * ---------------------------
+ */
+
+// function make theme paths
+const makeThemePaths = () => {
+    const root = `src/theme`;
+    const dist = `themes/${themeName}/assets`;
+
+    return {
+        input: {
+            scss: `${root}/scss/`,
+            js: `${root}/js/`
+        },
+        output: {
+            css: `${dist}/css/`,
+            js: `${dist}/js/`
+        },
+        woo: {
+            css: `themes/${themeName}/includes/woocommerce/assets/css/`,
+            js: `themes/${themeName}/includes/woocommerce/assets/js/`
+        }
+    };
+}
+
+/** Theme paths */
+const pathTheme = makeThemePaths();
+
+/** Task build style theme */
 const buildStyleTheme = () => {
-    return src(`${paths.theme.scss}main.scss`)
-        .pipe(plumber({
-            errorHandler: function (err) {
-                console.error('SCSS Style Theme Error:', err.message);
-                this.emit('end');
-            }
-        }))
-        .pipe(gulpIf(isDev, sourcemaps.init()))
-        .pipe(sass({
-            outputStyle: 'expanded',
-            includePaths: ['node_modules', 'src']
-        }, '').on('error', sass.logError))
-
-        // --- Xuất file chưa min ---
-        .pipe(dest(`${paths.output.theme.css}`))
-
-        // --- Tạo bản minified ---
-        .pipe(cleanCSS({level: 2}))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(gulpIf(isDev, sourcemaps.write()))
-        .pipe(dest(`${paths.output.theme.css}`))
-        .pipe(browserSync.stream())
+    return buildScssPipeline({
+        input: `${pathTheme.input.scss}main.scss`,
+        output: `${pathTheme.output.css}`
+    })
 }
 
+/** Task build style custom post type */
+const buildStyleCustomPostType = () => {
+    return buildScssPipeline({
+        input: `${pathTheme.input.scss}post-type/**/*.scss`,
+        output: `${pathTheme.output.css}post-type/`
+    })
+}
+
+/** Task build style page template */
+const buildStylePageTemplate = () => {
+    return buildScssPipeline({
+        input: `${pathTheme.input.scss}page-templates/*.scss`,
+        output: `${pathTheme.output.css}page-templates/`
+    })
+}
+
+/** Task build js theme */
 const buildJSTheme = () => {
     return src([
-        `${paths.theme.js}*.js`
+        `${pathTheme.input.js}*.js`
     ], {allowEmpty: true})
         .pipe(plumber({
             errorHandler: function (err) {
@@ -230,7 +311,7 @@ const buildJSTheme = () => {
                 this.emit('end');
             }
         }))
-        .pipe(webpack({
+        .pipe(webpackStream({
             mode: 'production',
             output: {
                 filename: 'main.min.js'
@@ -266,90 +347,27 @@ const buildJSTheme = () => {
                 ]
             }
         }))
-        .pipe(dest(`${paths.output.theme.js}`))
+        .pipe(dest(`${pathTheme.output.js}`))
         .pipe(browserSync.stream())
 }
 
-// Task build style custom post type
-const buildStyleCustomPostType = () => {
-    return src(`${paths.theme.scss}post-type/*/**.scss`)
-        .pipe(plumber({
-            errorHandler: function (err) {
-                console.error(err.message);
-                this.emit('end');
-            }
-        }))
-        .pipe(gulpIf(isDev, sourcemaps.init()))
-        .pipe(sass({
-            outputStyle: 'expanded',
-            includePaths: ['node_modules', 'src']
-        }, '').on('error', sass.logError))
-        .pipe(cleanCSS({
-            level: 2
-        }))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(gulpIf(isDev, sourcemaps.write()))
-        .pipe(dest(`${paths.output.theme.css}post-type/`))
-        .pipe(browserSync.stream())
-}
-
-// Task build style page templates
-const buildStylePageTemplate = () => {
-    return src(`${paths.theme.scss}page-templates/*.scss`)
-        .pipe(plumber({
-            errorHandler: function (err) {
-                console.error(err.message);
-                this.emit('end');
-            }
-        }))
-        .pipe(gulpIf(isDev, sourcemaps.init()))
-        .pipe(sass({
-            outputStyle: 'expanded',
-            includePaths: ['node_modules', 'src']
-        }, '').on('error', sass.logError))
-        .pipe(cleanCSS({
-            level: 2
-        }))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(gulpIf(isDev, sourcemaps.write()))
-        .pipe(dest(`${paths.output.theme.css}page-templates/`))
-        .pipe(browserSync.stream())
-}
-
-// Task build style shop
+/** Task build style shop */
 const buildStyleShop = () => {
-    return src(`${paths.theme.scss}shop/*.scss`)
-        .pipe(plumber({
-            errorHandler: function (err) {
-                console.error('SCSS Shop Error:', err.message);
-                this.emit('end');
-            }
-        }))
-        .pipe(gulpIf(isDev, sourcemaps.init()))
-        .pipe(sass({
-            outputStyle: 'expanded',
-            includePaths: ['node_modules', 'src']
-        }, '').on('error', sass.logError))
-
-        // --- Xuất file chưa min ---
-        .pipe(dest(`${paths.output.theme.woo}css/`))
-
-        // --- Tạo bản minified ---
-        .pipe(cleanCSS({level: 2}))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(gulpIf(isDev, sourcemaps.write()))
-        .pipe(dest(`${paths.output.theme.woo}css/`))
-        .pipe(browserSync.stream())
+    return buildScssPipeline({
+        input: `${pathTheme.input.scss}shop/*.scss`,
+        output: `${pathTheme.woo.css}`
+    })
 }
 
+/** Task build js shop */
 const buildJSShop = () => {
-    const entries = glob.sync(`${paths.theme.js}shop/*.js`).reduce((result, file) => {
+    const entries = glob.sync(`${pathTheme.input.js}shop/*.js`).reduce((result, file) => {
         const name = path.basename(file, '.js');
         result[name] = './' + file.replace(/\\/g, '/');
         return result;
     }, {});
 
-    return src(`${paths.theme.js}shop/*.js`, { allowEmpty: true })
+    return src(`${pathTheme.input.js}shop/*.js`, { allowEmpty: true })
         .pipe(plumber({
             errorHandler: function (err) {
                 console.error('Error in buildJSShop:', err.message);
@@ -393,64 +411,57 @@ const buildJSShop = () => {
                 ]
             }
         }, webpack))
-        .pipe(dest(`${paths.output.theme.woo}js/`))
+        .pipe(dest(`${pathTheme.woo.js}`))
         .pipe(browserSync.stream());
 }
-exports.buildJSShop = buildJSShop;
 
-/*
-** Plugin Extend Site
-* */
+/** Watch Shared build style */
+const buildWatchShared = () => {
+    watch([
+        `src/shared/scss/**/*.scss`
+    ], gulp.series(
+        pluginEsBuildStyleCustomLogin,
+        pluginEsBuildStyleAddons,
+        pluginEsBuildStyleCPT,
 
-// Task build style custom login
-const buildStyleCustomLogin = () => {
-    return buildScssPipeline({
-        input: `${paths.plugins.es.scss}custom-login.scss`,
-        output: `${paths.output.plugins.es.css}backend/`
-    })
+        buildStyleCustomBootstrap,
+        buildStyleTheme,
+        buildStyleCustomPostType,
+        buildStylePageTemplate,
+        buildStyleShop
+    ))
 }
 
-// Task build style elementor addons
-const buildStyleAddonsPluginExtendSite = () => {
-    return buildScssPipeline({
-        input: `${paths.plugins.es.scss}addons-elementor.scss`,
-        output: `${paths.output.plugins.es.css}frontend/`
-    })
-}
+/** Watch all theme */
+const themeWatchAll = () => {
+    watch([
+        `${pathTheme.input.scss}base/*.scss`,
+        `${pathTheme.input.scss}utilities/*.scss`,
+        `${pathTheme.input.scss}components/*.scss`,
+        `${pathTheme.input.scss}layout/*.scss`,
+        `${pathTheme.input.scss}main.scss`,
+    ], buildStyleTheme)
 
-const buildStyleCPTPluginExtendSite = () => {
-    return buildScssPipeline({
-        input: `${paths.plugins.es.scss}post-type/*/**.scss`,
-        output: `${paths.output.plugins.es.css}frontend/post-type/`
-    })
-}
+    watch([
+        `${pathTheme.input.scss}post-type/**/*.scss`
+    ], buildStyleCustomPostType)
 
-const buildJPluginExtendSite = () => {
-    return buildJsPipeline({
-        input: `${paths.plugins.es.js}*/**.js`,
-        output: `${paths.output.plugins.es.js}`
-    })
-}
+    watch([
+        `${pathTheme.input.scss}page-templates/*.scss`
+    ], buildStylePageTemplate)
 
-// Task build plugin simple-user-crm
-const buildCssPluginSimpleUserCrmBE = () => {
-    return buildScssPipeline({
-        input: `${paths.plugins.su_crm.admin.scss}*.scss`,
-        output: `${paths.plugins.su_crm.admin.cssOut}`
-    })
-}
-const buildJsPluginSimpleUserCrmBE = () => {
-    return buildJsPipeline({
-        input: `${paths.plugins.su_crm.admin.js}*.js`,
-        output: `${paths.plugins.su_crm.admin.jsOut}`
-    })
-}
+    watch([
+        `${pathTheme.input.scss}shop/abstracts/*.scss`,
+        `${pathTheme.input.scss}shop/components/*.scss`,
+        `${pathTheme.input.scss}shop/*.scss`
+    ], buildStyleShop)
 
-const buildStyleFESimpleUserCrm = () => {
-    return buildScssPipeline({
-        input: `${paths.plugins.su_crm.frontend.scss}*.scss`,
-        output: `${paths.plugins.su_crm.frontend.cssOut}`
-    })
+    watch([`${pathTheme.input.js}*.js`], buildJSTheme)
+
+    watch([
+        `${pathTheme.input.js}shop/components/*.js`,
+        `${pathTheme.input.js}shop/*.js`
+    ], buildJSShop)
 }
 
 /*
@@ -459,9 +470,9 @@ Task build project
 const buildProject = async () => {
     // Chạy các plugin styles song song
     await Promise.all([
-        buildStyleCustomLogin(),
-        buildStyleAddonsPluginExtendSite(),
-        buildJPluginExtendSite(),
+        pluginEsBuildStyleCustomLogin(),
+        pluginEsBuildStyleAddons(),
+        pluginEsBuildJs(),
     ]);
 
     // Chạy vendors style và các theme styles/JS song song
@@ -484,87 +495,16 @@ exports.buildProject = buildProject
 const watchTask = () => {
     server()
 
-    // watch abstracts
-    watch([
-        `${paths.shared.scss}abstracts/*.scss`
-    ], gulp.series(
-        buildStyleCustomBootstrap,
-        buildStyleTheme,
-        buildStyleAddonsPluginExtendSite,
-        buildStyleCustomLogin,
-        buildStyleCustomPostType,
-        buildStylePageTemplate,
-        buildStyleShop
-    ))
+    // watch plugins extend site
+    pluginEsWatchAll()
 
-    // plugin essentials watch
-    watch([
-        `${paths.plugins.es.scss}custom-login.scss`
-    ], buildStyleCustomLogin)
+    // watch vendors
+    vendorWatchAll()
 
-    watch([
-        `${paths.plugins.es.scss}abstracts/*.scss`,
-        `${paths.plugins.es.scss}addons/*.scss`,
-        `${paths.plugins.es.scss}base/*.scss`,
-        `${paths.plugins.es.scss}components/*.scss`,
-        `${paths.plugins.es.scss}addons-elementor.scss`
-    ], buildStyleAddonsPluginExtendSite)
+    // watch shared styles
+    buildWatchShared()
 
-
-    watch([
-        `${paths.plugins.es.scss}abstracts/*.scss`,
-        `${paths.plugins.es.scss}base/*.scss`,
-        `${paths.plugins.es.scss}components/*.scss`,
-        `${paths.plugins.es.scss}post-type/*/**.scss`
-    ], buildStyleCPTPluginExtendSite)
-
-    watch([`${paths.plugins.es.js}*/**.js`], buildJPluginExtendSite)
-
-    // watch su_crm admin
-    watch([
-        `${paths.plugins.su_crm.admin.scss}**/*.scss`
-    ], buildCssPluginSimpleUserCrmBE)
-
-    watch([
-        `${paths.plugins.su_crm.admin.js}*.js`
-    ], buildJsPluginSimpleUserCrmBE)
-
-    watch([
-        `${paths.plugins.su_crm.frontend.scss}*.scss`
-    ], buildStyleFESimpleUserCrm)
-
-    // theme watch
-    watch([
-        `${paths.vendors}bootstrap/*.scss`
-    ], buildStyleCustomBootstrap)
-
-    watch([
-        `${paths.theme.scss}base/*.scss`,
-        `${paths.theme.scss}utilities/*.scss`,
-        `${paths.theme.scss}components/*.scss`,
-        `${paths.theme.scss}layout/*.scss`,
-        `${paths.theme.scss}main.scss`,
-    ], buildStyleTheme)
-
-    watch([
-        `${paths.theme.scss}post-type/*/**.scss`
-    ], buildStyleCustomPostType)
-
-    watch([
-        `${paths.theme.scss}page-templates/*.scss`
-    ], buildStylePageTemplate)
-
-    watch([
-        `${paths.theme.scss}shop/abstracts/*.scss`,
-        `${paths.theme.scss}shop/components/*.scss`,
-        `${paths.theme.scss}shop/*.scss`
-    ], buildStyleShop)
-
-    watch([`${paths.vendors}bootstrap/*.js`], buildJSCustomBootstrap)
-    watch([`${paths.theme.js}*.js`], buildJSTheme)
-    watch([
-        `${paths.theme.js}shop/components/*.js`,
-        `${paths.theme.js}shop/*.js`
-    ], buildJSShop)
+    // watch theme
+    themeWatchAll()
 }
 exports.watchTask = watchTask

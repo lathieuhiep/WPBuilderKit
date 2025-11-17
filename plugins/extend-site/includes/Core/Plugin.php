@@ -2,6 +2,7 @@
 
 namespace ExtendSite\Core;
 
+use Carbon_Fields\Carbon_Fields;
 use ExtendSite\PostType\PortfolioPostType;
 use ExtendSite\ElementorAddon\ElementorAddon;
 use ExtendSite\PostType\TemplateLoader;
@@ -19,6 +20,9 @@ class Plugin
 
         // Flush rewrite
         self::maybe_flush_rewrite();
+
+        // Load Carbon Fields
+//        self::load_carbon_fields();
     }
 
     /**
@@ -60,7 +64,7 @@ class Plugin
     }
 
     /**
-     * ⭐ Flush rewrite rules nếu có flag
+     * Flush rewrite rules nếu có flag
      */
     private static function maybe_flush_rewrite(): void
     {
@@ -68,5 +72,14 @@ class Plugin
             flush_rewrite_rules(false); // false = không ghi lại htaccess
             delete_option('extend_site_flush_rewrite');
         }
+    }
+
+    /**
+     * Load Carbon Fields library.
+     */
+    private static function load_carbon_fields(): void {
+        require_once EXTEND_SITE_PATH . 'vendor/carbon-fields/core/Carbon_Fields.php';
+
+        Carbon_Fields::boot();
     }
 }

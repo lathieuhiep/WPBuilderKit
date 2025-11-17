@@ -72,6 +72,60 @@ const buildJsPipeline = ({ input, output, label = 'JS Pipeline' }) => {
         .pipe(browserSync.stream());
 }
 
+// function buildWebpackPipeline
+const buildWebpackPipeline = ({ input, output, filename, entries }) => {
+    // Cấu hình Webpack cơ bản, được tái sử dụng
+    const webpackConfig = {
+        mode: 'production',
+        output: {
+            // Sử dụng entries để đặt tên file nếu có, hoặc filename nếu chỉ là 1 file
+            filename: entries ? '[name].min.js' : filename,
+        },
+        entry: entries || input, // Sử dụng entries nếu có, nếu không dùng input
+        module: {
+            rules: [
+                {
+                    test: /\.m?js$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env']
+                        }
+                    }
+                }
+            ]
+        },
+        resolve: {
+            extensions: ['.js']
+        },
+        optimization: {
+            minimize: true,
+            minimizer: [
+                new TerserPlugin({
+                    extractComments: false,
+                    terserOptions: {
+                        format: {
+                            comments: false
+                        },
+                    },
+                })
+            ]
+        }
+    };
+
+    return src(input, { allowEmpty: true })
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.error('Error in build Webpack Pipeline:', err.message);
+                this.emit('end');
+            }
+        }))
+        .pipe(webpackStream(webpackConfig, webpack))
+        .pipe(dest(output))
+        .pipe(browserSync.stream());
+}
+
 /**
  * ---------------------------
  * Build Plugins
@@ -188,53 +242,11 @@ const buildStyleCustomBootstrap = () => {
 
 /** task build js custom bootstrap */
 const buildJSCustomBootstrap = () => {
-    return src([
-        `${pathVendorBootstrap.input}*.js`
-    ], {allowEmpty: true})
-        .pipe(plumber({
-            errorHandler: function (err) {
-                console.error('Error in build js bootstrap:', err.message);
-                this.emit('end');
-            }
-        }))
-        .pipe(webpackStream({
-            mode: 'production',
-            output: {
-                filename: 'custom-bootstrap.min.js'
-            },
-            module: {
-                rules: [
-                    {
-                        test: /\.m?js$/,
-                        exclude: /node_modules/,
-                        use: {
-                            loader: 'babel-loader',
-                            options: {
-                                presets: ['@babel/preset-env']
-                            }
-                        }
-                    }
-                ]
-            },
-            resolve: {
-                extensions: ['.js']
-            },
-            optimization: {
-                minimize: true,
-                minimizer: [
-                    new TerserPlugin({
-                        extractComments: false,
-                        terserOptions: {
-                            format: {
-                                comments: false
-                            },
-                        },
-                    })
-                ]
-            }
-        }))
-        .pipe(dest(`${pathVendorBootstrap.output}`))
-        .pipe(browserSync.stream())
+    return buildWebpackPipeline({
+        input: `${pathVendorBootstrap.input}*.js`,
+        output: `${pathVendorBootstrap.output}`,
+        filename: 'custom-bootstrap.min.js'
+    });
 }
 
 const vendorWatchAll = () => {
@@ -302,53 +314,11 @@ const buildStylePageTemplate = () => {
 
 /** Task build js theme */
 const buildJSTheme = () => {
-    return src([
-        `${pathTheme.input.js}*.js`
-    ], {allowEmpty: true})
-        .pipe(plumber({
-            errorHandler: function (err) {
-                console.error('Error in build js in theme:', err.message);
-                this.emit('end');
-            }
-        }))
-        .pipe(webpackStream({
-            mode: 'production',
-            output: {
-                filename: 'main.min.js'
-            },
-            module: {
-                rules: [
-                    {
-                        test: /\.m?js$/,
-                        exclude: /node_modules/,
-                        use: {
-                            loader: 'babel-loader',
-                            options: {
-                                presets: ['@babel/preset-env']
-                            }
-                        }
-                    }
-                ]
-            },
-            resolve: {
-                extensions: ['.js']
-            },
-            optimization: {
-                minimize: true,
-                minimizer: [
-                    new TerserPlugin({
-                        extractComments: false,
-                        terserOptions: {
-                            format: {
-                                comments: false
-                            },
-                        },
-                    })
-                ]
-            }
-        }))
-        .pipe(dest(`${pathTheme.output.js}`))
-        .pipe(browserSync.stream())
+    return buildWebpackPipeline({
+        input: `${pathTheme.input.js}*.js`,
+        output: `${pathTheme.output.js}`,
+        filename: 'main.min.js'
+    });
 }
 
 /** Task build style shop */
@@ -361,65 +331,25 @@ const buildStyleShop = () => {
 
 /** Task build js shop */
 const buildJSShop = () => {
+    // Vẫn cần glob để tạo danh sách entry (nhiều file đầu ra)
     const entries = glob.sync(`${pathTheme.input.js}shop/*.js`).reduce((result, file) => {
         const name = path.basename(file, '.js');
         result[name] = './' + file.replace(/\\/g, '/');
         return result;
     }, {});
 
-    return src(`${pathTheme.input.js}shop/*.js`, { allowEmpty: true })
-        .pipe(plumber({
-            errorHandler: function (err) {
-                console.error('Error in buildJSShop:', err.message);
-                this.emit('end');
-            }
-        }))
-        .pipe(webpackStream({
-            mode: 'production',
-            entry: entries,
-            output: {
-                filename: '[name].min.js',
-            },
-            module: {
-                rules: [
-                    {
-                        test: /\.m?js$/,
-                        exclude: /node_modules/,
-                        use: {
-                            loader: 'babel-loader',
-                            options: {
-                                presets: ['@babel/preset-env']
-                            }
-                        }
-                    }
-                ]
-            },
-            resolve: {
-                extensions: ['.js']
-            },
-            optimization: {
-                minimize: true,
-                minimizer: [
-                    new TerserPlugin({
-                        extractComments: false,
-                        terserOptions: {
-                            format: {
-                                comments: false
-                            },
-                        },
-                    })
-                ]
-            }
-        }, webpack))
-        .pipe(dest(`${pathTheme.woo.js}`))
-        .pipe(browserSync.stream());
+    return buildWebpackPipeline({
+        input: `${pathTheme.input.js}shop/*.js`,
+        output: `${pathTheme.woo.js}`,
+        entries: entries
+    });
 }
 
 /** Watch Shared build style */
 const buildWatchShared = () => {
     watch([
         `src/shared/scss/**/*.scss`
-    ], gulp.series(
+    ], gulp.parallel(
         pluginEsBuildStyleCustomLogin,
         pluginEsBuildStyleAddons,
         pluginEsBuildStyleCPT,
@@ -492,7 +422,7 @@ const buildProject = async () => {
 exports.buildProject = buildProject
 
 // Task watch
-const watchTask = () => {
+const watchTaskAll = () => {
     server()
 
     // watch plugins extend site
@@ -507,4 +437,4 @@ const watchTask = () => {
     // watch theme
     themeWatchAll()
 }
-exports.watchTask = watchTask
+exports.watchTask = watchTaskAll

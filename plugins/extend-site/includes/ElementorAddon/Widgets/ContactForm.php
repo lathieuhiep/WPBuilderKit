@@ -3,6 +3,7 @@ namespace ExtendSite\ElementorAddon\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use ExtendSite\Helpers\ESHelpers;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -51,7 +52,7 @@ class ContactForm extends Widget_Base {
 				'label'       => esc_html__( 'Chọn mẫu liên hệ', 'extend-site' ),
 				'type'        => Controls_Manager::SELECT,
 				'label_block' => true,
-				'options'     => es_get_form_cf7(),
+				'options'     => ESHelpers::get_form_cf7(),
 				'default'     => '0',
 			]
 		);

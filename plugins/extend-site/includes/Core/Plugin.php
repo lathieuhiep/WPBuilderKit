@@ -13,10 +13,12 @@ class Plugin
     public function boot(): void
     {
         self::load_text_domain();
-        self::active_core();
-        self::include_files();
-        self::active_elementor_addon();
-        self::active_custom_post_types();
+        self::load_enqueue();
+        self::load_elementor_addon();
+        self::load_custom_post_types();
+
+        // Flush rewrite
+        self::maybe_flush_rewrite();
     }
 
     /**
@@ -27,31 +29,22 @@ class Plugin
         load_plugin_textdomain(
             'extend-site',
             false,
-            dirname( EXTEND_SITE_BASENAME ) . '/languages'
+            dirname(EXTEND_SITE_BASENAME) . '/languages'
         );
     }
 
     /**
      * Load core functionalities.
      */
-    private static function active_core(): void
+    private static function load_enqueue(): void
     {
         Enqueue::boot();
     }
 
     /**
-     * Include necessary files.
-     */
-    private static function include_files(): void
-    {
-        require_once EXTEND_SITE_PATH . 'functions/helpers.php';
-        require_once EXTEND_SITE_PATH . 'functions/cpt-helpers.php';
-    }
-
-    /**
      * Load the Elementor addon.
      */
-    private static function active_elementor_addon(): void
+    private static function load_elementor_addon(): void
     {
         ElementorAddon::boot();
     }
@@ -59,9 +52,21 @@ class Plugin
     /**
      * Load custom post types.
      */
-    private static function active_custom_post_types(): void
+    private static function load_custom_post_types(): void
     {
         new PortfolioPostType();
+
         TemplateLoader::boot();
+    }
+
+    /**
+     * ⭐ Flush rewrite rules nếu có flag
+     */
+    private static function maybe_flush_rewrite(): void
+    {
+        if (get_option('extend_site_flush_rewrite')) {
+            flush_rewrite_rules(false); // false = không ghi lại htaccess
+            delete_option('extend_site_flush_rewrite');
+        }
     }
 }

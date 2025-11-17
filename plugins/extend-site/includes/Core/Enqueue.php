@@ -1,6 +1,7 @@
 <?php
 namespace ExtendSite\Core;
 
+use ExtendSite\Helpers\ESHelpers;
 use ExtendSite\PostType\PortfolioPostType;
 
 defined('ABSPATH') || exit;
@@ -42,7 +43,7 @@ class Enqueue
     public static function enqueue_scripts_frontend(): void
     {
         // Check if Elementor is used to build the current page
-        $page_builder = es_check_elementor_builder();
+        $page_builder = ESHelpers::check_elementor_builder();
 
         if ( $page_builder ) {
             // load frontend style

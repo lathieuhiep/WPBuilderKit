@@ -2,6 +2,7 @@
 namespace ExtendSite\ElementorAddon\Traits;
 
 use Elementor\Controls_Manager;
+use ExtendSite\Helpers\ESHelpers;
 use WP_Query;
 
 defined('ABSPATH') || exit;
@@ -75,7 +76,7 @@ trait HasQueryControls
                 [
                     'label'       => esc_html__('Chọn danh mục', 'extend-site'),
                     'type'        => Controls_Manager::SELECT2,
-                    'options'     => es_get_tax_list($taxonomy),
+                    'options'     => ESHelpers::get_tax_list($taxonomy),
                     'multiple'    => true,
                     'label_block' => true,
                 ]

@@ -3,6 +3,9 @@
 namespace ExtendSite\Core;
 
 use Carbon_Fields\Carbon_Fields;
+use ExtendSite\Fields\FieldsManager;
+use ExtendSite\Options\GeneralOptions;
+use ExtendSite\Options\ThemeOptions;
 use ExtendSite\PostType\PortfolioPostType;
 use ExtendSite\ElementorAddon\ElementorAddon;
 use ExtendSite\PostType\TemplateLoader;
@@ -22,7 +25,13 @@ class Plugin
         self::maybe_flush_rewrite();
 
         // Load Carbon Fields
-//        self::load_carbon_fields();
+        CarbonLoader::boot();
+
+        // Load custom fields
+        FieldsManager::boot();
+
+        // Load Carbon Fields theme options
+        ThemeOptions::boot();
     }
 
     /**

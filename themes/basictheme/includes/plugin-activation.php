@@ -20,13 +20,6 @@ function basictheme_register_required_plugins(): void {
 		),
 
 		// This is an example of how to include a plugin from the WordPress Plugin Repository
-        array(
-            'name'      =>  'CMB2',
-            'slug'      =>  'cmb2',
-            'required'  =>  true,
-        ),
-
-		// This is an example of how to include a plugin from the WordPress Plugin Repository
 		array(
 			'name'      =>  'Elementor',
 			'slug'      =>  'elementor',

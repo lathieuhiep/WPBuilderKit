@@ -13,9 +13,8 @@ class ThemeOptions
 
     public static function register(): void
     {
-
-        $container = Container::make('theme_options', __('Theme Settings', 'extend-site'))
-            ->set_icon('dashicons-admin-customizer')
+        Container::make('theme_options', __('Theme Settings', 'extend-site'))
+            ->set_icon('dashicons-admin-generic')
             ->set_page_menu_position(3)
             ->add_tab(__('General', 'extend-site'), GeneralOptions::fields())
             ->add_tab(__('Header', 'extend-site'), HeaderOptions::fields())

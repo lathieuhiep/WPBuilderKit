@@ -5,24 +5,21 @@ use Carbon_Fields\Field;
 
 defined('ABSPATH') || exit;
 
-class BlogOptions {
+class BlogOptions extends OptionBase {
+    private const SIDEBAR_LAYOUT = 'es_opt_sidebar_layout';
 
     public static function fields(): array {
         return [
-            Field::make('select', 'es_blog_sidebar', __('Sidebar Position', 'extend-site'))
+            // === CATEGORY ARCHIVE ===
+            Field::make('separator', 'sep_category', esc_html__('Category Archive', 'extend-site')),
+            Field::make('html', 'sep_category_desc')->set_html('<p class="cf-subtext">'. esc_html__( 'Sử dụng cho các trang danh mục, archive, index, tìm kiếm.', 'extend-site' ) .'</p>'),
+
+            Field::make('select', self::SIDEBAR_LAYOUT, esc_html__('Sidebar Layout', 'extend-site'))
                 ->set_options([
-                    'right' => __('Right Sidebar', 'extend-site'),
-                    'left'  => __('Left Sidebar', 'extend-site'),
-                    'none'  => __('No Sidebar', 'extend-site'),
-                ]),
-
-            Field::make('checkbox', 'es_blog_show_author', __('Show Author', 'extend-site'))
-                ->set_option_value('yes'),
-
-            Field::make('checkbox', 'es_blog_show_date', __('Show Date', 'extend-site'))
-                ->set_option_value('yes'),
-
-            Field::make('image', 'es_blog_default_thumbnail', __('Default Thumbnail', 'extend-site')),
+                    'right' => esc_html__('Right Sidebar', 'extend-site'),
+                    'left'  => esc_html__('Left Sidebar', 'extend-site'),
+                    'hidden'  => esc_html__('Hidden', 'extend-site'),
+                ])->set_default_value('right'),
         ];
     }
 }

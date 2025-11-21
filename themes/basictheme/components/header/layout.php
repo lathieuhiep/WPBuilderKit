@@ -1,7 +1,10 @@
 <?php
-$sticky_menu = basictheme_get_option( 'opt_menu_sticky', '1' );
+
+use ExtendSite\Options\HeaderOptions;
+
+$sticky_menu = basictheme_opt(HeaderOptions::class)?->get_position_fixed_menu() ?? true;
 ?>
-<header class="main-header <?php echo esc_attr( $sticky_menu == '1' ? 'active-sticky-nav' : '' ); ?>">
+<header class="main-header <?php echo esc_attr( $sticky_menu ? 'active-sticky-nav' : '' ); ?>">
     <nav class="main-header__warp container">
         <!-- main logo -->
         <?php get_template_part('components/header/logo'); ?>

@@ -20,6 +20,8 @@ class FooterOptions {
 
             Field::make('textarea', 'es_footer_bottom_text', __('Footer Bottom Text', 'extend-site'))
                 ->set_help_text(__('HTML allowed.', 'extend-site')),
+
+            Field::make('text', 'es_copyright', esc_html__('Copyright', 'extend-site')),
         ];
     }
 }

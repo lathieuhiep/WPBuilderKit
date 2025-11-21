@@ -1,30 +1,32 @@
 <?php
+
 namespace ExtendSite\Options;
 
 use Carbon_Fields\Field;
 
 defined('ABSPATH') || exit;
 
-class HeaderOptions {
+class HeaderOptions extends OptionBase
+{
 
-    public static function fields(): array {
+    // key options
+    private const POSITION_FIXED_MENU = 'es_opt_position_fixed_menu';
+
+    // option fields
+    public static function fields(): array
+    {
 
         return [
-            Field::make('select', 'es_header_layout', __('Header Layout', 'extend-site'))
-                ->set_options([
-                    'default' => __('Default', 'extend-site'),
-                    'minimal' => __('Minimal', 'extend-site'),
-                    'sticky'  => __('Sticky', 'extend-site'),
-                ]),
-
-            Field::make('checkbox', 'es_topbar_enable', __('Enable Top Bar', 'extend-site'))
-                ->set_option_value('yes'),
-
-            Field::make('text', 'es_topbar_text', __('Top Bar Text', 'extend-site'))
-                ->set_help_text(__('Visible when Top Bar is enabled.', 'extend-site')),
-
-            Field::make('text', 'es_header_cta_label', __('CTA Button Label', 'extend-site')),
-            Field::make('text', 'es_header_cta_link', __('CTA Button Link', 'extend-site')),
+            // Display back to top
+            Field::make('checkbox', self::POSITION_FIXED_MENU, esc_html__('Enable Position Fixed Menu', 'extend-site'))
+                ->set_option_value('yes')
+                ->set_default_value('yes'),
         ];
+    }
+
+    // get position fixed menu
+    public function get_position_fixed_menu(): bool
+    {
+        return (bool)self::get(self::POSITION_FIXED_MENU, true);
     }
 }

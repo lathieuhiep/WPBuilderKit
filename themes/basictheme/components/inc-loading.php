@@ -1,14 +1,23 @@
 <?php
-$show_loading = basictheme_get_option( 'opt_general_loading', '0' );
 
-if(  $show_loading == '1' ) :
-    $opt_image_loading  = basictheme_get_option( 'opt_general_image_loading' );
+use ExtendSite\Options\GeneralOptions;
+
+defined('ABSPATH') || exit;
+
+$show_loading = basictheme_opt(GeneralOptions::class)?->get_loading_enabled() ?? true;
+
+if(  $show_loading ) :
+    $opt_image_loading  = basictheme_opt(GeneralOptions::class)?->get_loading_image_id();
 ?>
     <div id="site-loading" class="d-flex align-items-center justify-content-center">
-        <?php if ( !empty( $opt_image_loading['url'] ) ): ?>
-            <img class="loading_img" src="<?php echo esc_url( $opt_image_loading['url'] ); ?>" alt="<?php esc_attr_e('Đang tải...','basictheme') ?>"  >
+        <?php if ( !empty( $opt_image_loading ) ): ?>
+            <img class="loading_img"
+                 src="<?php echo esc_url( wp_get_attachment_image_url( $opt_image_loading ) ); ?>"
+                 alt="<?php esc_attr_e('Đang tải...','basictheme') ?>">
         <?php else: ?>
-            <img class="loading_img" src="<?php echo esc_url(get_theme_file_uri( '/assets/images/gif/loading.gif' )); ?>" alt="<?php esc_attr_e('Đang tải...','basictheme') ?>">
+            <img class="loading_img"
+                 src="<?php echo esc_url(get_theme_file_uri( '/assets/images/gif/loading.gif' )); ?>"
+                 alt="<?php esc_attr_e('Đang tải...','basictheme') ?>">
         <?php endif; ?>
     </div>
 <?php endif; ?>

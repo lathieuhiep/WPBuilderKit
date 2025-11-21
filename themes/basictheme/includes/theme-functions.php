@@ -4,6 +4,20 @@ function basictheme_get_version_theme(): string {
 	return wp_get_theme()->get( 'Version' );
 }
 
+/**
+ * @template T of object
+ * @param class-string<T> $class
+ * @return T|null
+ */
+function basictheme_opt(string $class)
+{
+    if (!class_exists($class)) {
+        return null;
+    }
+
+    return new $class();
+}
+
 // set favicon default
 if ( ! function_exists( 'basictheme_fallback_favicon' ) ) {
     add_action( 'wp_head', 'basictheme_fallback_favicon' );

@@ -22,6 +22,7 @@ defined('ABSPATH') || exit;
  * Constants
  * -----------------------------------------------------
  */
+define('EXTEND_SITE_ACTIVE', true);
 define('EXTEND_SITE_VERSION',  '1.0.0');
 define('EXTEND_SITE_FILE',      __FILE__);
 define('EXTEND_SITE_PATH',      plugin_dir_path(__FILE__));

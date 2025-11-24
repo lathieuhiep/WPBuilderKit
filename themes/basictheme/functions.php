@@ -3,6 +3,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Required: Theme constants
+require get_parent_theme_file_path( '/includes/theme-constants.php' );
+
+// Required: Theme setup
 require get_parent_theme_file_path( '/includes/theme-setup.php' );
 
 // Required: Plugin Activation

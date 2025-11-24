@@ -1,4 +1,7 @@
 <?php
+
+use ExtendSite\Options\BlogOptions;
+
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -58,13 +61,13 @@ function basictheme_column_width_fields($min = 1, $max = 12, $sm = 12, $md = 6, 
 }
 
 //
-function basictheme_get_responsive_row_class($option_key): string
+function basictheme_get_responsive_row_class(): string
 {
-    $per_row = basictheme_get_option($option_key);
+    $per_row = basictheme_opt(BlogOptions::class)?->get_archive_row_columns();
 
     if ( empty( $per_row ) || ! is_array( $per_row ) ) {
         $per_row = [
-            'sm' => 1,
+            'sm' => 2,
             'md' => 2,
             'lg' => 3,
             'xl' => 3
@@ -72,7 +75,7 @@ function basictheme_get_responsive_row_class($option_key): string
     }
 
     return sprintf(
-        'theme-row-cols-sm-%s theme-row-cols-md-%s theme-row-cols-lg-%s theme-row-cols-xl-%s',
+        'theme-row-cols-1 theme-row-cols-sm-%s theme-row-cols-md-%s theme-row-cols-lg-%s theme-row-cols-xl-%s',
         $per_row['sm'],
         $per_row['md'],
         $per_row['lg'],

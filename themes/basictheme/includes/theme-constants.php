@@ -1,0 +1,4 @@
+<?php
+const THEME_SIDEBAR_LAYOUT_RIGHT = 'right';
+const THEME_SIDEBAR_LAYOUT_LEFT = 'left';
+const THEME_SIDEBAR_LAYOUT_HIDDEN = 'hidden';

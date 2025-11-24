@@ -1,7 +1,10 @@
 <?php
-$sidebar = basictheme_get_option('opt_post_cat_sidebar_position', 'right');
+
+use ExtendSite\Options\BlogOptions;
+
+$sidebar = basictheme_opt(BlogOptions::class)?->get_sidebar_layout_archive() ?? THEME_SIDEBAR_LAYOUT_RIGHT;
 $class_col_content = basictheme_col_use_sidebar($sidebar, 'sidebar-main');
-$per_row_classes = basictheme_get_responsive_row_class('opt_post_cat_per_row');
+$per_row_classes = basictheme_get_responsive_row_class();
 ?>
 
 <div class="site-container archive-post-warp">
@@ -60,7 +63,7 @@ $per_row_classes = basictheme_get_responsive_row_class('opt_post_cat_per_row');
             </div>
 
             <?php
-            if ( $sidebar !== 'hide' ) :
+            if ( $sidebar !== THEME_SIDEBAR_LAYOUT_HIDDEN ) :
                 get_sidebar();
             endif;
             ?>

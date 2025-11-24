@@ -161,9 +161,9 @@ function basictheme_paging_nav_query( $query ): void {
 
 // Get col global
 function basictheme_col_use_sidebar( $option_sidebar, $active_sidebar ): string {
-	if ( $option_sidebar != 'hide' && is_active_sidebar( $active_sidebar ) ):
+	if ( $option_sidebar != THEME_SIDEBAR_LAYOUT_HIDDEN && is_active_sidebar( $active_sidebar ) ):
 
-		if ( $option_sidebar == 'left' ) :
+		if ( $option_sidebar == THEME_SIDEBAR_LAYOUT_LEFT ) :
 			$class_position_sidebar = ' order-1 order-md-2';
 		else:
 			$class_position_sidebar = ' order-1';

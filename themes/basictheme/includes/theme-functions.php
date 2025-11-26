@@ -1,5 +1,7 @@
 <?php
 // get version theme
+use ExtendSite\Options\SocialLinkOptions;
+
 function basictheme_get_version_theme(): string {
 	return wp_get_theme()->get( 'Version' );
 }
@@ -161,9 +163,9 @@ function basictheme_paging_nav_query( $query ): void {
 
 // Get col global
 function basictheme_col_use_sidebar( $option_sidebar, $active_sidebar ): string {
-	if ( $option_sidebar != THEME_SIDEBAR_LAYOUT_HIDDEN && is_active_sidebar( $active_sidebar ) ):
+	if ( $option_sidebar != THEME_SIDEBAR_POSITION_HIDDEN && is_active_sidebar( $active_sidebar ) ):
 
-		if ( $option_sidebar == THEME_SIDEBAR_LAYOUT_LEFT ) :
+		if ( $option_sidebar == THEME_SIDEBAR_POSITION_LEFT ) :
 			$class_position_sidebar = ' order-1 order-md-2';
 		else:
 			$class_position_sidebar = ' order-1';
@@ -246,26 +248,29 @@ function basictheme_get_form_cf7(): array {
 // list social network
 function basictheme_list_social_network(): array {
 	return array(
-		'facebook-f'  => 'Facebook',
-		'twitter'     => 'Twitter',
-		'linkedin-in' => 'Linkedin',
-		'youtube'     => 'Youtube',
-		'instagram'   => 'Instagram'
+        'facebook-f' => 'Facebook',
+        'twitter' => 'Twitter',
+        'linkedin-in' => 'LinkedIn',
+        'youtube' => 'YouTube',
+        'instagram' => 'Instagram',
+        'tiktok' => 'TikTok',
 	);
 }
 
 function basictheme_get_social_url(): void {
-	$opt_social_networks = basictheme_get_option( 'opt_social_networks' );
+	$opt_social_networks = basictheme_opt( SocialLinkOptions::class )?->get_social_list();
 
 	if ( ! empty( $opt_social_networks ) ) :
 		foreach ( $opt_social_networks as $item ) :
-			if ( empty( $item['item'] ) ) {
+            $network = $item['network'];
+
+			if ( empty( $network ) ) {
 				continue;
 			}
 			?>
             <div class="social-network-item">
                 <a href="<?php echo esc_url( $item['url'] ); ?>" target="_blank">
-                    <i class="ic-mask ic-mask-<?php echo esc_attr( $item['item'] ); ?>"></i>
+                    <i class="ic-mask ic-mask-<?php echo esc_attr( $network ); ?>"></i>
                 </a>
             </div>
 		<?php

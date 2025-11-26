@@ -1,8 +1,12 @@
 <?php
+
+use ExtendSite\Options\SinglePostOptions;
+
+$show_related = basictheme_opt(SinglePostOptions::class)?->get_show_related_posts() ?? THEME_YES;
 $term_ids  = wp_get_post_terms( get_the_ID(), 'category', array( 'fields' => 'ids' ) );
 
-if ( !empty( $term_ids ) ):
-	$limit = basictheme_get_option('opt_post_single_related_limit', 3);
+if ( $show_related == THEME_YES && !empty( $term_ids ) ):
+	$limit = basictheme_opt(SinglePostOptions::class)?->get_related_count() ?? 3;
 
     $arg = array(
         'post_type' => 'post',

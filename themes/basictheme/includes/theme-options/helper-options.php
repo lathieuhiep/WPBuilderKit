@@ -1,6 +1,6 @@
 <?php
 
-use ExtendSite\Options\BlogOptions;
+use ExtendSite\Options\PostArchiveOptions;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -63,7 +63,7 @@ function basictheme_column_width_fields($min = 1, $max = 12, $sm = 12, $md = 6, 
 //
 function basictheme_get_responsive_row_class(): string
 {
-    $per_row = basictheme_opt(BlogOptions::class)?->get_archive_row_columns();
+    $per_row = basictheme_opt(PostArchiveOptions::class)?->get_archive_row_columns();
 
     if ( empty( $per_row ) || ! is_array( $per_row ) ) {
         $per_row = [

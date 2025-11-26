@@ -1,8 +1,8 @@
 <?php
 
-use ExtendSite\Options\BlogOptions;
+use ExtendSite\Options\PostArchiveOptions;
 
-$sidebar = basictheme_opt(BlogOptions::class)?->get_sidebar_layout_archive() ?? THEME_SIDEBAR_LAYOUT_RIGHT;
+$sidebar = basictheme_opt(PostArchiveOptions::class)?->get_sidebar_layout_archive() ?? THEME_SIDEBAR_POSITION_RIGHT;
 $class_col_content = basictheme_col_use_sidebar($sidebar, 'sidebar-main');
 $per_row_classes = basictheme_get_responsive_row_class();
 ?>
@@ -63,7 +63,7 @@ $per_row_classes = basictheme_get_responsive_row_class();
             </div>
 
             <?php
-            if ( $sidebar !== THEME_SIDEBAR_LAYOUT_HIDDEN ) :
+            if ( $sidebar !== THEME_SIDEBAR_POSITION_HIDDEN ) :
                 get_sidebar();
             endif;
             ?>

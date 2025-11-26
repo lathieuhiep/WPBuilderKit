@@ -1,7 +1,3 @@
-<?php
-$show_related = basictheme_get_option('opt_post_single_related', '1');
-?>
-
 <div id="post-<?php the_ID() ?>" <?php post_class('single-post-content'); ?>>
     <?php if ( has_post_thumbnail() ) :?>
         <div class="single-post-content__image">
@@ -49,6 +45,4 @@ $show_related = basictheme_get_option('opt_post_single_related', '1');
 <?php
 get_template_part('components/inc', 'comment-form');
 
-if ( $show_related == '1' ) :
-    get_template_part( 'template-parts/post/inc','related-post' );
-endif;
+get_template_part( 'template-parts/post/inc','related-post' );

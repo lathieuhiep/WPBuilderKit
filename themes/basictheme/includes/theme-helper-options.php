@@ -6,48 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-// column width
-function basictheme_column_width_fields($min = 1, $max = 12, $sm = 12, $md = 6, $lg = 3, $xl = 3): array
-{
-    return [
-        [
-            'id'      => 'sm',
-            'type'    => 'slider',
-            'title'   => esc_html__( 'sm: ≥576px', 'basictheme' ),
-            'default' => $sm,
-            'min'     => $min,
-            'max'     => $max,
-        ],
-
-        [
-            'id'      => 'md',
-            'type'    => 'slider',
-            'title'   => esc_html__( 'md: ≥768px', 'basictheme' ),
-            'default' => $md,
-            'min'     => $min,
-            'max'     => $max,
-        ],
-
-        [
-            'id'      => 'lg',
-            'type'    => 'slider',
-            'title'   => esc_html__( 'lg: ≥992px', 'basictheme' ),
-            'default' => $lg,
-            'min'     => $min,
-            'max'     => $max,
-        ],
-
-        [
-            'id'      => 'xl',
-            'type'    => 'slider',
-            'title'   => esc_html__( 'xl: ≥1200px', 'basictheme' ),
-            'default' => $xl,
-            'min'     => $min,
-            'max'     => $max,
-        ],
-    ];
-}
-
 // get responsive row class
 function basictheme_get_responsive_row_class($per_row): string
 {

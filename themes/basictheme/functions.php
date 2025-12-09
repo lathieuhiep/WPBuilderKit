@@ -20,7 +20,7 @@ require get_parent_theme_file_path( '/includes/theme-scripts.php' );
 require get_parent_theme_file_path( '/includes/theme-sidebar.php' );
 
 // Required: Theme options
-require get_theme_file_path( '/includes/theme-options.php' );
+require get_theme_file_path( '/includes/theme-helper-options.php' );
 
 // Required: Meta box options
 require get_parent_theme_file_path( '/includes/theme-meta-box-options.php' );

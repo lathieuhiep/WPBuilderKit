@@ -1,6 +1,9 @@
 <?php
 // get the footer sidebar
-$opt_number_columns = basictheme_get_option('opt_footer_columns', '4');
+
+use ExtendSite\Options\FooterOptions;
+
+$opt_number_columns = basictheme_get_footer_sidebar_columns_count();
 
 // check sidebar active
 $has_footer_sidebar = false;
@@ -19,7 +22,7 @@ if ( $has_footer_sidebar ) :
 	            <?php
 	            for ( $i = 0; $i < $opt_number_columns; $i++ ) :
 		            $j = $i + 1;
-		            $cols = basictheme_get_option( 'opt_footer_column_width_' .  $j );
+		            $cols = basictheme_opt(FooterOptions::class)->get_footer_sidebar_settings($j);
 
                     if ( empty( $cols ) ) {
                         $cols = [

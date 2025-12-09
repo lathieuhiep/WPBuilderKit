@@ -37,7 +37,7 @@ function basictheme_multiple_widget_init(): void {
     endif;
 
 	// sidebar footer
-	$opt_number_columns = basictheme_get_option( 'opt_footer_columns', '4' );
+	$opt_number_columns = basictheme_get_footer_sidebar_columns_count();
 
 	for ( $i = 1; $i <= $opt_number_columns; $i ++ ) {
 		basictheme_register_sidebar(

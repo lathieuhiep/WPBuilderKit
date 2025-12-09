@@ -1,4 +1,8 @@
 <?php
+
+use ExtendSite\Options\WooOptions;
+use ExtendSite\Options\WooSingleOptions;
+
 /**
  * General functions used to integrate this theme with WooCommerce.
  */
@@ -147,10 +151,10 @@ function basictheme_woo_get_sidebar_active(): array
 
     if (is_product()) :
         $sidebar['active'] = 'sidebar-wc-product';
-        $sidebar['position'] = basictheme_get_option('opt_shop_single_sidebar_position');
+        $sidebar['position'] = basictheme_opt(WooSingleOptions::class)->get_product_single_sidebar_position() ?? THEME_SIDEBAR_POSITION_RIGHT;
     else:
         $sidebar['active'] = 'sidebar-wc';
-        $sidebar['position'] = basictheme_get_option('opt_shop_cat_sidebar_position');
+        $sidebar['position'] = basictheme_opt(WooOptions::class)->get_products_sidebar_position() ?? THEME_SIDEBAR_POSITION_RIGHT;
     endif;
 
     return $sidebar;
@@ -162,8 +166,8 @@ if (!function_exists('basictheme_woo_get_sidebar')) :
     {
         $sidebar = basictheme_woo_get_sidebar_active();
 
-        if (!empty($sidebar) && $sidebar['position'] != 'hide' && is_active_sidebar($sidebar['active'])):
-            if ($sidebar['position'] == 'left') :
+        if (!empty($sidebar) && $sidebar['position'] != THEME_SIDEBAR_POSITION_HIDDEN && is_active_sidebar($sidebar['active'])):
+            if ($sidebar['position'] == THEME_SIDEBAR_POSITION_LEFT) :
                 $class_order = 'order-md-1';
             else:
                 $class_order = 'order-md-2';
@@ -203,7 +207,7 @@ if (!function_exists('basictheme_woo_before_main_content')) :
          */
         do_action('basictheme_woo_sidebar');
         ?>
-        <div class="<?php echo !empty($sidebar) && is_active_sidebar($sidebar['active']) && $sidebar['position'] != 'hide' ? 'col-12 col-md-8 col-lg-9 order-1 has-sidebar' : 'col-md-12'; ?>">
+        <div class="<?php echo !empty($sidebar) && is_active_sidebar($sidebar['active']) && $sidebar['position'] != THEME_SIDEBAR_POSITION_HIDDEN ? 'col-12 col-md-8 col-lg-9 order-1 has-sidebar' : 'col-md-12'; ?>">
 
         <?php
 

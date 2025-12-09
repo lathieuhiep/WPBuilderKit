@@ -1,21 +1,9 @@
 <?php
 
-use ExtendSite\Options\PostArchiveOptions;
+use ExtendSite\Options\FooterOptions;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
-}
-
-// prefix option
-const PREFIX_THEME_OPTIONS = 'basictheme_options';
-
-// A Custom function for get an option
-if ( ! function_exists( 'basictheme_get_option' ) ) {
-    function basictheme_get_option( $option = '', $default = null ) {
-        $options = get_option( PREFIX_THEME_OPTIONS );
-
-        return ( isset( $options[ $option ] ) ) ? $options[ $option ] : $default;
-    }
 }
 
 // column width
@@ -60,11 +48,9 @@ function basictheme_column_width_fields($min = 1, $max = 12, $sm = 12, $md = 6, 
     ];
 }
 
-//
-function basictheme_get_responsive_row_class(): string
+// get responsive row class
+function basictheme_get_responsive_row_class($per_row): string
 {
-    $per_row = basictheme_opt(PostArchiveOptions::class)?->get_archive_row_columns();
-
     if ( empty( $per_row ) || ! is_array( $per_row ) ) {
         $per_row = [
             'sm' => 2,
@@ -81,4 +67,10 @@ function basictheme_get_responsive_row_class(): string
         $per_row['lg'],
         $per_row['xl']
     );
+}
+
+// get footer sidebar columns count
+function basictheme_get_footer_sidebar_columns_count (): int
+{
+    return basictheme_opt(FooterOptions::class)->get_footer_sidebar_columns_count() ?? 4;
 }

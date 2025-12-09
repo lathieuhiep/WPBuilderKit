@@ -1,8 +1,11 @@
 <?php
-$show_copyright = basictheme_get_option('opt_footer_copyright_show', '1');
-$copyright = basictheme_get_option('opt_footer_copyright_content', 'Copyright &copy; DiepLK');
 
-if ( $show_copyright == '1' ) :
+use ExtendSite\Options\CopyrightOptions;
+
+$show_copyright = basictheme_opt(CopyrightOptions::class)->get_show_copyright() ?? true;
+
+if ( $show_copyright ) :
+    $copyright = basictheme_opt(CopyrightOptions::class)->get_content_copyright() ?? esc_html__('Copyright &copy; DiepLK', 'basictheme');
 ?>
     <div class="footer__bottom text-center">
         <div class="container">

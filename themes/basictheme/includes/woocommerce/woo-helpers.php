@@ -1,5 +1,8 @@
 <?php
 // setup shop
+use ExtendSite\Options\WooOptions;
+use ExtendSite\Options\WooSingleOptions;
+
 function basictheme_shop_setup(): void
 {
     add_theme_support('woocommerce');
@@ -9,20 +12,15 @@ function basictheme_shop_setup(): void
 }
 add_action('after_setup_theme', 'basictheme_shop_setup');
 
-// set number of products per row
-function basictheme_loop_columns_product()
-{
-    return basictheme_get_option('opt_shop_cat_per_row', 3);
-}
-//add_filter('loop_shop_columns', 'basictheme_loop_columns_product');
-
 // set col product list
 function basictheme_woo_override_product_list_class($html): array|string
 {
     if (is_product() && did_action('woocommerce_after_single_product_summary')) {
-        $per_row_classes = basictheme_get_responsive_row_class('opt_shop_single_related_per_row');
+        $per_row = basictheme_opt(WooSingleOptions::class)->get_product_single_row_columns();
+        $per_row_classes = basictheme_get_responsive_row_class($per_row);
     } else {
-        $per_row_classes = basictheme_get_responsive_row_class('opt_shop_cat_per_row');
+        $per_row = basictheme_opt(WooOptions::class)->get_product_row_columns();
+        $per_row_classes = basictheme_get_responsive_row_class($per_row);
     }
 
     // remove class columns-x
@@ -36,13 +34,13 @@ add_filter('woocommerce_product_loop_start', 'basictheme_woo_override_product_li
 // limit product
 function basictheme_show_products_per_page()
 {
-    return basictheme_get_option('opt_shop_cat_limit', 12);
+    return basictheme_opt(WooOptions::class)->get_products_per_page() ?? 12;
 }
 add_filter('loop_shop_per_page', 'basictheme_show_products_per_page');
 
 // set product related
 function basictheme_woo_related_products_args($args) {
-    $args['posts_per_page'] = basictheme_get_option('opt_shop_single_related_limit', 3);
+    $args['posts_per_page'] = basictheme_opt(WooSingleOptions::class)->get_product_single_related_count() ?? 3;
 
     return $args;
 }

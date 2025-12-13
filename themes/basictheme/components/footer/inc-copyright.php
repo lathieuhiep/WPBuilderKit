@@ -2,10 +2,10 @@
 
 use ExtendSite\Options\CopyrightOptions;
 
-$show_copyright = basictheme_opt(CopyrightOptions::class)->get_show_copyright() ?? true;
+$show_copyright = basictheme_opt(CopyrightOptions::class)?->get_show_copyright() ?? true;
 
 if ( $show_copyright ) :
-    $copyright = basictheme_opt(CopyrightOptions::class)->get_content_copyright() ?? esc_html__('Copyright &copy; DiepLK', 'basictheme');
+    $copyright = basictheme_opt(CopyrightOptions::class)?->get_content_copyright() ?? esc_html__('Copyright &copy; DiepLK', 'basictheme');
 ?>
     <div class="footer__bottom text-center">
         <div class="container">

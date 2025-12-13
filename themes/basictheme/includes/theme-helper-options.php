@@ -30,5 +30,7 @@ function basictheme_get_responsive_row_class($per_row): string
 // get footer sidebar columns count
 function basictheme_get_footer_sidebar_columns_count (): int
 {
-    return basictheme_opt(FooterOptions::class)->get_footer_sidebar_columns_count() ?? 4;
+    return basictheme_opt(FooterOptions::class)
+        ?->get_footer_sidebar_columns_count()
+        ?? 4;
 }

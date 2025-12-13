@@ -2,7 +2,7 @@
 
 use ExtendSite\Options\GeneralOptions;
 
-$opt_back_to_top = basictheme_opt(GeneralOptions::class)->get_back_to_top_enabled() ?? true;
+$opt_back_to_top = basictheme_opt(GeneralOptions::class)?->get_back_to_top_enabled() ?? true;
 
 if ( $opt_back_to_top ) :
 ?>

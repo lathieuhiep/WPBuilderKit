@@ -151,10 +151,10 @@ function basictheme_woo_get_sidebar_active(): array
 
     if (is_product()) :
         $sidebar['active'] = 'sidebar-wc-product';
-        $sidebar['position'] = basictheme_opt(WooSingleOptions::class)->get_product_single_sidebar_position() ?? THEME_SIDEBAR_POSITION_RIGHT;
+        $sidebar['position'] = basictheme_opt(WooSingleOptions::class)?->get_product_single_sidebar_position() ?? THEME_SIDEBAR_POSITION_RIGHT;
     else:
         $sidebar['active'] = 'sidebar-wc';
-        $sidebar['position'] = basictheme_opt(WooOptions::class)->get_products_sidebar_position() ?? THEME_SIDEBAR_POSITION_RIGHT;
+        $sidebar['position'] = basictheme_opt(WooOptions::class)?->get_products_sidebar_position() ?? THEME_SIDEBAR_POSITION_RIGHT;
     endif;
 
     return $sidebar;

@@ -6,6 +6,7 @@ use Elementor\Repeater;
 use Elementor\Utils;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use ExtendSite\Constants\Config;
 use ExtendSite\ElementorAddon\Traits\HasImageSizeControl;
 use ExtendSite\ElementorAddon\Traits\HasSliderControls;
 
@@ -257,7 +258,7 @@ class TestimonialSlider extends Widget_Base {
                                 echo wp_get_attachment_image( $item['list_image']['id'], $settings['image_size'] );
                             else:
                                 ?>
-                                <img src="<?php echo esc_url( EXTEND_SITE_URL . 'assets/images/user-avatar.png' ); ?>"
+                                <img src="<?php echo esc_url( Config::$url . 'assets/images/user-avatar.png' ); ?>"
                                      alt="<?php echo esc_attr( $item['list_title'] ); ?>"/>
                             <?php endif; ?>
                         </div>

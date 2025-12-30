@@ -5,6 +5,7 @@ use Elementor\Repeater;
 use Elementor\Utils;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use ExtendSite\Constants\Config;
 use ExtendSite\ElementorAddon\Traits\HasImageSizeControl;
 use ExtendSite\ElementorAddon\Traits\HasSliderControls;
 
@@ -167,7 +168,7 @@ class CarouselImages extends Widget_Base {
 	                        echo wp_get_attachment_image( $image_id, $settings['image_size'] );
                         else:
                         ?>
-                            <img src="<?php echo esc_url( EXTEND_SITE_URL . 'assets/images/no-image.png' ); ?>" alt="<?php the_title(); ?>"/>
+                            <img src="<?php echo esc_url( Config::$url . 'assets/images/no-image.png' ); ?>" alt="<?php the_title(); ?>"/>
                         <?php
                         endif;
 

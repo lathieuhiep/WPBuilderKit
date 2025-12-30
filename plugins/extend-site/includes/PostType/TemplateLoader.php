@@ -1,6 +1,8 @@
 <?php
 namespace ExtendSite\PostType;
 
+use ExtendSite\Constants\Config;
+
 defined('ABSPATH') || exit;
 
 class TemplateLoader
@@ -43,7 +45,7 @@ class TemplateLoader
      * @return string The full path to the plugin template file.
      */
     private static function plugin_template(string $basename): string {
-        return EXTEND_SITE_PATH . 'templates/' . $basename;
+        return Config::$path . 'templates/' . $basename;
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 namespace ExtendSite\Core;
 
+use ExtendSite\Constants\Config;
 use ExtendSite\Helpers\ESHelpers;
 use ExtendSite\PostType\PortfolioPostType;
 
@@ -25,9 +26,9 @@ class Enqueue
     {
         wp_enqueue_style(
             'es-login',
-            EXTEND_SITE_URL . 'assets/css/backend/custom-login.min.css',
+            Config::$url . 'assets/css/backend/custom-login.min.css',
             [],
-            EXTEND_SITE_VERSION
+            Config::VERSION
         );
     }
 
@@ -48,16 +49,16 @@ class Enqueue
         if ( $page_builder ) {
             // load frontend style
             wp_enqueue_style('es-addons-elementor',
-                EXTEND_SITE_URL . 'assets/css/frontend/addons-elementor.min.css',
+                Config::$url . 'assets/css/frontend/addons-elementor.min.css',
                 [],
-                EXTEND_SITE_VERSION
+                Config::VERSION
             );
 
             // load frontend script
             wp_register_script( 'es-addons-elementor',
-                EXTEND_SITE_URL . 'assets/js/frontend/addons-elementor.min.js',
+                Config::$url . 'assets/js/frontend/addons-elementor.min.js',
                 array( 'jquery', 'swiper' ),
-                EXTEND_SITE_VERSION,
+                Config::VERSION,
                 true
             );
         }
@@ -65,9 +66,9 @@ class Enqueue
         if ( is_singular(PortfolioPostType::SLUG) ) {
             // load portfolio style
             wp_enqueue_style('es-single-portfolio',
-                EXTEND_SITE_URL . 'assets/css/frontend/post-type/portfolio/single-portfolio.min.css',
+                Config::$url . 'assets/css/frontend/post-type/portfolio/single-portfolio.min.css',
                 [],
-                EXTEND_SITE_VERSION
+                Config::VERSION
             );
         }
     }

@@ -2,131 +2,189 @@
 
 namespace ExtendSite\PostType;
 
+use ExtendSite\Constants\Config;
+
 defined('ABSPATH') || exit;
 
-/**
- * Base class cho mọi CPT: cung cấp khung đăng ký & helper.
- */
 abstract class BasePostType
 {
     protected static array $registry = [];
     protected static array $templates = [];
 
-    public const SLUG = 'item';
-    public const SINGULAR = 'Item';
-    public const PLURAL = 'Items';
+    // Định nghĩa hằng số cơ bản cho Post Type
+    public const SLUG = '';
+    public const SINGULAR = '';
+    public const PLURAL = '';
 
-    /** tên file template */
-    public const TEMPLATE_SINGLE = '';
-    public const TEMPLATE_ARCHIVE = '';
-    public const TEMPLATE_TAX_CAT = '';
+    // Tên menu trong admin, mặc định rỗng
+    public const MENU_NAME = '';
+
+    // Đăng ký template mapping mặc định rỗng
+    public const TEMPLATE_MAP = [];
 
     protected array $args = [];
 
     public function __construct(array $args = [])
     {
+        // Kiểm tra nếu chưa định nghĩa SLUG thì thoát để tránh lỗi
+        if (empty(static::SLUG)) {
+            return;
+        }
+
         $this->args = $args;
 
-        add_action('init', [$this, 'register_ctp']);
+        // Quy trình khởi tạo tập trung
+        add_action('init', [$this, 'boot_post_type']);
 
-        // Registry info
+        // Đăng ký thông tin vào Registry
         self::$registry[static::SLUG] = [
+            'slug' => static::SLUG,
             'singular' => static::SINGULAR,
-            'plural'   => static::PLURAL,
+            'plural' => static::PLURAL,
+            'class' => static::class,
         ];
 
-        // Tự động load template mapping nếu có
-        $constants = (new \ReflectionClass($this))->getConstants();
-
-        if (!empty($constants['TEMPLATE_SINGLE'])) {
-            self::$templates[static::SLUG]['single'] = $constants['TEMPLATE_SINGLE'];
-        }
-
-        if (!empty($constants['TEMPLATE_ARCHIVE'])) {
-            self::$templates[static::SLUG]['archive'] = $constants['TEMPLATE_ARCHIVE'];
-        }
-
-        if (isset($constants['TAX_SLUG']) && !empty($constants['TEMPLATE_TAX_CAT'])) {
-            self::$templates[$constants['TAX_SLUG']]['taxonomy'] = $constants['TEMPLATE_TAX_CAT'];
+        // Tự động load template mapping từ mảng TEMPLATE_MAP
+        $map = static::TEMPLATE_MAP;
+        if (!empty($map)) {
+            foreach ($map as $key => $template_file) {
+                if (in_array($key, ['single', 'archive'])) {
+                    // Lưu cho Post Type
+                    self::$templates[static::SLUG][$key] = $template_file;
+                } else {
+                    // Mặc định các key khác là Taxonomy Slug
+                    self::$templates[$key]['taxonomy'] = $template_file;
+                }
+            }
         }
     }
 
-    public static function get_registry(): array
+    /**
+     * Quy trình khởi tạo: Luôn ưu tiên Taxonomy trước CPT
+     */
+    public function boot_post_type(): void
     {
-        return self::$registry;
+        $this->register_taxonomies();
+        $this->register_ctp();
     }
 
-    public static function get_templates(): array
+    /**
+     * Lớp con sẽ ghi đè để đăng ký các Taxonomy
+     */
+    protected function register_taxonomies(): void
     {
-        return self::$templates;
+        // Để trống cho lớp con override
     }
 
+    /**
+     * Cho phép lớp con ghi đè các label cần dịch thuật
+     */
+    protected function get_custom_labels(): array
+    {
+        return [];
+    }
+
+    /**
+     * Đăng ký Custom Post Type chung
+     */
     public function register_ctp(): void
     {
+        /// Lấy các label tùy chỉnh từ lớp con
+        $custom_labels = $this->get_custom_labels();
+
         $labels = [
-            'name'               => _x(static::PLURAL, 'Post type general name', 'extend-site'),
-            'singular_name'      => _x(static::SINGULAR, 'Post type singular name', 'extend-site'),
-            'menu_name'          => static::PLURAL,
-            'add_new'            => __('Thêm mới', 'extend-site'),
-            'add_new_item'       => sprintf(__('Thêm %s', 'extend-site'), static::SINGULAR),
-            'edit_item'          => sprintf(__('Chỉnh sửa %s', 'extend-site'), static::SINGULAR),
-            'new_item'           => sprintf(__('Mới %s', 'extend-site'), static::SINGULAR),
-            'view_item'          => sprintf(__('Xem %s', 'extend-site'), static::SINGULAR),
-            'all_items'          => sprintf(__('Tất cả %s', 'extend-site'), static::PLURAL),
-            'search_items'       => sprintf(__('Tìm kiếm %s', 'extend-site'), static::PLURAL),
-            'not_found'          => __('Không tìm thấy.', 'extend-site'),
+            'name' => $custom_labels['name'] ?? static::PLURAL,
+            'singular_name' => $custom_labels['singular_name'] ?? static::SINGULAR,
+            'menu_name' => $custom_labels['menu_name'] ?? (!empty(static::MENU_NAME) ? static::MENU_NAME : static::PLURAL),
+            'all_items' => esc_html__('Tất cả', 'extend-site'),
+            'add_new_item' => esc_html__('Thêm mới', 'extend-site'),
+            'edit_item' => esc_html__('Chỉnh sửa', 'extend-site'),
+            'view_item' => esc_html__('Xem', 'extend-site'),
+            'search_items' => esc_html__('Tìm kiếm', 'extend-site'),
+            'not_found' => esc_html__('Không tìm thấy kết quả phù hợp', 'extend-site'),
         ];
 
         $default_args = [
-            'labels'       => $labels,
-            'public'       => true,
-            'has_archive'  => true,
-            'hierarchical' => false,
-            'supports'     => ['title', 'editor', 'thumbnail', 'excerpt', 'revisions'],
-            'rewrite'      => ['slug' => static::SLUG, 'with_front' => false],
-            'menu_icon'    => 'dashicons-portfolio',
+            'labels' => $labels,
+            'public' => true,
+            'has_archive' => true,
+            'show_in_menu' => true,
+            'show_in_nav_menus' => true, // Quan trọng để hiện ở trang quản lý Menu
+            'rewrite' => ['slug' => static::SLUG, 'with_front' => false],
+            'menu_icon' => 'dashicons-admin-post',
+            'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
         ];
 
         register_post_type(static::SLUG, array_replace_recursive($default_args, $this->args));
 
-        // Flag flush rewrite
         $this->mark_rewrite_flush_needed();
     }
 
     /**
-     * Đăng ký taxonomy cho CPT.
+     * Đăng ký taxonomy chung
      */
     protected function register_taxonomy(string $tax_slug, string $singular, string $plural, array $args = []): void
     {
         $labels = [
-            'name'          => $plural,
+            'name' => $plural,
             'singular_name' => $singular,
-            'menu_name'     => $plural,
-            'search_items'  => sprintf(__('Tìm kiếm %s', 'extend-site'), $plural),
-            'add_new_item'  => sprintf(__('Thêm %s', 'extend-site'), $singular),
+            'menu_name' => $plural,
         ];
 
         $defaults = [
-            'labels'            => $labels,
-            'public'            => true,
-            'hierarchical'      => true,
+            'labels' => $labels,
+            'public' => true,
+            'hierarchical' => true,
             'show_admin_column' => true,
-            'rewrite'           => ['slug' => $tax_slug, 'with_front' => false],
+            'show_in_nav_menus' => true,
+            'rewrite' => ['slug' => $tax_slug, 'with_front' => false],
         ];
 
+        // array_replace_recursive giúp ghi đè labels sâu bên trong $args
         register_taxonomy($tax_slug, static::SLUG, array_replace_recursive($defaults, $args));
-
-        // Flag flush rewrite
-        $this->mark_rewrite_flush_needed();
     }
 
     /**
-     * Đánh dấu cần flush rewrite.
+     * Đánh dấu cần Flush Rewrite Rules
      */
     protected function mark_rewrite_flush_needed(): void
     {
-        if (! get_option('extend_site_flush_rewrite')) {
-            update_option('extend_site_flush_rewrite', 1);
+        // Đánh dấu cần flush rewrite rules
+        $flag = Config::FLUSH_FLAG;
+
+        if (!get_option($flag)) {
+            update_option($flag, 1);
         }
+    }
+
+    /**
+     * Tự động Flush Rewrite Rules khi kết thúc request nếu có thay đổi
+     */
+    public function __destruct()
+    {
+        add_action('shutdown', function () {
+            $flag = Config::FLUSH_FLAG;
+
+            if (get_option($flag)) {
+                flush_rewrite_rules();
+                delete_option($flag);
+            }
+        });
+    }
+
+    /**
+     * Lấy danh sách Post Type đã đăng ký
+     */
+    public static function get_registered_post_types(): array
+    {
+        return self::$registry;
+    }
+
+    /**
+     * Lấy danh sách template đã đăng ký
+     */
+    public static function get_templates(): array
+    {
+        return self::$templates;
     }
 }

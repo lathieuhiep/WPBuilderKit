@@ -3,6 +3,7 @@
 namespace ExtendSite\Core;
 
 use Carbon_Fields\Carbon_Fields;
+use ExtendSite\Constants\Config;
 use ExtendSite\Fields\FieldsManager;
 use ExtendSite\Options\GeneralOptions;
 use ExtendSite\Options\ThemeOptions;
@@ -42,7 +43,7 @@ class Plugin
         load_plugin_textdomain(
             'extend-site',
             false,
-            dirname(EXTEND_SITE_BASENAME) . '/languages'
+            dirname(Config::$basename) . '/languages'
         );
     }
 
@@ -87,7 +88,7 @@ class Plugin
      * Load Carbon Fields library.
      */
     private static function load_carbon_fields(): void {
-        require_once EXTEND_SITE_PATH . 'vendor/carbon-fields/core/Carbon_Fields.php';
+        require_once Config::$path . 'vendor/carbon-fields/core/Carbon_Fields.php';
 
         Carbon_Fields::boot();
     }

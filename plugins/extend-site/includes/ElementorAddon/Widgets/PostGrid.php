@@ -4,6 +4,7 @@ namespace ExtendSite\ElementorAddon\Widgets;
 use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use ExtendSite\Constants\Config;
 use ExtendSite\ElementorAddon\Traits\HasImageSizeControl;
 use ExtendSite\ElementorAddon\Traits\HasQueryControls;
 
@@ -266,7 +267,7 @@ class PostGrid extends Widget_Base {
                                     the_post_thumbnail( $settings['image_size'] );
                                 else:
                                     ?>
-                                    <img src="<?php echo esc_url( EXTEND_SITE_URL . 'assets/images/no-image.png' ); ?>" alt="<?php the_title(); ?>"/>
+                                    <img src="<?php echo esc_url( Config::$url . 'assets/images/no-image.png' ); ?>" alt="<?php the_title(); ?>"/>
                                 <?php endif; ?>
                             </a>
                         </div>

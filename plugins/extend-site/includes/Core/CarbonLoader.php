@@ -2,6 +2,7 @@
 namespace ExtendSite\Core;
 
 use Carbon_Fields\Carbon_Fields;
+use ExtendSite\Constants\Config;
 
 defined('ABSPATH') || exit;
 
@@ -20,7 +21,7 @@ class CarbonLoader
      */
     public static function load_carbon_fields(): void {
         // Path tới thư mục carbon-fields
-        $path = EXTEND_SITE_PATH . 'libraries/carbon-fields/vendor/autoload.php';
+        $path = Config::$path . 'libraries/carbon-fields/vendor/autoload.php';
 
         if ( file_exists($path) ) {
             require_once $path;

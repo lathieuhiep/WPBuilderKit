@@ -7,8 +7,10 @@ final class Autoloader
 {
     public static function register(): void
     {
-        $base = rtrim(EXTEND_SITE_PATH, '/\\') . '/includes/'; // map vào /includes
+        // Base directory for the namespace prefix
+        $base = dirname(__DIR__) . '/';
 
+        // Register the autoloader
         spl_autoload_register(static function (string $class) use ($base) {
             $prefix = 'ExtendSite\\';
 

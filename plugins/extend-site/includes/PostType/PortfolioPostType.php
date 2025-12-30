@@ -4,39 +4,58 @@ namespace ExtendSite\PostType;
 
 use ExtendSite\Admin\Helpers\TaxFilter;
 
-defined('ABSPATH') || exit;
-
 class PortfolioPostType extends BasePostType
 {
     public const SLUG = 'portfolio';
-    public const TAX_SLUG = 'portfolio_category';
-
+    public const TAX_CATEGORY = 'portfolio_category';
     public const SINGULAR = 'Portfolio';
     public const PLURAL = 'Portfolios';
-    public const TAX_NAME = 'Danh mục Portfolio';
+    public const MENU_NAME = 'Portfolios';
 
-    public const TEMPLATE_SINGLE = 'single-portfolio.php';
-    public const TEMPLATE_ARCHIVE = 'archive-portfolio.php';
-    public const TEMPLATE_TAX_CAT = 'taxonomy-portfolio-category.php';
+    // Đăng ký mọi template tại đây
+    public const TEMPLATE_MAP = [
+        'single' => 'single-portfolio.php',
+        'archive' => 'archive-portfolio.php',
+        self::TAX_CATEGORY => 'taxonomy-portfolio-category.php',
+    ];
 
     public function __construct(array $args = [])
     {
         parent::__construct($args);
 
-        // Đăng ký taxonomy
-        add_action('init', function () {
-            $this->register_taxonomy(
-                self::TAX_SLUG,
-                'Danh mục',
-                'Danh mục',
-                [
-                    'hierarchical' => true,
-                    'rewrite' => ['slug' => 'portfolio-category'],
-                ]
-            );
-        });
+        // Đăng ký bộ lọc admin nếu class tồn tại
+        if (class_exists('ExtendSite\Admin\Helpers\TaxFilter')) {
+            TaxFilter::register(self::SLUG, self::TAX_CATEGORY);
+        }
+    }
 
-        // Đăng ký bộ lọc taxonomy trong admin
-        TaxFilter::register(self::SLUG, self::TAX_SLUG);
+    /**
+     * Đăng ký Custom Post Type
+     */
+    protected function register_taxonomies(): void
+    {
+        $this->register_taxonomy(
+            self::TAX_CATEGORY,
+            esc_html__('Danh mục', 'extend-site'),        // singular_name
+            esc_html__('Danh mục dự án', 'extend-site'), // name (Hiện ở Nav Menu)
+            [
+                'labels' => [
+                    'menu_name' => esc_html__('Danh mục', 'extend-site'),
+                ],
+                'rewrite' => ['slug' => 'portfolio-category']
+            ]
+        );
+    }
+
+    /**
+     * Ghi đè các label cần dịch thuật
+     */
+    protected function get_custom_labels(): array
+    {
+        return [
+            'name' => esc_html__('Dự án', 'extend-site'),
+            'singular_name' => esc_html__('Dự án', 'extend-site'),
+            'menu_name' => esc_html__('Dự án', 'extend-site'),
+        ];
     }
 }

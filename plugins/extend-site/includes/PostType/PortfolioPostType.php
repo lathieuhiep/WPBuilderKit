@@ -14,9 +14,9 @@ class PortfolioPostType extends BasePostType
 
     // Đăng ký mọi template tại đây
     public const TEMPLATE_MAP = [
-        'single' => 'single-portfolio.php',
-        'archive' => 'archive-portfolio.php',
-        self::TAX_CATEGORY => 'taxonomy-portfolio-category.php',
+        'single' => 'portfolio/single-portfolio.php',
+        'archive' => 'portfolio/archive-portfolio.php',
+        self::TAX_CATEGORY => 'portfolio/taxonomy-portfolio-category.php',
     ];
 
     public function __construct(array $args = [])

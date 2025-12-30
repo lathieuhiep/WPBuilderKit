@@ -55,29 +55,44 @@ class TemplateLoader
      * @return string The path to the selected template file.
      */
     public static function pick(string $template): string {
-        $templates = BasePostType::get_templates();
+        $registry = BasePostType::get_templates();
 
-        // Kiểm tra post type và template tương ứng
-        foreach ($templates as $slug => $template_files) {
-            // single post type
-            if (is_singular($slug) && isset($template_files['single'])) {
-                return self::locate_in_theme($template_files['single'])
-                    ?: self::plugin_template($template_files['single']);
+        foreach ($registry as $post_type => $template_files) {
+
+            // 1. Kiểm tra Single (Trang chi tiết của Post Type)
+            if (is_singular($post_type) && isset($template_files['single'])) {
+                return self::resolve($template_files['single'], $template);
             }
 
-            // archive post type
-            if (is_post_type_archive($slug) && isset($template_files['archive'])) {
-                return self::locate_in_theme($template_files['archive'])
-                    ?: self::plugin_template($template_files['archive']);
+            // 2. Kiểm tra Archive (Trang danh sách của Post Type)
+            if (is_post_type_archive($post_type) && isset($template_files['archive'])) {
+                return self::resolve($template_files['archive'], $template);
             }
 
-            // taxonomy
-            if (is_tax($slug) && isset($template_files['taxonomy'])) {
-                return self::locate_in_theme($template_files['taxonomy'])
-                    ?: self::plugin_template($template_files['taxonomy']);
+            // 3. Kiểm tra Taxonomy linh hoạt
+            // Chúng ta duyệt qua toàn bộ mảng template_files
+            foreach ($template_files as $key => $file_name) {
+                // Nếu key không phải single/archive, WordPress sẽ kiểm tra nó có phải là Taxonomy đang hiển thị không
+                if (!in_array($key, ['single', 'archive']) && is_tax($key)) {
+                    return self::resolve($file_name, $template);
+                }
             }
         }
 
         return $template;
+    }
+
+    /**
+     * Hàm bổ trợ để tách biệt logic tìm file
+     */
+    private static function resolve(string $file_name, string $default): string {
+        $located = self::locate_in_theme($file_name);
+
+        if ($located) {
+            return $located;
+        }
+
+        $plugin_file = self::plugin_template($file_name);
+        return file_exists($plugin_file) ? $plugin_file : $default;
     }
 }

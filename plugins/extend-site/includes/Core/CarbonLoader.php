@@ -29,5 +29,4 @@ class CarbonLoader
             Carbon_Fields::boot();
         }
     }
-
 }

@@ -1,24 +1,28 @@
 <?php
 // get version theme
-use Options\Modules\SocialLinkOptions;
+use ExtendSite\Admin\Options\Modules\SocialLinkOptions;
 
 function basictheme_get_version_theme(): string
 {
     return wp_get_theme()->get('Version');
 }
 
-/**
- * @template T of object
- * @param class-string<T> $class
- * @return T|null
- */
-function basictheme_opt(string $class)
-{
-    if (!class_exists($class)) {
-        return null;
+// Empty Option Proxy Class
+if (!class_exists('EmptyOptionProxy')) {
+    class EmptyOptionProxy {
+        public static function __callStatic($name, $args) { return null; }
     }
+}
 
-    return new $class();
+/**
+ * Hàm bổ trợ lấy Option Module an toàn
+ * * @template T
+ * @param class-string<T> $class Class name của Option Module (ví dụ: GeneralOptions::class)
+ * @return class-string<T>|class-string<EmptyOptionProxy> Trả về class name của Option Module hoặc EmptyOptionProxy nếu không tồn tại
+ */
+function basictheme_opt(string $class): string
+{
+    return class_exists($class) ? $class : EmptyOptionProxy::class;
 }
 
 /**
@@ -293,7 +297,7 @@ function basictheme_list_social_network(): array
 
 function basictheme_get_social_url(): void
 {
-    $opt_social_networks = basictheme_opt(SocialLinkOptions::class)?->get_social_list();
+    $opt_social_networks = basictheme_opt(SocialLinkOptions::class)::get_social_list() ?? [];
 
     if (!empty($opt_social_networks)) :
         foreach ($opt_social_networks as $item) :

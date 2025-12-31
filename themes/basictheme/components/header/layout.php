@@ -1,8 +1,8 @@
 <?php
 
-use Options\Modules\HeaderOptions;
+use ExtendSite\Admin\Options\Modules\HeaderOptions;
 
-$sticky_menu = basictheme_opt(HeaderOptions::class)?->get_position_fixed_menu() ?? true;
+$sticky_menu = basictheme_opt(HeaderOptions::class)::get_position_fixed_menu() ?? true;
 ?>
 <header class="main-header <?php echo esc_attr( $sticky_menu ? 'active-sticky-nav' : '' ); ?>">
     <nav class="main-header__warp container">

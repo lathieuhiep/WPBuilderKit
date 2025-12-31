@@ -1,10 +1,9 @@
 <?php
-
-use Options\Modules\GeneralOptions;
+use ExtendSite\Admin\Options\Modules\GeneralOptions;
 
 defined('ABSPATH') || exit;
 
-$logo = basictheme_opt(GeneralOptions::class)?->get_logo_id();
+$logo = basictheme_opt(GeneralOptions::class)::get_logo_id() ?? '';
 ?>
 <div class="logo">
     <a href="<?php echo esc_url( get_home_url( '/' ) ); ?>" title="<?php bloginfo( 'name' ); ?>">

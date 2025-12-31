@@ -1,13 +1,12 @@
 <?php
-
-use Options\Modules\PostArchiveOptions;
+use ExtendSite\Admin\Options\Modules\PostArchiveOptions;
 
 // Get sidebar layout
-$sidebar = basictheme_opt(PostArchiveOptions::class)?->get_sidebar_layout_archive() ?? THEME_SIDEBAR_POSITION_RIGHT;
+$sidebar = basictheme_opt(PostArchiveOptions::class)::get_sidebar_layout_archive() ?? THEME_SIDEBAR_POSITION_RIGHT;
 $class_col_content = basictheme_col_use_sidebar($sidebar, 'sidebar-main');
 
 // Get per row classes
-$per_row = basictheme_opt(PostArchiveOptions::class)?->get_archive_row_columns();
+$per_row = basictheme_opt(PostArchiveOptions::class)::get_archive_row_columns() ?? 3;
 $per_row_classes = basictheme_get_responsive_row_class( $per_row );
 ?>
 

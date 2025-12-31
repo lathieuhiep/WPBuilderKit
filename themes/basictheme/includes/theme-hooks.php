@@ -4,7 +4,7 @@
  * */
 
 // optimize WordPress
-use Options\Modules\InsertCodeOptions;
+use ExtendSite\Admin\Options\Modules\InsertCodeOptions;
 
 function basictheme_optimize_wordpress(): void {
 	// Disable WordPress Emoji
@@ -41,7 +41,7 @@ add_action('init', 'basictheme_optimize_wordpress');
 
 // add code to head
 function basictheme_custom_header_code(): void {
-	$header_code = basictheme_opt(InsertCodeOptions::class)?->get_head_code() ?? '';
+	$header_code = basictheme_opt(InsertCodeOptions::class)::get_head_code() ?? '';
 
 	if ($header_code) {
 		echo $header_code;
@@ -51,7 +51,7 @@ add_action('wp_head', 'basictheme_custom_header_code');
 
 // add code to body
 function basictheme_custom_body_code(): void {
-	$body_code = basictheme_opt(InsertCodeOptions::class)?->get_after_body_code() ?? '';
+	$body_code = basictheme_opt(InsertCodeOptions::class)::get_after_body_code() ?? '';
 
 	if ($body_code) {
 		echo $body_code;
@@ -61,7 +61,7 @@ add_action('wp_body_open', 'basictheme_custom_body_code');
 
 // add code to footer
 function basictheme_custom_footer_code(): void {
-	$footer_code = basictheme_opt(InsertCodeOptions::class)?->get_footer_code() ?? '';
+	$footer_code = basictheme_opt(InsertCodeOptions::class)::get_footer_code() ?? '';
 
 	if ($footer_code) {
 		echo $footer_code;

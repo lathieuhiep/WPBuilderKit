@@ -1,7 +1,7 @@
 <?php
 // get the footer sidebar
 
-use Options\Modules\FooterOptions;
+use ExtendSite\Admin\Options\Modules\FooterOptions;
 
 $opt_number_columns = basictheme_get_footer_sidebar_columns_count();
 
@@ -22,7 +22,7 @@ if ( $has_footer_sidebar ) :
 	            <?php
 	            for ( $i = 0; $i < $opt_number_columns; $i++ ) :
 		            $j = $i + 1;
-		            $cols = basictheme_opt(FooterOptions::class)?->get_footer_sidebar_settings($j);
+		            $cols = basictheme_opt(FooterOptions::class)::get_footer_sidebar_settings($j) ?? [];
 
                     if ( empty( $cols ) ) {
                         $cols = [

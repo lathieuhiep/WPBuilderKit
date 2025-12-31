@@ -2,9 +2,8 @@
 
 namespace ExtendSite\Core;
 
+use ExtendSite\Admin\Options\ThemeOptions;
 use ExtendSite\Constants\Config;
-use ExtendSite\Fields\FieldsManager;
-use ExtendSite\Options\ThemeOptions;
 use ExtendSite\ElementorAddon\ElementorAddon;
 use ExtendSite\PostType\PostTypeManager;
 
@@ -22,9 +21,6 @@ class Plugin
 
         // Load Carbon Fields theme options
         ThemeOptions::boot();
-
-        // Load custom fields
-        FieldsManager::boot();
 
         // Load asset enqueuing
         Enqueue::boot();

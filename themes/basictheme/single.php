@@ -1,6 +1,6 @@
 <?php
 
-use ExtendSite\Options\SinglePostOptions;
+use Options\Modules\SinglePostOptions;
 
 get_header();
 

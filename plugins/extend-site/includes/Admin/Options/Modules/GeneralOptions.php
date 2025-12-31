@@ -5,22 +5,27 @@
  * @package ExtendSite
  */
 
-namespace ExtendSite\Options;
+namespace ExtendSite\Admin\Options\Modules;
 
 use Carbon_Fields\Field;
+use ExtendSite\Admin\Options\OptionBase;
+use ExtendSite\Admin\Options\OptionIF;
 
 defined('ABSPATH') || exit;
 
-class GeneralOptions extends OptionBase
+class GeneralOptions extends OptionBase implements OptionIF
 {
 
     // key options
-    private const LOGO = 'es_opt_logo';
-    private const ENABLE_LOADING = 'es_opt_enable_loading';
-    private const LOADING_IMAGE = 'es_opt_loading_image';
-    private const BACK_TO_TOP = 'es_opt_back_to_top';
+    private const PREFIX = 'es_opt_general_';
+    private const LOGO = self::PREFIX . 'logo';
+    private const ENABLE_LOADING = self::PREFIX . 'enable_loading';
+    private const LOADING_IMAGE = self::PREFIX . 'loading_image';
+    private const BACK_TO_TOP = self::PREFIX . 'back_to_top';
 
-    // option fields
+    /**
+     * fields
+     */
     public static function fields(): array
     {
 
@@ -52,8 +57,12 @@ class GeneralOptions extends OptionBase
         ];
     }
 
+    /**
+     * get data
+     */
+
     // get logo
-    public function get_logo_id($default = null)
+    public static function get_logo_id($default = null)
     {
         $id = self::get(self::LOGO);
 
@@ -61,13 +70,13 @@ class GeneralOptions extends OptionBase
     }
 
     // get display loading enabled
-    public function get_loading_enabled(): bool
+    public static function get_loading_enabled(): bool
     {
         return (bool)self::get(self::ENABLE_LOADING, false);
     }
 
     // get image loading
-    public function get_loading_image_id($default = null)
+    public static function get_loading_image_id($default = null)
     {
         $id = self::get(self::LOADING_IMAGE);
 
@@ -75,8 +84,19 @@ class GeneralOptions extends OptionBase
     }
 
     // get display back to top
-    public function get_back_to_top_enabled(): bool
+    public static function get_back_to_top_enabled(): bool
     {
         return (bool)self::get(self::BACK_TO_TOP, true);
+    }
+
+    // get all options
+    public static function get_all(): array
+    {
+        return [
+            self::LOGO => self::get_logo_id(),
+            self::ENABLE_LOADING => self::get_loading_enabled(),
+            self::LOADING_IMAGE => self::get_loading_image_id(),
+            self::BACK_TO_TOP => self::get_back_to_top_enabled(),
+        ];
     }
 }

@@ -1,20 +1,24 @@
 <?php
 
-namespace ExtendSite\Options;
+namespace ExtendSite\Admin\Options\Modules;
 
 use Carbon_Fields\Field;
+use ExtendSite\Admin\Options\OptionBase;
+use ExtendSite\Admin\Options\OptionIF;
 use ExtendSite\Constants\Breakpoints;
 use ExtendSite\Constants\Layout;
 
 defined('ABSPATH') || exit;
 
-class PostArchiveOptions extends OptionBase
+class PostArchiveOptions extends OptionBase implements OptionIF
 {
     // Key prefix
     private const PREFIX = 'es_opt_post_archive_';
     private const SIDEBAR_POSITION = self::PREFIX . 'sidebar_position';
 
-    // fields
+    /**
+     * fields
+     */
     public static function fields(): array
     {
         $fields = [];
@@ -48,29 +52,42 @@ class PostArchiveOptions extends OptionBase
                 ->set_attribute('min', 1)
                 ->set_attribute('max', 12)
                 ->set_attribute('step', 1)
-                ->set_default_value( Breakpoints::default_col($key) )
+                ->set_default_value(Breakpoints::default_col($key))
                 ->set_width(25);
         }
 
         return $fields;
     }
 
+    /**
+     * get data
+     */
+
     // Read: sidebar
-    public function get_sidebar_layout_archive(string $default = Layout::SIDEBAR_RIGHT): string
+    public static function get_sidebar_layout_archive(string $default = Layout::SIDEBAR_RIGHT): string
     {
         $value = self::get(self::SIDEBAR_POSITION, $default);
         return !empty($value) ? $value : $default;
     }
 
     // Read: archive row columns
-    public function get_archive_row_columns(): array
+    public static function get_archive_row_columns(): array
     {
         $columns = [];
 
         foreach (Breakpoints::map() as $key => $minWidth) {
-            $columns[$key] = (int) self::get(self::PREFIX . 'col_' . $key, Breakpoints::default_col($key));
+            $columns[$key] = (int)self::get(self::PREFIX . 'col_' . $key, Breakpoints::default_col($key));
         }
 
         return $columns;
+    }
+
+    // get all data
+    public static function get_all(): array
+    {
+        return [
+            'sidebar_layout' => self::get_sidebar_layout_archive(),
+            'archive_row_columns' => self::get_archive_row_columns(),
+        ];
     }
 }

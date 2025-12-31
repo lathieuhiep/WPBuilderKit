@@ -1,6 +1,6 @@
 <?php
 
-use ExtendSite\Options\FooterOptions;
+use Options\Modules\FooterOptions;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;

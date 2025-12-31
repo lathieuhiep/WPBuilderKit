@@ -2,6 +2,7 @@
 
 namespace ExtendSite\PostType;
 
+use ExtendSite\Admin\Fields\PortfolioFields;
 use ExtendSite\Admin\Helpers\TaxFilter;
 
 class PortfolioPostType extends BasePostType
@@ -24,9 +25,10 @@ class PortfolioPostType extends BasePostType
         parent::__construct($args);
 
         // Đăng ký bộ lọc admin nếu class tồn tại
-        if (class_exists('ExtendSite\Admin\Helpers\TaxFilter')) {
-            TaxFilter::register(self::SLUG, self::TAX_CATEGORY);
-        }
+        TaxFilter::register(self::SLUG, self::TAX_CATEGORY);
+
+        // Đăng ký các field cho post type này
+        add_action('carbon_fields_register_fields', [$this, 'register_fields']);
     }
 
     /**
@@ -57,5 +59,15 @@ class PortfolioPostType extends BasePostType
             'singular_name' => esc_html__('Dự án', 'extend-site'),
             'menu_name' => esc_html__('Dự án', 'extend-site'),
         ];
+    }
+
+    /**
+     * Đăng ký các field cho post type này
+     */
+    public function register_fields(): void
+    {
+        if (class_exists(PortfolioFields::class)) {
+            PortfolioFields::register(self::SLUG);
+        }
     }
 }

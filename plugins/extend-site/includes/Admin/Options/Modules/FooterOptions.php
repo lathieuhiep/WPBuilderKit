@@ -1,13 +1,15 @@
 <?php
 
-namespace ExtendSite\Options;
+namespace ExtendSite\Admin\Options\Modules;
 
 use Carbon_Fields\Field;
+use ExtendSite\Admin\Options\OptionBase;
+use ExtendSite\Admin\Options\OptionIF;
 use ExtendSite\Constants\Breakpoints;
 
 defined('ABSPATH') || exit;
 
-class FooterOptions extends OptionBase
+class FooterOptions extends OptionBase implements OptionIF
 {
 
     // Key prefix
@@ -16,7 +18,9 @@ class FooterOptions extends OptionBase
     private const BREAKPOINT_HEADING = self::PREFIX . 'breakpoint_heading_sidebar_';
     private const COLUMNS_PREFIX = self::PREFIX . 'sidebar_column_';
 
-    // fields
+    /**
+     * fields
+     */
     public static function fields(): array
     {
         $fields = [];
@@ -162,8 +166,12 @@ class FooterOptions extends OptionBase
         return $fields;
     }
 
+    /**
+     * get data
+     */
+
     // get footer sidebar columns count
-    public function get_footer_sidebar_columns_count(int $default = 4): int
+    public static function get_footer_sidebar_columns_count(int $default = 4): int
     {
         $value = (int)self::get(self::SIDEBAR_COLUMNS, $default);
 
@@ -171,7 +179,7 @@ class FooterOptions extends OptionBase
     }
 
     // get footer sidebar settings
-    public function get_footer_sidebar_settings(int $column): array
+    public static function get_footer_sidebar_settings(int $column): array
     {
         $columns = [];
 
@@ -180,5 +188,19 @@ class FooterOptions extends OptionBase
         }
 
         return $columns;
+    }
+
+    // get all options
+    public static function get_all(): array
+    {
+        return [
+            'footer_sidebar_columns_count' => self::get_footer_sidebar_columns_count(),
+            'footer_sidebar_settings' => [
+                1 => self::get_footer_sidebar_settings(1),
+                2 => self::get_footer_sidebar_settings(2),
+                3 => self::get_footer_sidebar_settings(3),
+                4 => self::get_footer_sidebar_settings(4),
+            ],
+        ];
     }
 }

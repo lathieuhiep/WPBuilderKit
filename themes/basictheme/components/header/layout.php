@@ -1,6 +1,6 @@
 <?php
 
-use ExtendSite\Options\HeaderOptions;
+use Options\Modules\HeaderOptions;
 
 $sticky_menu = basictheme_opt(HeaderOptions::class)?->get_position_fixed_menu() ?? true;
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-use ExtendSite\Options\GeneralOptions;
+use Options\Modules\GeneralOptions;
 
 defined('ABSPATH') || exit;
 

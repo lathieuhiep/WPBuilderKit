@@ -1,17 +1,22 @@
 <?php
-namespace ExtendSite\Options;
+namespace ExtendSite\Admin\Options\Modules;
 
 use Carbon_Fields\Field;
+use ExtendSite\Admin\Options\OptionBase;
+use ExtendSite\Admin\Options\OptionIF;
 use ExtendSite\Constants\Social;
 
 defined('ABSPATH') || exit;
 
-class SocialLinkOptions extends OptionBase
+class SocialLinkOptions extends OptionBase implements OptionIF
 {
     // key options
-    private const SOCIAL_LINKS = 'es_opt_social_links';
+    private const KEY = 'es_opt_social_';
+    private const SOCIAL_LINKS = self::KEY . 'links';
 
-    // option fields
+    /**
+     * fields
+     */
     public static function fields(): array
     {
         $max = count(Social::list());
@@ -29,11 +34,23 @@ class SocialLinkOptions extends OptionBase
         ];
     }
 
+    /**
+     * get data
+     */
+
     // get social list
-    public function get_social_list()
+    public static function get_social_list()
     {
         $value = self::get(self::SOCIAL_LINKS);
 
         return !empty($value) ? $value : [];
+    }
+
+    // get all options
+    public static function get_all(): array
+    {
+        return [
+            'social_links' => self::get_social_list()
+        ];
     }
 }

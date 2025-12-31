@@ -1,6 +1,6 @@
 <?php
 
-use ExtendSite\Options\PostArchiveOptions;
+use Options\Modules\PostArchiveOptions;
 
 // Get sidebar layout
 $sidebar = basictheme_opt(PostArchiveOptions::class)?->get_sidebar_layout_archive() ?? THEME_SIDEBAR_POSITION_RIGHT;

@@ -1,7 +1,7 @@
 <?php
 // get the footer sidebar
 
-use ExtendSite\Options\FooterOptions;
+use Options\Modules\FooterOptions;
 
 $opt_number_columns = basictheme_get_footer_sidebar_columns_count();
 

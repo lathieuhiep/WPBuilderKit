@@ -1,7 +1,7 @@
 <?php
 // setup shop
-use ExtendSite\Options\WooOptions;
-use ExtendSite\Options\WooSingleOptions;
+use Options\Modules\WooOptions;
+use Options\Modules\WooSingleOptions;
 
 function basictheme_shop_setup(): void
 {

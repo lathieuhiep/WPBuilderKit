@@ -1,6 +1,6 @@
 <?php
 
-use ExtendSite\Options\SinglePostOptions;
+use Options\Modules\SinglePostOptions;
 
 $show_related = basictheme_opt(SinglePostOptions::class)?->get_show_related_posts() ?? THEME_YES;
 $term_ids  = wp_get_post_terms( get_the_ID(), 'category', array( 'fields' => 'ids' ) );

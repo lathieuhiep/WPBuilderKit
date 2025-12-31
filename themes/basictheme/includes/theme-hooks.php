@@ -4,7 +4,7 @@
  * */
 
 // optimize WordPress
-use ExtendSite\Options\InsertCodeOptions;
+use Options\Modules\InsertCodeOptions;
 
 function basictheme_optimize_wordpress(): void {
 	// Disable WordPress Emoji

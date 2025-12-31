@@ -1,6 +1,6 @@
 <?php
 
-use ExtendSite\Options\GeneralOptions;
+use Options\Modules\GeneralOptions;
 
 $opt_back_to_top = basictheme_opt(GeneralOptions::class)?->get_back_to_top_enabled() ?? true;
 

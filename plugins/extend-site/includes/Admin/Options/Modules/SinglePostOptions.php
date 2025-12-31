@@ -1,14 +1,16 @@
 <?php
 
-namespace ExtendSite\Options;
+namespace ExtendSite\Admin\Options\Modules;
 
 use Carbon_Fields\Field;
+use ExtendSite\Admin\Options\OptionBase;
+use ExtendSite\Admin\Options\OptionIF;
 use ExtendSite\Constants\Layout;
 use ExtendSite\Constants\Toggle;
 
 defined('ABSPATH') || exit;
 
-class SinglePostOptions extends OptionBase
+class SinglePostOptions extends OptionBase implements OptionIF
 {
     // key options
     private const PREFIX = 'es_opt_single_post_';
@@ -17,7 +19,9 @@ class SinglePostOptions extends OptionBase
     private const SHOW_RELATED = self::PREFIX . 'show_related_posts';
     private const RELATED_COUNT = self::PREFIX . 'related_count';
 
-    // option fields
+    /**
+     * fields
+     */
     public static function fields(): array
     {
         return [
@@ -46,15 +50,19 @@ class SinglePostOptions extends OptionBase
         ];
     }
 
+    /**
+     * get data
+     */
+
     // Read: sidebar
-    public function get_sidebar_position(string $default = Layout::SIDEBAR_RIGHT): string
+    public static function get_sidebar_position(string $default = Layout::SIDEBAR_RIGHT): string
     {
         $value = self::get(self::SIDEBAR_POSITION, $default);
         return !empty($value) ? $value : $default;
     }
 
     // get show related posts
-    public function get_show_related_posts()
+    public static function get_show_related_posts()
     {
         $value = self::get(self::SHOW_RELATED);
 
@@ -62,10 +70,20 @@ class SinglePostOptions extends OptionBase
     }
 
     // get related count
-    public function get_related_count(): int|string
+    public static function get_related_count(): int|string
     {
         $value = (int) self::get(self::RELATED_COUNT);
 
         return !empty($value) ? $value : '';
+    }
+
+    // get all data
+    public static function get_all(): array
+    {
+        return [
+            'sidebar_position' => self::get_sidebar_position(),
+            'show_related_posts' => self::get_show_related_posts(),
+            'related_count' => self::get_related_count(),
+        ];
     }
 }

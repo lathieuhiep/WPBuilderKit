@@ -1,6 +1,6 @@
 <?php
 
-use ExtendSite\Options\CopyrightOptions;
+use Options\Modules\CopyrightOptions;
 
 $show_copyright = basictheme_opt(CopyrightOptions::class)?->get_show_copyright() ?? true;
 

@@ -1,7 +1,7 @@
 <?php
 
-use ExtendSite\Options\WooOptions;
-use ExtendSite\Options\WooSingleOptions;
+use Options\Modules\WooOptions;
+use Options\Modules\WooSingleOptions;
 
 /**
  * General functions used to integrate this theme with WooCommerce.

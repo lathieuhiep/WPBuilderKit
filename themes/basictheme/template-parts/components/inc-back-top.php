@@ -9,7 +9,7 @@ if ( $opt_back_to_top ) :
 
 <div id="back-top">
     <a href="#">
-        <i class="ic-mask ic-mask-chevron-up"></i>
+        <i class="icon-theme-mask icon-theme-mask-chevron-up"></i>
     </a>
 </div>
 

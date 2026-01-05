@@ -69,7 +69,7 @@ function basictheme_woo_quantity_minus_button(): void
 {
 ?>
     <button type="button" class="qty-btn qty-minus">
-        <i class="ic-mask ic-mask-minus"></i>
+        <i class="icon-theme-mask icon-theme-mask-minus"></i>
     </button>
 <?php
 }
@@ -80,7 +80,7 @@ function basictheme_woo_quantity_plus_button(): void
 {
 ?>
     <button type="button" class="qty-btn qty-plus">
-        <i class="ic-mask ic-mask-plus"></i>
+        <i class="icon-theme-mask icon-theme-mask-plus"></i>
     </button>
 <?php
 }

@@ -1,7 +1,7 @@
 @import "../abstracts/abstracts";
 
 // list icon
-$ic-names: (
+$icon-theme-names: (
         bars
         calendar-days
         cart-plus
@@ -24,15 +24,15 @@ $ic-names: (
         youtube
 );
 
-.ic-mask {
-  --#{$prefix-theme}ic-width: 1.6rem;
-  --#{$prefix-theme}ic-height: 1.6rem;
-  --#{$prefix-theme}ic-color: currentColor;
+.icon-theme-mask {
+  --#{$prefix-theme}icon-theme-width: 1.6rem;
+  --#{$prefix-theme}icon-theme-height: 1.6rem;
+  --#{$prefix-theme}icon-theme-color: currentColor;
 
   display: inline-block;
-  width: var(--#{$prefix-theme}ic-width);
-  height: var(--#{$prefix-theme}ic-height);
-  background-color: var(--#{$prefix-theme}ic-color);
+  width: var(--#{$prefix-theme}icon-theme-width);
+  height: var(--#{$prefix-theme}icon-theme-height);
+  background-color: var(--#{$prefix-theme}icon-theme-color);
   mask-size: contain;
   -webkit-mask-size: contain;
   mask-repeat: no-repeat;
@@ -40,9 +40,9 @@ $ic-names: (
   mask-position: center;
   -webkit-mask-position: center;
 
-  @each $name in $ic-names {
+  @each $name in $icon-theme-names {
     &-#{$name} {
-      @include mask-image("#{$ic-path-theme}/#{$name}.svg");
+      @include mask-image("#{$icon-path-theme}/#{$name}.svg");
     }
   }
 }

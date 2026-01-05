@@ -13,7 +13,7 @@ function basictheme_get_cart(): void
     $cart_count = WC()->cart->get_cart_contents_count();
     ?>
     <div class="cart-box">
-        <i class="ic-mask ic-mask-cart-shopping"></i>
+        <i class="icon-theme-mask icon-theme-mask-cart-shopping"></i>
 
         <span class="number-cart-product"><?php echo esc_html($cart_count > 9 ? '9+' : $cart_count); ?></span>
     </div>
@@ -95,7 +95,7 @@ function basictheme_custom_mini_cart(): void {
                                data-product_id="<?php echo esc_attr( $_product->get_id() ); ?>"
                                data-cart_item_key="<?php echo esc_attr( $cart_item_key ); ?>"
                                data-product_sku="<?php echo esc_attr( $_product->get_sku() ); ?>">
-                                <i class="ic-mask ic-mask-xmark"></i>
+                                <i class="icon-theme-mask icon-theme-mask-xmark"></i>
                             </a>
                         </div>
                     </li>

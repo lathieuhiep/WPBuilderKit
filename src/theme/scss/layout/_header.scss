@@ -132,7 +132,7 @@
             height: 2rem;
 
             &.active {
-              @include mask-image("#{$ic-path-theme}/minus.svg");
+              @include mask-image("#{$icon-path-theme}/minus.svg");
             }
           }
         }
@@ -252,11 +252,11 @@
       @include transition();
 
       @media (min-width: 992px) {
-        @include mask-image("#{$ic-path-theme}/chevron-down.svg");
+        @include mask-image("#{$icon-path-theme}/chevron-down.svg");
       }
 
       @media (max-width: 991px) {
-        @include mask-image("#{$ic-path-theme}/plus.svg");
+        @include mask-image("#{$icon-path-theme}/plus.svg");
       }
     }
   }
@@ -271,8 +271,8 @@
       cursor: pointer;
 
       i {
-        --#{$prefix-theme}ic-width: 1.8rem;
-        --#{$prefix-theme}ic-height: 1.8rem;
+        --#{$prefix-theme}icon-theme-width: 1.8rem;
+        --#{$prefix-theme}icon-theme-height: 1.8rem;
 
         padding-right: 1.5rem;
       }

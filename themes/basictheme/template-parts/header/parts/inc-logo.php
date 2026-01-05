@@ -21,6 +21,6 @@ $logo = basictheme_opt(GeneralOptions::class)::get_logo_id() ?? '';
 
     <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#primary-menu"
             aria-controls="site-menu" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="ic-mask ic-mask-bars"></i>
+        <i class="icon-theme-mask icon-theme-mask-bars"></i>
     </button>
 </div>

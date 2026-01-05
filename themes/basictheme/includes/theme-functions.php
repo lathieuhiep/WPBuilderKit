@@ -309,7 +309,7 @@ function basictheme_get_social_url(): void
             ?>
             <div class="social-network-item">
                 <a href="<?php echo esc_url($item['url']); ?>" target="_blank">
-                    <i class="ic-mask ic-mask-<?php echo esc_attr($network); ?>"></i>
+                    <i class="icon-theme-mask icon-theme-mask-<?php echo esc_attr($network); ?>"></i>
                 </a>
             </div>
         <?php

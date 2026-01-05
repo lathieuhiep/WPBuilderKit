@@ -74,7 +74,7 @@ class MyTheme_Recent_Post_Widget extends WP_Widget {
                             </h4>
 
                             <p class="meta d-flex gap-1">
-                                <i class="ic-mask ic-mask-calendar-days"></i>
+                                <i class="icon-theme-mask icon-theme-mask-calendar-days"></i>
 								<span><?php echo get_the_date(); ?></span>
                             </p>
                         </div>

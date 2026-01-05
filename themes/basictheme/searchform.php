@@ -8,6 +8,6 @@
            value="<?php echo get_search_query(); ?>" name="s" aria-label="" />
 
     <button type="submit" class="btn search-submit">
-        <i class="ic-mask ic-mask-magnifying-glass"></i>
+        <i class="icon-theme-mask icon-theme-mask-magnifying-glass"></i>
     </button>
 </form>

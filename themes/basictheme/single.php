@@ -8,7 +8,7 @@ get_header();
 $sidebar = basictheme_opt(SinglePostOptions::class)::get_sidebar_position() ?? THEME_SIDEBAR_POSITION_RIGHT;
 $class_col_content = basictheme_col_use_sidebar( $sidebar, 'sidebar-main' );
 
-get_template_part('components/inc', 'breadcrumbs');
+get_template_part('template-parts/components/inc', 'breadcrumbs');
 ?>
 
 <div class="site-container single-post-warp">

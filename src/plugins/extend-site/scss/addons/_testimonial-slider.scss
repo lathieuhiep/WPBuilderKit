@@ -1,11 +1,10 @@
 @use "sass:map";
 
-@import "shared/scss/abstracts/abstracts";
 @import "../abstracts/abstracts";
 
 .#{$prefix-plugin-class-addon}addon-testimonial-slider {
-  --#{$prefix-plugin-class}fs-name: #{map.get($mt-font-sizes, md)};
-  --#{$prefix-plugin-class}fw-name: #{map.get($mt-font-weights, bold)};
+  --#{$prefix-plugin-class}fs-name: 1.6rem;
+  --#{$prefix-plugin-class}fw-name: 700;
 
   .item {
     text-align: center;

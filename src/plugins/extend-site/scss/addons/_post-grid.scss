@@ -1,11 +1,10 @@
 @use "sass:map";
 
-@import "shared/scss/abstracts/abstracts";
 @import "../abstracts/abstracts";
 
 .#{$prefix-plugin-class-addon}post-grid {
   .item {
-    --#{$prefix-plugin-class}fs-title: #{map.get($mt-font-sizes, md)};
+    --#{$prefix-plugin-class}fs-title: 1.6rem;
 
     .thumbnail {
       margin-bottom: 1.5rem;

@@ -33,9 +33,6 @@ const server = () => {
     })
 }
 
-// Biến đại diện cho tên plugin và theme
-const pluginNameEFA = 'essential-features-addon';
-
 // function build scss pipeline
 const buildScssPipeline = ({ input, output, includePaths = ['node_modules', 'src'] }) => {
     return src(input)
@@ -156,7 +153,7 @@ const pathPluginES = makePluginPaths('extend-site');
 const pluginEsBuildStyleCustomLogin = () => {
     return buildScssPipeline({
         input: `${pathPluginES.input.scss}custom-login.scss`,
-        output: `${pathPluginES.output.css}be/`
+        output: `${pathPluginES.output.css}backend/`
     })
 }
 
@@ -164,15 +161,7 @@ const pluginEsBuildStyleCustomLogin = () => {
 const pluginEsBuildStyleAddons = () => {
     return buildScssPipeline({
         input: `${pathPluginES.input.scss}addons-elementor.scss`,
-        output: `${pathPluginES.output.css}fe/`
-    })
-}
-
-/** Task build style custom post type */
-const pluginEsBuildStyleCPT = () => {
-    return buildScssPipeline({
-        input: `${pathPluginES.input.scss}cpt/**/*.scss`,
-        output: `${pathPluginES.output.css}fe/cpt/`
+        output: `${pathPluginES.output.css}frontend/`
     })
 }
 
@@ -186,28 +175,23 @@ const pluginEsBuildJs = () => {
 
 /** Watch all plugin extend site */
 const pluginEsWatchAll = () => {
-    watch([
-        `${pathPluginES.input.scss}abstracts/*.scss`,
-        `${pathPluginES.input.scss}base/*.scss`,
-        `${pathPluginES.input.scss}components/*.scss`,
-    ], gulp.series(
-        pluginEsBuildStyleAddons,
-        pluginEsBuildStyleCPT
-    ))
-
+    // watch custom login scss
     watch([
         `${pathPluginES.input.scss}custom-login.scss`
     ], pluginEsBuildStyleCustomLogin)
 
+    // watch style addons-elementor
     watch([
+        `${pathPluginES.input.scss}abstracts/*.scss`,
+        `${pathPluginES.input.scss}base/*.scss`,
+        `${pathPluginES.input.scss}components/*.scss`,
         `${pathPluginES.input.scss}addons/*.scss`,
         `${pathPluginES.input.scss}addons-elementor.scss`
-    ], pluginEsBuildStyleAddons)
+    ], gulp.series(
+        pluginEsBuildStyleAddons
+    ))
 
-    watch([
-        `${pathPluginES.input.scss}cpt/**/*.scss`
-    ], pluginEsBuildStyleCPT)
-
+    // watch js
     watch([
         `${pathPluginES.input.js}*/**.js`
     ], pluginEsBuildJs)
@@ -221,7 +205,7 @@ const themeName = 'basictheme';
 
 // function make vendor paths
 const makeVendorPaths = (slug) => {
-    const root = `src/vendors/${slug}`;
+    const root = `./src/vendors/${slug}`;
     const dist = `themes/${themeName}/assets/vendors/${slug}`;
 
     return {
@@ -243,7 +227,7 @@ const buildStyleCustomBootstrap = () => {
 /** task build js custom bootstrap */
 const buildJSCustomBootstrap = () => {
     return buildWebpackPipeline({
-        input: `${pathVendorBootstrap.input}*.js`,
+        input: `${pathVendorBootstrap.input}custom-bootstrap.js`,
         output: `${pathVendorBootstrap.output}`,
         filename: 'custom-bootstrap.min.js'
     });
@@ -314,10 +298,17 @@ const buildStylePageTemplate = () => {
 
 /** Task build js theme */
 const buildJSTheme = () => {
+    // danh sách entry (nhiều file đầu ra)
+    const entries = glob.sync(`${pathTheme.input.js}*.js`).reduce((result, file) => {
+        const name = path.basename(file, '.js');
+        result[name] = './' + file.replace(/\\/g, '/');
+        return result;
+    }, {});
+
     return buildWebpackPipeline({
         input: `${pathTheme.input.js}*.js`,
         output: `${pathTheme.output.js}`,
-        filename: 'main.min.js'
+        entries: entries
     });
 }
 
@@ -346,14 +337,10 @@ const buildJSShop = () => {
 }
 
 /** Watch Shared build style */
-const buildWatchShared = () => {
+const buildWatchAbstracts = () => {
     watch([
-        `src/shared/scss/**/*.scss`
+        `${pathTheme.input.scss}abstracts/*.scss`
     ], gulp.parallel(
-        pluginEsBuildStyleCustomLogin,
-        pluginEsBuildStyleAddons,
-        pluginEsBuildStyleCPT,
-
         buildStyleCustomBootstrap,
         buildStyleTheme,
         buildStyleCustomPostType,
@@ -381,7 +368,6 @@ const themeWatchAll = () => {
     ], buildStylePageTemplate)
 
     watch([
-        `${pathTheme.input.scss}shop/abstracts/*.scss`,
         `${pathTheme.input.scss}shop/components/*.scss`,
         `${pathTheme.input.scss}shop/*.scss`
     ], buildStyleShop)
@@ -432,7 +418,7 @@ const watchTaskAll = () => {
     vendorWatchAll()
 
     // watch shared styles
-    buildWatchShared()
+    buildWatchAbstracts()
 
     // watch theme
     themeWatchAll()

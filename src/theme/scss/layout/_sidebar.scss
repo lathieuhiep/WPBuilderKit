@@ -1,4 +1,4 @@
-@import "shared/scss/abstracts/abstracts";;
+@import "../abstracts/abstracts";
 
 .search-form {
   --#{$prefix-theme}search-field-min-height: 4rem;

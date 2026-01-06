@@ -1,4 +1,8 @@
-<?php get_header(); ?>
+<?php
+get_header();
+
+extend_site_breadcrumb();
+?>
 
 <div class="es-single-portfolio-warp">
     <div class="es-container">

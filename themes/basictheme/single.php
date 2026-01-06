@@ -1,7 +1,7 @@
 <?php
-
-
 use ExtendSite\Admin\Options\Modules\SinglePostOptions;
+
+defined('ABSPATH') || exit;
 
 get_header();
 

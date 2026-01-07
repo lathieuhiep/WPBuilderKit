@@ -4,7 +4,7 @@ namespace ExtendSite\Constants;
 
 defined('ABSPATH') || exit;
 
-class Config
+final class Config
 {
     public const ACTIVE = true;
     public const VERSION = '1.0.0';

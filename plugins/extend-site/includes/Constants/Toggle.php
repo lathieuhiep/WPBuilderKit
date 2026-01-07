@@ -3,8 +3,7 @@
 namespace ExtendSite\Constants;
 
 defined('ABSPATH') || exit;
-
-class Toggle
+final class Toggle
 {
     public const YES = 'yes';
     public const NO = 'no';

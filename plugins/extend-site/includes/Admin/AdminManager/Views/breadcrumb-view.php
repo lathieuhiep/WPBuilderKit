@@ -1,32 +1,35 @@
 <?php
-/**
- * View template cho trang cấu hình Breadcrumb.
- * * @var string $title       Được truyền từ BreadcrumbAdmin
- * @var string $description Được truyền từ BreadcrumbAdmin
- */
-
 defined('ABSPATH') || exit;
+
+/**
+ * @var array $options
+ */
 ?>
 
 <div class="wrap">
-    <h1 class="wp-heading-inline"><?php echo esc_html($title); ?></h1>
-    <p class="description"><?php echo esc_html($description); ?></p>
-    <hr class="wp-header-end">
+    <h1><?php esc_html_e('Breadcrumb Settings', 'extend-site'); ?></h1>
 
-    <form method="post" action="options.php">
-        <?php
-        // Hiển thị các hidden field cần thiết cho Settings API (nonce, v.v.)
-        settings_fields('es_breadcrumb_group');
+    <form method="post">
+        <?php wp_nonce_field($this->get_nonce_action()); ?>
 
-        // Hiển thị các Section và Field đã đăng ký trong register_settings()
-        do_settings_sections('es-breadcrumb');
-        ?>
+        <table class="form-table" role="presentation">
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('Enable Breadcrumb', 'extend-site'); ?>
+                </th>
+                <td>
+                    <label>
+                        <input type="checkbox"
+                               name="breadcrumb_enabled"
+                               value="1"
+                            <?php checked(!empty($options['enabled'])); ?>
+                        />
+                        <?php esc_html_e('Display breadcrumb on frontend', 'extend-site'); ?>
+                    </label>
+                </td>
+            </tr>
+        </table>
 
-        <div>
-            <?php
-            // Nút lưu thay đổi mặc định của WordPress
-            submit_button(esc_html__('Lưu thay đổi', 'extend-site'));
-            ?>
-        </div>
+        <?php submit_button(); ?>
     </form>
 </div>

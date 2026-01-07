@@ -3,70 +3,90 @@
 namespace ExtendSite\Admin\AdminManager;
 
 use ExtendSite\Admin\AdminManager\Modules\BreadcrumbAdmin;
+use ExtendSite\Constants\Config;
 
 defined('ABSPATH') || exit;
 
 /**
- * Class AdminManager
- * Điều phối toàn bộ hoạt động quản trị của Framework.
+ * Kernel điều phối toàn bộ Admin Menu Framework
  */
-class AdminManager
+final class AdminManager
 {
     /**
-     * Khởi tạo và đăng ký các module quản lý.
+     * Boot admin framework
      */
     public static function boot(): void
     {
-        // Đăng ký menu chính trước
-        add_action('admin_menu', [self::class, 'register_main_menu']);
+        add_action('admin_menu', [self::class, 'register']);
+    }
 
-        // Khởi tạo các module con
-        BreadcrumbAdmin::init();
-
-        // Sau này thêm các module khác tại đây:
-        // ElementorAdmin::init();
+    public static function register(): void
+    {
+        self::register_main_menu();
+        self::boot_modules();
     }
 
     /**
-     * Đăng ký Menu cha "Extend Site" ở sidebar.
+     * Register main menu "Extend Site"
      */
     public static function register_main_menu(): void
     {
         add_menu_page(
             esc_html__('Extend Site Framework', 'extend-site'),
-            'Extend Site',
-            'manage_options',
-            'extend-site',
+            esc_html__('Extend Site', 'extend-site'),
+            AdminConstants::CAPABILITY_MANAGE,
+            AdminConstants::MENU_PARENT,
             [self::class, 'render_dashboard'],
-            'dashicons-superhero', // Bạn có thể đổi icon tùy ý
+            'dashicons-superhero',
             65
         );
     }
 
     /**
-     * Hiển thị trang Dashboard tổng quan.
+     * Boot all admin modules
+     */
+    protected static function boot_modules(): void
+    {
+        foreach (self::get_modules() as $module) {
+            if ($module instanceof BaseAdminModule) {
+                $module->boot();
+            }
+        }
+    }
+
+    /**
+     * Danh sách các module admin
+     */
+    protected static function get_modules(): array
+    {
+        return [
+            new BreadcrumbAdmin(),
+            // new SeoAdmin(),
+            // new SchemaAdmin(),
+        ];
+    }
+
+    /**
+     * Render dashboard page
      */
     public static function render_dashboard(): void
     {
         self::render_view('dashboard-view', [
-            'title' => esc_html__('Extend Site Dashboard', 'extend-site')
+            'title' => esc_html__('Extend Site Dashboard', 'extend-site'),
         ]);
     }
 
     /**
-     * Helper render file HTML từ thư mục Views.
-     * * @param string $view_name Tên file trong thư mục Views (không cần đuôi .php)
-     * @param array $data Mảng dữ liệu truyền sang View
+     * Render admin view
      */
-    public static function render_view(string $view_name, array $data = []): void
+    protected static function render_view(string $view, array $data = []): void
     {
-        $view_path = __DIR__ . '/Views/' . $view_name . '.php';
+        $path = Config::$path . 'includes/Admin/AdminManager/Views/' . $view . '.php';
 
-        if (file_exists($view_path)) {
-            // Giải nén mảng thành các biến tự do (VD: $data['title'] thành $title)
-            extract($data);
+        if (is_readable($path)) {
 
-            include $view_path;
+            extract($data, EXTR_SKIP);
+            require $path;
         }
     }
 }

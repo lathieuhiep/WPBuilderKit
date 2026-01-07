@@ -4,7 +4,7 @@ namespace ExtendSite\Constants;
 
 defined('ABSPATH') || exit;
 
-class Breakpoints
+final class Breakpoints
 {
     public const SM = 576;
     public const MD = 768;

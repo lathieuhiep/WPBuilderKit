@@ -4,7 +4,7 @@ namespace ExtendSite\Constants;
 
 defined('ABSPATH') || exit;
 
-class Layout
+final class Layout
 {
     public const SIDEBAR_RIGHT = 'right';
     public const SIDEBAR_LEFT = 'left';

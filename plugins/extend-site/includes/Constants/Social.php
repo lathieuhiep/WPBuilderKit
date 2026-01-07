@@ -4,7 +4,7 @@ namespace ExtendSite\Constants;
 
 defined('ABSPATH') || exit;
 
-class Social
+final class Social
 {
     public static function list(): array
     {

@@ -81,11 +81,11 @@ final class AdminManager
      */
     protected static function render_view(string $view, array $data = []): void
     {
-        $path = Config::$path . 'includes/Admin/AdminManager/Views/' . $view . '.php';
+        $path = Config::$path . AdminConstants::PATH_VIEWS . $view . '.php';
 
         if (is_readable($path)) {
-
             extract($data, EXTR_SKIP);
+
             require $path;
         }
     }

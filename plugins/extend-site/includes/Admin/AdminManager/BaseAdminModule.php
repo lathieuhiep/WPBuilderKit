@@ -11,6 +11,8 @@ defined('ABSPATH') || exit;
  */
 abstract class BaseAdminModule
 {
+    protected static array $option_keys = [];
+
     /**
      * Unique module key
      */
@@ -35,7 +37,7 @@ abstract class BaseAdminModule
      */
     public function get_page_slug(): string
     {
-        return AdminConstants::PAGE_PREFIX . '_' . $this->get_key();
+        return AdminConstants::PAGE_PREFIX . $this->get_key();
     }
 
     /**
@@ -90,7 +92,7 @@ abstract class BaseAdminModule
      */
     final protected function resolve_view_path(): string
     {
-        return Config::$path . 'includes/Admin/AdminManager/Views/' . $this->get_view_name() . '.php';
+        return Config::$path . AdminConstants::PATH_VIEWS . $this->get_view_name() . '.php';
     }
 
     /**
@@ -98,16 +100,28 @@ abstract class BaseAdminModule
      */
     final public function render(): void
     {
+        // Lấy dữ liệu giá trị (Values)
         $options = wp_parse_args(
             get_option($this->get_option_key(), []),
             $this->get_default_options()
         );
 
+        // Tạo mảng tên Field (Names) có sẵn tiền tố
+        $field_names = [];
+        $module_key = $this->get_key();
+
+        foreach (static::$option_keys as $key) {
+            $field_names[$key] = $module_key . '_' . $key;
+        }
+
+        // Trích xuất dữ liệu để dùng trong View
+        // Dùng mảng $options để lấy giá trị: $enabled
+        extract($options);
+
+        // Dùng mảng $field_names để lấy tên input: $fields['enabled']
+        $fields = $field_names;
+
         $view = $this->resolve_view_path();
-
-        error_log('Parent slug: ' . $view);
-
-
         if (is_readable($view)) {
             require $view;
         }
@@ -119,7 +133,29 @@ abstract class BaseAdminModule
      */
     protected function handle_request(): void
     {
-        // intentionally left blank
+        // Kiểm tra bảo mật cơ bản
+        if (empty($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], $this->get_nonce_action())) {
+            return;
+        }
+
+        if (!current_user_can($this->get_capability())) {
+            return;
+        }
+
+        // Thu thập dữ liệu dựa trên $option_keys đã khai báo ở lớp con
+        $settings_to_save = [];
+        foreach (static::$option_keys as $key) {
+            // Quy ước: name trong HTML sẽ là {module_key}_{option_key}
+            $input_name = $this->get_key() . '_' . $key;
+
+            // Xử lý lưu trữ (ví dụ đơn giản cho checkbox/text)
+            $settings_to_save[$key] = isset($_POST[$input_name]) ? sanitize_text_field($_POST[$input_name]) : false;
+        }
+
+        // Tận dụng get_option_key() để lưu chính xác vào DB
+        if (!empty($settings_to_save)) {
+            update_option($this->get_option_key(), $settings_to_save);
+        }
     }
 
     /**

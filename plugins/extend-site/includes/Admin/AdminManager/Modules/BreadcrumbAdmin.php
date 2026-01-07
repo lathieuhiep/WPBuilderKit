@@ -12,6 +12,11 @@ defined('ABSPATH') || exit;
 final class BreadcrumbAdmin extends BaseAdminModule
 {
     /**
+     * Option keys managed by this module
+     */
+    protected static array $option_keys = ['enabled'];
+
+    /**
      * Unique module key
      */
     public function get_key(): string
@@ -43,31 +48,5 @@ final class BreadcrumbAdmin extends BaseAdminModule
     protected function get_view_name(): string
     {
         return 'breadcrumb-view';
-    }
-
-    /**
-     * Handle save request
-     */
-    protected function handle_request(): void
-    {
-        if (
-            empty($_POST['_wpnonce']) ||
-            ! wp_verify_nonce($_POST['_wpnonce'], $this->get_nonce_action())
-        ) {
-            return;
-        }
-
-        if (! current_user_can($this->get_capability())) {
-            return;
-        }
-
-        $enabled = isset($_POST['breadcrumb_enabled']);
-
-        update_option(
-            $this->get_option_key(),
-            [
-                'enabled' => $enabled,
-            ]
-        );
     }
 }

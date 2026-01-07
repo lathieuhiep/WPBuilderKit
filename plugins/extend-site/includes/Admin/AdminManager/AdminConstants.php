@@ -6,24 +6,20 @@ defined('ABSPATH') || exit;
 
 final class AdminConstants
 {
-    public const DOMAIN = 'admin';
+    public const DOMAIN = 'extend_site_admin';
+    public const CAPABILITY_MANAGE = 'manage_options';
 
     /**
      * Internal parent menu slug (KHÔNG render page)
      */
-    public const MENU_PARENT = 'extend_site_admin';
-
-    /**
-     * Dashboard page slug (menu cha click vào)
-     */
-    public const PAGE_DASHBOARD = 'extend-site-admin-dashboard';
+    public const MENU_PARENT = self::DOMAIN;
 
     /**
      * Sub page prefix
      */
-    public const PAGE_PREFIX = 'extend_site_admin';
+    public const PAGE_PREFIX = self::DOMAIN . '_';
+    public const OPTION_PREFIX = self::DOMAIN . '_option_';
+    public const NONCE_PREFIX  = self::DOMAIN . '_nonce_';
 
-    public const OPTION_PREFIX = 'extend_site_admin_';
-    public const NONCE_PREFIX  = 'extend_site_admin_nonce_';
-    public const CAPABILITY_MANAGE = 'manage_options';
+    public const PATH_VIEWS =  'includes/Admin/AdminManager/Views/';
 }

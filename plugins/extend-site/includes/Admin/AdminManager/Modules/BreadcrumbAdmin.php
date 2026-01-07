@@ -14,7 +14,7 @@ final class BreadcrumbAdmin extends BaseAdminModule
     /**
      * Option keys managed by this module
      */
-    protected static array $option_keys = ['enabled'];
+    protected static array $option_keys = ['enabled', 'separator'];
 
     /**
      * Unique module key
@@ -39,6 +39,7 @@ final class BreadcrumbAdmin extends BaseAdminModule
     {
         return [
             'enabled' => true,
+            'separator' => '>',
         ];
     }
 

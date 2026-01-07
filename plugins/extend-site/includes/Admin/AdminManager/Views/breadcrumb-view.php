@@ -1,16 +1,19 @@
 <?php
 defined('ABSPATH') || exit;
 /**
- * @var bool $enabled   (Giá trị hiện tại của option 'enabled')
- * @var array $fields   (Danh sách tên field: ['enabled' => 'breadcrumb_enabled'])
+ * @var string $title (Tiêu đề trang admin)
+ * @var string $nonce_field (Trường nonce để bảo vệ form)
+ * @var bool $enabled (Giá trị hiện tại của option 'enabled')
+ * @var string $separator (Giá trị hiện tại của option 'separator')
+ * @var array $fields (Danh sách tên field: ['enabled' => 'breadcrumb_enabled'])
  */
 ?>
 
 <div class="wrap">
-    <h1><?php echo esc_html($this->get_title()); ?></h1>
+    <h1><?php echo esc_html($title); ?></h1>
 
     <form method="post">
-        <?php wp_nonce_field($this->get_nonce_action()); ?>
+        <?php echo $nonce_field; ?>
 
         <table class="form-table">
             <tr>
@@ -24,6 +27,15 @@ defined('ABSPATH') || exit;
                         />
                         <?php esc_html_e('Display breadcrumb on frontend', 'extend-site'); ?>
                     </label>
+                </td>
+            </tr>
+
+            <tr>
+                <th><?php _e('Separator', 'extend-site'); ?></th>
+                <td>
+                    <input type="text"
+                           name="<?php echo $fields['separator']; ?>"
+                           value="<?php echo esc_attr($separator); ?>">
                 </td>
             </tr>
         </table>

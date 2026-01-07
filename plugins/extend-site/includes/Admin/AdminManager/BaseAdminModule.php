@@ -100,26 +100,28 @@ abstract class BaseAdminModule
      */
     final public function render(): void
     {
-        // Lấy dữ liệu giá trị (Values)
+        // 1. Lấy dữ liệu hiện tại (Values)
         $options = wp_parse_args(
             get_option($this->get_option_key(), []),
             $this->get_default_options()
         );
 
-        // Tạo mảng tên Field (Names) có sẵn tiền tố
-        $field_names = [];
-        $module_key = $this->get_key();
-
+        // 2. Tạo mảng Map tên field (Names)
+        $fields = [];
         foreach (static::$option_keys as $key) {
-            $field_names[$key] = $module_key . '_' . $key;
+            // Tự động nối module_key với option_key
+            $fields[$key] = $this->get_key() . '_' . $key;
         }
 
-        // Trích xuất dữ liệu để dùng trong View
-        // Dùng mảng $options để lấy giá trị: $enabled
-        extract($options);
+        // 3. Chuẩn bị biến cho View
+        $view_data = array_merge($options, [
+            'fields' => $fields,
+            'title' => $this->get_title(),
+            'nonce_field' => wp_nonce_field($this->get_nonce_action(), '_wpnonce', true, false),
+        ]);
 
-        // Dùng mảng $field_names để lấy tên input: $fields['enabled']
-        $fields = $field_names;
+        // Trích xuất mảng thành các biến độc lập (Laravel thường làm qua compact/with)
+        extract($view_data);
 
         $view = $this->resolve_view_path();
         if (is_readable($view)) {
@@ -133,7 +135,7 @@ abstract class BaseAdminModule
      */
     protected function handle_request(): void
     {
-        // Kiểm tra bảo mật cơ bản
+        // 1. Kiểm tra bảo mật (Nonce & Capability)
         if (empty($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], $this->get_nonce_action())) {
             return;
         }
@@ -142,20 +144,27 @@ abstract class BaseAdminModule
             return;
         }
 
-        // Thu thập dữ liệu dựa trên $option_keys đã khai báo ở lớp con
-        $settings_to_save = [];
+        $module_key = $this->get_key();
+        $new_options = [];
+
+        // 2. Tự động lặp qua các key đã khai báo ở lớp con
         foreach (static::$option_keys as $key) {
-            // Quy ước: name trong HTML sẽ là {module_key}_{option_key}
-            $input_name = $this->get_key() . '_' . $key;
+            $input_name = $module_key . '_' . $key;
 
-            // Xử lý lưu trữ (ví dụ đơn giản cho checkbox/text)
-            $settings_to_save[$key] = isset($_POST[$input_name]) ? sanitize_text_field($_POST[$input_name]) : false;
+            if (isset($_POST[$input_name])) {
+                // Làm sạch dữ liệu (Có thể mở rộng thêm filter tại đây)
+                $new_options[$key] = sanitize_text_field($_POST[$input_name]);
+            } else {
+                // Xử lý cho checkbox khi không được tích
+                $new_options[$key] = false;
+            }
         }
 
-        // Tận dụng get_option_key() để lưu chính xác vào DB
-        if (!empty($settings_to_save)) {
-            update_option($this->get_option_key(), $settings_to_save);
-        }
+        // 3. Lưu vào Database
+        update_option($this->get_option_key(), $new_options);
+
+        // 4. Thông báo thành công (Tùy chọn)
+        add_settings_error('extend_site_messages', 'settings_updated', esc_html__('Settings Saved', 'extend-site'), 'updated');
     }
 
     /**

@@ -96,15 +96,23 @@ abstract class BaseAdminModule
     }
 
     /**
+     * Get merged options (saved + default)
+     */
+    final public function get_options(): array
+    {
+        return wp_parse_args(
+            get_option($this->get_option_key(), []),
+            $this->get_default_options()
+        );
+    }
+
+    /**
      * Render admin page
      */
     final public function render(): void
     {
         // 1. Lấy dữ liệu hiện tại (Values)
-        $options = wp_parse_args(
-            get_option($this->get_option_key(), []),
-            $this->get_default_options()
-        );
+        $options = $this->get_options();
 
         // 2. Tạo mảng Map tên field (Names)
         $fields = [];
@@ -120,7 +128,7 @@ abstract class BaseAdminModule
             'nonce_field' => wp_nonce_field($this->get_nonce_action(), '_wpnonce', true, false),
         ]);
 
-        // Trích xuất mảng thành các biến độc lập (Laravel thường làm qua compact/with)
+        // Trích xuất mảng thành các biến độc lập
         extract($view_data);
 
         $view = $this->resolve_view_path();

@@ -11,10 +11,19 @@ defined('ABSPATH') || exit;
  */
 final class BreadcrumbAdmin extends BaseAdminModule
 {
+
+    // -------- Setting --------
+
     /**
      * Option keys managed by this module
      */
-    protected static array $option_keys = ['enabled', 'separator'];
+    public const OPTION_ENABLED = 'enabled';
+    public const OPTION_SEPARATOR = 'separator';
+
+    protected static array $option_keys = [
+        self::OPTION_ENABLED,
+        self::OPTION_SEPARATOR,
+    ];
 
     /**
      * Unique module key
@@ -32,16 +41,32 @@ final class BreadcrumbAdmin extends BaseAdminModule
         return esc_html__('Breadcrumb', 'extend-site');
     }
 
+    // -------- Get options --------
+
     /**
      * Default options
      */
     public function get_default_options(): array
     {
         return [
-            'enabled' => true,
-            'separator' => '>',
+            self::OPTION_ENABLED => true,
+            self::OPTION_SEPARATOR => '>',
         ];
     }
+
+    // get option enabled
+    public function is_enabled(): bool
+    {
+        return (bool)$this->get_option(self::OPTION_ENABLED, false);
+    }
+
+    // get option separator
+    public function get_separator(): string
+    {
+        return (string)$this->get_option(self::OPTION_SEPARATOR, '>');
+    }
+
+    // -------- View --------
 
     /**
      * View file path

@@ -1,4 +1,7 @@
 <?php
+
+use ExtendSite\Admin\AdminManager\Modules\BreadcrumbAdmin;
+
 defined('ABSPATH') || exit;
 /**
  * @var string $title (Tiêu đề trang admin)
@@ -21,7 +24,7 @@ defined('ABSPATH') || exit;
                 <td>
                     <label>
                         <input type="checkbox"
-                               name="<?php echo esc_attr($fields['enabled']); ?>"
+                               name="<?php echo esc_attr( $fields[BreadcrumbAdmin::OPTION_ENABLED] ); ?>"
                                value="1"
                             <?php checked(!empty($enabled)); ?>
                         />
@@ -31,11 +34,13 @@ defined('ABSPATH') || exit;
             </tr>
 
             <tr>
-                <th><?php _e('Separator', 'extend-site'); ?></th>
+                <th><?php esc_html_e('Separator', 'extend-site'); ?></th>
                 <td>
                     <input type="text"
-                           name="<?php echo $fields['separator']; ?>"
-                           value="<?php echo esc_attr($separator); ?>">
+                           name="<?php echo esc_attr( $fields[BreadcrumbAdmin::OPTION_SEPARATOR] ); ?>"
+                           value="<?php echo esc_attr($separator); ?>"
+                           aria-label=""
+                    />
                 </td>
             </tr>
         </table>

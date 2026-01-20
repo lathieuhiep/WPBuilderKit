@@ -3,6 +3,7 @@
 namespace ExtendSite\Core;
 
 use ExtendSite\Admin\AdminManager\AdminManager;
+use ExtendSite\Admin\AdminManager\Modules\BreadcrumbAdmin;
 use ExtendSite\Admin\Options\ThemeOptions;
 use ExtendSite\Constants\Config;
 use ExtendSite\Core\Breadcrumb\BreadcrumbService;
@@ -57,6 +58,12 @@ class Plugin
      */
     private function boot_breadcrumb(): void
     {
+        $module = new BreadcrumbAdmin();
+
+        if (!$module->is_enabled()) {
+            return;
+        }
+
         BreadcrumbService::instance()->boot();
 
         // Load public functions (function + shortcode)

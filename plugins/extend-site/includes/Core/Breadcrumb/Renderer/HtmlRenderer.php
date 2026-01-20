@@ -12,10 +12,12 @@ final class HtmlRenderer
     /**
      * Render breadcrumb using plugin template.
      *
-     * @param BreadcrumbItem[] $items
+     * @param array $data
      */
-    public function render(array $items): void
+    public function render(array $data): void
     {
+        $items = $data['items'] ?? [];
+
         if (empty($items)) {
             return;
         }

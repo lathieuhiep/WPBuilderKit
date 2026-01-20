@@ -2,6 +2,7 @@
 
 namespace ExtendSite\Core\Breadcrumb;
 
+use ExtendSite\Admin\AdminManager\Modules\BreadcrumbAdmin;
 use ExtendSite\Core\Breadcrumb\Renderer\HtmlRenderer;
 use ExtendSite\Core\Breadcrumb\Renderer\JsonLdRenderer;
 
@@ -11,6 +12,9 @@ final class BreadcrumbService
 {
     private static ?self $instance = null;
     private BreadcrumbManager $manager;
+
+    // Separator string
+    private string $separator = '>';
 
     /**
      * Private constructor for singleton.
@@ -37,14 +41,38 @@ final class BreadcrumbService
      */
     public function boot(): void
     {
+        $this->load_config();
+
+        // Register hooks
         add_action('wp_head', [$this, 'render_schema'], 20);
         add_shortcode('extend_site_breadcrumb', [$this, 'shortcode']);
 
         add_action('save_post', [$this, 'clear_post_cache']);
         add_action('created_term', [$this, 'clear_term_cache']);
-        add_action('edited_term',  [$this, 'clear_term_cache']);
-        add_action('delete_term',  [$this, 'clear_term_cache']);
+        add_action('edited_term', [$this, 'clear_term_cache']);
+        add_action('delete_term', [$this, 'clear_term_cache']);
     }
+
+    /**
+     * Load configuration from admin settings.
+     */
+    private function load_config(): void
+    {
+        $admin = new BreadcrumbAdmin();
+        $this->separator = $admin->get_separator();
+    }
+
+    // -------- Get option --------
+
+    /**
+     * Get separator string.
+     */
+    public function get_separator(): string
+    {
+        return $this->separator;
+    }
+
+    // -------- Render HTML --------
 
     /**
      * Public: render breadcrumb HTML.
@@ -52,11 +80,21 @@ final class BreadcrumbService
     public function render(): void
     {
         $items = $this->manager->get_items();
+
         if (!$items) {
             return;
         }
 
-        (new HtmlRenderer())->render($items);
+        // Prepare data
+        $data = [
+            'items' => $items,
+            'options' => [
+                'separator' => $this->get_separator(),
+            ],
+        ];
+
+        // Render HTML
+        (new HtmlRenderer())->render($data);
     }
 
     /**

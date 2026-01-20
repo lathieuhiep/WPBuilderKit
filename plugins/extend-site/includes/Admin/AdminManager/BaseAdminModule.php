@@ -107,6 +107,15 @@ abstract class BaseAdminModule
     }
 
     /**
+     * Get single option value by key
+     */
+    public function get_option(string $key, mixed $default = null): mixed
+    {
+        $options = $this->get_options();
+        return $options[$key] ?? $default;
+    }
+
+    /**
      * Render admin page
      */
     final public function render(): void
@@ -131,7 +140,10 @@ abstract class BaseAdminModule
         // Trích xuất mảng thành các biến độc lập
         extract($view_data);
 
+        error_log( print_r( $options, true ) );
+
         $view = $this->resolve_view_path();
+
         if (is_readable($view)) {
             require $view;
         }

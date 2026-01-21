@@ -48,7 +48,7 @@
         }
 
         .product_title {
-          font-size: $var-fs-md;
+          font-size: fs(md);
           margin: 0 0 1rem;
         }
 
@@ -63,7 +63,7 @@
 
         .price {
           margin: 0 0 1rem;
-          color: $var-accent-color;
+          color: color(accent);
         }
 
         form {
@@ -75,9 +75,9 @@
             }
 
             .single_add_to_cart_button {
-              background-color: $var-accent-color;
+              background-color: color(accent);
               width: auto;
-              font-weight: $var-fw-regular;
+              font-weight: fw(regular);
               padding: 1rem 1.5rem;
             }
           }
@@ -89,7 +89,7 @@
       > span {
         display: block;
         margin-bottom: .5rem;
-        font-weight: $var-fw-bold;
+        font-weight: fw(bold);
 
         &:last-child {
           margin-bottom: 0;
@@ -98,7 +98,7 @@
         span,
         a {
           display: inline-block;
-          font-weight: $var-fw-regular;
+          font-weight: fw(regular);
         }
       }
     }

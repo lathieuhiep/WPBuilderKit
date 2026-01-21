@@ -24,41 +24,25 @@ $mt-colors: (
         "black": #000000,
         "white": #ffffff
 );
-$var-primary-color: var(--#{$prefix-theme}primary);
-$var-secondary-color: var(--#{$prefix-theme}secondary);
-$var-accent-color: var(--#{$prefix-theme}accent);
-$var-success-color: var(--#{$prefix-theme}success);
-$var-error-color: var(--#{$prefix-theme}error);
-$var-warning-color: var(--#{$prefix-theme}warning);
-$var-info-color: var(--#{$prefix-theme}info);
-$var-black-color: var(--#{$prefix-theme}black);
-$var-white-color: var(--#{$prefix-theme}white);
 
 // typography
+$fs-base: 1.4rem;
+
 $mt-font-sizes: (
-        xs: 1.4rem,
-        sm: 1.6rem,
-        md: 1.8rem,
+        xs: 1.2rem,
+        sm: $fs-base,
+        md: 1.6rem,
         lg: 2rem,
         xl: 2.4rem,
         xxl: 2.8rem,
         3xl: 3.2rem
 );
-$var-fs-xs: var(--#{$prefix-theme}fs-xs);
-$var-fs-sm: var(--#{$prefix-theme}fs-sm);
-$var-fs-md: var(--#{$prefix-theme}fs-md);
-$var-fs-lg: var(--#{$prefix-theme}fs-lg);
-$var-fs-xl: var(--#{$prefix-theme}fs-xl);
-$var-fs-xxl: var(--#{$prefix-theme}fs-xxl);
-$var-fs-3xl: var(--#{$prefix-theme}fs-3xl);
 
 // font family
 $mt-fonts: (
         base: '"Inter", sans-serif',
         heading: '"Roboto Condensed", sans-serif'
 );
-$var-ff-base: var(--#{$prefix-theme}ff-base);
-$var-ff-heading: var(--#{$prefix-theme}ff-heading);
 
 // font-weights
 $mt-font-weights: (
@@ -66,32 +50,23 @@ $mt-font-weights: (
         medium: 500,
         bold: 700
 );
-$var-fw-regular: var(--#{$prefix-theme}fw-regular);
-$var-fw-medium: var(--#{$prefix-theme}fw-medium);
-$var-fw-bold: var(--#{$prefix-theme}fw-bold);
 
 $line-height-base: 1.5;
 $line-height-heading: 1.25;
 
 // spacing
 $spacing-base: 0.4rem;
-$spacers: ();
 
+$spacers: ();
 @for $i from 0 through 8 {
   $spacers: map.merge($spacers, (#{$i}: $spacing-base * $i));
 }
 
 // body
-$body-color: $var-black-color;
-$body-bg: $var-white-color;
-
 $color-required: #ff5555;
 
 // headings variables
 $headings-margin-bottom: $spacing-base * 3;
-$heading-color: $var-primary-color;
-$headings-font-family: $var-ff-heading;
-$headings-font-weight: $var-fw-bold;
 $headings-line-height: $line-height-heading;
 
 // FontAwesome

@@ -66,10 +66,10 @@
 
   #payment {
     #place_order {
-      background-color: $var-black-color;
+      background-color: color(black);
 
       &:hover {
-        background-color: $var-accent-color;
+        background-color: color(accent);
       }
     }
   }
@@ -81,10 +81,10 @@
 
 .woocommerce-info,
 .woocommerce-message {
-  border-top-color: $var-accent-color;
+  border-top-color: color(accent);
 
   &::before {
-    color: $var-accent-color;
+    color: color(accent);
   }
 }
 
@@ -96,15 +96,15 @@
     display: inline-block;
     width: auto;
     padding: .9rem 2.2rem;
-    color: $var-black-color;
+    color: color(black);
     background-color: #eeeeee;
     border: none;
-    font-weight: $var-fw-regular;
+    font-weight: fw(regular);
     @include transition();
 
     &:hover {
       color: #ffffff;
-      background-color: $var-accent-color;
+      background-color: color(accent);
     }
   }
 

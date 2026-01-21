@@ -26,7 +26,7 @@
             a {
               display: block;
               cursor: pointer;
-              border: .1rem solid $var-primary-color;
+              border: .1rem solid color(primary);
               padding: .4rem 1.2rem;
               line-height: inherit;
               min-width: inherit;
@@ -36,15 +36,15 @@
             a {
               &:focus {
                 background-color: transparent;
-                color: $heading-color;
+                color: color(primary);
               }
             }
 
             span.current,
             a:hover {
-              color: $var-white-color;
-              background: $var-accent-color;
-              border-color: $var-accent-color;
+              color: color(white);
+              background: color(accent);
+              border-color: color(accent);
             }
           }
         }

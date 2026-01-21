@@ -5,10 +5,10 @@
 
   a {
     display: block;
-    color: $var-black-color;
+    color: color(black);
 
     &:hover {
-      color: $var-accent-color;
+      color: color(accent);
     }
   }
 }

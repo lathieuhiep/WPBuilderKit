@@ -219,7 +219,7 @@ const pathVendorBootstrap = makeVendorPaths('bootstrap');
 /** task build style custom bootstrap */
 const buildStyleCustomBootstrap = () => {
     return buildScssPipeline({
-        input: `${pathVendorBootstrap.input}*.scss`,
+        input: `${pathVendorBootstrap.input}scss/*.scss`,
         output: `${pathVendorBootstrap.output}`
     })
 }
@@ -227,7 +227,7 @@ const buildStyleCustomBootstrap = () => {
 /** task build js custom bootstrap */
 const buildJSCustomBootstrap = () => {
     return buildWebpackPipeline({
-        input: `${pathVendorBootstrap.input}custom-bootstrap.js`,
+        input: `${pathVendorBootstrap.input}js/custom-bootstrap.js`,
         output: `${pathVendorBootstrap.output}`,
         filename: 'custom-bootstrap.min.js'
     });
@@ -235,11 +235,11 @@ const buildJSCustomBootstrap = () => {
 
 const vendorWatchAll = () => {
     watch([
-        `${pathVendorBootstrap.input}*.scss`
+        `${pathVendorBootstrap.input}scss/*.scss`
     ], buildStyleCustomBootstrap)
 
     watch([
-        `${pathVendorBootstrap.input}*.js`
+        `${pathVendorBootstrap.input}js/*.js`
     ], buildJSCustomBootstrap)
 }
 

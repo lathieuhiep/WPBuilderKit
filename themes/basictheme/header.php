@@ -13,8 +13,8 @@
 <div class="main-warp">
     <?php
     if ( !is_404() ) :
-        get_template_part('template-parts/header/header','main');
+        get_template_part('template-parts/header/inc', 'layout');
     endif;
     ?>
-
-    <div class="sticky-footer">
+    <!-- open .sticky-footer -->
+    <main class="sticky-footer">

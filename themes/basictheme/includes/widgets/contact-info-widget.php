@@ -22,14 +22,14 @@ class MyTheme_Contact_Info_Widget extends WP_Widget {
 		<div class="list">
 			<?php if ( ! empty( $instance['address'] ) ) : ?>
 				<div class="item">
-                    <i class="fas fa-location-dot"></i>
+                    <i class="icon-theme-mask icon-theme-mask-location-dot"></i>
 					<span class="text"><?php echo esc_html( $instance['address'] ); ?></span>
 				</div>
 			<?php endif; ?>
 
 			<?php if ( ! empty( $instance['email'] ) ) : ?>
 				<div class="item">
-                    <i class="fas fa-paper-plane"></i>
+                    <i class="icon-theme-mask icon-theme-mask-paper-plane"></i>
 					<a class="text"
 					   href="mailto:<?php echo esc_attr( $instance['email'] ); ?>"><?php echo esc_html( $instance['email'] ); ?></a>
 				</div>
@@ -37,7 +37,7 @@ class MyTheme_Contact_Info_Widget extends WP_Widget {
 
 			<?php if ( ! empty( $instance['phone'] ) ) : ?>
 				<div class="item">
-                    <i class="fas fa-phone"></i>
+                    <i class="icon-theme-mask icon-theme-mask-phone"></i>
 					<a class="text"
 					   href="tel:<?php echo esc_attr( basictheme_preg_replace_ony_number( $instance['phone'] ) ); ?>"><?php echo esc_html( $instance['phone'] ); ?></a>
 				</div>
@@ -58,7 +58,7 @@ class MyTheme_Contact_Info_Widget extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, $defaults );
 
 		$fields = [
-			'title'   => esc_html__( 'Title:', 'basictheme' ),
+			'title'   => esc_html__( 'Tiêu đề:', 'basictheme' ),
 			'address' => esc_html__( 'Địa chỉ:', 'basictheme' ),
 			'email'   => esc_html__( 'Email:', 'basictheme' ),
 			'phone'   => esc_html__( 'Số điện thoại:', 'basictheme' )

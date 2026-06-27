@@ -1,20 +1,14 @@
-@import "../../../shared/scss/abstracts/abstracts";
+@import "../abstracts/abstracts";
 
-.global-footer {
-  section {
-    &.widget {
-
-    }
-  }
-
+.footer {
   &__column {
-    border-top: .1rem solid $var-primary-color;
+    border-top: .1rem solid color(primary);
     padding: 3rem 0;
   }
 
   &__bottom {
     padding: 1rem 0;
-    color: $var-white-color;
-    background-color: $body-color;
+    color: color(white);
+    background-color: color(black);
   }
 }

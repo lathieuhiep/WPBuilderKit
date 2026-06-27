@@ -1,10 +1,14 @@
 <?php
+use ExtendSite\Admin\Options\Modules\SinglePostOptions;
+
+defined('ABSPATH') || exit;
+
 get_header();
 
-$sidebar = basictheme_get_option('opt_post_single_sidebar_position', 'right');
+$sidebar = basictheme_opt(SinglePostOptions::class)::get_sidebar_position() ?? THEME_SIDEBAR_POSITION_RIGHT;
 $class_col_content = basictheme_col_use_sidebar( $sidebar, 'sidebar-main' );
 
-get_template_part( 'template-parts/parts/breadcrumbs' );
+get_template_part('template-parts/components/inc', 'breadcrumbs');
 ?>
 
 <div class="site-container single-post-warp">
@@ -22,7 +26,7 @@ get_template_part( 'template-parts/parts/breadcrumbs' );
             </div>
 
             <?php
-            if ( $sidebar !== 'hide' ) :
+            if ( $sidebar !== THEME_SIDEBAR_POSITION_HIDDEN ) :
 	            get_sidebar();
             endif;
             ?>

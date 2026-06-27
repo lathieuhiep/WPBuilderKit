@@ -4,7 +4,8 @@
  * */
 
 // optimize WordPress
-add_action('init', 'basictheme_optimize_wordpress');
+use ExtendSite\Admin\Options\Modules\InsertCodeOptions;
+
 function basictheme_optimize_wordpress(): void {
 	// Disable WordPress Emoji
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
@@ -36,9 +37,11 @@ function basictheme_disable_emojis_tinymce( $plugins ): array {
 	}
 }
 
+add_action('init', 'basictheme_optimize_wordpress');
+
 // add code to head
 function basictheme_custom_header_code(): void {
-	$header_code = basictheme_get_option( 'opt_header_code' );
+	$header_code = basictheme_opt(InsertCodeOptions::class)::get_head_code() ?? '';
 
 	if ($header_code) {
 		echo $header_code;
@@ -48,7 +51,7 @@ add_action('wp_head', 'basictheme_custom_header_code');
 
 // add code to body
 function basictheme_custom_body_code(): void {
-	$body_code = basictheme_get_option( 'opt_body_code' );
+	$body_code = basictheme_opt(InsertCodeOptions::class)::get_after_body_code() ?? '';
 
 	if ($body_code) {
 		echo $body_code;
@@ -58,7 +61,7 @@ add_action('wp_body_open', 'basictheme_custom_body_code');
 
 // add code to footer
 function basictheme_custom_footer_code(): void {
-	$footer_code = basictheme_get_option( 'opt_footer_code' );
+	$footer_code = basictheme_opt(InsertCodeOptions::class)::get_footer_code() ?? '';
 
 	if ($footer_code) {
 		echo $footer_code;
@@ -74,20 +77,48 @@ add_action('wp_footer', 'basictheme_custom_footer_code');
 add_filter('xmlrpc_enabled', '__return_false');
 
 // disable gutenberg editor
-add_filter("use_block_editor_for_post_type", "disable_gutenberg_editor");
-function disable_gutenberg_editor(): bool {
+add_filter("use_block_editor_for_post_type", "basictheme_disable_gutenberg_editor");
+function basictheme_disable_gutenberg_editor(): bool {
 	return false;
 }
 
 // disable gutenberg widgets
 add_filter('use_widgets_block_editor', '__return_false');
 
+/**
+ * Thêm thuộc tính preconnect cho Google Fonts
+ */
+function basictheme_partner_resource_hints( $urls, $relation_type ) {
+    if ( 'preconnect' === $relation_type ) {
+        $urls[] = 'https://fonts.googleapis.com';
+        $urls[] = array(
+            'href'       => 'https://fonts.gstatic.com',
+            'crossorigin' => 'anonymous',
+        );
+    }
+    return $urls;
+}
+add_filter( 'wp_resource_hints', 'basictheme_partner_resource_hints', 10, 2 );
+
+/**
+ * Chuyển đổi thẻ link phông chữ sang chuẩn Preload/Async
+ */
+function basictheme_partner_async_google_fonts( $tag, $handle, $src ) {
+    // Chỉ áp dụng cho handle 'google-font' đã đăng ký
+    if ( 'google-font' === $handle ) {
+        $tag = '<link rel="preload" as="style" href="' . esc_url( $src ) . '" onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n";
+        $tag .= '<noscript><link rel="stylesheet" href="' . esc_url( $src ) . '"></noscript>';
+    }
+    return $tag;
+}
+add_filter( 'style_loader_tag', 'basictheme_partner_async_google_fonts', 10, 3 );
+
 // Walker for the main menu
 add_filter( 'walker_nav_menu_start_el', 'basictheme_add_arrow',10,4);
 function basictheme_add_arrow( $output, $item, $depth, $args ){
 	if('primary' == $args->theme_location && $depth >= 0 ){
 		if (in_array("menu-item-has-children", $item->classes)) {
-			$output .='<span class="sub-menu-toggle"></span>';
+			$output .='<span class="sub-menu-toggle icon-theme-mask"></span>';
 		}
 	}
 

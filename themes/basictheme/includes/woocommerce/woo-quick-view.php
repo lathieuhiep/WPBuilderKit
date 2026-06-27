@@ -5,7 +5,7 @@
 */
 function basictheme_button_quick_view(): void {
 	?>
-    <a class="btn-quick-view-product" href="#" title="<?php esc_attr_e( 'Quick view product', 'basictheme' ); ?>"
+    <a class="btn-quick-view-product" href="#" title="<?php esc_attr_e( 'Xem nhanh', 'basictheme' ); ?>"
        data-id-product="<?php echo esc_attr( get_the_ID() ); ?>" data-bs-toggle="modal"
        data-bs-target="#mode-quick-view-product">
 		<?php esc_html_e( 'Xem nhanh', 'basictheme' ); ?>

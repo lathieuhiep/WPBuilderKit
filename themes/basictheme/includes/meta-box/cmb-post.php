@@ -12,8 +12,8 @@ function basictheme_post_meta_boxes(): void {
 
     $cmb->add_field( array(
         'id'   => 'basictheme_cmb_post_title',
-        'name' => esc_html__( 'Test Title', 'basictheme' ),
+        'name' => esc_html__( 'Tiêu đề', 'basictheme' ),
         'type' => 'title',
-        'desc' => esc_html__( 'This is a title description', 'basictheme' ),
+        'desc' => esc_html__( 'Đây là mô tả tiêu đề', 'basictheme' ),
     ) );
 }

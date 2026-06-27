@@ -55,8 +55,14 @@ const buildScssPipeline = ({ input, output, includePaths = ['node_modules', 'src
 };
 
 // function buildJSPipeline
-const buildJsPipeline = ({ input, output, label = 'JS Pipeline' }) => {
-    return src(input, { allowEmpty: true })
+const buildJsPipeline = ({ input, output, label = 'JS Pipeline', base = undefined }) => {
+    const options = { allowEmpty: true };
+
+    if (base) {
+        options.base = base;
+    }
+
+    return src(input, options)
         .pipe(plumber({
             errorHandler: function (err) {
                 console.error(`Error in build JS in ${label}:`, err.message);
@@ -67,6 +73,32 @@ const buildJsPipeline = ({ input, output, label = 'JS Pipeline' }) => {
         .pipe(rename({ suffix: '.min' }))
         .pipe(dest(output))
         .pipe(browserSync.stream());
+}
+
+const normalizePath = (filePath) => filePath.replace(/\\/g, '/');
+
+const isScssPartial = (filePath) => path.basename(filePath).startsWith('_');
+
+const getWebpackEntryPath = (filePath) => './' + normalizePath(path.relative(process.cwd(), path.resolve(filePath)));
+
+const getRelativeOutputDir = ({ filePath, sourceRoot, outputRoot }) => {
+    const relativePath = path.relative(path.resolve(sourceRoot), path.resolve(filePath));
+    const relativeDir = path.dirname(relativePath);
+
+    return normalizePath(path.join(outputRoot, relativeDir === '.' ? '' : relativeDir));
+}
+
+const buildScssEntryFile = ({ filePath, sourceRoot, outputRoot }) => {
+    return buildScssPipeline({
+        input: normalizePath(filePath),
+        output: getRelativeOutputDir({ filePath, sourceRoot, outputRoot })
+    });
+}
+
+const watchChangedEntry = (globs, task) => {
+    return watch(globs)
+        .on('change', task)
+        .on('add', task);
 }
 
 // function buildWebpackPipeline
@@ -169,7 +201,18 @@ const pluginEsBuildStyleAddons = () => {
 const pluginEsBuildJs = () => {
     return buildJsPipeline({
         input: `${pathPluginES.input.js}*/**.js`,
-        output: `${pathPluginES.output.js}`
+        output: `${pathPluginES.output.js}`,
+        base: pathPluginES.input.js
+    })
+}
+
+/** Task build changed js plugin extend site */
+const pluginEsBuildJsFile = (filePath) => {
+    return buildJsPipeline({
+        input: normalizePath(path.resolve(filePath)),
+        output: `${pathPluginES.output.js}`,
+        label: 'Plugin Extend Site JS',
+        base: path.resolve(pathPluginES.input.js)
     })
 }
 
@@ -192,9 +235,9 @@ const pluginEsWatchAll = () => {
     ))
 
     // watch js
-    watch([
+    watchChangedEntry([
         `${pathPluginES.input.js}*/**.js`
-    ], pluginEsBuildJs)
+    ], pluginEsBuildJsFile)
 }
 
 /** ---------------------------
@@ -312,6 +355,19 @@ const buildJSTheme = () => {
     });
 }
 
+/** Task build changed js theme entry */
+const buildJSThemeFile = (filePath) => {
+    const name = path.basename(filePath, '.js');
+
+    return buildWebpackPipeline({
+        input: normalizePath(filePath),
+        output: `${pathTheme.output.js}`,
+        entries: {
+            [name]: getWebpackEntryPath(filePath)
+        }
+    });
+}
+
 /** Task build style shop */
 const buildStyleShop = () => {
     return buildScssPipeline({
@@ -333,6 +389,58 @@ const buildJSShop = () => {
         input: `${pathTheme.input.js}shop/*.js`,
         output: `${pathTheme.woo.js}`,
         entries: entries
+    });
+}
+
+/** Task build changed js shop entry */
+const buildJSShopFile = (filePath) => {
+    const name = path.basename(filePath, '.js');
+
+    return buildWebpackPipeline({
+        input: normalizePath(filePath),
+        output: `${pathTheme.woo.js}`,
+        entries: {
+            [name]: getWebpackEntryPath(filePath)
+        }
+    });
+}
+
+/** Task build changed custom post type style entry */
+const buildStyleCustomPostTypeFile = (filePath) => {
+    if (isScssPartial(filePath)) {
+        return buildStyleCustomPostType();
+    }
+
+    return buildScssEntryFile({
+        filePath,
+        sourceRoot: `${pathTheme.input.scss}post-type/`,
+        outputRoot: `${pathTheme.output.css}post-type/`
+    });
+}
+
+/** Task build changed page template style entry */
+const buildStylePageTemplateFile = (filePath) => {
+    if (isScssPartial(filePath)) {
+        return buildStylePageTemplate();
+    }
+
+    return buildScssEntryFile({
+        filePath,
+        sourceRoot: `${pathTheme.input.scss}page-templates/`,
+        outputRoot: `${pathTheme.output.css}page-templates/`
+    });
+}
+
+/** Task build changed shop style entry */
+const buildStyleShopFile = (filePath) => {
+    if (isScssPartial(filePath)) {
+        return buildStyleShop();
+    }
+
+    return buildScssEntryFile({
+        filePath,
+        sourceRoot: `${pathTheme.input.scss}shop/`,
+        outputRoot: `${pathTheme.woo.css}`
     });
 }
 
@@ -359,25 +467,31 @@ const themeWatchAll = () => {
         `${pathTheme.input.scss}main.scss`,
     ], buildStyleTheme)
 
-    watch([
+    watchChangedEntry([
         `${pathTheme.input.scss}post-type/**/*.scss`
-    ], buildStyleCustomPostType)
+    ], buildStyleCustomPostTypeFile)
 
-    watch([
+    watchChangedEntry([
         `${pathTheme.input.scss}page-templates/*.scss`
-    ], buildStylePageTemplate)
+    ], buildStylePageTemplateFile)
 
-    watch([
+    watchChangedEntry([
         `${pathTheme.input.scss}shop/components/*.scss`,
         `${pathTheme.input.scss}shop/*.scss`
-    ], buildStyleShop)
+    ], buildStyleShopFile)
 
-    watch([`${pathTheme.input.js}*.js`], buildJSTheme)
+    watchChangedEntry([`${pathTheme.input.js}*.js`], buildJSThemeFile)
 
-    watch([
+    watchChangedEntry([
         `${pathTheme.input.js}shop/components/*.js`,
         `${pathTheme.input.js}shop/*.js`
-    ], buildJSShop)
+    ], (filePath) => {
+        if (normalizePath(filePath).includes('/components/')) {
+            return buildJSShop();
+        }
+
+        return buildJSShopFile(filePath);
+    })
 }
 
 /*
